@@ -1,5 +1,5 @@
 var testEnv = {
-  Chai : require('chai')
+  Chai : require('chai'),
 };
 
 module.exports = testEnv;
