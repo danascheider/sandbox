@@ -1,4 +1,4 @@
 language: node_js
 node_js:
   - "iojs"
-before_script: "npm install -g commander diff glob debug escape-string-regexp"
+before_script: "npm install commander diff glob debug escape-string-regexp"
