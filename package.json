@@ -1,0 +1,19 @@
+{
+  "name"        : "Canto",
+  "version"     : "0.1.0",
+  "repository"  : "https://github.com/danascheider/sandbox",
+  "description" : "Just random projects I'm working on",
+  "scripts"     : {
+    "spec" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec js/spec"
+  },
+
+  "devDependencies": {
+    "chai"        : "~2.1.1",
+    "chai-jq"     : "~0.0.8",
+    "jquery"      : "~2.1.3",
+    "jsdom"       : "~4.0.2",
+    "mocha"       : "~2.1.0",
+    "sinon"       : "~1.13.0",
+    "sinon-chai"  : "~2.7.0"
+  }
+}
