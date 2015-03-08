@@ -19,7 +19,11 @@ describe('Protected Resource', function() {
     resource = null;
   });
 
-  describe('token()', function() {
+  describe('fetch() method', function() {
+    //
+  });
+
+  describe('token() method', function() {
     it('returns the auth header value for the logged-in user', function() {
       var string = 'Basic ' + Env.btoa('testuser:testuser');
       expect(resource.token()).to.equal(string);
