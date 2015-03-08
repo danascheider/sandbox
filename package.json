@@ -4,8 +4,8 @@
   "repository"  : "https://github.com/danascheider/sandbox",
   "description" : "Just random projects I'm working on",
   "scripts"     : {
-    "test" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec js/spec",
-    "spec" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec js/spec"
+    "test" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec spec",
+    "spec" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec spec"
   },
 
   "devDependencies": {
