@@ -5,5 +5,8 @@
   ],
   "helpers": [
     "helpers/**/*.js"
+  ],
+  "src_files": [
+    "js/**/*.js"
   ]
 }

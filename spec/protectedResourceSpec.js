@@ -5,7 +5,7 @@ var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/protectedResource.js');
 
 var Backbone = App.Backbone;
-Backbone.$ = require('jquery');
+var $ = Backbone.$ = App.$;
 
 describe('Protected Resource', function() {
   var resource;
@@ -26,7 +26,11 @@ describe('Protected Resource', function() {
   });
 
   describe('destroy() method', function() {
-    it('attaches an authorization header');
+    it('attaches an authorization header', function() {
+      spyOn($, 'ajax');
+      resource.destroy();
+      expect($.ajax).toHaveBeenCalled;
+    });
 
     it('calls destroy on the Backbone model prototype', function() {
       spyOn(Backbone.Model.prototype.destroy, 'call');
