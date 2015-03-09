@@ -4,7 +4,7 @@
   "repository"  : "https://github.com/danascheider/sandbox",
   "description" : "Just random projects I'm working on",
   "scripts"     : {
-    "test" : "jasmine",
+    "test" : "jasmine"
   },
 
   "dependencies" : {
