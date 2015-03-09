@@ -1,15 +1,18 @@
+require(process.cwd() + '/spec/support/jsdom.js');
+
 var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/protectedResource.js');
 
 var Backbone = App.Backbone;
-var $        = App.$
+Backbone.$ = require('jquery');
 
 describe('Protected Resource', function() {
   var resource;
 
   beforeEach(function() {
-    resource = new SUT();
+    resource = new SUT({id: 1});
+    resource.url = App.API.base + '/protected-resources/1'; 
   });
 
   afterAll(function() {
@@ -26,9 +29,9 @@ describe('Protected Resource', function() {
     it('attaches an authorization header');
 
     it('calls destroy on the Backbone model prototype', function() {
-      spyOn(Backbone.Model.prototype, 'destroy');
+      spyOn(Backbone.Model.prototype.destroy, 'call');
       resource.destroy();
-      expect(Backbone.Model.prototype.destroy).toHaveBeenCalledWith(resource, {});
+      expect(Backbone.Model.prototype.destroy.call).toHaveBeenCalledWith(resource, {});
     });
   });
 });
