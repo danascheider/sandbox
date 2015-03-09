@@ -16,6 +16,6 @@
 
   "devDependencies": {
     "jsdom"   : "~4.0.2",
-    "jasmine" : "~2.2.1",
+    "jasmine" : "~2.2.1"
   }
 }
