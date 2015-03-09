@@ -9,7 +9,8 @@ var ProtectedResource = Backbone.Model.extend({
 
   destroy : function(opts) {
     opts = opts || {};
-    return Backbone.Model.prototype.destroy(this, opts);
+    var that = this;
+    return Backbone.Model.prototype.destroy.call(that, opts);
   }
 });
 
