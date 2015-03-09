@@ -11,12 +11,14 @@ describe('Protected Resource', function() {
   var resource;
 
   beforeEach(function() {
+    jasmine.Ajax.install();
     resource = new SUT({id: 1});
     resource.url = App.API.base + '/protected-resources/1'; 
   });
 
   afterAll(function() {
     resource = null;
+    jasmine.Ajax.uninstall();
   });
 
   it('returns its token', function() {

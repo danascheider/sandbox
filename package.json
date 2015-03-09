@@ -15,8 +15,7 @@
   },
 
   "devDependencies": {
-    "jsdom"         : "~4.0.2",
-    "jasmine"       : "~2.2.1",
-    "sinon"         : "~1.13.0"
+    "jsdom"   : "~4.0.2",
+    "jasmine" : "~2.2.1",
   }
 }
