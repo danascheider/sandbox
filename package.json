@@ -4,8 +4,7 @@
   "repository"  : "https://github.com/danascheider/sandbox",
   "description" : "Just random projects I'm working on",
   "scripts"     : {
-    "test" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec spec",
-    "spec" : "./node_modules/mocha/bin/_mocha --recursive --reporter spec spec"
+    "test" : "jasmine",
   },
 
   "dependencies" : {
@@ -19,7 +18,7 @@
     "chai"          : "~2.1.1",
     "chai-jq"       : "~0.0.8",
     "jsdom"         : "~4.0.2",
-    "mocha"         : "~2.1.0",
+    "jasmine"       : "~2.2.1",
     "sinon"         : "~1.13.0",
     "sinon-chai"    : "~2.7.0"
   }
