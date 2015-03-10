@@ -18,6 +18,7 @@
     "jsdom"                : "~4.0.2",
     "jasmine"              : "~2.2.1",
     "entities"             : "~1.1.1",
-    "xmlhttprequest"       : "~1.7.0"
+    "xmlhttprequest"       : "~1.7.0",
+    "domhandler"           : "~2.3.0"
   }
 }
