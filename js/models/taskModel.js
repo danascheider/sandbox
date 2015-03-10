@@ -12,6 +12,15 @@ var TaskModel = ProtectedResource.extend({
     return App.API.tasks.single(this.get('id'));
   },
 
+  save    : function(attrs, opts) {
+    attrs = attrs || this.attributes;
+    opts  = opts || {};
+
+    opts.url = this.isNew() ? this.urlRoot() : this.url();
+
+    ProtectedResource.prototype.save.call(this, attrs, opts);
+  },
+
   validate: function(attrs) {
     if (!attrs.title) {
       return 'Title is required';

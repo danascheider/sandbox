@@ -7,6 +7,7 @@ var SUT = require(process.cwd() + '/js/models/taskModel.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var Backbone       = App.Backbone;
 var $              = Backbone.$ = App.$;
+var context        = describe;
 
 describe('Task Model', function() {
   var task, xhr;
@@ -48,12 +49,21 @@ describe('Task Model', function() {
   });
 
   describe('core functions', function() {
+    beforeEach(function() { spyOn($, 'ajax'); });
+
     describe('save', function() {
       it('calls validate', function() {
         spyOn(task, 'validate');
-        spyOn($, 'ajax');
         task.save();
         expect(task.validate).toHaveBeenCalled();
+      });
+
+      context('when the task is new', function() {
+        it('sends the request to the collection endpoint', function() {
+          spyOn(task, 'isNew').and.returnValue(true);
+          task.save();
+          expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.urlRoot());
+        });
       });
     });
   });
