@@ -28,6 +28,10 @@ describe('User Model', function() {
   describe('constructor', function() {
     beforeEach(function() { spyOn(SUT.prototype, 'protectedFetch'); });
 
+    it('instantiates a task collection', function() {
+      pending('need to define the task collection');
+    });
+
     context('when instantiated with an ID', function() {
       it('calls protectedFetch', function() {
         var newUser = new SUT({id: 14});
