@@ -158,5 +158,12 @@ describe('Task Model', function() {
         });
       });
     });
+
+    describe('prettyDeadline', function() {
+      it('presents its deadline in a human-friendly format', function() {
+        task.set('deadline', new Date('2014-11-10 00:00:00 -0800'));
+        expect(task.prettyDeadline()).toEqual('Monday, November 10, 2014');
+      });
+    });
   });
 });
