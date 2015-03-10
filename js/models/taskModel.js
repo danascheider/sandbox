@@ -12,13 +12,29 @@ var TaskModel = ProtectedResource.extend({
     return App.API.tasks.single(this.get('id'));
   },
 
-  fetch   : function(opts) {
+  // ----------------- //
+  // Special Functions //
+  // ----------------- //
+
+  complete   : function() {
+    return this.get('status') === 'Complete';
+  },
+
+  // -------------------- //
+  // Core Model Functions //
+  // -------------------- //
+
+  fetch      : function(opts) {
     opts = opts || {};
     opts.url = opts.url || this.url();
     return ProtectedResource.prototype.fetch.call(this, opts);
   },
 
-  save    : function(attrs, opts) {
+  initialize : function() {
+    // FIX: This should do something to handle validation errors
+  },
+
+  save       : function(attrs, opts) {
     attrs = attrs || this.attributes;
     opts  = opts || {};
 
@@ -27,7 +43,7 @@ var TaskModel = ProtectedResource.extend({
     return ProtectedResource.prototype.save.call(this, attrs, opts);
   },
 
-  validate: function(attrs) {
+  validate   : function(attrs) {
     if (!attrs.title) {
       return 'Title is required';
     }

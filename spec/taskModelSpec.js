@@ -108,4 +108,15 @@ describe('Task Model', function() {
       });
     });
   });
+
+  describe('special functions', function() {
+    describe('complete', function() {
+      context('when the task is complete', function() {
+        it('returns true', function() {
+          task.set('status', 'Complete');
+          expect(task.complete()).toEqual(true);
+        });
+      });
+    });
+  });
 });
