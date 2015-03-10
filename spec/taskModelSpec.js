@@ -46,4 +46,15 @@ describe('Task Model', function() {
       expect(newTask.isValid()).toBe(false);
     });
   });
+
+  describe('core functions', function() {
+    describe('save', function() {
+      it('calls validate', function() {
+        spyOn(task, 'validate');
+        spyOn($, 'ajax');
+        task.save();
+        expect(task.validate).toHaveBeenCalled();
+      });
+    });
+  });
 });
