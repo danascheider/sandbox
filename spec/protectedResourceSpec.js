@@ -80,6 +80,16 @@ describe('Protected Resource', function() {
   describe('save() method', function() {
     beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
 
+    it('attaches an authorization header', function() {
+      xhr.open('PUT', resource.url);
+
+      spyOn($, 'ajax');
+      resource.save();
+
+      $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+      expect(xhr.getRequestHeader('Authorization')).toEqual(resource.token());
+    });
+
     it('calls save on the Backbone model prototype', function() {
       spyOn(Backbone.Model.prototype, 'save');
       resource.save();

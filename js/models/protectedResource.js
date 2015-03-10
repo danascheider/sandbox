@@ -31,8 +31,17 @@ var ProtectedResource = Backbone.Model.extend({
     return Backbone.Model.prototype.fetch.call(this, opts);
   },
 
-  save    : function(opts) {
-    return Backbone.Model.prototype.save.call(this, opts);
+  save    : function(attrs, opts) {
+    opts  = opts || {};
+    attrs = attrs || this.attributes;
+
+    var that = this;
+
+    opts.beforeSend = function(xhr) {
+      xhr.setRequestHeader('Authorization', that.token());
+    };
+
+    return Backbone.Model.prototype.save.call(this, attrs, opts);
   }
 });
 
