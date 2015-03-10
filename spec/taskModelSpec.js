@@ -26,5 +26,9 @@ describe('Task Model', function() {
     it('has a `urlRoot` scoped to the logged in user', function() {
       expect(task.urlRoot()).toEqual(App.API.base + '/users/342/tasks');
     });
+
+    it('has an individual `url` not scoped to the logged in user', function() {
+      expect(task.url()).toEqual(App.API.base + '/tasks/1');
+    });
   });
 });

@@ -6,6 +6,10 @@ var TaskModel = Backbone.Model.extend({
   urlRoot : function() {
     return App.API.tasks.collection($.cookie('userID'));
   },
+
+  url     : function() {
+    return App.API.tasks.single(this.get('id'));
+  }
 });
 
 module.exports = TaskModel;
