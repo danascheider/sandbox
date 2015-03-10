@@ -2,7 +2,7 @@ require(process.cwd() + '/spec/support/jsdom.js');
 
 var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
-var SUT = require(process.cwd() + '/js/models/protectedResource.js');
+var SUT = require(process.cwd() + '/js/models/protectedResourceModel.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var Backbone       = App.Backbone;
