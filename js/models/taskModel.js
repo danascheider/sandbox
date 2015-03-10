@@ -16,11 +16,15 @@ var TaskModel = ProtectedResource.extend({
   // Special Functions //
   // ----------------- //
 
-  complete   : function() {
+  complete     : function() {
     return this.get('status') === 'Complete';
   },
 
-  incomplete : function() {
+  displayTitle : function() {
+    return this.escape('title');
+  },
+
+  incomplete   : function() {
     return this.get('status') != 'Complete';
   },
 

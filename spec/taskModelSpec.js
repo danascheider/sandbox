@@ -126,6 +126,23 @@ describe('Task Model', function() {
       });
     });
 
+    describe('displayTitle', function() {
+      it('leaves a short title as-is', function() {
+        task.set('title', 'Take out the trash');
+        expect(task.displayTitle()).toEqual('Take out the trash');
+      });
+
+      // it('truncates a long title with an ellipsis', function() {
+      //   task = new Task({title: 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood'});
+      //   task.displayTitle().should.equal('Find out how much wood a woodchuck would chuck if a ...');
+      // });
+
+      // it('takes an argument into consideration', function() {
+      //   task = new Task({title: 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood'});
+      //   task.displayTitle(35).should.equal('Find out how much wood a ...');
+      // });
+    });
+
     describe('incomplete', function() {
       context('when the task is complete', function() {
         it('returns false', function() {
