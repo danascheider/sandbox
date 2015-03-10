@@ -18,6 +18,7 @@ describe('Task Model', function() {
     var cookie = spyOn($, 'cookie').and.callFake(function(name) {
       return name === 'userID' ? 342 : 'Basic ' + Env.btoa('testuser:testuser');
     });
+    spyOn($, 'ajax');
   });
 
   afterAll(function() {
@@ -50,7 +51,18 @@ describe('Task Model', function() {
   });
 
   describe('core functions', function() {
-    beforeEach(function() { spyOn($, 'ajax'); });
+    describe('fetch', function() {
+      it('sends the request to the task\'s individual endpoint', function() {
+        task.fetch();
+        expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.url());
+      });
+
+      it('calls fetch on the ProtectedResource prototype', function() {
+        spyOn(ProtectedResource.prototype, 'fetch');
+        task.fetch();
+        expect(ProtectedResource.prototype.fetch).toHaveBeenCalled();
+      });
+    });
 
     describe('save', function() {
       it('calls validate', function() {

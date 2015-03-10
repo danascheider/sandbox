@@ -12,13 +12,19 @@ var TaskModel = ProtectedResource.extend({
     return App.API.tasks.single(this.get('id'));
   },
 
+  fetch   : function(opts) {
+    opts = opts || {};
+    opts.url = opts.url || this.url();
+    return ProtectedResource.prototype.fetch.call(this, opts);
+  },
+
   save    : function(attrs, opts) {
     attrs = attrs || this.attributes;
     opts  = opts || {};
 
     opts.url = this.isNew() ? this.urlRoot() : this.url();
 
-    ProtectedResource.prototype.save.call(this, attrs, opts);
+    return ProtectedResource.prototype.save.call(this, attrs, opts);
   },
 
   validate: function(attrs) {
