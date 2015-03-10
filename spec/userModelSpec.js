@@ -26,9 +26,9 @@ describe('User Model', function() {
   });
 
   describe('constructor', function() {
-    context('when instantiated with an ID', function() {
-      beforeEach(function() { spyOn(SUT.prototype, 'protectedFetch'); });
+    beforeEach(function() { spyOn(SUT.prototype, 'protectedFetch'); });
 
+    context('when instantiated with an ID', function() {
       it('calls protectedFetch', function() {
         var newUser = new SUT({id: 14});
         expect(SUT.prototype.protectedFetch).toHaveBeenCalled();
@@ -36,6 +36,13 @@ describe('User Model', function() {
 
       it('doesn\'t call protectedFetch if `sync` is set to false', function() {
         var newUser = new SUT({id: 22}, {sync: false});
+        expect(SUT.prototype.protectedFetch).not.toHaveBeenCalled();
+      });
+    });
+
+    context('when not instantiated with an ID', function() {
+      it('doesn\'t call protectedFetch', function() {
+        var newUser = new SUT();
         expect(SUT.prototype.protectedFetch).not.toHaveBeenCalled();
       });
     });
