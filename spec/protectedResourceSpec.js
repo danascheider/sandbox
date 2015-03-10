@@ -1,6 +1,5 @@
 require(process.cwd() + '/spec/support/jsdom.js');
 
-
 var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/protectedResource.js');
@@ -9,7 +8,7 @@ var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var Backbone       = App.Backbone;
 var $              = Backbone.$ = App.$;
 
-describe('Protected Resource', function() {
+describe('Protected Resource Model', function() {
   var resource, xhr;
 
   beforeEach(function() {
