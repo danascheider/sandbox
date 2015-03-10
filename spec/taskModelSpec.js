@@ -137,10 +137,10 @@ describe('Task Model', function() {
         expect(task.displayTitle()).toEqual('Find out how much wood a woodchuck would chuck if a ...');
       });
 
-      // it('takes an argument into consideration', function() {
-      //   task = new Task({title: 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood'});
-      //   task.displayTitle(35).should.equal('Find out how much wood a ...');
-      // });
+      it('takes an argument into consideration', function() {
+        task.set('title', 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood');
+        expect(task.displayTitle(35)).toEqual('Find out how much wood a ...');
+      });
     });
 
     describe('incomplete', function() {

@@ -20,8 +20,8 @@ var TaskModel = ProtectedResource.extend({
     return this.get('status') === 'Complete';
   },
 
-  displayTitle : function() {
-    var chars = 60;
+  displayTitle : function(chars) {
+    var chars = chars || 60;
     var title = this.escape('title');
 
     if(title.length > chars) {
