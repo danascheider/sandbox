@@ -4,10 +4,11 @@ var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/taskModel.js');
 
-var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-var Backbone       = App.Backbone;
-var $              = Backbone.$ = App.$;
-var context        = describe;
+var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceModel.js');
+var XMLHttpRequest    = require('xmlhttprequest').XMLHttpRequest;
+var Backbone          = App.Backbone;
+var $                 = Backbone.$ = App.$;
+var context           = describe;
 
 describe('Task Model', function() {
   var task, xhr;
@@ -56,6 +57,12 @@ describe('Task Model', function() {
         spyOn(task, 'validate');
         task.save();
         expect(task.validate).toHaveBeenCalled();
+      });
+
+      it('calls save on the ProtectedResource prototype', function() {
+        spyOn(ProtectedResource.prototype, 'save');
+        task.save();
+        expect(ProtectedResource.prototype.save).toHaveBeenCalled();
       });
 
       context('when the task is new', function() {
