@@ -9,8 +9,17 @@ var UserModel = Backbone.Model.extend({
   // Special Functions //
   // ----------------- //
 
-  protectedFetch : function() {
-    //
+  protectedFetch : function(settings) {
+    settings = settings || {};
+    var that = this;
+
+    settings.url = App.API.users.single(this.get('id'));
+
+    settings.beforeSend = (settings.beforeSend) || function(xhr) {
+      xhr.setRequestHeader('Authorization', $.cookie('auth'));
+    };
+
+    return Backbone.Model.prototype.fetch.call(this, settings);
   },
 
   // -------------------- //

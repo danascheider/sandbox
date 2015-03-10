@@ -1,20 +1,20 @@
 require(process.cwd() + '/spec/support/jsdom.js');
+document = window;
 
 var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/userModel.js');
 
-var XMLHttpRequest    = require('xmlhttprequest').XMLHttpRequest;
-var Backbone          = App.Backbone;
-var $                 = Backbone.$ = App.$;
-var context           = describe // RSpecify
+var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+var Backbone       = App.Backbone;
+var $              = Backbone.$ = App.$;
 
 describe('User Model', function() {
   var user, xhr;
 
   beforeEach(function() {
-    xhr  = new XMLHttpRequest();
     user = new SUT({id: 342, username: 'testuser', password: 'testuser', email: 'testuser@example.com', first_name: 'Test', last_name: 'User'});
+    xhr = new XMLHttpRequest();
   });
 
   afterAll(function() {
@@ -34,7 +34,7 @@ describe('User Model', function() {
       pending('need to define the task collection');
     });
 
-    context('when instantiated with an ID', function() {
+    describe('when instantiated with an ID', function() {
       it('calls protectedFetch', function() {
         var newUser = new SUT({id: 14});
         expect(SUT.prototype.protectedFetch).toHaveBeenCalled();
@@ -46,7 +46,7 @@ describe('User Model', function() {
       });
     });
 
-    context('when not instantiated with an ID', function() {
+    describe('when not instantiated with an ID', function() {
       it('doesn\'t call protectedFetch', function() {
         var newUser = new SUT();
         expect(SUT.prototype.protectedFetch).not.toHaveBeenCalled();
@@ -55,14 +55,11 @@ describe('User Model', function() {
   });
 
   describe('core functions', function() {
-    describe('fetch', function() {
-      beforeEach(function() {
-        spyOn($, 'ajax');
-        spyOn($, 'cookie').and.callFake(function(name) {
-          return name === 'userID' ? 1 : 'Basic ' + Env.btoa('danascheider:danascheider');
-        });
-      });
+    beforeEach(function() {
+      spyOn($, 'ajax');
+    });
 
+    describe('fetch', function() {
       it('calls Backbone fetch function', function() {
         spyOn(Backbone.Model.prototype, 'fetch');
         user.fetch();
@@ -70,15 +67,44 @@ describe('User Model', function() {
       });
 
       it('sets the auth header for the requested user', function() {
-        xhr.open('GET', user.url);
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', user.url());
         user.fetch();
         $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
         expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + Env.btoa('testuser:testuser'));
       });
 
-      it('fetches the calling user, not the logged-in user', function() {
+      it('sends the request to the requested user\'s endpoint', function() {
         user.fetch();
         expect($.ajax.calls.argsFor(0)[0].url).toEqual(user.url());
+      });
+    });
+  });
+
+  describe('special functions', function() {
+    beforeEach(function() {
+      spyOn($, 'cookie').and.returnValue('Basic ' + Env.btoa('danascheider:danascheider'));
+      spyOn($, 'ajax');
+    });
+
+    describe('protectedFetch', function() {
+      it('calls Backbone fetch function', function() {
+        spyOn(Backbone.Model.prototype, 'fetch');
+        user.protectedFetch();
+        expect(Backbone.Model.prototype.fetch).toHaveBeenCalled();
+      });
+
+      it('sets the auth header for the requested user', function() {
+        xhr.open('GET', user.url);
+        user.protectedFetch();
+        $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+        expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + Env.btoa('danascheider:danascheider'));
+      });
+
+      it('sends the request to the requested user\'s endpoint', function() {
+
+        user.protectedFetch();
+        expect($.ajax.calls.argsFor(0)[0].url).toEqual(App.API.base + '/users/342');
       });
     });
   });
