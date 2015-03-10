@@ -31,4 +31,12 @@ describe('Task Model', function() {
       expect(task.url()).toEqual(App.API.base + '/tasks/1');
     });
   });
+
+  describe('constructor', function() {
+    it('does not save the task automatically', function() {
+      spyOn(SUT.prototype, 'save');
+      var newTask = new SUT();
+      expect(SUT.prototype.save).not.toHaveBeenCalled();
+    });
+  });
 });
