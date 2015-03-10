@@ -29,6 +29,10 @@ var ProtectedResource = Backbone.Model.extend({
     };
 
     return Backbone.Model.prototype.fetch.call(this, opts);
+  },
+
+  save    : function(opts) {
+    return Backbone.Model.prototype.save.call(this, opts);
   }
 });
 

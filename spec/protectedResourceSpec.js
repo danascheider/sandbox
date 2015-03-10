@@ -76,4 +76,14 @@ describe('Protected Resource', function() {
       expect(Backbone.Model.prototype.fetch).toHaveBeenCalled;
     });
   });
+
+  describe('save() method', function() {
+    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
+
+    it('calls save on the Backbone model prototype', function() {
+      spyOn(Backbone.Model.prototype, 'save');
+      resource.save();
+      expect(Backbone.Model.prototype.save).toHaveBeenCalled();
+    });
+  });
 });
