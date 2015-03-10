@@ -21,7 +21,16 @@ var TaskModel = ProtectedResource.extend({
   },
 
   displayTitle : function() {
-    return this.escape('title');
+    var chars = 60;
+    var title = this.escape('title');
+
+    if(title.length > chars) {
+      var shorter = title.substring(0,chars - 1).split(' ');
+      shorter.pop();
+      return shorter.join(' ') + ' ...';
+    } 
+
+    return title;
   },
 
   incomplete   : function() {

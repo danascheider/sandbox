@@ -132,10 +132,10 @@ describe('Task Model', function() {
         expect(task.displayTitle()).toEqual('Take out the trash');
       });
 
-      // it('truncates a long title with an ellipsis', function() {
-      //   task = new Task({title: 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood'});
-      //   task.displayTitle().should.equal('Find out how much wood a woodchuck would chuck if a ...');
-      // });
+      it('truncates a long title with an ellipsis', function() {
+        task.set('title', 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood');
+        expect(task.displayTitle()).toEqual('Find out how much wood a woodchuck would chuck if a ...');
+      });
 
       // it('takes an argument into consideration', function() {
       //   task = new Task({title: 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood'});
