@@ -8,7 +8,7 @@ var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceMod
 var XMLHttpRequest    = require('xmlhttprequest').XMLHttpRequest;
 var Backbone          = App.Backbone;
 var $                 = Backbone.$ = App.$;
-var context           = describe;
+var context           = describe; // RSpecify
 
 describe('Task Model', function() {
   var task, xhr;
@@ -115,6 +115,13 @@ describe('Task Model', function() {
         it('returns true', function() {
           task.set('status', 'Complete');
           expect(task.complete()).toEqual(true);
+        });
+      });
+
+      context('when the task is incomplete', function() {
+        it('returns false', function() {
+          task.set('status', 'Blocking');
+          expect(task.complete()).toEqual(false);
         });
       });
     });
