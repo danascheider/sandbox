@@ -37,6 +37,12 @@ describe('Protected Collection', function() {
         $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
         expect(xhr.getRequestHeader('Authorization')).toEqual(collection.token());
       });
+
+      it('calls fetch on the Backbone collection prototype', function() {
+        spyOn(Backbone.Collection.prototype, 'fetch');
+        collection.fetch();
+        expect(Backbone.Collection.prototype.fetch).toHaveBeenCalled();
+      });
     });
   });
 });
