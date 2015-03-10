@@ -17,6 +17,18 @@ var ProtectedResource = Backbone.Model.extend({
     };
 
     return Backbone.Model.prototype.destroy.call(this, opts);
+  },
+
+  fetch   : function(opts) {
+    opts = opts || {};
+
+    var that = this;
+
+    opts.beforeSend = (opts.beforeSend) || function(xhr) {
+      xhr.setRequestHeader('Authorization', that.token());
+    };
+
+    return Backbone.Model.prototype.fetch.call(this, opts);
   }
 });
 

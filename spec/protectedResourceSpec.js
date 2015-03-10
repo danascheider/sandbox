@@ -10,11 +10,12 @@ var Backbone       = App.Backbone;
 var $              = Backbone.$ = App.$;
 
 describe('Protected Resource', function() {
-  var resource;
+  var resource, xhr;
 
   beforeEach(function() {
     resource = new SUT({id: 1});
     resource.url = App.API.base + '/protected-resources/1'; 
+    xhr = new XMLHttpRequest();
   });
 
   afterAll(function() {
@@ -35,7 +36,6 @@ describe('Protected Resource', function() {
       // XHR object can be passed to the Ajax beforeSend setting to
       // check the value of the Authorization header
 
-      var xhr = new XMLHttpRequest();
       xhr.open('DELETE', resource.url);
 
       // Spy on Ajax to intercept its options
@@ -54,6 +54,26 @@ describe('Protected Resource', function() {
       spyOn(Backbone.Model.prototype, 'destroy');
       resource.destroy();
       expect(Backbone.Model.prototype.destroy).toHaveBeenCalled();
+    });
+  });
+
+  describe('fetch() method', function() {
+    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
+
+    it('attaches an authorization header', function() {
+      xhr.open('GET', resource.url);
+
+      spyOn($, 'ajax');
+      resource.fetch();
+
+      $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+      expect(xhr.getRequestHeader('Authorization')).toEqual(resource.token());
+    });
+
+    it('calls fetch on the Backbone model prototype', function() {
+      spyOn(Backbone.Model.prototype, 'fetch');
+      resource.fetch();
+      expect(Backbone.Model.prototype.fetch).toHaveBeenCalled;
     });
   });
 });
