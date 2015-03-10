@@ -21,4 +21,12 @@ describe('App Presenter', function() {
       pending('define the homepage view');
     });
   });
+
+  describe('events', function() {
+    describe('redirect:dashboard', function() {
+      it('calls emitRedirect', function() {
+        pending('fuller implementation of the app as a whole');
+      });
+    });
+  });
 });
