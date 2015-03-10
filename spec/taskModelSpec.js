@@ -114,14 +114,30 @@ describe('Task Model', function() {
       context('when the task is complete', function() {
         it('returns true', function() {
           task.set('status', 'Complete');
-          expect(task.complete()).toEqual(true);
+          expect(task.complete()).toBe(true);
         });
       });
 
       context('when the task is incomplete', function() {
         it('returns false', function() {
           task.set('status', 'Blocking');
-          expect(task.complete()).toEqual(false);
+          expect(task.complete()).toBe(false);
+        });
+      });
+    });
+
+    describe('incomplete', function() {
+      context('when the task is complete', function() {
+        it('returns false', function() {
+          task.set('status', 'Complete');
+          expect(task.incomplete()).toBe(false);
+        });
+      });
+
+      context('when the task is incomplete', function() {
+        it('returns true', function() {
+          task.set('status', 'In Progress');
+          expect(task.incomplete()).toBe(true);
         });
       });
     });

@@ -20,6 +20,10 @@ var TaskModel = ProtectedResource.extend({
     return this.get('status') === 'Complete';
   },
 
+  incomplete : function() {
+    return this.get('status') != 'Complete';
+  },
+
   // -------------------- //
   // Core Model Functions //
   // -------------------- //
