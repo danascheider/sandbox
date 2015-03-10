@@ -5,13 +5,12 @@ var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/taskModel.js');
 
 var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceModel.js');
-var XMLHttpRequest    = require('xmlhttprequest').XMLHttpRequest;
 var Backbone          = App.Backbone;
 var $                 = Backbone.$ = App.$;
 var context           = describe; // RSpecify
 
 describe('Task Model', function() {
-  var task, xhr;
+  var task;
 
   beforeEach(function() {
     task = new SUT({id: 1, title: 'My Task'});
