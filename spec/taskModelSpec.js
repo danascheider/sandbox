@@ -59,18 +59,32 @@ describe('Task Model', function() {
       });
 
       context('when the task is new', function() {
-        it('sends the request to the collection endpoint', function() {
+        beforeEach(function() {
           spyOn(task, 'isNew').and.returnValue(true);
           task.save();
+        });
+
+        it('sends the request to the collection endpoint', function() {
           expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.urlRoot());
+        });
+
+        it('sends a POST request', function() {
+          expect($.ajax.calls.argsFor(0)[0].type).toEqual('POST');
         });
       });
 
       context('when the task is not new', function() {
-        it('sends the request to the individual endpoint', function() {
-          spyOn(task, 'isNew').and.returnValue(false);
+        beforeEach(function() { 
+          spyOn(task, 'isNew').and.returnValue(false); 
           task.save();
+        });
+
+        it('sends the request to the individual endpoint', function() {
           expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.url());
+        });
+
+        it('sends a PUT request', function() {
+          expect($.ajax.calls.argsFor(0)[0].type).toEqual('PUT');
         });
       });
     });
