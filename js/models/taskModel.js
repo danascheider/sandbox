@@ -9,6 +9,12 @@ var TaskModel = Backbone.Model.extend({
 
   url     : function() {
     return App.API.tasks.single(this.get('id'));
+  },
+
+  validate: function(attrs) {
+    if (!attrs.title) {
+      return 'Title is required';
+    }
   }
 });
 

@@ -39,4 +39,11 @@ describe('Task Model', function() {
       expect(SUT.prototype.save).not.toHaveBeenCalled();
     });
   });
+
+  describe('validations', function() {
+    it('is invalid without a title', function() {
+      var newTask = new SUT();
+      expect(newTask.isValid()).toBe(false);
+    });
+  });
 });
