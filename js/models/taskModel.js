@@ -39,7 +39,7 @@ var TaskModel = ProtectedResource.extend({
 
   prettyDeadline : function() {
     // Without being prettified, deadlines show up in the view like this:
-    // 2014-11-10 00:00:00 -0800. They should instead say 11/10/2014.
+    // 2014-11-10 00:00:00 -0800. They should instead say Monday, November 10, 20whatever.
     var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var months = [
                   'January',
