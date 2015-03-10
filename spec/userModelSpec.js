@@ -51,4 +51,20 @@ describe('User Model', function() {
       });
     });
   });
+
+  describe('core functions', function() {
+    describe('fetch', function() {
+      beforeEach(function() {
+        spyOn($, 'cookie').and.callFake(function(name) {
+          return name === 'userID' ? 1 : 'Basic ' + Env.btoa('danascheider:danascheider');
+        });
+      });
+
+      it('calls Backbone fetch function', function() {
+        spyOn(Backbone.Model.prototype, 'fetch');
+        user.fetch();
+        expect(Backbone.Model.prototype.fetch).toHaveBeenCalled();
+      });
+    });
+  });
 });
