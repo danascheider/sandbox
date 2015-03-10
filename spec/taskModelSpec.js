@@ -65,6 +65,14 @@ describe('Task Model', function() {
           expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.urlRoot());
         });
       });
+
+      context('when the task is not new', function() {
+        it('sends the request to the individual endpoint', function() {
+          spyOn(task, 'isNew').and.returnValue(false);
+          task.save();
+          expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.url());
+        });
+      });
     });
   });
 });
