@@ -20,7 +20,7 @@ var UserModel = Backbone.Model.extend({
   initialize     : function(attrs, opts) {
     opts = opts || {};
     
-    if(this.get('id')) { this.protectedFetch(); }
+    if(this.get('id') && !(opts.sync === false)) { this.protectedFetch(); }
   }
 });
 
