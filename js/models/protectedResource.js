@@ -9,8 +9,14 @@ var ProtectedResource = Backbone.Model.extend({
 
   destroy : function(opts) {
     opts = opts || {};
+
     var that = this;
-    return Backbone.Model.prototype.destroy.call(that, opts);
+
+    opts.beforeSend = (opts.beforeSend) || function(xhr) {
+      xhr.setRequestHeader('Authorization', that.token());
+    };
+
+    return Backbone.Model.prototype.destroy.call(this, opts);
   }
 });
 

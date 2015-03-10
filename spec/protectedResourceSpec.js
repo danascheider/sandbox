@@ -1,24 +1,24 @@
 require(process.cwd() + '/spec/support/jsdom.js');
 
+
 var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/protectedResource.js');
 
-var Backbone = App.Backbone;
-var $ = Backbone.$ = App.$;
+var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
+var Backbone       = App.Backbone;
+var $              = Backbone.$ = App.$;
 
 describe('Protected Resource', function() {
   var resource;
 
   beforeEach(function() {
-    jasmine.Ajax.install();
     resource = new SUT({id: 1});
     resource.url = App.API.base + '/protected-resources/1'; 
   });
 
   afterAll(function() {
     resource = null;
-    jasmine.Ajax.uninstall();
   });
 
   it('returns its token', function() {
@@ -28,16 +28,32 @@ describe('Protected Resource', function() {
   });
 
   describe('destroy() method', function() {
+    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
+
     it('attaches an authorization header', function() {
+
+      // XHR object can be passed to the Ajax beforeSend setting to
+      // check the value of the Authorization header
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('DELETE', resource.url);
+
+      // Spy on Ajax to intercept its options
       spyOn($, 'ajax');
       resource.destroy();
-      expect($.ajax).toHaveBeenCalled;
+
+      // The beforeSend function should set the Authorization header
+      // on the XHR object passed to it to the value of "token", the 
+      // resource's authorization token.
+
+      $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+      expect(xhr.getRequestHeader('Authorization')).toEqual(resource.token());
     });
 
     it('calls destroy on the Backbone model prototype', function() {
-      spyOn(Backbone.Model.prototype.destroy, 'call');
+      spyOn(Backbone.Model.prototype, 'destroy');
       resource.destroy();
-      expect(Backbone.Model.prototype.destroy.call).toHaveBeenCalledWith(resource, {});
+      expect(Backbone.Model.prototype.destroy).toHaveBeenCalled();
     });
   });
 });
