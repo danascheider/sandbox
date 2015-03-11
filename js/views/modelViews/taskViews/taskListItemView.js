@@ -6,6 +6,7 @@ var Template  = require(process.cwd() + '/templates/modelTemplates/taskTemplates
 var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 
 var ListItemView = Backbone.View.extend({
+  tagName    : 'li',
 
   // ----------------- //
   // Special Functions //

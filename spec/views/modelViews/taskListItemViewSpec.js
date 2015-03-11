@@ -29,6 +29,18 @@ describe('List Item Task View', function() {
     it('creates a model view', function() {
       expect(view.modelView.isA('TaskModelView')).toBe(true);
     });
+
+    it('creates an edit form', function() {
+      pending('Need to implement the edit form view');
+    });
+  });
+
+  describe('el', function() {
+    beforeEach(function() { view.render(); });
+
+    it('is an li', function() {
+      expect(view.$el[0].tagName).toEqual('LI');
+    });
   });
 
   describe('special functions', function() {
