@@ -9,6 +9,18 @@ var TaskCollection = ProtectedCollection.extend({
     return App.API.tasks.collection(App.$.cookie('userID'));
   },
 
+  // ----------------- //
+  // Special Functions //
+  // ----------------- //
+
+  // The isA() function returns true if passed one of the following
+  // strings: 'TaskCollection', 'Backbone.Collection', 'ProtectedCollection'
+
+  isA        : function(type) {
+    var trueTypes = ['TaskCollection', 'Backbone.Collection', 'ProtectedCollection'];
+    return trueTypes.indexOf(type) > -1 ? true : false;
+  },
+
   // ------------------------- //
   // Core Collection Functions //
   // ------------------------- //

@@ -84,4 +84,22 @@ describe('Task Collection', function() {
       });
     });
   });
+
+  describe('special functions', function() {
+    it('returns true with arg \'TaskCollection\'', function() {
+      expect(collection.isA('TaskCollection')).toBe(true);
+    });
+
+    it('returns true with arg \'Backbone.Collection\'', function() {
+      expect(collection.isA('Backbone.Collection')).toBe(true);
+    });
+
+    it('returns true with arg \'ProtectedCollection\'', function() {
+      expect(collection.isA('ProtectedCollection')).toBe(true);
+    });
+
+    it('returns false with wrong type', function() {
+      expect(collection.isA('UserCollection')).toBe(false);
+    });
+  });
 });
