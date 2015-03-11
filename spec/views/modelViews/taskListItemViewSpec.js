@@ -41,6 +41,10 @@ describe('List Item Task View', function() {
     it('is an li', function() {
       expect(view.$el[0].tagName).toEqual('LI');
     });
+
+    it('has class .task-list-item', function() {
+      expect(view.$el[0].className).toEqual(jasmine.stringMatching('task-list-item'));
+    });
   });
 
   describe('special functions', function() {

@@ -7,6 +7,7 @@ var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 
 var ListItemView = Backbone.View.extend({
   tagName    : 'li',
+  className  : 'task-list-item',
 
   // ----------------- //
   // Special Functions //
