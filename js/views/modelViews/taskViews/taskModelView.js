@@ -30,6 +30,10 @@ var TaskModelView = Backbone.View.extend({
   // Core View Functions //
   // ------------------- //
 
+  initialize   : function() {
+    this.listenTo(this.model, 'sync', this.renderOnSync);
+  },
+
   render       : function() {
     this.$el.html(this.template({model: this.model}));
     return this;

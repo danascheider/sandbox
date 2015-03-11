@@ -70,6 +70,17 @@ describe('Task Model View', function() {
     });
   });
 
+  describe('events', function() {
+    describe('save model', function() {
+      it('calls renderOnSync', function() {
+        spyOn(SUT.prototype, 'renderOnSync');
+        var newView = new SUT({model: task});
+        task.trigger('sync');
+        expect(SUT.prototype.renderOnSync).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('view elements', function() {
     beforeEach(function() { view.render(); });
 
