@@ -8,6 +8,7 @@ var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 var ListItemView = Backbone.View.extend({
   tagName    : 'li',
   className  : 'task-list-item',
+  template   : _.template(Template),
 
   // ----------------- //
   // Special Functions //
@@ -24,6 +25,10 @@ var ListItemView = Backbone.View.extend({
 
   initialize : function() {
     this.modelView = new ModelView({model: this.model});
+  },
+
+  render     : function() {
+    this.$el.html(this.template({model: this.model}));
   }
 });
 

@@ -47,6 +47,14 @@ describe('List Item Task View', function() {
     });
   });
 
+  describe('elements', function() {
+    beforeEach(function() { view.render(); });
+
+    it('has a mark-complete checkbox', function() {
+      expect(view.$('i[title="Mark complete"]').length).toEqual(1);
+    });
+  });
+
   describe('special functions', function() {
     describe('isA', function() {
       it('returns true with arg \'TaskListItemView\'', function() {
