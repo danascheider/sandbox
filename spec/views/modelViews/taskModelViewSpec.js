@@ -54,6 +54,18 @@ describe('Task Model View', function() {
   });
 
   describe('special functions', function() {
-    describe('isA', function() {});
+    describe('isA', function() {
+      it('returns true with arg \'TaskModelView\'', function() {
+        expect(view.isA('TaskModelView')).toBe(true);
+      });
+
+      it('returns true with arg \'Backbone.View\'', function() {
+        expect(view.isA('Backbone.View')).toBe(true);
+      });
+
+      it('returns false with another string', function() {
+        expect(view.isA('TaskCollection')).toBe(false);
+      });
+    });
   });
 });
