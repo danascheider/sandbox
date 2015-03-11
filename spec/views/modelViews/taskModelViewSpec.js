@@ -86,12 +86,12 @@ describe('Task Model View', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching("Test Canto's front-end functionality"));
     });
 
-    // it('does not display blank fields', function() {
-    //   task.unset('deadline');
-    //   view.render();
-    //   view.$('tr.task-deadline-row').length.should.equal(0);
-    //   task.set('deadline', new Date(2015, 8, 28));
-    // });
+    it('does not display blank fields', function() {
+      task.unset('deadline');
+      view.render();
+      expect(view.$('tr.task-deadline-row').length).toEqual(0);
+      task.set('deadline', new Date(2015, 8, 28));
+    });
   });
 
   describe('special functions', function() {
