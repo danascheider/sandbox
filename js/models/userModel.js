@@ -1,4 +1,5 @@
-var App = require(process.cwd() + '/js/dependencies.js');
+var App        = require(process.cwd() + '/js/dependencies.js');
+var Collection = require(process.cwd() + '/js/collections/taskCollection.js');
 
 var Backbone = App.Backbone, _ = App._, $ = App.$;
 
@@ -41,7 +42,9 @@ var UserModel = Backbone.Model.extend({
 
   initialize     : function(attrs, opts) {
     opts = opts || {};
-    
+
+    this.tasks = new Collection();
+
     if(this.get('id') && !(opts.sync === false)) { this.protectedFetch(); }
   }
 });

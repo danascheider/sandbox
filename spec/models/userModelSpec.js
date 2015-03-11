@@ -5,6 +5,7 @@ var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/userModel.js');
 
+var Collection     = require(process.cwd() + '/js/collections/taskCollection.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var Backbone       = App.Backbone;
 var $              = Backbone.$ = App.$;
@@ -31,7 +32,8 @@ describe('User Model', function() {
     beforeEach(function() { spyOn(SUT.prototype, 'protectedFetch'); });
 
     it('instantiates a task collection', function() {
-      pending('need to define the task collection');
+      var newUser = new SUT();
+      expect(newUser.tasks).toBeDefined();
     });
 
     describe('when instantiated with an ID', function() {
