@@ -144,6 +144,17 @@ describe('Task Model View', function() {
       it('returns the view', function() {
         expect(view.render()).toEqual(view);
       });
+
+      it('sets the HTML of the view\'s el', function() {
+        spyOn(view.$el, 'html');
+        view.render();
+
+        // Expect view.$el.html() to be called with 1 argument - i.e.,
+        // as a setter; jQuery.prototype.html() is a getter when called
+        // without arguments
+        
+        expect(view.$el.html.calls.mostRecent().args.length).toEqual(1);
+      });
     });
   });
 });
