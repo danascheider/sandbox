@@ -4,6 +4,8 @@ var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
 var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 
 var TaskModelView = Backbone.View.extend({
+  tagName   : 'div',
+  className : 'task-model',
 
   // ----------------- //
   // Special Functions //

@@ -51,6 +51,10 @@ describe('Task Model View', function() {
     it('is a div', function() {
       expect(view.$el[0].tagName).toEqual('DIV');
     });
+
+    it('has class .task-model', function() {
+      expect(view.$el[0].className).toEqual(jasmine.stringMatching('task-model'));
+    });
   });
 
   describe('special functions', function() {
