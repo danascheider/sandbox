@@ -127,6 +127,15 @@ describe('Task Model View', function() {
           expect(view.render).toHaveBeenCalled();
         });
       });
+
+      context('when marked complete', function() {
+        it('doesn\'t call render', function() {
+          task.set('status', 'Complete');
+          view.renderOnSync();
+          expect(view.render).not.toHaveBeenCalled();
+          task.set('status', 'New');
+        });
+      });
     });
   });
 });

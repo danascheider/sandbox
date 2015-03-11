@@ -14,6 +14,7 @@ var TaskModelView = Backbone.View.extend({
   // --------------- //
 
   renderOnSync : function() {
+    if(this.model.get('status') === 'Complete') { return; }
     this.render();
   },
 
