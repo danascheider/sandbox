@@ -25,5 +25,9 @@ describe('List Item Task View', function() {
       var newView = new SUT({model: task});
       expect(SUT.prototype.render).not.toHaveBeenCalled();
     });
+
+    it('creates a model view', function() {
+      expect(view.modelView.isA('TaskModelView')).toBe(true);
+    });
   });
 });
