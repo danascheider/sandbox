@@ -7,6 +7,7 @@ var SUT = require(process.cwd() + '/js/collections/taskCollection.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var TaskModel      = require(process.cwd() + '/js/models/taskModel.js');
+var Collection     = require(process.cwd() + '/js/collections/protectedCollection.js');
 var Backbone       = App.Backbone;
 var $              = Backbone.$ = App.$;
 var context        = describe; // RSpecify
@@ -54,6 +55,27 @@ describe('Task Collection', function() {
   describe('URL', function() {
     it('gets the URL for the logged-in user', function() {
       expect(collection.url()).toEqual(App.API.base + '/users/342/tasks');
+    });
+  });
+
+  describe('core functions', function() {
+    describe('fetch', function() {
+      beforeAll(function() {
+        spyOn($, 'ajax');
+      });
+
+      context('normal', function() {
+        it('sends the request to the collection URL', function() {
+          collection.fetch();
+          expect($.ajax.calls.argsFor(0)[0].url).toEqual(collection.url());
+        });
+
+        it('calls fetch on the collection prototype', function() {
+          spyOn(Collection.prototype, 'fetch');
+          collection.fetch();
+          expect(Collection.prototype.fetch).toHaveBeenCalled();
+        });
+      });
     });
   });
 });
