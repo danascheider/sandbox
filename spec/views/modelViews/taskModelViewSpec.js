@@ -138,4 +138,12 @@ describe('Task Model View', function() {
       });
     });
   });
+
+  describe('core functions', function() {
+    describe('render', function() {
+      it('returns the view', function() {
+        expect(view.render()).toEqual(view);
+      });
+    });
+  });
 });
