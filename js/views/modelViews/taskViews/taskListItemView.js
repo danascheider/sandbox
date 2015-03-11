@@ -7,6 +7,15 @@ var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 
 var ListItemView = Backbone.View.extend({
 
+  // ----------------- //
+  // Special Functions //
+  // ----------------- //
+
+  isA        : function(type) {
+    var trueValues = ['TaskListItemView', 'ListItemView', 'Backbone.View'];
+    return trueValues.indexOf(type) > -1 ? true : false;
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //

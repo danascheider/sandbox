@@ -30,4 +30,24 @@ describe('List Item Task View', function() {
       expect(view.modelView.isA('TaskModelView')).toBe(true);
     });
   });
+
+  describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with arg \'TaskListItemView\'', function() {
+        expect(view.isA('TaskListItemView')).toBe(true);
+      });
+
+      it('returns true with arg \'ListItemView\'', function() {
+        expect(view.isA('ListItemView')).toBe(true);
+      });
+
+      it('returns true with arg \'Backbone.View\'', function() {
+        expect(view.isA('Backbone.View')).toBe(true);
+      });
+
+      it('returns false with other arg', function() {
+        expect(view.isA('Backbone.Router')).toBe(false);
+      });
+    });
+  });
 });
