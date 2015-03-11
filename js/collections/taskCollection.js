@@ -27,10 +27,11 @@ var TaskCollection = ProtectedCollection.extend({
   fetch      : function(opts) {
     opts = opts || {};
 
-    if(opts.all === true) {
-      opts.url = API.tasks.fullCollection($.cookie('userID'));
-      delete opts.all;
+    if(!opts.url) {
+      opts.url = opts.all === true ? App.API.tasks.fullCollection($.cookie('userID')) : this.url();
     }
+
+    delete opts.all;
 
     ProtectedCollection.prototype.fetch.call(this, opts);
   }

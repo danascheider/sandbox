@@ -60,20 +60,26 @@ describe('Task Collection', function() {
 
   describe('core functions', function() {
     describe('fetch', function() {
-      beforeAll(function() {
-        spyOn($, 'ajax');
+      beforeEach(function() {
+        spyOn(Collection.prototype, 'fetch');
       });
 
       context('normal', function() {
         it('sends the request to the collection URL', function() {
           collection.fetch();
-          expect($.ajax.calls.argsFor(0)[0].url).toEqual(collection.url());
+          expect(Collection.prototype.fetch.calls.argsFor(0)[0].url).toEqual(collection.url());
         });
 
-        it('calls fetch on the collection prototype', function() {
-          spyOn(Collection.prototype, 'fetch');
-          collection.fetch();
-          expect(Collection.prototype.fetch).toHaveBeenCalled();
+      //   it('calls fetch on the collection prototype', function() {
+      //     collection.fetch();
+      //     expect(Collection.prototype.fetch).toHaveBeenCalled();
+      //   });
+      });
+
+      context('with option `all` set to `true`', function() {
+        it('sends the request to the `all` route', function() {
+          collection.fetch({all: true});
+          expect(Collection.prototype.fetch.calls.argsFor(0)[0].url).toEqual(collection.url() + '/all');
         });
       });
     });
