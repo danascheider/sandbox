@@ -5,15 +5,23 @@ var Template  = require(process.cwd() + '/templates/modelTemplates/taskTemplates
 var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 
 var TaskModelView = Backbone.View.extend({
-  tagName   : 'div',
-  className : 'task-model',
-  template  : _.template(Template),
+  tagName      : 'div',
+  className    : 'task-model',
+  template     : _.template(Template),
+
+  // --------------- //
+  // Event Callbacks //
+  // --------------- //
+
+  renderOnSync : function() {
+    this.render();
+  },
 
   // ----------------- //
   // Special Functions //
   // ----------------- //
 
-  isA       : function(type) {
+  isA          : function(type) {
     return ['TaskModelView', 'Backbone.View'].indexOf(type) > -1 ? true : false;
   },
 
@@ -21,7 +29,7 @@ var TaskModelView = Backbone.View.extend({
   // Core View Functions //
   // ------------------- //
 
-  render    : function() {
+  render       : function() {
     this.$el.html(this.template({model: this.model}));
   }
 });

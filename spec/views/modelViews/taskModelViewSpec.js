@@ -42,6 +42,7 @@ describe('Task Model View', function() {
   });
 
   afterAll(function() {
+    view.remove();
     view = null;
   });
 
@@ -112,6 +113,19 @@ describe('Task Model View', function() {
 
       it('returns false with another string', function() {
         expect(view.isA('TaskCollection')).toBe(false);
+      });
+    });
+  });
+
+  describe('event callbacks', function() {
+    describe('renderOnSync', function() {
+      beforeEach(function() { spyOn(view, 'render'); });
+
+      context('when not marked complete', function() {
+        it('calls the render function', function() {
+          view.renderOnSync();
+          expect(view.render).toHaveBeenCalled();
+        });
       });
     });
   });
