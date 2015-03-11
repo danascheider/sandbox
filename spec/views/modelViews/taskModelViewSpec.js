@@ -74,9 +74,9 @@ describe('Task Model View', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('Monday, September 28, 2015'));
     });
 
-    // it('displays the task\'s priority', function() {
-    //   view.$('table.task-details').html().should.include('Low');
-    // });
+    it('displays the task\'s priority', function() {
+      expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('Low'));
+    });
 
     // it('displays the task\'s status', function() {
     //   view.$('table.task-details').html().should.include('New');
