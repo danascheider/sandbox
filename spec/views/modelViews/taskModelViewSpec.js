@@ -45,6 +45,12 @@ describe('Task Model View', function() {
     view = null;
   });
 
+  describe('constructor', function() {
+    it('assigns the model', function() {
+      expect(view.model).toBe(task);
+    });
+  });
+
   describe('el', function() {
     beforeEach(function() { view.render(); });
 
@@ -54,6 +60,14 @@ describe('Task Model View', function() {
 
     it('has class .task-model', function() {
       expect(view.$el[0].className).toEqual(jasmine.stringMatching('task-model'));
+    });
+  });
+
+  describe('view elements', function() {
+    beforeEach(function() { view.render(); });
+
+    it('displays the task\'s title', function() {
+      expect(view.$('a.task-title').html()).toEqual('My Task 1');
     });
   });
 
