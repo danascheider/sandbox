@@ -50,4 +50,10 @@ describe('Task Collection', function() {
       expect(collection.models).toEqual([task2, task1, task3]);
     });
   });
+
+  describe('URL', function() {
+    it('gets the URL for the logged-in user', function() {
+      expect(collection.url()).toEqual(App.API.base + '/users/342/tasks');
+    });
+  });
 });
