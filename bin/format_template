@@ -1,0 +1,6 @@
+#!/usr/bin/ruby
+filename = ARGV[0]
+new_filename = filename.gsub(/\.txt$/, '.js')
+
+str = File.read(filename)
+File.open(new_filename, 'w+') {|file| file.puts("var string = " + str.inspect + ";") }
