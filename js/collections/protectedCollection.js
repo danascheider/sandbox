@@ -4,15 +4,41 @@ var $              = App.$;
 var context        = describe; // RSpecify
 
 var ProtectedCollection = Backbone.Collection.extend({
-  token : function() {
+  token     : function() {
     return 'Basic ' + $.cookie('auth');
+  },
+
+  // ----------------- //
+  // Special Functions //
+  // ----------------- //
+
+  updateAll : function(opts) {
+    opts         = opts || {};
+
+    var that          = this;
+    var callback      = opts.success;
+    var changedModels = this.filter(function(model) {
+      return model.hasChanged();
+    });
+    var toSync        = new Backbone.Collection(changedModels, {url: opts.url});
+
+    opts.url        = opts.url || this.url;
+    opts.beforeSend = (opts.beforeSend) || function(xhr) {
+      xhr.setRequestHeader('Authorization', that.token());
+    };
+    opts.success    = function(obj, response, xhr) {
+      if(callback) { callback.call(obj, response, xhr); }
+      that.trigger('collectionSynced');
+    }
+
+    Backbone.sync('update', toSync, opts);
   },
 
   // ------------------------- //
   // Core Collection Functions //
   // ------------------------- //
 
-  fetch : function(opts) {
+  fetch     : function(opts) {
     opts = opts || {};
 
     var that = this;

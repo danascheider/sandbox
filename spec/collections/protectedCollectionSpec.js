@@ -12,7 +12,7 @@ var Model          = Backbone.Model.extend({});
 var context        = describe; // RSpecify
 
 describe('Protected Collection', function() {
-  var collection, model1, model2, model3, xhr;
+  var collection, model1, model2, model3, xhr, ajaxSettings, spy;
 
   beforeEach(function() {
     collection = new SUT({model: Model});
@@ -42,6 +42,56 @@ describe('Protected Collection', function() {
         spyOn(Backbone.Collection.prototype, 'fetch');
         collection.fetch();
         expect(Backbone.Collection.prototype.fetch).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('special functions', function() {
+    describe('updateAll', function() {
+      beforeEach(function() {
+        spy = jasmine.createSpy('spy');
+
+        model1 = new Model({foo: 'bar'}), model2 = new Model({foo: 'baz'}), model3 = new Model({foo: 'qux'});
+        
+        collection.reset([model1, model2, model3]);
+        collection.on('collectionSynced', spy);
+        
+        spyOn($, 'ajax').and.callFake(function(args) {
+          args.success();
+        });
+
+        // Only 2 of the 3 models have been modified in this example, so only
+        // those should be sent in the request.
+
+        spyOn(model1, 'hasChanged').and.returnValue(true);
+        spyOn(model2, 'hasChanged').and.returnValue(false);
+        spyOn(model3, 'hasChanged').and.returnValue(true);
+
+        collection.updateAll();
+        ajaxSettings = $.ajax.calls.argsFor(0)[0];
+      });
+
+      it('sends a request to the collection\'s main URL', function() {
+        expect(ajaxSettings.url).toEqual(collection.url);
+      });
+
+      it('sends a PUT request', function() {
+        expect(ajaxSettings.type).toEqual('PUT');
+      });
+
+      it('triggers the collectionSynced event', function() {
+        expect(spy).toHaveBeenCalled();
+      });
+
+      it('includes all changed models', function() {
+        var expected = [JSON.parse(JSON.stringify(model1)), JSON.parse(JSON.stringify(model3))];
+        expect(JSON.parse(ajaxSettings.data)).toEqual(expected);
+      });
+
+      it('reintegrates the updated models into itself', function() {
+        model1.set({foo: 'qux'});
+        collection.updateAll();
+        expect(collection.models[0].get('foo')).toEqual('qux');
       });
     });
   });
