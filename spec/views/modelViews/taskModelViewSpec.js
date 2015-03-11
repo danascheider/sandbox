@@ -82,9 +82,9 @@ describe('Task Model View', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('New'));
     });
 
-    // it('displays the task\'s description', function() {
-    //   view.$('table.task-details').html().should.include("Test Canto's front-end functionality");
-    // });
+    it('displays the task\'s description', function() {
+      expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching("Test Canto's front-end functionality"));
+    });
 
     // it('does not display blank fields', function() {
     //   task.unset('deadline');
