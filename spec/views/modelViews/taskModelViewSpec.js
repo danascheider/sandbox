@@ -78,9 +78,9 @@ describe('Task Model View', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('Low'));
     });
 
-    // it('displays the task\'s status', function() {
-    //   view.$('table.task-details').html().should.include('New');
-    // });
+    it('displays the task\'s status', function() {
+      expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('New'));
+    });
 
     // it('displays the task\'s description', function() {
     //   view.$('table.task-details').html().should.include("Test Canto's front-end functionality");
