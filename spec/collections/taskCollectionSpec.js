@@ -32,4 +32,22 @@ describe('Task Collection', function() {
       expect(collection.models).toEqual([task1, task2, task3]);
     });
   });
+
+  describe('comparator', function() {
+    beforeEach(function() {
+      task1.set('position', 2);
+      task2.set('position', 1);
+      collection.sort();
+    });
+
+    afterEach(function() {
+      task1.set('position', 1);
+      task2.set('position', 2);
+      collection.sort();
+    });
+
+    it('orders the tasks by position', function() {
+      expect(collection.models).toEqual([task2, task1, task3]);
+    });
+  });
 });
