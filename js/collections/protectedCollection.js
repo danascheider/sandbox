@@ -12,6 +12,10 @@ var ProtectedCollection = Backbone.Collection.extend({
   // Special Functions //
   // ----------------- //
 
+  isA       : function(type) {
+    return ['Backbone.Collection', 'ProtectedCollection'].indexOf(type) > -1 ? true : false;
+  },
+
   updateAll : function(opts) {
     opts         = opts || {};
 

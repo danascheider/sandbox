@@ -94,5 +94,19 @@ describe('Protected Collection', function() {
         expect(collection.models[0].get('foo')).toEqual('qux');
       });
     });
+
+    describe('isA', function() {
+      it('returns true with arg \'ProtectedCollection\'', function() {
+        expect(collection.isA('ProtectedCollection')).toBe(true);
+      });
+
+      it('returns true with arg \'Backbone.Collection\'', function() {
+        expect(collection.isA('Backbone.Collection')).toBe(true);
+      });
+
+      it('returns false with another value', function() {
+        expect(collection.isA('TaskModel')).toBe(false);
+      });
+    });
   });
 });
