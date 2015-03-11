@@ -69,6 +69,29 @@ describe('Task Model View', function() {
     it('displays the task\'s title', function() {
       expect(view.$('a.task-title').html()).toEqual('My Task 1');
     });
+
+    it('displays the task\'s deadline', function() {
+      expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('Monday, September 28, 2015'));
+    });
+
+    // it('displays the task\'s priority', function() {
+    //   view.$('table.task-details').html().should.include('Low');
+    // });
+
+    // it('displays the task\'s status', function() {
+    //   view.$('table.task-details').html().should.include('New');
+    // });
+
+    // it('displays the task\'s description', function() {
+    //   view.$('table.task-details').html().should.include("Test Canto's front-end functionality");
+    // });
+
+    // it('does not display blank fields', function() {
+    //   task.unset('deadline');
+    //   view.render();
+    //   view.$('tr.task-deadline-row').length.should.equal(0);
+    //   task.set('deadline', new Date(2015, 8, 28));
+    // });
   });
 
   describe('special functions', function() {
