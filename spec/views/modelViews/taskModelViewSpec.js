@@ -5,22 +5,12 @@ var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
 
 var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
-var UserModel = require(process.cwd() + '/js/models/userModel.js');
 var Backbone  = App.Backbone;
 var $         = Backbone.$ = App.$;
 var context   = describe; // RSpecify
 
 describe('Task Model View', function() {
   var view;
-
-  var user = new UserModel({
-    id: 342, 
-    username   : 'testuser', 
-    password   : 'testuser',
-    email      : 'testuser@example.com',
-    first_name : 'Test',
-    last_name  : 'User'
-  });
 
   var task = new TaskModel({
     title        : 'My Task 1', 
@@ -35,7 +25,7 @@ describe('Task Model View', function() {
 
   beforeEach(function() {
     spyOn($, 'cookie').and.callFake(function(name) {
-      return name === 'userID' ? user.get('id') : Env.btoa(user.get('username') + ':' + user.get('password'));
+      return name === 'userID' ? 342 : Env.btoa('testuser:testuser');
     });
 
     view = new SUT({model: task});
