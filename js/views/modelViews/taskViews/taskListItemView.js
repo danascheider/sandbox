@@ -8,6 +8,7 @@ var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 var ListItemView = Backbone.View.extend({
   tagName    : 'li',
   className  : 'task-list-item',
+  id         : function() { return 'task-' + this.model.get('id'); },
   template   : _.template(Template),
 
   // ----------------- //
@@ -28,7 +29,10 @@ var ListItemView = Backbone.View.extend({
   },
 
   render     : function() {
-    this.$el.html(this.template({model: this.model}));
+    this.$el.html(this.template());
+
+    this.modelView.render();
+    this.$('td.task-listing').html(this.modelView.el);
   }
 });
 

@@ -4,6 +4,7 @@ var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js');
 
+var matchers  = require('jasmine-jquery-matchers');
 var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
 var ModelView = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
 var Backbone  = App.Backbone;
@@ -15,7 +16,11 @@ describe('List Item Task View', function() {
 
   var task = new TaskModel({title: 'Finish writing test suite', status: 'New', priority: 'Normal'});
 
-  beforeEach(function() { view = new SUT({model: task}); });
+  beforeEach(function() { 
+    jasmine.addMatchers(matchers);
+    view = new SUT({model: task}); 
+  });
+
   afterEach(function() { view.remove(); });
   afterAll(function() { view = null; });
 
@@ -51,7 +56,12 @@ describe('List Item Task View', function() {
     beforeEach(function() { view.render(); });
 
     it('has a mark-complete checkbox', function() {
-      expect(view.$('i[title="Mark complete"]').length).toEqual(1);
+      expect(view.$('i[title="Mark complete"]')[0]).toBeVisible();
+    });
+
+    it('displays the task model', function() {
+      var modelHTML = view.modelView.$el.html();
+      expect(view.$el.html()).toEqual(jasmine.stringMatching(modelHTML));
     });
   });
 
