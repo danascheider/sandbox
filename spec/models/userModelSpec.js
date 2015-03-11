@@ -33,7 +33,7 @@ describe('User Model', function() {
 
     it('instantiates a task collection', function() {
       var newUser = new SUT();
-      expect(newUser.tasks).toBeDefined();
+      expect(newUser.tasks.isA('TaskCollection')).toBe(true);
     });
 
     describe('when instantiated with an ID', function() {
