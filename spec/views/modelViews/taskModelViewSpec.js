@@ -49,6 +49,12 @@ describe('Task Model View', function() {
     it('assigns the model', function() {
       expect(view.model).toBe(task);
     });
+
+    it('does not call render', function() {
+      spyOn(SUT.prototype, 'render');
+      var newView = new SUT({model: task});
+      expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
   });
 
   describe('el', function() {
