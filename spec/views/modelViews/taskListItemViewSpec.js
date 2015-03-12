@@ -44,7 +44,7 @@ describe('List Item Task View', function() {
     beforeEach(function() { view.render(); });
 
     it('is an li', function() {
-      expect(view.$el[0].tagName).toEqual('LI');
+      expect(view.$el).toHaveTag('li');
     });
 
     it('has class .task-list-item', function() {
