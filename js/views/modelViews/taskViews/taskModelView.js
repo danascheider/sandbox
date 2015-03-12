@@ -1,12 +1,11 @@
 require(process.cwd() + '/js/dependencies.js');
 
 var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
-var Template  = require(process.cwd() + '/templates/modelTemplates/taskTemplates/modelTemplate.js');
 
 var TaskModelView = Backbone.View.extend({
   tagName      : 'div',
   className    : 'task-model',
-  template     : _.template(Template),
+  template     : JST['tasks/model'],
 
   // --------------- //
   // Event Callbacks //
