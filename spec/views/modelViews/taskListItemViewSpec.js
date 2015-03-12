@@ -72,6 +72,10 @@ describe('List Item Task View', function() {
       it('has class ui-widget-content', function() {
         expect(view.$el).toHaveClass('ui-widget-content');
       });
+
+      it('has class .ui-draggable', function() {
+        expect(view.$el).toHaveClass('ui-draggable');
+      });
     });
   });
 
