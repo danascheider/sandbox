@@ -11,6 +11,11 @@ var Backbone  = App.Backbone;
 var $         = Backbone.$ = App.$;
 var context   = describe; // RSpecify
 
+// FIX: Need to give serious consideration to testing styles. If styles are not
+//      the responsibility of the view, they should not be tested by the view
+//      spec. If they are the responsibility of the view, they should be defined
+//      in the view. 
+
 describe('List Item Task View', function() {
   var view, e;
 
@@ -56,7 +61,11 @@ describe('List Item Task View', function() {
     beforeEach(function() { view.render(); });
 
     it('has a mark-complete checkbox', function() {
-      expect(view.$('i[title="Mark complete"]')[0]).toBeVisible();
+      expect(view.$('i[title="Mark complete"]')).toExist();
+    });
+
+    it('displays the mark-complete checkbox', function() {
+      pending('Deciding if the view is responsible for this');
     });
 
     it('displays the task model', function() {
@@ -68,13 +77,34 @@ describe('List Item Task View', function() {
       pending('Need to implement the edit form view');
     });
 
-    context('draggable', function() {
+    describe('draggable functionality', function() {
       it('has class ui-widget-content', function() {
         expect(view.$el).toHaveClass('ui-widget-content');
       });
 
       it('has class .ui-draggable', function() {
         expect(view.$el).toHaveClass('ui-draggable');
+      });
+    });
+
+    describe('edit icon', function() {
+      it('is present', function() {
+        expect(view.$('i[title="Edit"]')).toExist();
+      });
+
+      it('is hidden by default', function() {
+        pending('Deciding if the view is responsible for this');
+        expect(view.$('i[title="Edit"]')).not.toBeVisible();
+      });
+    });
+
+    describe('delete icon', function() {
+      it('is present', function() {
+        expect(view.$('i[title="Delete"]')).toExist();
+      });
+
+      it('is hidden by default', function() {
+        pending('Deciding if the view is responsible for this');
       });
     });
   });
