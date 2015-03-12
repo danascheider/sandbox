@@ -119,6 +119,26 @@ describe('List Item Task View', function() {
     });
   });
 
+  describe('event callbacks', function() {
+    describe('backlogTask', function() {
+      beforeEach(function() {
+
+        // It is necessary to stub both $.ajax and task.save, because otherwise
+        // the program waits for the server to respond, which, of course, it won't.
+
+        spyOn($, 'ajax');
+        spyOn(task, 'save').and.callThrough();
+      });
+
+      afterEach(function() { task.unset('backlog'); });
+
+      it('changes the task\'s backlog status to true', function() {
+        view.backlogTask();
+        expect(task.get('backlog')).toBe(true);
+      });
+    });
+  });
+
   describe('special functions', function() {
     describe('isA', function() {
       it('returns true with arg \'TaskListItemView\'', function() {

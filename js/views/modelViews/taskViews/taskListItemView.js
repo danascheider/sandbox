@@ -11,6 +11,14 @@ var ListItemView = Backbone.View.extend({
   id         : function() { return 'task-' + this.model.get('id'); },
   template   : _.template(Template),
 
+  // --------------- //
+  // Event Callbacks //
+  // --------------- //
+
+  backlogTask: function() {
+    this.model.save({backlog: true});
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //
