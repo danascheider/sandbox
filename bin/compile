@@ -1,0 +1,2 @@
+#!/bin/bash
+sass css/canto.sass --style compressed 2>&1 css/canto.min.css
