@@ -48,7 +48,7 @@ describe('List Item Task View', function() {
     });
 
     it('has class .task-list-item', function() {
-      expect(view.$el[0].className).toEqual(jasmine.stringMatching('task-list-item'));
+      expect(view.$el).toHaveClass('task-list-item');
     });
   });
 
