@@ -107,6 +107,16 @@ describe('List Item Task View', function() {
         pending('Deciding if the view is responsible for this');
       });
     });
+
+    describe('backlog icon', function() {
+      it('is present', function() {
+        expect(view.$('i[title="Backlog"]')).toExist();
+      });
+
+      it('is hidden by default', function() {
+        pending('Deciding if the view is responsible for this');
+      });
+    });
   });
 
   describe('special functions', function() {
