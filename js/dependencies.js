@@ -4,7 +4,7 @@ var templatePath = process.cwd() + '/templates';
 global.Canto   = {
   API      : require(process.cwd() + '/js/api.js'),
   template : function(filename) {
-    return _.template(require(process.cwd() + '/templates' + filename));
+    return _.template(require(templatePath + filename));
   }
 };
 
