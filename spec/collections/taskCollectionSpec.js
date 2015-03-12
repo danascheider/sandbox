@@ -1,15 +1,13 @@
 require(process.cwd() + '/spec/support/jsdom.js');
-document = window;
+require(process.cwd() + '/js/dependencies.js');
 
-var App = require(process.cwd() + '/js/dependencies.js');
 var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/collections/taskCollection.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 var TaskModel      = require(process.cwd() + '/js/models/taskModel.js');
 var Collection     = require(process.cwd() + '/js/collections/protectedCollection.js');
-var Backbone       = App.Backbone;
-var $              = Backbone.$ = App.$;
+Backbone.$         = $;
 var context        = describe; // RSpecify
 
 describe('Task Collection', function() {
@@ -54,7 +52,7 @@ describe('Task Collection', function() {
 
   describe('URL', function() {
     it('gets the URL for the logged-in user', function() {
-      expect(collection.url()).toEqual(App.API.base + '/users/342/tasks');
+      expect(collection.url()).toEqual(API.base + '/users/342/tasks');
     });
   });
 

@@ -1,19 +1,18 @@
 require(process.cwd() + '/spec/support/jsdom.js');
+require(process.cwd() + '/js/dependencies.js');
+require(process.cwd() + '/spec/support/env.js');
 
-var App = require(process.cwd() + '/js/dependencies.js');
-var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/protectedResourceModel.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-var Backbone       = App.Backbone;
-var $              = Backbone.$ = App.$;
+Backbone.$         = $;
 
 describe('Protected Resource Model', function() {
   var resource, xhr;
 
   beforeEach(function() {
     resource = new SUT({id: 1});
-    resource.url = App.API.base + '/protected-resources/1'; 
+    resource.url = API.base + '/protected-resources/1'; 
     xhr = new XMLHttpRequest();
   });
 
@@ -22,13 +21,13 @@ describe('Protected Resource Model', function() {
   });
 
   it('returns its token', function() {
-    spyOn($, 'cookie').and.returnValue(Env.btoa('testuser:testuser'));
-    var string = 'Basic ' + Env.btoa('testuser:testuser');
+    spyOn($, 'cookie').and.returnValue(btoa('testuser:testuser'));
+    var string = 'Basic ' + btoa('testuser:testuser');
     expect(resource.token()).toEqual(string);
   });
 
   describe('destroy() method', function() {
-    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
+    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
     it('attaches an authorization header', function() {
 
@@ -57,7 +56,7 @@ describe('Protected Resource Model', function() {
   });
 
   describe('fetch() method', function() {
-    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
+    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
     it('attaches an authorization header', function() {
       xhr.open('GET', resource.url);
@@ -77,7 +76,7 @@ describe('Protected Resource Model', function() {
   });
 
   describe('save() method', function() {
-    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + Env.btoa('testuser:testuser')); });
+    beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
     it('attaches an authorization header', function() {
       xhr.open('PUT', resource.url);

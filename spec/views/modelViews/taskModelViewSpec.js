@@ -1,12 +1,11 @@
 require(process.cwd() + '/spec/support/jsdom.js');
+require(process.cwd() + '/js/dependencies.js');
+require(process.cwd() + '/spec/support/env.js');
 
-var App = require(process.cwd() + '/js/dependencies.js');
-var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
 
 var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
-var Backbone  = App.Backbone;
-var $         = Backbone.$ = App.$;
+Backbone.$    = $;
 var context   = describe; // RSpecify
 
 describe('Task Model View', function() {
@@ -25,7 +24,7 @@ describe('Task Model View', function() {
 
   beforeEach(function() {
     spyOn($, 'cookie').and.callFake(function(name) {
-      return name === 'userID' ? 342 : Env.btoa('testuser:testuser');
+      return name === 'userID' ? 342 : btoa('testuser:testuser');
     });
 
     view = new SUT({model: task});

@@ -1,13 +1,11 @@
 require(process.cwd() + '/spec/support/jsdom.js');
-document = window;
+require(process.cwd() + '/js/dependencies.js');
+require(process.cwd() + '/spec/support/env.js');
 
-var App = require(process.cwd() + '/js/dependencies.js');
-var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/collections/protectedCollection.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-var Backbone       = App.Backbone;
-var $              = Backbone.$ = App.$;
+Backbone.$         = $;
 var Model          = Backbone.Model.extend({});
 var context        = describe; // RSpecify
 
@@ -16,14 +14,14 @@ describe('Protected Collection', function() {
 
   beforeEach(function() {
     collection = new SUT({model: Model});
-    collection.url = App.API.base + '/models';
+    collection.url = API.base + '/models';
     xhr = new XMLHttpRequest();
-    spyOn($, 'cookie').and.returnValue(Env.btoa('testuser:testuser'));
+    spyOn($, 'cookie').and.returnValue(btoa('testuser:testuser'));
   });
 
   describe('token', function() {
     it('returns the value of the auth header for the logged-in user', function() {
-      expect(collection.token()).toEqual('Basic ' + Env.btoa('testuser:testuser'));
+      expect(collection.token()).toEqual('Basic ' + btoa('testuser:testuser'));
     });
   });
 

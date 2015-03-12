@@ -1,7 +1,4 @@
-var App = require(process.cwd() + '/js/dependencies.js');
-var Backbone       = App.Backbone;
-var $              = App.$;
-var context        = describe; // RSpecify
+require(process.cwd() + '/js/dependencies.js');
 
 var ProtectedCollection = Backbone.Collection.extend({
   token     : function() {

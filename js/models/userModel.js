@@ -1,10 +1,9 @@
-var App        = require(process.cwd() + '/js/dependencies.js');
+require(process.cwd() + '/js/dependencies.js');
+
 var Collection = require(process.cwd() + '/js/collections/taskCollection.js');
 
-var Backbone = App.Backbone, _ = App._, $ = App.$;
-
 var UserModel = Backbone.Model.extend({
-  urlRoot: App.API.users.collection,
+  urlRoot: API.users.collection,
 
   // ----------------- //
   // Special Functions //
@@ -14,7 +13,7 @@ var UserModel = Backbone.Model.extend({
     settings = settings || {};
     var that = this;
 
-    settings.url = App.API.users.single(this.get('id'));
+    settings.url = API.users.single(this.get('id'));
 
     settings.beforeSend = (settings.beforeSend) || function(xhr) {
       xhr.setRequestHeader('Authorization', $.cookie('auth'));

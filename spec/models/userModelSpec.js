@@ -1,14 +1,12 @@
 require(process.cwd() + '/spec/support/jsdom.js');
-document = window;
+require(process.cwd() + '/js/dependencies.js');
+require(process.cwd() + '/spec/support/env.js');
 
-var App = require(process.cwd() + '/js/dependencies.js');
-var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/models/userModel.js');
 
 var Collection     = require(process.cwd() + '/js/collections/taskCollection.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-var Backbone       = App.Backbone;
-var $              = Backbone.$ = App.$;
+Backbone.$         = $;
 
 describe('User Model', function() {
   var user, xhr;
@@ -24,7 +22,7 @@ describe('User Model', function() {
 
   describe('properties', function() {
     it('has `urlRoot` /users', function() {
-      expect(user.urlRoot).toEqual(App.API.base + '/users');
+      expect(user.urlRoot).toEqual(API.base + '/users');
     });
   });
 
@@ -73,7 +71,7 @@ describe('User Model', function() {
         xhr.open('GET', user.url());
         user.fetch();
         $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
-        expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + Env.btoa('testuser:testuser'));
+        expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + btoa('testuser:testuser'));
       });
 
       it('sends the request to the requested user\'s endpoint', function() {
@@ -85,7 +83,7 @@ describe('User Model', function() {
 
   describe('special functions', function() {
     beforeEach(function() {
-      spyOn($, 'cookie').and.returnValue('Basic ' + Env.btoa('danascheider:danascheider'));
+      spyOn($, 'cookie').and.returnValue('Basic ' + btoa('danascheider:danascheider'));
       spyOn($, 'ajax');
     });
 
@@ -100,13 +98,12 @@ describe('User Model', function() {
         xhr.open('GET', user.url);
         user.protectedFetch();
         $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
-        expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + Env.btoa('danascheider:danascheider'));
+        expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + btoa('danascheider:danascheider'));
       });
 
       it('sends the request to the requested user\'s endpoint', function() {
-
         user.protectedFetch();
-        expect($.ajax.calls.argsFor(0)[0].url).toEqual(App.API.base + '/users/342');
+        expect($.ajax.calls.argsFor(0)[0].url).toEqual(API.base + '/users/342');
       });
     });
   });

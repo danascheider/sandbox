@@ -1,9 +1,5 @@
-var Canto = {
-  $          : require('jquery'),
-  _          : require('underscore'),
-  Backbone   : require('backbone'),
-  cookie     : require('jquery.cookie'),
-  API        : require(process.cwd() + '/js/api.js')
-};
-
-module.exports = Canto;
+global.$ = require('jquery');
+global._ = require('underscore');
+global.Backbone = require('backbone');
+global.API = require(process.cwd() + '/js/api.js');
+global.cookie = require('jquery.cookie');
