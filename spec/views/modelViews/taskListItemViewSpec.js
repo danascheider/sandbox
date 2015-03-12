@@ -128,13 +128,17 @@ describe('List Item Task View', function() {
 
         spyOn($, 'ajax');
         spyOn(task, 'save').and.callThrough();
+        view.backlogTask();
       });
 
       afterEach(function() { task.unset('backlog'); });
 
       it('changes the task\'s backlog status to true', function() {
-        view.backlogTask();
         expect(task.get('backlog')).toBe(true);
+      });
+
+      it('saves the task', function() {
+        expect(task.save).toHaveBeenCalled();
       });
     });
   });
