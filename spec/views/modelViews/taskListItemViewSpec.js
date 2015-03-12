@@ -63,6 +63,16 @@ describe('List Item Task View', function() {
       var modelHTML = view.modelView.$el.html();
       expect(view.$el.html()).toEqual(jasmine.stringMatching(modelHTML));
     });
+
+    it('doesn\'t display its edit form by default', function() {
+      pending('Need to implement the edit form view');
+    });
+
+    context('draggable', function() {
+      it('has class ui-widget-content', function() {
+        expect(view.$el).toHaveClass('ui-widget-content');
+      });
+    });
   });
 
   describe('special functions', function() {

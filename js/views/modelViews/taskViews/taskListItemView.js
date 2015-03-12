@@ -7,7 +7,7 @@ var Backbone = App.Backbone, _ = App._, $ = Backbone.$ = App.$;
 
 var ListItemView = Backbone.View.extend({
   tagName    : 'li',
-  className  : 'task-list-item',
+  className  : 'task-list-item ui-widget-content',
   id         : function() { return 'task-' + this.model.get('id'); },
   template   : _.template(Template),
 
