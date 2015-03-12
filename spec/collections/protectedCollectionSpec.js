@@ -14,7 +14,7 @@ describe('Protected Collection', function() {
 
   beforeEach(function() {
     collection = new SUT({model: Model});
-    collection.url = API.base + '/models';
+    collection.url = Canto.API.base + '/models';
     xhr = new XMLHttpRequest();
     spyOn($, 'cookie').and.returnValue(btoa('testuser:testuser'));
   });

@@ -3,11 +3,11 @@ var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceMod
 
 var TaskModel = ProtectedResource.extend({
   urlRoot : function() {
-    return API.tasks.collection($.cookie('userID'));
+    return Canto.API.tasks.collection($.cookie('userID'));
   },
 
   url     : function() {
-    return API.tasks.single(this.get('id'));
+    return Canto.API.tasks.single(this.get('id'));
   },
 
   // ----------------- //

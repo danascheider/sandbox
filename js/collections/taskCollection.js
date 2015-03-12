@@ -7,7 +7,7 @@ var TaskCollection = ProtectedCollection.extend({
   model      : Task,
   comparator : 'position',
   url        : function() {
-    return API.tasks.collection($.cookie('userID'));
+    return Canto.API.tasks.collection($.cookie('userID'));
   },
 
   // ----------------- //
@@ -41,7 +41,7 @@ var TaskCollection = ProtectedCollection.extend({
     opts = opts || {};
 
     if(!opts.url) {
-      opts.url = opts.all === true ? API.tasks.fullCollection($.cookie('userID')) : this.url();
+      opts.url = opts.all === true ? Canto.API.tasks.fullCollection($.cookie('userID')) : this.url();
     }
 
     delete opts.all;

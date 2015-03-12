@@ -22,7 +22,7 @@ describe('User Model', function() {
 
   describe('properties', function() {
     it('has `urlRoot` /users', function() {
-      expect(user.urlRoot).toEqual(API.base + '/users');
+      expect(user.urlRoot).toEqual(Canto.API.base + '/users');
     });
   });
 
@@ -103,7 +103,7 @@ describe('User Model', function() {
 
       it('sends the request to the requested user\'s endpoint', function() {
         user.protectedFetch();
-        expect($.ajax.calls.argsFor(0)[0].url).toEqual(API.base + '/users/342');
+        expect($.ajax.calls.argsFor(0)[0].url).toEqual(Canto.API.base + '/users/342');
       });
     });
   });

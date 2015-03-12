@@ -25,11 +25,11 @@ describe('Task Model', function() {
 
   describe('properties', function() {
     it('has a `urlRoot` scoped to the logged in user', function() {
-      expect(task.urlRoot()).toEqual(API.base + '/users/342/tasks');
+      expect(task.urlRoot()).toEqual(Canto.API.base + '/users/342/tasks');
     });
 
     it('has an individual `url` not scoped to the logged in user', function() {
-      expect(task.url()).toEqual(API.base + '/tasks/1');
+      expect(task.url()).toEqual(Canto.API.base + '/tasks/1');
     });
   });
 

@@ -12,7 +12,7 @@ describe('Protected Resource Model', function() {
 
   beforeEach(function() {
     resource = new SUT({id: 1});
-    resource.url = API.base + '/protected-resources/1'; 
+    resource.url = Canto.API.base + '/protected-resources/1'; 
     xhr = new XMLHttpRequest();
   });
 

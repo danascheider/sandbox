@@ -3,7 +3,7 @@ require(process.cwd() + '/js/dependencies.js');
 var Collection = require(process.cwd() + '/js/collections/taskCollection.js');
 
 var UserModel = Backbone.Model.extend({
-  urlRoot: API.users.collection,
+  urlRoot: Canto.API.users.collection,
 
   // ----------------- //
   // Special Functions //
@@ -13,7 +13,7 @@ var UserModel = Backbone.Model.extend({
     settings = settings || {};
     var that = this;
 
-    settings.url = API.users.single(this.get('id'));
+    settings.url = Canto.API.users.single(this.get('id'));
 
     settings.beforeSend = (settings.beforeSend) || function(xhr) {
       xhr.setRequestHeader('Authorization', $.cookie('auth'));

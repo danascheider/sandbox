@@ -52,7 +52,7 @@ describe('Task Collection', function() {
 
   describe('URL', function() {
     it('gets the URL for the logged-in user', function() {
-      expect(collection.url()).toEqual(API.base + '/users/342/tasks');
+      expect(collection.url()).toEqual(Canto.API.base + '/users/342/tasks');
     });
   });
 
