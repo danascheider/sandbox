@@ -8,7 +8,7 @@ var Collection     = require(process.cwd() + '/js/collections/taskCollection.js'
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 
-describe('User Model', function() {
+describe('#travis User Model', function() {
   var user, xhr;
 
   beforeEach(function() {

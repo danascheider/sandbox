@@ -8,7 +8,7 @@ var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceMod
 Backbone.$            = $;
 var context           = describe; // RSpecify
 
-describe('Task Model', function() {
+describe('#travis Task Model', function() {
   var task;
 
   beforeEach(function() {

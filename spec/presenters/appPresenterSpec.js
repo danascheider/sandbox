@@ -8,7 +8,7 @@ var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 var context        = describe; // RSpecify
 
-describe('App Presenter', function() {
+describe('#travis App Presenter', function() {
   var presenter;
 
   beforeEach(function() { presenter = new SUT(); });

@@ -15,7 +15,7 @@ var context   = describe; // RSpecify
 //      spec. If they are the responsibility of the view, they should be defined
 //      in the view. 
 
-describe('List Item Task View', function() {
+describe('#travis List Item Task View', function() {
   var view, e;
 
   var task = new TaskModel({title: 'Finish writing test suite', status: 'New', priority: 'Normal'});

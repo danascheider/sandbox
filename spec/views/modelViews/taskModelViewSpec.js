@@ -8,7 +8,7 @@ var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
 Backbone.$    = $;
 var context   = describe; // RSpecify
 
-describe('Task Model View', function() {
+describe('#travisTask Model View', function() {
   var view;
 
   var task = new TaskModel({

@@ -7,7 +7,7 @@ var SUT = require(process.cwd() + '/js/models/protectedResourceModel.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 
-describe('Protected Resource Model', function() {
+describe('#travis Protected Resource Model', function() {
   var resource, xhr;
 
   beforeEach(function() {
