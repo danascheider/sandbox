@@ -9,7 +9,7 @@ Backbone.$         = $;
 var Model          = Backbone.Model.extend({});
 var context        = describe; // RSpecify
 
-describe('Protected Collection', function() {
+describe('#travis Protected Collection', function() {
   var collection, model1, model2, model3, xhr, ajaxSettings, spy;
 
   beforeEach(function() {
