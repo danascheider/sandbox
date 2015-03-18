@@ -25,6 +25,7 @@
     "phantomjs"            : "~1.9.16",
     "webdriverio"          : "~2.4.5",
     "browserify"           : "~9.0.3",
+    "minifyify"            : "~6.3.2",
     "jasmine-jquery-matchers": "~0.0.1"
   }
 }
