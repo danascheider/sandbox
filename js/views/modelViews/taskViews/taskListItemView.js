@@ -1,7 +1,7 @@
-require(process.cwd() + '/js/dependencies.js');
+require('../../../dependencies.js');
 
-var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
-var ModelView = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
+var TaskModel = require('../../../models/taskModel.js');
+var ModelView = require('./taskModelView.js');
 
 var ListItemView = Backbone.View.extend({
   tagName    : 'li',

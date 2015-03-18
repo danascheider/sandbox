@@ -1,6 +1,6 @@
-require(process.cwd() + '/js/dependencies.js');
+require('../../../dependencies.js');
 
-var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
+var TaskModel = require('../../../models/taskModel.js');
 
 var TaskModelView = Backbone.View.extend({
   tagName      : 'div',
