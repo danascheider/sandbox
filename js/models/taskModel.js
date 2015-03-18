@@ -1,5 +1,5 @@
-require(process.cwd() + '/js/dependencies.js');
-var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceModel');
+require('../dependencies.js');
+var ProtectedResource = require('./protectedResourceModel');
 
 var TaskModel = ProtectedResource.extend({
   urlRoot : function() {

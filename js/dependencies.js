@@ -1,18 +1,17 @@
 require('jquery.cookie');
-var templatePath = process.cwd() + '/templates';
 
 global.Canto   = {
-  API      : require(process.cwd() + '/js/api.js'),
-  template : function(filename) {
-    return _.template(require(templatePath + filename));
-  }
+  API      : require('./api.js')
 };
 
 global.$        = require('jquery');
 global._        = require('underscore');
 global.Backbone = require('backbone');
+Backbone.$      = $;
 
 global.JST      = {
-  'tasks/model'    : Canto.template('/modelTemplates/taskTemplates/modelTemplate.js'),
-  'tasks/listItem' : Canto.template('/modelTemplates/taskTemplates/listItemTemplate.js')
+  'tasks/model'    : _.template(require('../templates/modelTemplates/taskTemplates/modelTemplate.js')),
+  'tasks/listItem' : _.template(require('../templates/modelTemplates/taskTemplates/listItemTemplate.js')),
 };
+
+module.exports = Canto;

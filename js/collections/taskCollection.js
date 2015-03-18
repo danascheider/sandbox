@@ -1,7 +1,7 @@
-require(process.cwd() + '/js/dependencies.js');
+require('../dependencies.js');
 
-var Task                = require(process.cwd() + '/js/models/taskModel.js');
-var ProtectedCollection = require(process.cwd() + '/js/collections/protectedCollection.js');
+var Task                = require('../models/taskModel.js');
+var ProtectedCollection = require('./protectedCollection.js');
 
 var TaskCollection = ProtectedCollection.extend({
   model      : Task,

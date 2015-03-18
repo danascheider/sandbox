@@ -1,6 +1,6 @@
-require(process.cwd() + '/js/dependencies.js');
+require('../dependencies.js');
 
-var Collection = require(process.cwd() + '/js/collections/taskCollection.js');
+var Collection = require('../collections/taskCollection.js');
 
 var UserModel = Backbone.Model.extend({
   urlRoot: Canto.API.users.collection,

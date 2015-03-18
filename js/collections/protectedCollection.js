@@ -1,4 +1,4 @@
-require(process.cwd() + '/js/dependencies.js');
+require('../dependencies.js');
 
 var ProtectedCollection = Backbone.Collection.extend({
   token     : function() {

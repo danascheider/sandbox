@@ -1,4 +1,4 @@
-require(process.cwd() + '/js/dependencies.js');
+require('../dependencies.js');
 
 var ProtectedResource = Backbone.Model.extend({
   token   : function() {
