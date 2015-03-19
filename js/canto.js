@@ -15,3 +15,8 @@ require('./views/modelViews/taskViews/taskModelView.js');
 
 // Require presenters
 require('./presenters/appPresenter.js');
+
+// Require router
+var router = require('../spec/support/testRouter.js');
+global.Router = new router();
+Backbone.history.start();
