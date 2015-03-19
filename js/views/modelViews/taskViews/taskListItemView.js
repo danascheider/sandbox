@@ -17,6 +17,10 @@ var ListItemView = Backbone.View.extend({
     this.model.save({backlog: true});
   },
 
+  deleteTask         : function() {
+    this.model.destroy();
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //
@@ -30,7 +34,7 @@ var ListItemView = Backbone.View.extend({
     this.$el.removeAttr('style');
     this.render();
   },
-  
+
   configureDraggable : function() {
     this.$el.draggable({
       containment       : 'parent',

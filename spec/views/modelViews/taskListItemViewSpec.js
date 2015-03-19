@@ -123,6 +123,16 @@ describe('#travis List Item Task View', function() {
       });
     });
 
+    describe('deleteTask', function() {
+      it('destroys the task', function() {
+        spyOn(task, 'destroy');
+        view.deleteTask();
+        expect(task.destroy).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('special functions', function() {
     describe('changePosition', function() {
       it('removes inline styles', function() {
         view.changePosition();
@@ -154,9 +164,7 @@ describe('#travis List Item Task View', function() {
         expect(view.$el.draggable.calls.argsFor(0)[0].connectToSortable).toEqual('.task-list');
       });
     });
-  });
 
-  describe('special functions', function() {
     describe('isA', function() {
       it('returns true with arg \'TaskListItemView\'', function() {
         expect(view.isA('TaskListItemView')).toBe(true);
