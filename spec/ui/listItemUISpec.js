@@ -6,7 +6,8 @@ var Task     = require(process.cwd() + '/js/models/taskModel.js'),
     View     = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js'), 
     matchers = require('jasmine-jquery-matchers');
 
-var task = new Task({id: 1, title: 'Troubleshoot Selenium tests'});
+var task    = new Task({id: 1, title: 'Troubleshoot Selenium tests'});
+var context = describe;
 
 describe('Display Functions - Task List Item View', function() {
   beforeAll(function() {
@@ -60,5 +61,21 @@ describe('Display Functions - Task List Item View', function() {
         done();
       });
     })
+  });
+
+  describe('callbacks', function() {
+    describe('hideEditForm', function() {
+      context('when the edit form is not visible', function() {
+        it('doesn\'t toggle the form', function() {
+          pending('Define the edit form view');
+        });
+      });
+
+      context('when the edit form is visible', function() {
+        it('hides the form', function() {
+          pending('Define the edit form view');
+        });
+      });
+    });
   });
 });
