@@ -96,6 +96,10 @@ describe('#travis List Item Task View', function() {
     });
   });
 
+  describe('events', function() {
+    //
+  });
+
   describe('event callbacks', function() {
     describe('backlogTask', function() {
       beforeEach(function() {
@@ -116,6 +120,25 @@ describe('#travis List Item Task View', function() {
 
       it('saves the task', function() {
         expect(task.save).toHaveBeenCalled();
+      });
+    });
+
+    describe('configureDraggable', function() {
+      beforeEach(function() {
+        spyOn(view.$el, 'draggable');
+        view.configureDraggable();
+      });
+
+      it('makes the view draggable', function() {
+        expect(view.$el.draggable).toHaveBeenCalled();
+      });
+
+      it('confines the view to its parent list', function() {
+        expect(view.$el.draggable.calls.argsFor(0)[0].containment).toEqual('parent');
+      });
+
+      it('connects to the sortable task list', function() {
+        expect(view.$el.draggable.calls.argsFor(0)[0].connectToSortable).toEqual('.task-list');
       });
     });
   });
