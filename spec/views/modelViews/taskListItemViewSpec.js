@@ -1,3 +1,13 @@
+// NOTE: The following callbacks are tested partially or completely
+//       in the listItemUISpec.js file:
+//       - hideEditForm
+//       - showEditForm
+//       - hideEditIcons
+//       - showEditIcons
+//       - markComplete
+//       - toggleTaskDetails
+//       - render
+
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/env.js');
@@ -128,6 +138,15 @@ describe('#travis List Item Task View', function() {
         spyOn(task, 'destroy');
         view.deleteTask();
         expect(task.destroy).toHaveBeenCalled();
+      });
+    });
+
+    describe('hideEditForm', function() {
+      it('removes the edit form from the DOM', function() {
+        pending('Define the edit form view');
+        spyOn(view.editForm, 'remove');
+        view.hideEditForm();
+        expect(view.editForm.remove).toHaveBeenCalled();
       });
     });
   });
