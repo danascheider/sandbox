@@ -123,6 +123,19 @@ describe('#travis List Item Task View', function() {
       });
     });
 
+    describe('changePosition', function() {
+      it('removes inline styles', function() {
+        view.changePosition();
+        expect(view.$el.attr('style')).not.toExist();
+      });
+
+      it('renders the view', function() {
+        spyOn(view, 'render');
+        view.changePosition();
+        expect(view.render).toHaveBeenCalled();
+      });
+    });
+
     describe('configureDraggable', function() {
       beforeEach(function() {
         spyOn(view.$el, 'draggable');

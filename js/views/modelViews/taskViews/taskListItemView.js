@@ -20,6 +20,16 @@ var ListItemView = Backbone.View.extend({
   // ----------------- //
   // Special Functions //
   // ----------------- //
+
+  // When the list item is dragged and dropped, by default an
+  // inline style is placed that causes problems with the 
+  // rest of my UI. This method takes it away and renders the
+  // list item without the inline style.
+  
+  changePosition  : function() {
+    this.$el.removeAttr('style');
+    this.render();
+  },
   
   configureDraggable : function() {
     this.$el.draggable({
