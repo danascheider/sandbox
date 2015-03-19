@@ -63,15 +63,6 @@ describe('#travis List Item Task View', function() {
       expect(view.$('i[title="Mark complete"]')).toExist();
     });
 
-    it('displays the mark-complete checkbox', function() {
-      pending('Deciding if the view is responsible for this');
-    });
-
-    it('displays the task model', function() {
-      var modelHTML = view.modelView.$el.html();
-      expect(view.$el.html()).toEqual(jasmine.stringMatching(modelHTML));
-    });
-
     it('doesn\'t display its edit form by default', function() {
       pending('Need to implement the edit form view');
     });
@@ -90,30 +81,17 @@ describe('#travis List Item Task View', function() {
       it('is present', function() {
         expect(view.$('i[title="Edit"]')).toExist();
       });
-
-      it('is hidden by default', function() {
-        pending('Deciding if the view is responsible for this');
-        expect(view.$('i[title="Edit"]')).not.toBeVisible();
-      });
     });
 
     describe('delete icon', function() {
       it('is present', function() {
         expect(view.$('i[title="Delete"]')).toExist();
       });
-
-      it('is hidden by default', function() {
-        pending('Deciding if the view is responsible for this');
-      });
     });
 
     describe('backlog icon', function() {
       it('is present', function() {
         expect(view.$('i[title="Backlog"]')).toExist();
-      });
-
-      it('is hidden by default', function() {
-        pending('Deciding if the view is responsible for this');
       });
     });
   });

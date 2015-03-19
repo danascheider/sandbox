@@ -11,22 +11,54 @@ var task = new Task({id: 1, title: 'Troubleshoot Selenium tests'});
 describe('Display Functions - Task List Item View', function() {
   beforeAll(function() {
     jasmine.addMatchers(matchers);
-  });
-  
-  beforeEach(function(done) {
-    client.init().url('http://localhost', done);
-    view = new View({model: task});
-    view.render();
-    $('body').html(view.$el);
+    client.init();
   });
 
-  afterAll(function() {
+  beforeEach(function(done) {
+    client.url('http://localhost/#listItemViewSpec', done);
+  });
+
+  afterAll(function(done) {
+    client.end();
+    done();
     task = null;
     view = null;
   });
 
-  it('displays the mark-complete checkbox', function(done) {
-    expect(view.$('i[title="Mark complete"]')).toBeVisible();
-    done();
+  describe('view elements', function() {
+    it('displays the mark-complete checkbox', function(done) {
+      client.waitForVisible('li#task-1 i[title="Mark complete"]', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
+
+    it('displays the task model', function(done) {
+      client.waitForVisible('li#task-1 div.task-model', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
+
+    it('doesn\'t display the edit icon by default', function(done) {
+      client.waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
+        expect(isVisible).toBe(false);
+        done();
+      });
+    });
+
+    it('doesn\'t display the delete icon by default', function(done) {
+      client.waitForVisible('li#task-1 i[title=Delete]', function(err, isVisible) {
+        expect(isVisible).toBe(false);
+        done();
+      });
+    });
+
+    it('doesn\'t display the backlog icon by default', function(done) {
+      client.waitForVisible('li#task-1 i[title=Backlog]', function(err, isVisible) {
+        expect(isVisible).toBe(false);
+        done();
+      });
+    })
   });
 });
