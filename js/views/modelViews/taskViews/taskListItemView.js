@@ -17,6 +17,10 @@ var ListItemView = Backbone.View.extend({
     this.model.save({backlog: true});
   },
 
+  // ----------------- //
+  // Special Functions //
+  // ----------------- //
+  
   configureDraggable : function() {
     this.$el.draggable({
       containment       : 'parent',
@@ -77,10 +81,6 @@ var ListItemView = Backbone.View.extend({
       }
     });
   },
-
-  // ----------------- //
-  // Special Functions //
-  // ----------------- //
 
   isA                : function(type) {
     var trueValues = ['TaskListItemView', 'ListItemView', 'Backbone.View'];
