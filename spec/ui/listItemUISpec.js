@@ -88,6 +88,16 @@ describe('Display Functions - Task List Item View', function() {
           done();
         });
       });
+
+      it('shows the backlog icon', function(done) {
+        client.waitForVisible('#triggers a')
+              .click('#triggers a[data-method=showEditIcons]')
+              .waitForVisible('li#task-1 i[title=Backlog]', function(err, isVisible) {
+
+          expect(isVisible).toBe(true);
+          done();
+        });
+      });
     });
   });
 });
