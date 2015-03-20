@@ -27,6 +27,7 @@ var ListItemView = Backbone.View.extend({
 
   markComplete      : function() {
     this.model.save({status: 'Complete'});
+    this.$('.fa-square-o').removeClass('fa-square-o').addClass('fa-check-square-o');
   },
 
   showEditIcons     : function() {

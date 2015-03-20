@@ -89,6 +89,29 @@ describe('Display Functions - Task List Item View', function() {
       });
     });
 
+    describe('markComplete', function(done) {
+      beforeEach(function() {
+        client.waitForVisible('#triggers a')
+              .click('#triggers a[data-method=markComplete]')
+      });
+
+      it('checks the checkbox', function(done) {
+        client.waitForVisible('i.fa-check-square-o', function(err, isVisible) {
+          expect(isVisible).toBe(true);
+          done();
+        });
+      });
+
+      it('doesn\'t show the unchecked checkbox icon', function(done) {
+        client.waitFor('i.fa-check-square-o')
+              .getAttribute('i.fa-check-square-o', 'class', function(err, res) {
+
+          expect('i.fa-check-square-o').not.toHaveClass('fa-square-o');
+          done();
+        });
+      });
+    });
+
     describe('showEditIcons', function(done) {
       it('shows the edit icon', function(done) {
         client.waitForVisible('#triggers a')
