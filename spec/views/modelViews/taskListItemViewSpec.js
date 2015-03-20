@@ -229,6 +229,18 @@ describe('#travis List Item Task View', function() {
           expect(view.configureDraggable).toHaveBeenCalled();
         });
       });
+
+      it('delegates events', function() {
+        spyOn(view, 'delegateEvents');
+        view.render();
+        expect(view.delegateEvents).toHaveBeenCalled();
+      });
+
+      it('renders the model view', function() {
+        spyOn(view.modelView, 'render');
+        view.render();
+        expect(view.modelView.render).toHaveBeenCalled();
+      });
     });
   });
 });
