@@ -218,6 +218,10 @@ describe('#travis List Item Task View', function() {
         view.render();
         expect(view.$el.html).toHaveBeenCalled();
       });
+
+      it('returns itself', function() {
+        expect(view.render()).toBe(view);
+      });
     });
   });
 });

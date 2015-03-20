@@ -132,6 +132,8 @@ var ListItemView = Backbone.View.extend({
 
     this.modelView.render();
     this.$('td.task-listing').html(this.modelView.el);
+
+    return this;
   }
 });
 
