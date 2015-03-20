@@ -15,7 +15,8 @@ var ListItemView = Backbone.View.extend({
     'click i[title=Backlog]' : 'backlogTask',
     'click .fa-square-o'     : 'markComplete',
     'click .task-title'      : 'toggleTaskDetails',
-    'mouseenter'             : 'showEditIcons'
+    'mouseenter'             : 'showEditIcons',
+    'mouseleave'             : 'hideEditIcons'
   },
 
   // --------------- //

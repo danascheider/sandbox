@@ -116,6 +116,7 @@ describe('#travis List Item Task View', function() {
       spyOn(SUT.prototype, 'backlogTask');
       spyOn(SUT.prototype, 'toggleTaskDetails');
       spyOn(SUT.prototype, 'showEditIcons');
+      spyOn(SUT.prototype, 'hideEditIcons');
       newView = new SUT({model: task});
       newView.render();
     });
@@ -165,8 +166,15 @@ describe('#travis List Item Task View', function() {
       it('calls showEditIcons', function() {
         newView.$el.mouseenter();
         expect(SUT.prototype.showEditIcons).toHaveBeenCalled();
-      })
-    })
+      });
+    });
+
+    describe('mouseleave', function() {
+      it('calls hideEditIcons', function() {
+        newView.$el.mouseleave();
+        expect(SUT.prototype.hideEditIcons).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('event callbacks', function() {
