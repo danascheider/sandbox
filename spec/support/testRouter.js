@@ -1,5 +1,5 @@
-var taskModel = require('../../js/models/taskModel.js');
-var taskListItemView = require('../../js/views/modelViews/taskViews/taskListItemView.js');
+require('../../js/dependencies.js');
+var ListItemView = require('../../js/views/specViews/taskListItemSpecView.js');
 
 var TestRouter = Backbone.Router.extend({
   routes : {
@@ -7,11 +7,8 @@ var TestRouter = Backbone.Router.extend({
   },
 
   displayListItemView : function() {
-    var opts = {id: 1, title: 'Troubleshoot Selenium tests'},
-        task = new taskModel(opts),
-        view = new taskListItemView({model: task});
+    view = new ListItemView();
     view.render();
-    $('body').html(view.$el);
   }
 });
 
