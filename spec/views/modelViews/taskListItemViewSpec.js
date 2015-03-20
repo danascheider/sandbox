@@ -113,6 +113,7 @@ describe('#travis List Item Task View', function() {
       spyOn(SUT.prototype, 'showEditForm');
       spyOn(SUT.prototype, 'markComplete');
       spyOn(SUT.prototype, 'deleteTask');
+      spyOn(SUT.prototype, 'backlogTask');
       newView = new SUT({model: task});
       newView.render();
     });
@@ -135,6 +136,13 @@ describe('#travis List Item Task View', function() {
       it('calls deleteTask', function() {
         newView.$('i[title=Delete]').click();
         expect(SUT.prototype.deleteTask).toHaveBeenCalled();
+      });
+    });
+
+    describe('click backlog icon', function() {
+      it('calls backlogTask', function() {
+        newView.$('i[title=Backlog]').click();
+        expect(SUT.prototype.backlogTask).toHaveBeenCalled();
       });
     });
   });

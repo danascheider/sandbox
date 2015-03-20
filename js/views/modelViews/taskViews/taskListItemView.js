@@ -10,9 +10,10 @@ var ListItemView = Backbone.View.extend({
   template   : JST['tasks/listItem'],
 
   events     : {
-    'click i[title=Edit]'   : 'showEditForm',
-    'click i[title=Delete]' : 'deleteTask',
-    'click .fa-square-o'    : 'markComplete'
+    'click i[title=Edit]'    : 'showEditForm',
+    'click i[title=Delete]'  : 'deleteTask',
+    'click i[title=Backlog]' : 'backlogTask',
+    'click .fa-square-o'     : 'markComplete'
   },
 
   // --------------- //
