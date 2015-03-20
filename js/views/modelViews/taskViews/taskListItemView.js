@@ -34,6 +34,11 @@ var ListItemView = Backbone.View.extend({
     this.$('span.edit-task').show();
   },
 
+  toggleTaskDetails : function(e) {
+    if(e) { e.preventDefault(); }
+    this.$('.task-details').slideToggle();
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //
