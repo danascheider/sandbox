@@ -25,6 +25,10 @@ var ListItemView = Backbone.View.extend({
     this.$('span.edit-task').hide();
   },
 
+  markComplete      : function() {
+    this.model.save({status: 'Complete'});
+  },
+
   showEditIcons     : function() {
     this.$('span.edit-task').show();
   },

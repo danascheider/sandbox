@@ -149,6 +149,14 @@ describe('#travis List Item Task View', function() {
         expect(view.editForm.remove).toHaveBeenCalled();
       });
     });
+
+    describe('markComplete', function() {
+      it('marks the task complete and saves', function() {
+        spyOn(task, 'save');
+        view.markComplete();
+        expect(task.save.calls.argsFor(0)[0]).toEqual({status: 'Complete'});
+      });
+    });
   });
 
   describe('special functions', function() {
