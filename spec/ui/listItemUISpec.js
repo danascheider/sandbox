@@ -152,13 +152,27 @@ describe('Display Functions - Task List Item View', function() {
     });
 
     describe('toggleTaskDetails', function() {
-      context('when the details are hidden', function(done) {
-        it('shows the details', function() {
+      context('when the details are hidden', function() {
+        it('shows the details', function(done) {
           client.waitForVisible('#triggers a')
                 .click('#triggers a[data-method=toggleTaskDetails]')
                 .waitForVisible('.task-details', function(err, isVisible) {
 
             expect(isVisible).toBe(true);
+            done();
+          });
+        });
+      });
+
+      context('when the details are visible', function() {
+        it('hides the details', function(done) {
+          client.waitForVisible('#triggers a')
+                .click('#triggers a[data-method=toggleTaskDetails]')
+                .waitForVisible('.task-details')
+                .click('#triggers a[data-method=toggleTaskDetails]')
+                .waitForVisible('.task-details', function(err, isVisible) {
+
+            expect(isVisible).toBe(false);
             done();
           });
         });
