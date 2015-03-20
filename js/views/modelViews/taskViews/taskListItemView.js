@@ -13,7 +13,8 @@ var ListItemView = Backbone.View.extend({
     'click i[title=Edit]'    : 'showEditForm',
     'click i[title=Delete]'  : 'deleteTask',
     'click i[title=Backlog]' : 'backlogTask',
-    'click .fa-square-o'     : 'markComplete'
+    'click .fa-square-o'     : 'markComplete',
+    'click .task-title'      : 'toggleTaskDetails'
   },
 
   // --------------- //
