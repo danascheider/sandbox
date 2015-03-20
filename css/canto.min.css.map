@@ -1,6 +1,6 @@
 {
 "version": 3,
-"mappings": "AAAA,cAAc,CACZ,OAAO,CAAE,IAAI",
+"mappings": "AAAA,iBAAiB,CACf,UAAU,CAAE,IAAI,CAElB,cAAc,CACZ,OAAO,CAAE,IAAI",
 "sources": ["canto.sass"],
 "names": [],
 "file": "canto.min.css"
