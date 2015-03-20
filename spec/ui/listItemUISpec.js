@@ -6,15 +6,16 @@ var matchers = require('jasmine-jquery-matchers'),
     context  = describe;
 
 describe('Display Functions - Task List Item View', function() {
-  beforeAll(function() {
+  beforeAll(function(done) {
     jasmine.addMatchers(matchers);
-  });
-
-  beforeEach(function(done) {
     client.init().url('http://localhost/#listItemViewSpec', done);
   });
 
-  afterEach(function(done) {
+  beforeEach(function(done) {
+    client.refresh(done);
+  });
+
+  afterAll(function(done) {
     client.end();
     done();
   });
