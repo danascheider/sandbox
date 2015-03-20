@@ -115,6 +115,7 @@ describe('#travis List Item Task View', function() {
       spyOn(SUT.prototype, 'deleteTask');
       spyOn(SUT.prototype, 'backlogTask');
       spyOn(SUT.prototype, 'toggleTaskDetails');
+      spyOn(SUT.prototype, 'showEditIcons');
       newView = new SUT({model: task});
       newView.render();
     });
@@ -153,6 +154,19 @@ describe('#travis List Item Task View', function() {
         expect(SUT.prototype.toggleTaskDetails).toHaveBeenCalled();
       });
     });
+
+    describe('click reset button', function() {
+      it('calls hideEditForm', function() {
+        pending('Need to implement the edit form view');
+      });
+    });
+
+    describe('mouseenter', function() {
+      it('calls showEditIcons', function() {
+        newView.$el.mouseenter();
+        expect(SUT.prototype.showEditIcons).toHaveBeenCalled();
+      })
+    })
   });
 
   describe('event callbacks', function() {
