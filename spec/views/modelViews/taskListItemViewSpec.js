@@ -175,6 +175,12 @@ describe('#travis List Item Task View', function() {
         expect(SUT.prototype.hideEditIcons).toHaveBeenCalled();
       });
     });
+
+    describe('done event on edit form', function() {
+      it('calls render', function() {
+        pending('Need to implement the edit form view');
+      });
+    });
   });
 
   describe('event callbacks', function() {
