@@ -21,6 +21,10 @@ var ListItemView = Backbone.View.extend({
     this.model.destroy();
   },
 
+  showEditIcons     : function() {
+    this.$('span.edit-task').show();
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //

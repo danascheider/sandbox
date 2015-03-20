@@ -60,7 +60,7 @@ describe('Display Functions - Task List Item View', function() {
         expect(isVisible).toBe(false);
         done();
       });
-    })
+    });
   });
 
   describe('callbacks', function() {
@@ -74,6 +74,18 @@ describe('Display Functions - Task List Item View', function() {
       context('when the edit form is visible', function() {
         it('hides the form', function() {
           pending('Define the edit form view');
+        });
+      });
+    });
+
+    describe('showEditIcons', function(done) {
+      it('shows the edit icon', function(done) {
+        client.waitForVisible('#triggers a')
+              .click('#triggers a[data-method=showEditIcons]')
+              .waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
+
+          expect(isVisible).toBe(true);
+          done();
         });
       });
     });
