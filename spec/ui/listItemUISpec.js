@@ -2,28 +2,21 @@ require(process.cwd() + '/spec/support/webdriver.js');
 require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var Task     = require(process.cwd() + '/js/models/taskModel.js'),
-    View     = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js'), 
-    matchers = require('jasmine-jquery-matchers');
-
-var task    = new Task({id: 1, title: 'Troubleshoot Selenium tests'});
-var context = describe;
+var matchers = require('jasmine-jquery-matchers'),
+    context  = describe;
 
 describe('Display Functions - Task List Item View', function() {
   beforeAll(function() {
     jasmine.addMatchers(matchers);
-    client.init();
   });
 
   beforeEach(function(done) {
-    client.url('http://localhost/#listItemViewSpec', done);
+    client.init().url('http://localhost/#listItemViewSpec', done);
   });
 
-  afterAll(function(done) {
+  afterEach(function(done) {
     client.end();
     done();
-    task = null;
-    view = null;
   });
 
   describe('view elements', function() {
@@ -93,6 +86,16 @@ describe('Display Functions - Task List Item View', function() {
         client.waitForVisible('#triggers a')
               .click('#triggers a[data-method=showEditIcons]')
               .waitForVisible('li#task-1 i[title=Backlog]', function(err, isVisible) {
+
+          expect(isVisible).toBe(true);
+          done();
+        });
+      });
+
+      it('shows the delete icon', function(done) {
+        client.waitForVisible('#triggers')
+              .click('#triggers a[data-method=showEditIcons]')
+              .waitForVisible('li#task-1 i[title=Delete]', function(err, isVisible) {
 
           expect(isVisible).toBe(true);
           done();
