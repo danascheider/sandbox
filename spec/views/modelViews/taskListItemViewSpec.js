@@ -222,6 +222,13 @@ describe('#travis List Item Task View', function() {
       it('returns itself', function() {
         expect(view.render()).toBe(view);
       });
+
+      it('configures the draggable property', function() {
+        spyOn(view, 'configureDraggable', function() {
+          view.render();
+          expect(view.configureDraggable).toHaveBeenCalled();
+        });
+      });
     });
   });
 });
