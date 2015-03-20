@@ -35,6 +35,13 @@ describe('Display Functions - Task List Item View', function() {
       });
     });
 
+    it('doesn\'t display the task details by default', function(done) {
+      client.waitForVisible('li#task-1 .task-details', function(err, isVisible) {
+        expect(isVisible).toBe(false);
+        done();
+      });
+    });
+
     it('doesn\'t display the edit icon by default', function(done) {
       client.waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
         expect(isVisible).toBe(false);
@@ -72,7 +79,7 @@ describe('Display Functions - Task List Item View', function() {
       });
     });
 
-    describe('hideEditIcons', function(done) {
+    describe('hideEditIcons', function() {
       beforeEach(function() {
         client.waitForVisible('#triggers a')
               .click('#triggers a[data-method=showEditIcons]')
@@ -89,7 +96,7 @@ describe('Display Functions - Task List Item View', function() {
       });
     });
 
-    describe('markComplete', function(done) {
+    describe('markComplete', function() {
       beforeEach(function() {
         client.waitForVisible('#triggers a')
               .click('#triggers a[data-method=markComplete]')
@@ -112,7 +119,7 @@ describe('Display Functions - Task List Item View', function() {
       });
     });
 
-    describe('showEditIcons', function(done) {
+    describe('showEditIcons', function() {
       it('shows the edit icon', function(done) {
         client.waitForVisible('#triggers a')
               .click('#triggers a[data-method=showEditIcons]')
@@ -141,6 +148,12 @@ describe('Display Functions - Task List Item View', function() {
           expect(isVisible).toBe(true);
           done();
         });
+      });
+    });
+
+    describe('toggleTaskDetails', function() {
+      context('when the details are hidden', function() {
+        //
       });
     });
   });
