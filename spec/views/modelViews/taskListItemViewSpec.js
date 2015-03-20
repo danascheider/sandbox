@@ -210,4 +210,14 @@ describe('#travis List Item Task View', function() {
       });
     });
   });
+
+  describe('core view functions', function() {
+    describe('render', function() {
+      it('sets the HTML of its element', function() {
+        spyOn(view.$el, 'html');
+        view.render();
+        expect(view.$el.html).toHaveBeenCalled();
+      });
+    });
+  });
 });

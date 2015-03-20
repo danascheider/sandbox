@@ -168,11 +168,11 @@ describe('Display Functions - Task List Item View', function() {
         it('hides the details', function(done) {
           client.waitForVisible('#triggers a')
                 .click('#triggers a[data-method=toggleTaskDetails]')
-                .waitForVisible('.task-details')
+                .waitFor('.task-details')
                 .click('#triggers a[data-method=toggleTaskDetails]')
-                .waitForVisible('.task-details', function(err, isVisible) {
+                .waitFor('.task-details', function(err, res) {
 
-            expect(isVisible).toBe(false);
+            expect($('li#task-1 .task-details')).not.toBeVisible();
             done();
           });
         });
