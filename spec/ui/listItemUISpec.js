@@ -72,6 +72,23 @@ describe('Display Functions - Task List Item View', function() {
       });
     });
 
+    describe('hideEditIcons', function(done) {
+      beforeEach(function() {
+        client.waitForVisible('#triggers a')
+              .click('#triggers a[data-method=showEditIcons]')
+              .waitForVisible('span.edit-task');
+      });
+
+      it('hides the edit icon', function(done) {
+        client.click('#triggers a[data-method=hideEditIcons]')
+              .waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
+          
+          expect(isVisible).toBe(false);
+          done();
+        });
+      });
+    });
+
     describe('showEditIcons', function(done) {
       it('shows the edit icon', function(done) {
         client.waitForVisible('#triggers a')

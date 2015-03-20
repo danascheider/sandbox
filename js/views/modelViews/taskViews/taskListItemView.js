@@ -21,6 +21,10 @@ var ListItemView = Backbone.View.extend({
     this.model.destroy();
   },
 
+  hideEditIcons     : function() {
+    this.$('span.edit-task').hide();
+  },
+
   showEditIcons     : function() {
     this.$('span.edit-task').show();
   },
