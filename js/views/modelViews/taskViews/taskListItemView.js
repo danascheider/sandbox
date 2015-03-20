@@ -9,6 +9,10 @@ var ListItemView = Backbone.View.extend({
   id         : function() { return 'task-' + this.model.get('id'); },
   template   : JST['tasks/listItem'],
 
+  events     : {
+    'click i[title=Edit]' : 'showEditForm'
+  },
+
   // --------------- //
   // Event Callbacks //
   // --------------- //
@@ -28,6 +32,9 @@ var ListItemView = Backbone.View.extend({
   markComplete      : function() {
     this.model.save({status: 'Complete'});
     this.$('.fa-square-o').removeClass('fa-square-o').addClass('fa-check-square-o');
+  },
+
+  showEditForm      : function() {
   },
 
   showEditIcons     : function() {

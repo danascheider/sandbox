@@ -107,7 +107,20 @@ describe('#travis List Item Task View', function() {
   });
 
   describe('events', function() {
-    //
+    var newView; 
+
+    beforeEach(function() {
+      spyOn(SUT.prototype, 'showEditForm');
+      newView = new SUT({model: task});
+      newView.render();
+    });
+
+    describe('click edit icon', function() {
+      it('calls showEditForm', function() {
+        newView.$('i[title=Edit]').click();
+        expect(SUT.prototype.showEditForm).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('event callbacks', function() {
