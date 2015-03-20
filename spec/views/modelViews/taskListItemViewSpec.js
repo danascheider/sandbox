@@ -111,6 +111,8 @@ describe('#travis List Item Task View', function() {
 
     beforeEach(function() {
       spyOn(SUT.prototype, 'showEditForm');
+      spyOn(SUT.prototype, 'markComplete');
+      spyOn(SUT.prototype, 'deleteTask');
       newView = new SUT({model: task});
       newView.render();
     });
@@ -119,6 +121,20 @@ describe('#travis List Item Task View', function() {
       it('calls showEditForm', function() {
         newView.$('i[title=Edit]').click();
         expect(SUT.prototype.showEditForm).toHaveBeenCalled();
+      });
+    });
+
+    describe('click markComplete checkbox', function() {
+      it('calls markComplete', function() {
+        newView.$('.fa-square-o').click();
+        expect(SUT.prototype.markComplete).toHaveBeenCalled();
+      });
+    });
+
+    describe('click delete icon', function() {
+      it('calls deleteTask', function() {
+        newView.$('i[title=Delete]').click();
+        expect(SUT.prototype.deleteTask).toHaveBeenCalled();
       });
     });
   });
