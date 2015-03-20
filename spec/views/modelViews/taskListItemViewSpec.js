@@ -202,6 +202,15 @@ describe('#travis List Item Task View', function() {
         expect(task.save.calls.argsFor(0)[0]).toEqual({status: 'Complete'});
       });
     });
+
+    describe('toggleTaskDetails', function() {
+      it('calls preventDefault', function() {
+        var e = $.Event({target: view.$('.task-title')});
+        spyOn(e, 'preventDefault');
+        view.toggleTaskDetails(e);
+        expect(e.preventDefault).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('special functions', function() {
