@@ -15,7 +15,7 @@ var SpecWrapper = Backbone.View.extend({
 
   callMethod : function(e) {
     e.preventDefault();
-    eval(this.view[$(e.target).attr('data-method')]);
+    this.view[$(e.target).attr('data-method')]();
   },
 
   initialize : function() {
