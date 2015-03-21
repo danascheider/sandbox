@@ -4,11 +4,12 @@ require(process.cwd() + '/spec/support/env.js');
 
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
 
-var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
+var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
+    matchers  = require('jasmine-jquery-matchers');
 Backbone.$    = $;
 var context   = describe; // RSpecify
 
-describe('#travisTask Model View', function() {
+describe('Task Model View', function() {
   var view;
 
   var task = new TaskModel({
@@ -23,6 +24,8 @@ describe('#travisTask Model View', function() {
   });
 
   beforeEach(function() {
+    jasmine.addMatchers(matchers);
+
     spyOn($, 'cookie').and.callFake(function(name) {
       return name === 'userID' ? 342 : btoa('testuser:testuser');
     });
@@ -36,11 +39,11 @@ describe('#travisTask Model View', function() {
   });
 
   describe('constructor', function() {
-    it('assigns the model', function() {
+    it('assigns the model #travis', function() {
       expect(view.model).toBe(task);
     });
 
-    it('does not call render', function() {
+    it('does not call render #travis', function() {
       spyOn(SUT.prototype, 'render');
       var newView = new SUT({model: task});
       expect(SUT.prototype.render).not.toHaveBeenCalled();
@@ -50,18 +53,18 @@ describe('#travisTask Model View', function() {
   describe('el', function() {
     beforeEach(function() { view.render(); });
 
-    it('is a div', function() {
+    it('is a div #travis', function() {
       expect(view.$el[0].tagName).toEqual('DIV');
     });
 
-    it('has class .task-model', function() {
-      expect(view.$el[0].className).toEqual(jasmine.stringMatching('task-model'));
+    it('has class .task-model #travis', function() {
+      expect(view.$el[0]).toHaveClass('task-model');
     });
   });
 
   describe('events', function() {
     describe('save model', function() {
-      it('calls renderOnSync', function() {
+      it('calls renderOnSync #travis', function() {
         spyOn(SUT.prototype, 'renderOnSync');
         var newView = new SUT({model: task});
         task.trigger('sync');
@@ -73,27 +76,27 @@ describe('#travisTask Model View', function() {
   describe('view elements', function() {
     beforeEach(function() { view.render(); });
 
-    it('displays the task\'s title', function() {
+    it('displays the task\'s title #travis', function() {
       expect(view.$('a.task-title').html()).toEqual('My Task 1');
     });
 
-    it('displays the task\'s deadline', function() {
+    it('displays the task\'s deadline #travis', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('Monday, September 28, 2015'));
     });
 
-    it('displays the task\'s priority', function() {
+    it('displays the task\'s priority #travis', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('Low'));
     });
 
-    it('displays the task\'s status', function() {
+    it('displays the task\'s status #travis', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching('New'));
     });
 
-    it('displays the task\'s description', function() {
+    it('displays the task\'s description #travis', function() {
       expect(view.$('table.task-details').html()).toEqual(jasmine.stringMatching("Test Canto's front-end functionality"));
     });
 
-    it('does not display blank fields', function() {
+    it('does not display blank fields #travis', function() {
       task.unset('deadline');
       view.render();
       expect(view.$('tr.task-deadline-row').length).toEqual(0);
@@ -103,15 +106,15 @@ describe('#travisTask Model View', function() {
 
   describe('special functions', function() {
     describe('isA', function() {
-      it('returns true with arg \'TaskModelView\'', function() {
+      it('returns true with arg \'TaskModelView\' #travis', function() {
         expect(view.isA('TaskModelView')).toBe(true);
       });
 
-      it('returns true with arg \'Backbone.View\'', function() {
+      it('returns true with arg \'Backbone.View\' #travis', function() {
         expect(view.isA('Backbone.View')).toBe(true);
       });
 
-      it('returns false with another string', function() {
+      it('returns false with another string #travis', function() {
         expect(view.isA('TaskCollection')).toBe(false);
       });
     });
@@ -122,14 +125,14 @@ describe('#travisTask Model View', function() {
       beforeEach(function() { spyOn(view, 'render'); });
 
       context('when not marked complete', function() {
-        it('calls the render function', function() {
+        it('calls the render function #travis', function() {
           view.renderOnSync();
           expect(view.render).toHaveBeenCalled();
         });
       });
 
       context('when marked complete', function() {
-        it('doesn\'t call render', function() {
+        it('doesn\'t call render #travis', function() {
           task.set('status', 'Complete');
           view.renderOnSync();
           expect(view.render).not.toHaveBeenCalled();
@@ -141,11 +144,11 @@ describe('#travisTask Model View', function() {
 
   describe('core functions', function() {
     describe('render', function() {
-      it('returns the view', function() {
+      it('returns the view #travis', function() {
         expect(view.render()).toEqual(view);
       });
 
-      it('sets the HTML of the view\'s el', function() {
+      it('sets the HTML of the view\'s el #travis', function() {
         spyOn(view.$el, 'html');
         view.render();
 
