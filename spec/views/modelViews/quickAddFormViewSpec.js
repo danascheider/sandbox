@@ -55,7 +55,11 @@ describe('Quick-Add Task Form', function() {
     });
 
     it('is a form #travis', function() {
-      expect(view.$el[0].tagName).toEqual('FORM');
+      expect(view.$el[0].tagName).toBe('FORM');
     });
+
+    it('has class .task-form #travis', function() {
+      expect(view.$el[0]).toHaveClass('task-form');
+    })
   });
 });
