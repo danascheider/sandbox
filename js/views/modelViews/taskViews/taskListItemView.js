@@ -151,6 +151,7 @@ var ListItemView = Backbone.View.extend({
 
     this.modelView.render();
     this.$('td.task-listing').html(this.modelView.el);
+    this.modelView.delegateEvents();
 
     return this;
   }

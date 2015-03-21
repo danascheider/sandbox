@@ -341,6 +341,12 @@ describe('List Item Task View', function() {
         view.render();
         expect(view.modelView.render).toHaveBeenCalled();
       });
+
+      it('calls delegateEvents on the model view #travis', function() {
+        spyOn(view.modelView, 'delegateEvents');
+        view.render();
+        expect(view.modelView.delegateEvents).toHaveBeenCalled();
+      });
     });
   });
 });
