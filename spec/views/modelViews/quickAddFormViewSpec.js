@@ -73,6 +73,17 @@ describe('Quick-Add Task Form', function() {
     });
   });
 
+  describe('events', function() {
+    describe('submit form', function() {
+      it('calls createTask #travis', function() {
+        spyOn(SUT.prototype, 'createTask');
+        var newView = new SUT({collection: collection, grouping: {status: 'Blocking'}});
+        newView.render().$el.submit();
+        expect(SUT.prototype.createTask).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('event callbacks', function() {
     describe('createTask', function() {
       beforeEach(function() {
