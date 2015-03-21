@@ -10,6 +10,10 @@ var QuickAddFormView = Backbone.View.extend({
 
   createTask : function(e) {
     e.preventDefault();
+    
+    var TaskModel = require('../../../models/taskModel.js');
+    var newTask = new TaskModel();
+
   },
 
   // --------------- //

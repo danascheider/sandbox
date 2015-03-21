@@ -103,6 +103,12 @@ describe('Quick-Add Task Form', function() {
           view.createTask(e);
           expect(e.preventDefault).toHaveBeenCalled();
         });
+
+        it('creates a new task #travis', function() {
+          spyOn(TaskModel.prototype, 'initialize');
+          view.createTask(e);
+          expect(TaskModel.prototype.initialize).toHaveBeenCalled();
+        });
       });
     });
   });
