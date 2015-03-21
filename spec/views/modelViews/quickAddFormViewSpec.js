@@ -149,7 +149,13 @@ describe('Quick-Add Task Form', function() {
       });
 
       context('when no title given', function() {
-        //
+        it('doesn\'t create a task', function() {
+          spyOn(collection, 'create');
+          spyOn(TaskModel.prototype, 'initialize');
+          view.createTask(e);
+          expect(collection.create).not.toHaveBeenCalled();
+          expect(TaskModel.prototype.initialize).not.toHaveBeenCalled();
+        });
       });
     });
   });
