@@ -5,9 +5,9 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/quickAddFormView.js');
 
 var matchers       = require('jasmine-jquery-matchers'),
+    XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
     TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
-    Utils          = require(process.cwd() + '/js/utils.js');
     context        = describe; // RSpecify
 
 Backbone.$         = $;
@@ -19,7 +19,7 @@ var task1 = new TaskModel({id: 1, title: 'Test Task 1', status: 'Blocking'}),
 var collection = new TaskCollection([task1, task2, task3]);
 
 describe('Quick-Add Task Form', function() {
-  var view;
+  var view, xhr, e;
 
   beforeEach(function() {
     jasmine.addMatchers(matchers);
@@ -75,8 +75,6 @@ describe('Quick-Add Task Form', function() {
 
   describe('event callbacks', function() {
     describe('createTask', function() {
-      var e; 
-
       beforeEach(function() {
         e = $.Event('submit', {target: view.$el});
         view.render();
@@ -89,8 +87,10 @@ describe('Quick-Add Task Form', function() {
 
       context('when valid', function() {
         beforeEach(function() {
-          spyOn(Utils, 'getAttributes').and.callFake(function() {
-            return {title: 'Finish writing tests', position: 1};
+          xhr = new XMLHttpRequest();
+
+          spyOn(Canto.Utils, 'getAttributes').and.callFake(function() {
+            return {title: 'Finish writing tests'};
           });
 
           spyOn($, 'ajax').and.callFake(function(args) {
@@ -108,6 +108,29 @@ describe('Quick-Add Task Form', function() {
           spyOn(TaskModel.prototype, 'initialize');
           view.createTask(e);
           expect(TaskModel.prototype.initialize).toHaveBeenCalled();
+        });
+
+        it('attaches an auth header #travis', function() {
+          spyOn($, 'cookie').and.callFake(function(args) {
+            return args === 'userID' ? 342 : btoa('testuser:testuser');
+          });
+
+          xhr.open('POST', Canto.API.tasks.collection(342));
+          view.createTask(e);
+          $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+          expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + btoa('testuser:testuser'));
+        });
+
+        it('sets the new task\'s attributes according to its grouping #travis', function() {
+          spyOn(TaskModel.prototype, 'save');
+          view.createTask(e);
+          expect(TaskModel.prototype.save.calls.argsFor(0)[0].status).toEqual('Blocking');
+        });
+
+        it('adds the new task to the beginning of the collection #travis', function() {
+          spyOn(collection, 'unshift');
+          view.createTask(e);
+          expect(collection.unshift).toHaveBeenCalled();
         });
       });
     });
