@@ -8,21 +8,21 @@ var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 var context        = describe; // RSpecify
 
-describe('#travis App Presenter', function() {
+describe('App Presenter', function() {
   var presenter;
 
   beforeEach(function() { presenter = new SUT(); });
   afterAll(function() { presenter = null; });
 
   describe('constructor', function() {
-    it('initializes a homepage view', function() {
+    it('initializes a homepage view #travis', function() {
       pending('define the homepage view');
     });
   });
 
   describe('events', function() {
     describe('redirect:dashboard', function() {
-      it('calls emitRedirect', function() {
+      it('calls emitRedirect #travis', function() {
         pending('fuller implementation of the app as a whole');
       });
     });
