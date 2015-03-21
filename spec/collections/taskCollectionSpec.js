@@ -27,7 +27,7 @@ describe('#travis Task Collection', function() {
   });
 
   describe('constructor', function() {
-    it('sets the models', function() {
+    it('sets the models #travis', function() {
       expect(collection.models).toEqual([task1, task2, task3]);
     });
   });
@@ -45,13 +45,13 @@ describe('#travis Task Collection', function() {
       collection.sort();
     });
 
-    it('orders the tasks by position', function() {
+    it('orders the tasks by position #travis', function() {
       expect(collection.models).toEqual([task2, task1, task3]);
     });
   });
 
   describe('URL', function() {
-    it('gets the URL for the logged-in user', function() {
+    it('gets the URL for the logged-in user #travis', function() {
       expect(collection.url()).toEqual(Canto.API.base + '/users/342/tasks');
     });
   });
@@ -63,7 +63,7 @@ describe('#travis Task Collection', function() {
       });
 
       context('normal', function() {
-        it('sends the request to the collection URL', function() {
+        it('sends the request to the collection URL #travis', function() {
           collection.fetch();
           expect(Collection.prototype.fetch.calls.argsFor(0)[0].url).toEqual(collection.url());
         });
@@ -75,7 +75,7 @@ describe('#travis Task Collection', function() {
       });
 
       context('with option `all` set to `true`', function() {
-        it('sends the request to the `all` route', function() {
+        it('sends the request to the `all` route #travis', function() {
           collection.fetch({all: true});
           expect(Collection.prototype.fetch.calls.argsFor(0)[0].url).toEqual(collection.url() + '/all');
         });
@@ -84,19 +84,19 @@ describe('#travis Task Collection', function() {
   });
 
   describe('special functions', function() {
-    it('returns true with arg \'TaskCollection\'', function() {
+    it('returns true with arg \'TaskCollection\' #travis', function() {
       expect(collection.isA('TaskCollection')).toBe(true);
     });
 
-    it('returns true with arg \'Backbone.Collection\'', function() {
+    it('returns true with arg \'Backbone.Collection\' #travis', function() {
       expect(collection.isA('Backbone.Collection')).toBe(true);
     });
 
-    it('returns true with arg \'ProtectedCollection\'', function() {
+    it('returns true with arg \'ProtectedCollection\' #travis', function() {
       expect(collection.isA('ProtectedCollection')).toBe(true);
     });
 
-    it('returns false with wrong type', function() {
+    it('returns false with wrong type #travis', function() {
       expect(collection.isA('UserCollection')).toBe(false);
     });
   });
