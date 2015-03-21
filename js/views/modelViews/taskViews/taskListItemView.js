@@ -140,6 +140,11 @@ var ListItemView = Backbone.View.extend({
     this.modelView = new ModelView({model: this.model});
   },
 
+  remove             : function() {
+    this.modelView.remove();
+    Backbone.View.prototype.remove.call(this);
+  },
+
   render             : function() {
     this.$el.html(this.template());
     this.delegateEvents();

@@ -298,6 +298,20 @@ describe('List Item Task View', function() {
   });
 
   describe('core view functions', function() {
+    describe('remove', function() {
+      it('removes the model view #travis', function() {
+        spyOn(view.modelView, 'remove');
+        view.remove();
+        expect(view.modelView.remove).toHaveBeenCalled();
+      });
+
+      it('removes itself #travis', function() {
+        spyOn(Backbone.View.prototype, 'remove');
+        view.remove();
+        expect(Backbone.View.prototype.remove).toHaveBeenCalled();
+      });
+    });
+
     describe('render', function() {
       it('sets the HTML of its element #travis', function() {
         spyOn(view.$el, 'html');
