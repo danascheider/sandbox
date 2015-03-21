@@ -68,6 +68,34 @@ describe('Quick-Add Task Form', function() {
 
     it('has class .quick-add-form #travis', function() {
       expect(view.$el[0]).toHaveClass('quick-add-form');
-    })
+    });
+  });
+
+  describe('special methods', function() {
+    describe('isA', function() {
+      it('returns true with arg \'QuickAddFormView\' #travis', function() {
+        expect(view.isA('QuickAddFormView')).toBe(true);
+      });
+
+      it('returns true with arg \'TaskCollectionView\' #travis', function() {
+        expect(view.isA('TaskCollectionView')).toBe(true);
+      });
+
+      it('returns true with arg \'TaskCreateFormView\' #travis', function() {
+        expect(view.isA('TaskCreateFormView')).toBe(true);
+      });
+
+      it('returns true with arg \'TaskForm\' #travis', function() {
+        expect(view.isA('TaskFormView')).toBe(true);
+      });
+
+      it('returns true with arg \'Backbone.View\' #travis', function() {
+        expect(view.isA('Backbone.View')).toBe(true);
+      });
+
+      it('returns false with other arg #travis', function() {
+        expect(view.isA('Backbone.Model')).toBe(false);
+      });
+    });
   });
 });
