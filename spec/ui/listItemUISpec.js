@@ -5,7 +5,7 @@ require(process.cwd() + '/spec/support/env.js');
 var matchers = require('jasmine-jquery-matchers'),
     context  = describe;
 
-describe('Display Functions - Task List Item View', function() {
+describe('#ui Task List Item View', function() {
   beforeAll(function(done) {
     jasmine.addMatchers(matchers);
     client.init().url('http://localhost/#listItemViewSpec', done);
