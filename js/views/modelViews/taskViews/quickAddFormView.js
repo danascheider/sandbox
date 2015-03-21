@@ -5,6 +5,14 @@ var QuickAddFormView = Backbone.View.extend({
   className  : 'task-form create-form quick-add-form',
 
   // --------------- //
+  // Event Callbacks //
+  // --------------- //
+
+  createTask : function(e) {
+    e.preventDefault();
+  },
+
+  // --------------- //
   // Special Methods //
   // --------------- //
 

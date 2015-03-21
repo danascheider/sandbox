@@ -4,11 +4,13 @@ require(process.cwd() + '/spec/support/env.js');
 
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/quickAddFormView.js');
 
-var matchers       = require('jasmine-jquery-matchers');
-var TaskModel      = require(process.cwd() + '/js/models/taskModel.js');
-var TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js');
+var matchers       = require('jasmine-jquery-matchers'),
+    TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
+    TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
+    Utils          = require(process.cwd() + '/js/utils.js');
+    context        = describe; // RSpecify
+
 Backbone.$         = $;
-var context        = describe; // RSpecify
 
 var task1 = new TaskModel({id: 1, title: 'Test Task 1', status: 'Blocking'}),
     task2 = new TaskModel({id: 2, title: 'Test Task 2', status: 'Blocking'}),
@@ -68,6 +70,40 @@ describe('Quick-Add Task Form', function() {
 
     it('has class .quick-add-form #travis', function() {
       expect(view.$el[0]).toHaveClass('quick-add-form');
+    });
+  });
+
+  describe('event callbacks', function() {
+    describe('createTask', function() {
+      var e; 
+
+      beforeEach(function() {
+        e = $.Event('submit', {target: view.$el});
+        view.render();
+      });
+
+      afterEach(function() {
+        view.remove();
+        collection.reset([task1, task2, task3]);
+      });
+
+      context('when valid', function() {
+        beforeEach(function() {
+          spyOn(Utils, 'getAttributes').and.callFake(function() {
+            return {title: 'Finish writing tests', position: 1};
+          });
+
+          spyOn($, 'ajax').and.callFake(function(args) {
+            args.success();
+          });
+        });
+
+        it('doesn\'t refresh the browser #travis', function() {
+          spyOn(e, 'preventDefault');
+          view.createTask(e);
+          expect(e.preventDefault).toHaveBeenCalled();
+        });
+      });
     });
   });
 
