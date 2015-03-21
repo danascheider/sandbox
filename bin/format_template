@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
-filename = ARGV[0]
-new_filename = filename.gsub(/\.txt$/, '.js')
+filename     = ARGV[0]
+new_filename = filename.gsub(/\.[a-z]{2,4}$/, '.js').gsub(/^(.+)\/templates\//, '')
+new_path     = '/home/dana/Development/sandbox/templates/'
 
 str = File.read(filename)
-File.open(new_filename, 'w+') {|file| file.puts("var string = " + str.inspect + ";\n\nmodule.exports = string;") }
+File.open("#{new_path}#{new_filename}", 'w+') {|file| file.puts("var string = " + str.inspect + ";\n\nmodule.exports = string;") }
