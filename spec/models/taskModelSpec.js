@@ -8,7 +8,7 @@ var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceMod
 Backbone.$            = $;
 var context           = describe; // RSpecify
 
-describe('#travis Task Model', function() {
+describe('Task Model', function() {
   var task;
 
   beforeEach(function() {
@@ -24,17 +24,17 @@ describe('#travis Task Model', function() {
   });
 
   describe('properties', function() {
-    it('has a `urlRoot` scoped to the logged in user', function() {
+    it('has a `urlRoot` scoped to the logged in user #travis', function() {
       expect(task.urlRoot()).toEqual(Canto.API.base + '/users/342/tasks');
     });
 
-    it('has an individual `url` not scoped to the logged in user', function() {
+    it('has an individual `url` not scoped to the logged in user #travis', function() {
       expect(task.url()).toEqual(Canto.API.base + '/tasks/1');
     });
   });
 
   describe('constructor', function() {
-    it('does not save the task automatically', function() {
+    it('does not save the task automatically #travis', function() {
       spyOn(SUT.prototype, 'save');
       var newTask = new SUT();
       expect(SUT.prototype.save).not.toHaveBeenCalled();
@@ -42,7 +42,7 @@ describe('#travis Task Model', function() {
   });
 
   describe('validations', function() {
-    it('is invalid without a title', function() {
+    it('is invalid without a title #travis', function() {
       var newTask = new SUT();
       expect(newTask.isValid()).toBe(false);
     });
@@ -50,12 +50,12 @@ describe('#travis Task Model', function() {
 
   describe('core functions', function() {
     describe('fetch', function() {
-      it('sends the request to the task\'s individual endpoint', function() {
+      it('sends the request to the task\'s individual endpoint #travis', function() {
         task.fetch();
         expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.url());
       });
 
-      it('calls fetch on the ProtectedResource prototype', function() {
+      it('calls fetch on the ProtectedResource prototype #travis', function() {
         spyOn(ProtectedResource.prototype, 'fetch');
         task.fetch();
         expect(ProtectedResource.prototype.fetch).toHaveBeenCalled();
@@ -63,13 +63,13 @@ describe('#travis Task Model', function() {
     });
 
     describe('save', function() {
-      it('calls validate', function() {
+      it('calls validate #travis', function() {
         spyOn(task, 'validate');
         task.save();
         expect(task.validate).toHaveBeenCalled();
       });
 
-      it('calls save on the ProtectedResource prototype', function() {
+      it('calls save on the ProtectedResource prototype #travis', function() {
         spyOn(ProtectedResource.prototype, 'save');
         task.save();
         expect(ProtectedResource.prototype.save).toHaveBeenCalled();
@@ -81,26 +81,26 @@ describe('#travis Task Model', function() {
           task.save();
         });
 
-        it('sends the request to the collection endpoint', function() {
+        it('sends the request to the collection endpoint #travis', function() {
           expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.urlRoot());
         });
 
-        it('sends a POST request', function() {
+        it('sends a POST request #travis', function() {
           expect($.ajax.calls.argsFor(0)[0].type).toEqual('POST');
         });
       });
 
-      context('when the task is not new', function() {
+      context('when the task is not new #travis', function() {
         beforeEach(function() { 
           spyOn(task, 'isNew').and.returnValue(false); 
           task.save();
         });
 
-        it('sends the request to the individual endpoint', function() {
+        it('sends the request to the individual endpoint #travis', function() {
           expect($.ajax.calls.argsFor(0)[0].url).toEqual(task.url());
         });
 
-        it('sends a PUT request', function() {
+        it('sends a PUT request #travis', function() {
           expect($.ajax.calls.argsFor(0)[0].type).toEqual('PUT');
         });
       });
@@ -110,14 +110,14 @@ describe('#travis Task Model', function() {
   describe('special functions', function() {
     describe('complete', function() {
       context('when the task is complete', function() {
-        it('returns true', function() {
+        it('returns true #travis', function() {
           task.set('status', 'Complete');
           expect(task.complete()).toBe(true);
         });
       });
 
       context('when the task is incomplete', function() {
-        it('returns false', function() {
+        it('returns false #travis', function() {
           task.set('status', 'Blocking');
           expect(task.complete()).toBe(false);
         });
@@ -125,17 +125,17 @@ describe('#travis Task Model', function() {
     });
 
     describe('displayTitle', function() {
-      it('leaves a short title as-is', function() {
+      it('leaves a short title as-is #travis', function() {
         task.set('title', 'Take out the trash');
         expect(task.displayTitle()).toEqual('Take out the trash');
       });
 
-      it('truncates a long title with an ellipsis', function() {
+      it('truncates a long title with an ellipsis #travis', function() {
         task.set('title', 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood');
         expect(task.displayTitle()).toEqual('Find out how much wood a woodchuck would chuck if a ...');
       });
 
-      it('takes an argument into consideration', function() {
+      it('takes an argument into consideration #travis', function() {
         task.set('title', 'Find out how much wood a woodchuck would chuck if a woodchuck could chuck wood');
         expect(task.displayTitle(35)).toEqual('Find out how much wood a ...');
       });
@@ -143,14 +143,14 @@ describe('#travis Task Model', function() {
 
     describe('incomplete', function() {
       context('when the task is complete', function() {
-        it('returns false', function() {
+        it('returns false #travis', function() {
           task.set('status', 'Complete');
           expect(task.incomplete()).toBe(false);
         });
       });
 
       context('when the task is incomplete', function() {
-        it('returns true', function() {
+        it('returns true #travis', function() {
           task.set('status', 'In Progress');
           expect(task.incomplete()).toBe(true);
         });
@@ -158,7 +158,7 @@ describe('#travis Task Model', function() {
     });
 
     describe('prettyDeadline', function() {
-      it('presents its deadline in a human-friendly format', function() {
+      it('presents its deadline in a human-friendly format #travis', function() {
         task.set('deadline', new Date('2014-11-10 00:00:00 -0800'));
         expect(task.prettyDeadline()).toEqual('Monday, November 10, 2014');
       });
