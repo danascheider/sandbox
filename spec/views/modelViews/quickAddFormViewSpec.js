@@ -30,18 +30,32 @@ describe('Quick-Add Task Form', function() {
   });
 
   describe('constructor', function() {
-    it('#travis assigns the collection', function() {
+    it('assigns the collection #travis', function() {
       expect(view.collection).toBe(collection);
     });
 
-    it('#travis doesn\'t call render', function() {
+    it('doesn\'t call render #travis', function() {
       spyOn(SUT.prototype, 'render');
       var newView = new SUT({collection: collection});
       expect(SUT.prototype.render).not.toHaveBeenCalled();
     });
 
-    it('#travis sets the `grouping` property', function() {
+    it('sets the `grouping` property #travis', function() {
       expect(view.grouping).toEqual({status: 'Blocking'});
+    });
+  });
+
+  describe('elements', function() {
+    beforeEach(function() {
+      view.render();
+    });
+
+    afterEach(function() {
+      view.remove();
+    });
+
+    it('is a form #travis', function() {
+      expect(view.$el[0].tagName).toEqual('FORM');
     });
   });
 });

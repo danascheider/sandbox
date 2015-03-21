@@ -1,7 +1,8 @@
 require('../../../dependencies.js');
 
 var QuickAddFormView = Backbone.View.extend({
-  initialize: function(opts) {
+  tagName    : 'form',
+  initialize : function(opts) {
     opts = opts || {};
     this.grouping = opts.grouping;
   }
