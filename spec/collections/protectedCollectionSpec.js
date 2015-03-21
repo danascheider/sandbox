@@ -9,7 +9,7 @@ Backbone.$         = $;
 var Model          = Backbone.Model.extend({});
 var context        = describe; // RSpecify
 
-describe('#travis Protected Collection', function() {
+describe('Protected Collection', function() {
   var collection, model1, model2, model3, xhr, ajaxSettings, spy;
 
   beforeEach(function() {
@@ -20,7 +20,7 @@ describe('#travis Protected Collection', function() {
   });
 
   describe('token', function() {
-    it('returns the value of the auth header for the logged-in user', function() {
+    it('returns the value of the auth header for the logged-in user #travis', function() {
       expect(collection.token()).toEqual('Basic ' + btoa('testuser:testuser'));
     });
   });
@@ -29,14 +29,14 @@ describe('#travis Protected Collection', function() {
     describe('fetch', function() {
       beforeEach(function() { spyOn($, 'ajax'); });
 
-      it('attaches the auth header', function() {
+      it('attaches the auth header #travis', function() {
         xhr.open('GET', collection.url);
         collection.fetch();
         $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
         expect(xhr.getRequestHeader('Authorization')).toEqual(collection.token());
       });
 
-      it('calls fetch on the Backbone collection prototype', function() {
+      it('calls fetch on the Backbone collection prototype #travis', function() {
         spyOn(Backbone.Collection.prototype, 'fetch');
         collection.fetch();
         expect(Backbone.Collection.prototype.fetch).toHaveBeenCalled();
@@ -69,24 +69,24 @@ describe('#travis Protected Collection', function() {
         ajaxSettings = $.ajax.calls.argsFor(0)[0];
       });
 
-      it('sends a request to the collection\'s main URL', function() {
+      it('sends a request to the collection\'s main URL #travis', function() {
         expect(ajaxSettings.url).toEqual(collection.url);
       });
 
-      it('sends a PUT request', function() {
+      it('sends a PUT request #travis', function() {
         expect(ajaxSettings.type).toEqual('PUT');
       });
 
-      it('triggers the collectionSynced event', function() {
+      it('triggers the collectionSynced event #travis', function() {
         expect(spy).toHaveBeenCalled();
       });
 
-      it('includes all changed models', function() {
+      it('includes all changed models #travis', function() {
         var expected = [JSON.parse(JSON.stringify(model1)), JSON.parse(JSON.stringify(model3))];
         expect(JSON.parse(ajaxSettings.data)).toEqual(expected);
       });
 
-      it('reintegrates the updated models into itself', function() {
+      it('reintegrates the updated models into itself #travis', function() {
         model1.set({foo: 'qux'});
         collection.updateAll();
         expect(collection.models[0].get('foo')).toEqual('qux');
@@ -94,15 +94,15 @@ describe('#travis Protected Collection', function() {
     });
 
     describe('isA', function() {
-      it('returns true with arg \'ProtectedCollection\'', function() {
+      it('returns true with arg \'ProtectedCollection\' #travis', function() {
         expect(collection.isA('ProtectedCollection')).toBe(true);
       });
 
-      it('returns true with arg \'Backbone.Collection\'', function() {
+      it('returns true with arg \'Backbone.Collection\' #travis', function() {
         expect(collection.isA('Backbone.Collection')).toBe(true);
       });
 
-      it('returns false with another value', function() {
+      it('returns false with another value #travis', function() {
         expect(collection.isA('TaskModel')).toBe(false);
       });
     });
