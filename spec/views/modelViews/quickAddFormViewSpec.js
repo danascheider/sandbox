@@ -60,6 +60,10 @@ describe('Quick-Add Task Form', function() {
 
     it('has class .task-form #travis', function() {
       expect(view.$el[0]).toHaveClass('task-form');
-    })
+    });
+
+    it('has class .create-form #travis', function() {
+      expect(view.$el[0]).toHaveClass('create-form');
+    });
   });
 });
