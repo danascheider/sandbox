@@ -8,7 +8,7 @@ var Collection     = require(process.cwd() + '/js/collections/taskCollection.js'
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 
-describe('#travis User Model', function() {
+describe('User Model', function() {
   var user, xhr;
 
   beforeEach(function() {
@@ -21,7 +21,7 @@ describe('#travis User Model', function() {
   });
 
   describe('properties', function() {
-    it('has `urlRoot` /users', function() {
+    it('has `urlRoot` /users #travis', function() {
       expect(user.urlRoot).toEqual(Canto.API.base + '/users');
     });
   });
@@ -29,25 +29,25 @@ describe('#travis User Model', function() {
   describe('constructor', function() {
     beforeEach(function() { spyOn(SUT.prototype, 'protectedFetch'); });
 
-    it('instantiates a task collection', function() {
+    it('instantiates a task collection #travis', function() {
       var newUser = new SUT();
       expect(newUser.tasks.isA('TaskCollection')).toBe(true);
     });
 
     describe('when instantiated with an ID', function() {
-      it('calls protectedFetch', function() {
+      it('calls protectedFetch #travis', function() {
         var newUser = new SUT({id: 14});
         expect(SUT.prototype.protectedFetch).toHaveBeenCalled();
       });
 
-      it('doesn\'t call protectedFetch if `sync` is set to false', function() {
+      it('doesn\'t call protectedFetch if `sync` is set to false #travis', function() {
         var newUser = new SUT({id: 22}, {sync: false});
         expect(SUT.prototype.protectedFetch).not.toHaveBeenCalled();
       });
     });
 
     describe('when not instantiated with an ID', function() {
-      it('doesn\'t call protectedFetch', function() {
+      it('doesn\'t call protectedFetch #travis', function() {
         var newUser = new SUT();
         expect(SUT.prototype.protectedFetch).not.toHaveBeenCalled();
       });
@@ -60,13 +60,13 @@ describe('#travis User Model', function() {
     });
 
     describe('fetch', function() {
-      it('calls Backbone fetch function', function() {
+      it('calls Backbone fetch function #travis', function() {
         spyOn(Backbone.Model.prototype, 'fetch');
         user.fetch();
         expect(Backbone.Model.prototype.fetch).toHaveBeenCalled();
       });
 
-      it('sets the auth header for the requested user', function() {
+      it('sets the auth header for the requested user #travis', function() {
         xhr = new XMLHttpRequest();
         xhr.open('GET', user.url());
         user.fetch();
@@ -74,7 +74,7 @@ describe('#travis User Model', function() {
         expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + btoa('testuser:testuser'));
       });
 
-      it('sends the request to the requested user\'s endpoint', function() {
+      it('sends the request to the requested user\'s endpoint #travis', function() {
         user.fetch();
         expect($.ajax.calls.argsFor(0)[0].url).toEqual(user.url());
       });
@@ -88,20 +88,20 @@ describe('#travis User Model', function() {
     });
 
     describe('protectedFetch', function() {
-      it('calls Backbone fetch function', function() {
+      it('calls Backbone fetch function #travis', function() {
         spyOn(Backbone.Model.prototype, 'fetch');
         user.protectedFetch();
         expect(Backbone.Model.prototype.fetch).toHaveBeenCalled();
       });
 
-      it('sets the auth header for the requested user', function() {
+      it('sets the auth header for the requested user #travis', function() {
         xhr.open('GET', user.url);
         user.protectedFetch();
         $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
         expect(xhr.getRequestHeader('Authorization')).toEqual('Basic ' + btoa('danascheider:danascheider'));
       });
 
-      it('sends the request to the requested user\'s endpoint', function() {
+      it('sends the request to the requested user\'s endpoint #travis', function() {
         user.protectedFetch();
         expect($.ajax.calls.argsFor(0)[0].url).toEqual(Canto.API.base + '/users/342');
       });
