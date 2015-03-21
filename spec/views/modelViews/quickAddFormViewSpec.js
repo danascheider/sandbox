@@ -132,6 +132,24 @@ describe('Quick-Add Task Form', function() {
           view.createTask(e);
           expect(collection.unshift).toHaveBeenCalled();
         });
+
+        it('triggers the newTask event #travis', function() {
+          var spy = jasmine.createSpy('spy');
+          view.on('newTask', spy);
+          view.createTask(e);
+          expect(spy).toHaveBeenCalled();
+          view.off();
+        });
+
+        it('resets the form #travis', function() {
+          spyOn(view.$el[0], 'reset');
+          view.createTask(e);
+          expect(view.$el[0].reset).toHaveBeenCalled();
+        });
+      });
+
+      context('when no title given', function() {
+        //
       });
     });
   });
