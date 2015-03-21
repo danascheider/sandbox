@@ -73,6 +73,7 @@ var QuickAddFormView = Backbone.View.extend({
 
   render     : function(opts) {
     this.$el.html(this.template());
+    this.delegateEvents();
     return this;
   }
 });

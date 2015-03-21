@@ -211,6 +211,12 @@ describe('Quick-Add Task Form', function() {
         expect(view.$el.html).toHaveBeenCalled();
       });
 
+      it('calls delegateEvents #travis', function() {
+        spyOn(view, 'delegateEvents');
+        view.render();
+        expect(view.delegateEvents).toHaveBeenCalled();
+      });
+
       it('returns itself #travis', function() {
         expect(view.render()).toEqual(view);
       });
