@@ -33,5 +33,11 @@ describe('#travis Quick-Add Task Form', function() {
     it('assigns the collection', function() {
       expect(view.collection).toBe(collection);
     });
+
+    it('doesn\'t call render', function() {
+      spyOn(SUT.prototype, 'render');
+      var newView = new SUT({collection: collection});
+      expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
   });
 });
