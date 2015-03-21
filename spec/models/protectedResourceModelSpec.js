@@ -7,7 +7,7 @@ var SUT = require(process.cwd() + '/js/models/protectedResourceModel.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 
-describe('#travis Protected Resource Model', function() {
+describe('Protected Resource Model', function() {
   var resource, xhr;
 
   beforeEach(function() {
@@ -20,7 +20,7 @@ describe('#travis Protected Resource Model', function() {
     resource = null;
   });
 
-  it('returns its token', function() {
+  it('returns its token #travis', function() {
     spyOn($, 'cookie').and.returnValue(btoa('testuser:testuser'));
     var string = 'Basic ' + btoa('testuser:testuser');
     expect(resource.token()).toEqual(string);
@@ -29,7 +29,7 @@ describe('#travis Protected Resource Model', function() {
   describe('destroy() method', function() {
     beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
-    it('attaches an authorization header', function() {
+    it('attaches an authorization header #travis', function() {
 
       // XHR object can be passed to the Ajax beforeSend setting to
       // check the value of the Authorization header
@@ -48,7 +48,7 @@ describe('#travis Protected Resource Model', function() {
       expect(xhr.getRequestHeader('Authorization')).toEqual(resource.token());
     });
 
-    it('calls destroy on the Backbone model prototype', function() {
+    it('calls destroy on the Backbone model prototype #travis', function() {
       spyOn(Backbone.Model.prototype, 'destroy');
       resource.destroy();
       expect(Backbone.Model.prototype.destroy).toHaveBeenCalled();
@@ -58,7 +58,7 @@ describe('#travis Protected Resource Model', function() {
   describe('fetch() method', function() {
     beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
-    it('attaches an authorization header', function() {
+    it('attaches an authorization header #travis', function() {
       xhr.open('GET', resource.url);
 
       spyOn($, 'ajax');
@@ -68,7 +68,7 @@ describe('#travis Protected Resource Model', function() {
       expect(xhr.getRequestHeader('Authorization')).toEqual(resource.token());
     });
 
-    it('calls fetch on the Backbone model prototype', function() {
+    it('calls fetch on the Backbone model prototype #travis', function() {
       spyOn(Backbone.Model.prototype, 'fetch');
       resource.fetch();
       expect(Backbone.Model.prototype.fetch).toHaveBeenCalled;
@@ -78,7 +78,7 @@ describe('#travis Protected Resource Model', function() {
   describe('save() method', function() {
     beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
-    it('attaches an authorization header', function() {
+    it('attaches an authorization header #travis', function() {
       xhr.open('PUT', resource.url);
 
       spyOn($, 'ajax');
@@ -88,7 +88,7 @@ describe('#travis Protected Resource Model', function() {
       expect(xhr.getRequestHeader('Authorization')).toEqual(resource.token());
     });
 
-    it('calls save on the Backbone model prototype', function() {
+    it('calls save on the Backbone model prototype #travis', function() {
       spyOn(Backbone.Model.prototype, 'save');
       resource.save();
       expect(Backbone.Model.prototype.save).toHaveBeenCalled();

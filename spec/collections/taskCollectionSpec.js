@@ -10,7 +10,7 @@ var Collection     = require(process.cwd() + '/js/collections/protectedCollectio
 Backbone.$         = $;
 var context        = describe; // RSpecify
 
-describe('#travis Task Collection', function() {
+describe('Task Collection', function() {
   var collection;
 
   // Instantiate the tasks that will populate the collection
