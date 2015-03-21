@@ -25,7 +25,7 @@ var context   = describe; // RSpecify
 //      spec. If they are the responsibility of the view, they should be defined
 //      in the view. 
 
-describe('#travis List Item Task View', function() {
+describe('List Item Task View', function() {
   var view, e;
 
   var task = new TaskModel({title: 'Finish writing test suite', status: 'New', priority: 'Normal'});
@@ -39,17 +39,21 @@ describe('#travis List Item Task View', function() {
   afterAll(function() { view = null; });
 
   describe('constructor', function() {
-    it('doesn\'t call render', function() {
+    it('sets the model #travis', function() {
+      expect(view.model).toBe(task);
+    });
+
+    it('doesn\'t call render #travis', function() {
       spyOn(SUT.prototype, 'render');
       var newView = new SUT({model: task});
       expect(SUT.prototype.render).not.toHaveBeenCalled();
     });
 
-    it('creates a model view', function() {
+    it('creates a model view #travis', function() {
       expect(view.modelView.isA('TaskModelView')).toBe(true);
     });
 
-    it('creates an edit form', function() {
+    it('creates an edit form #travis', function() {
       pending('Need to implement the edit form view');
     });
   });
@@ -57,11 +61,11 @@ describe('#travis List Item Task View', function() {
   describe('el', function() {
     beforeEach(function() { view.render(); });
 
-    it('is an li', function() {
+    it('is an li #travis', function() {
       expect(view.$el).toHaveTag('li');
     });
 
-    it('has class .task-list-item', function() {
+    it('has class .task-list-item #travis', function() {
       expect(view.$el).toHaveClass('task-list-item');
     });
   });
@@ -69,38 +73,38 @@ describe('#travis List Item Task View', function() {
   describe('elements', function() {
     beforeEach(function() { view.render(); });
 
-    it('has a mark-complete checkbox', function() {
+    it('has a mark-complete checkbox #travis', function() {
       expect(view.$('i[title="Mark complete"]')).toExist();
     });
 
-    it('doesn\'t display its edit form by default', function() {
+    it('doesn\'t display its edit form by default #travis', function() {
       pending('Need to implement the edit form view');
     });
 
     describe('draggable functionality', function() {
-      it('has class ui-widget-content', function() {
+      it('has class ui-widget-content #travis', function() {
         expect(view.$el).toHaveClass('ui-widget-content');
       });
 
-      it('has class .ui-draggable', function() {
+      it('has class .ui-draggable #travis', function() {
         expect(view.$el).toHaveClass('ui-draggable');
       });
     });
 
     describe('edit icon', function() {
-      it('is present', function() {
+      it('is present #travis', function() {
         expect(view.$('i[title="Edit"]')).toExist();
       });
     });
 
     describe('delete icon', function() {
-      it('is present', function() {
+      it('is present #travis', function() {
         expect(view.$('i[title="Delete"]')).toExist();
       });
     });
 
     describe('backlog icon', function() {
-      it('is present', function() {
+      it('is present #travis', function() {
         expect(view.$('i[title="Backlog"]')).toExist();
       });
     });
@@ -122,62 +126,62 @@ describe('#travis List Item Task View', function() {
     });
 
     describe('click edit icon', function() {
-      it('calls showEditForm', function() {
+      it('calls showEditForm #travis', function() {
         newView.$('i[title=Edit]').click();
         expect(SUT.prototype.showEditForm).toHaveBeenCalled();
       });
     });
 
     describe('click markComplete checkbox', function() {
-      it('calls markComplete', function() {
+      it('calls markComplete #travis', function() {
         newView.$('.fa-square-o').click();
         expect(SUT.prototype.markComplete).toHaveBeenCalled();
       });
     });
 
     describe('click delete icon', function() {
-      it('calls deleteTask', function() {
+      it('calls deleteTask #travis', function() {
         newView.$('i[title=Delete]').click();
         expect(SUT.prototype.deleteTask).toHaveBeenCalled();
       });
     });
 
     describe('click backlog icon', function() {
-      it('calls backlogTask', function() {
+      it('calls backlogTask #travis', function() {
         newView.$('i[title=Backlog]').click();
         expect(SUT.prototype.backlogTask).toHaveBeenCalled();
       });
     });
 
     describe('click task title', function() {
-      it('calls toggleTaskDetails', function() {
+      it('calls toggleTaskDetails #travis', function() {
         newView.$('a.task-title').click();
         expect(SUT.prototype.toggleTaskDetails).toHaveBeenCalled();
       });
     });
 
     describe('click reset button', function() {
-      it('calls hideEditForm', function() {
+      it('calls hideEditForm #travis', function() {
         pending('Need to implement the edit form view');
       });
     });
 
     describe('mouseenter', function() {
-      it('calls showEditIcons', function() {
+      it('calls showEditIcons #travis', function() {
         newView.$el.mouseenter();
         expect(SUT.prototype.showEditIcons).toHaveBeenCalled();
       });
     });
 
     describe('mouseleave', function() {
-      it('calls hideEditIcons', function() {
+      it('calls hideEditIcons #travis', function() {
         newView.$el.mouseleave();
         expect(SUT.prototype.hideEditIcons).toHaveBeenCalled();
       });
     });
 
     describe('done event on edit form', function() {
-      it('calls render', function() {
+      it('calls render #travis', function() {
         pending('Need to implement the edit form view');
       });
     });
@@ -197,17 +201,17 @@ describe('#travis List Item Task View', function() {
 
       afterEach(function() { task.unset('backlog'); });
 
-      it('changes the task\'s backlog status to true', function() {
+      it('changes the task\'s backlog status to true #travis', function() {
         expect(task.get('backlog')).toBe(true);
       });
 
-      it('saves the task', function() {
+      it('saves the task #travis', function() {
         expect(task.save).toHaveBeenCalled();
       });
     });
 
     describe('deleteTask', function() {
-      it('destroys the task', function() {
+      it('destroys the task #travis', function() {
         spyOn(task, 'destroy');
         view.deleteTask();
         expect(task.destroy).toHaveBeenCalled();
@@ -215,7 +219,7 @@ describe('#travis List Item Task View', function() {
     });
 
     describe('hideEditForm', function() {
-      it('removes the edit form from the DOM', function() {
+      it('removes the edit form from the DOM #travis', function() {
         pending('Define the edit form view');
         spyOn(view.editForm, 'remove');
         view.hideEditForm();
@@ -224,7 +228,7 @@ describe('#travis List Item Task View', function() {
     });
 
     describe('markComplete', function() {
-      it('marks the task complete and saves', function() {
+      it('marks the task complete and saves #travis', function() {
         spyOn(task, 'save');
         view.markComplete();
         expect(task.save.calls.argsFor(0)[0]).toEqual({status: 'Complete'});
@@ -232,7 +236,7 @@ describe('#travis List Item Task View', function() {
     });
 
     describe('toggleTaskDetails', function() {
-      it('calls preventDefault', function() {
+      it('calls preventDefault #travis', function() {
         var e = $.Event({target: view.$('.task-title')});
         spyOn(e, 'preventDefault');
         view.toggleTaskDetails(e);
@@ -243,12 +247,12 @@ describe('#travis List Item Task View', function() {
 
   describe('special functions', function() {
     describe('changePosition', function() {
-      it('removes inline styles', function() {
+      it('removes inline styles #travis', function() {
         view.changePosition();
         expect(view.$el.attr('style')).not.toExist();
       });
 
-      it('renders the view', function() {
+      it('renders the view #travis', function() {
         spyOn(view, 'render');
         view.changePosition();
         expect(view.render).toHaveBeenCalled();
@@ -261,33 +265,33 @@ describe('#travis List Item Task View', function() {
         view.configureDraggable();
       });
 
-      it('makes the view draggable', function() {
+      it('makes the view draggable #travis', function() {
         expect(view.$el.draggable).toHaveBeenCalled();
       });
 
-      it('confines the view to its parent list', function() {
+      it('confines the view to its parent list #travis', function() {
         expect(view.$el.draggable.calls.argsFor(0)[0].containment).toEqual('parent');
       });
 
-      it('connects to the sortable task list', function() {
+      it('connects to the sortable task list #travis', function() {
         expect(view.$el.draggable.calls.argsFor(0)[0].connectToSortable).toEqual('.task-list');
       });
     });
 
     describe('isA', function() {
-      it('returns true with arg \'TaskListItemView\'', function() {
+      it('returns true with arg \'TaskListItemView\' #travis', function() {
         expect(view.isA('TaskListItemView')).toBe(true);
       });
 
-      it('returns true with arg \'ListItemView\'', function() {
+      it('returns true with arg \'ListItemView\' #travis', function() {
         expect(view.isA('ListItemView')).toBe(true);
       });
 
-      it('returns true with arg \'Backbone.View\'', function() {
+      it('returns true with arg \'Backbone.View\' #travis', function() {
         expect(view.isA('Backbone.View')).toBe(true);
       });
 
-      it('returns false with other arg', function() {
+      it('returns false with other arg #travis', function() {
         expect(view.isA('Backbone.Router')).toBe(false);
       });
     });
@@ -295,30 +299,30 @@ describe('#travis List Item Task View', function() {
 
   describe('core view functions', function() {
     describe('render', function() {
-      it('sets the HTML of its element', function() {
+      it('sets the HTML of its element #travis', function() {
         spyOn(view.$el, 'html');
         view.render();
         expect(view.$el.html).toHaveBeenCalled();
       });
 
-      it('returns itself', function() {
+      it('returns itself #travis', function() {
         expect(view.render()).toBe(view);
       });
 
-      it('configures the draggable property', function() {
+      it('configures the draggable property #travis', function() {
         spyOn(view, 'configureDraggable', function() {
           view.render();
           expect(view.configureDraggable).toHaveBeenCalled();
         });
       });
 
-      it('delegates events', function() {
+      it('delegates events #travis', function() {
         spyOn(view, 'delegateEvents');
         view.render();
         expect(view.delegateEvents).toHaveBeenCalled();
       });
 
-      it('renders the model view', function() {
+      it('renders the model view #travis', function() {
         spyOn(view.modelView, 'render');
         view.render();
         expect(view.modelView.render).toHaveBeenCalled();
