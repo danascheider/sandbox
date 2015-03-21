@@ -150,6 +150,10 @@ describe('Quick-Add Task Form', function() {
 
       context('when no title given', function() {
         it('doesn\'t create a task', function() {
+          spyOn(Canto.Utils, 'getAttributes').and.callFake(function() {
+            return {title: ''};
+          });
+
           spyOn(collection, 'create');
           spyOn(TaskModel.prototype, 'initialize');
           view.createTask(e);
@@ -184,6 +188,20 @@ describe('Quick-Add Task Form', function() {
 
       it('returns false with other arg #travis', function() {
         expect(view.isA('Backbone.Model')).toBe(false);
+      });
+    });
+  });
+
+  describe('core functions', function() {
+    describe('render', function() {
+      it('sets the HTML #travis', function() {
+        spyOn(view.$el, 'html');
+        view.render();
+        expect(view.$el.html).toHaveBeenCalled();
+      });
+
+      it('returns itself #travis', function() {
+        expect(view.render()).toEqual(view);
       });
     });
   });

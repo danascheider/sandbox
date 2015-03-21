@@ -3,6 +3,7 @@ require('../../../dependencies.js');
 var QuickAddFormView = Backbone.View.extend({
   tagName    : 'form',
   className  : 'task-form create-form quick-add-form',
+  template   : JST['tasks/quickAdd'],
 
   // --------------- //
   // Event Callbacks //
@@ -64,6 +65,11 @@ var QuickAddFormView = Backbone.View.extend({
   initialize : function(opts) {
     opts = opts || {};
     this.grouping = opts.grouping;
+  },
+
+  render     : function(opts) {
+    this.$el.html(this.template());
+    return this;
   }
 });
 
