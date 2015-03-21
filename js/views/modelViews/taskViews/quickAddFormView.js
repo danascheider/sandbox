@@ -2,7 +2,7 @@ require('../../../dependencies.js');
 
 var QuickAddFormView = Backbone.View.extend({
   tagName    : 'form',
-  className  : 'task-form create-form',
+  className  : 'task-form create-form quick-add-form',
 
   initialize : function(opts) {
     opts = opts || {};
