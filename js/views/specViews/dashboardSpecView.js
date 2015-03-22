@@ -35,7 +35,7 @@ var SpecWrapper = Backbone.View.extend({
     e.preventDefault();
     var that = this;
 
-    var ev = $.Event('click', {target: that.view.$('a.dropdown-toggle')});
+    var ev = $.Event('click', {target: that.view.$('a.dropdown-toggle').first()});
     this.view.toggleDropdownMenu(ev);
   },
 

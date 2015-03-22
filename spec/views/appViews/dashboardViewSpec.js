@@ -99,12 +99,29 @@ describe('Main Dashboard View', function() {
           dashboard.toggleDropdownMenu(e);
         });
 
-        it('adds the .open class to the target menu #travis #current', function() {
+        it('adds the .open class to the target menu #travis', function() {
           expect(dashboard.$('li.dropdown').first()).toHaveClass('open');
         });
 
         it('doesn\'t add the .open class to the other menus #travis', function() {
           expect(dashboard.$('li.dropdown').last()).not.toHaveClass('open');
+        });
+      });
+
+      context('when another menu is open', function() {
+        beforeEach(function() {
+          e = $.Event('click', {target: dashboard.$('a.dropdown-toggle').last() });
+          dashboard.toggleDropdownMenu(e); // show the last one
+          e.target = dashboard.$('a.dropdown-toggle').first();
+          dashboard.toggleDropdownMenu(e);
+        });
+
+        it('removes the .open class from the open menu #travis', function() {
+          expect(dashboard.$('li.dropdown').last()).not.toHaveClass('open');
+        });
+
+        it('adds the .open class to the target menu #travis', function() {
+          expect(dashboard.$('li.dropdown').first()).toHaveClass('open');
         });
       });
     });
