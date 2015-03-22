@@ -23,16 +23,19 @@ var SpecWrapper = Backbone.View.extend({
   // Event Callbacks //
   // --------------- //
 
-  callHideDropdownMenus : function(e) {
+  callHideDropdownMenus  : function(e) {
     e.preventDefault();
     var that = this;
 
-    var ev = $.Event('click', {target: that.view.$('li.dropdown').first()});
-    this.view.toggleDropdownMenu(ev); // show the menu
-    ev = $.Event('click', {target: that.view.$('#page-wrapper')});
-    window.setTimeout(function() {
-      that.view.hideDropdownMenus(ev); // make sure it waits a sec before closing them
-    }, 500);
+    var ev = $.Event('click', {target: that.view.$('#page-wrapper')});
+    this.view.hideDropdownMenus(ev);
+  },
+
+  callToggleDropdownMenu : function(e) {
+    e.preventDefault();
+
+    var ev = $.Event('click', {target: that.view.$('a.dropdown-toggle')});
+    this.view.toggleDropdownMenu(ev);
   },
 
   // ------------------- //

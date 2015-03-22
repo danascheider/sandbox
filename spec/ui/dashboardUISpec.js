@@ -19,11 +19,27 @@ describe('Dashboard View', function() {
     done();
   });
 
-  describe('elements', function(done) {
+  describe('elements', function() {
     it('does not display dropdowns by default #ui', function(done) {
       client.waitForVisible('#dashboard-wrapper ul.dropdown-menu', function(err, isVisible) {
         expect(isVisible).toBe(false);
         done();
+      });
+    });
+  });
+
+  describe('event callbacks', function() {
+    describe('hideDropdownMenus', function() {
+      context('when no dropdown menus are visible', function() {
+        it('doesn\'t display the menus #current', function(done) {
+          client.waitForVisible('a[data-method=hideDropdownMenus]')
+                .click('a[data-method=hideDropdownMenus]')
+                .waitForVisible('#dashboard-wrapper ul.dropdown-menu', function(err, isVisible) {
+
+            expect(isVisible).toBe(false);
+            done();
+          });
+        });
       });
     });
   });
