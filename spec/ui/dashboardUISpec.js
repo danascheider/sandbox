@@ -37,7 +37,4 @@ describe('Dashboard View', function() {
       });
     });
   });
-
-  describe('event callbacks', function() {
-  });
 });
