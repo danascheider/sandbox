@@ -39,7 +39,27 @@ describe('Dashboard Sidebar View', function() {
     it('is a ul #travis', function() {
       expect(sidebar.$el[0].tagName).toEqual('UL');
     });
-  })
+
+    it('has class .nav #travis', function() {
+      expect(sidebar.$el).toHaveClass('nav');
+    });
+
+    it('has ID #side-menu #travis', function() {
+      expect(sidebar.$el).toHaveId('side-menu');
+    });
+
+    it('has a search field #travis', function() {
+      expect(sidebar.$('.custom-search-form')).toExist();
+    });
+
+    it('has a link to the dashboard', function() {
+      expect(sidebar.$('.dashboard-link')).toExist();
+    });
+
+    it('has a link to the task page', function() {
+      expect(sidebar.$('.task-page-link')).toExist();
+    });
+  });
 
   describe('events', function() {
     var newSidebar;
