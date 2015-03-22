@@ -11,6 +11,10 @@ var DashboardSidebarView = Backbone.View.extend({
     this.trigger('redirect', {destination: 'dashboard'});
   },
 
+  goToTaskPage    : function() {
+    this.trigger('redirect', {destination: 'tasks'});
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //

@@ -16,6 +16,11 @@ describe('Dashboard Sidebar View', function() {
     sidebar = new SUT();
   });
 
+  afterAll(function() {
+    sidebar.remove();
+    sidebar = null;
+  });
+
   describe('constructor', function() {
     it('doesn\'t call render #travis', function() {
       spyOn(SUT.prototype, 'render');
@@ -25,16 +30,24 @@ describe('Dashboard Sidebar View', function() {
   });
 
   describe('event callbacks', function() {
-    describe('goToDashboard', function() {
-      beforeEach(function() {
-        sidebar.render();
-      });
+    beforeEach(function() { sidebar.render(); });
 
+    describe('goToDashboard', function() {
       it('triggers the redirect:dashboard event on the view #travis', function() {
         var spy = jasmine.createSpy();
         sidebar.on('redirect', spy);
         sidebar.goToDashboard();
         expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+        sidebar.off('redirect');
+      });
+    });
+
+    describe('goToTaskPage', function() {
+      it('triggers the redirect:tasks event on the view #travis', function() {
+        var spy = jasmine.createSpy();
+        sidebar.on('redirect', spy);
+        sidebar.goToTaskPage();
+        expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
         sidebar.off('redirect');
       });
     });
