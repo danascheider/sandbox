@@ -11,7 +11,8 @@ var DashboardView = Backbone.View.extend({
   // --------------- //
 
   hideDropdownMenus  : function(e) {
-    this.$('li.dropdown').removeClass('open');
+    var li = this.$('li.dropdown');
+    if(!li.is(e.target) && !li.has(e.target).length) { li.removeClass('open'); }
   },
 
   toggleDropdownMenu : function(e) {

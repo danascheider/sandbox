@@ -109,6 +109,15 @@ describe('Main Dashboard View', function() {
           expect(dashboard.$('li.dropdown').first()).not.toHaveClass('open');
         });
       });
+
+      context('when the clicked-on object is inside the menu', function() {
+        it('doesn\'t hide the menu #travis', function() {
+          dashboard.$('li.dropdown').first().addClass('open');
+          e = $.Event('click', {target: dashboard.$('li.dropdown').first().find('ul.dropdown-menu')});
+          dashboard.hideDropdownMenus(e);
+          expect(dashboard.$('li.dropdown').first()).toHaveClass('open');
+        });
+      });
     });
 
     describe('toggleDropdownMenu', function() {
