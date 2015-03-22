@@ -75,5 +75,9 @@ describe('Main Dashboard View', function() {
     it('is a div #travis', function() {
       expect(dashboard.$el[0].tagName).toEqual('DIV');
     });
+
+    it('has ID #dashboard-wrapper #travis', function() {
+      expect(dashboard.$el).toHaveId('dashboard-wrapper');
+    });
   });
 });

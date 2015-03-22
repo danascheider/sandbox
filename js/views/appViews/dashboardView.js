@@ -3,6 +3,7 @@ require('../../dependencies.js');
 var UserModel = require('../../models/userModel.js');
 
 var DashboardView = Backbone.View.extend({
+  id         : 'dashboard-wrapper',
   setUser    : function() {},
 
   // ------------------- //
