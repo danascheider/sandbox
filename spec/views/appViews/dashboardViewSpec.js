@@ -81,7 +81,7 @@ describe('Main Dashboard View', function() {
     });
 
     describe('sidebar', function() {
-      it('is attached to div.sidebar-collapse element', function() {
+      it('is attached to div.sidebar-collapse element #travis', function() {
         expect(dashboard.$('div.sidebar-collapse')).toHaveDescendant('#side-menu');
       });
     });
@@ -268,7 +268,7 @@ describe('Main Dashboard View', function() {
           pending('Need to implement the dashboard task view');
         });
 
-        it('attaches the task view to the DOM #travisl', function() {
+        it('attaches the task view to the DOM #travis', function() {
           pending('Need to implement the dashboard task view');
         });
       });
@@ -372,6 +372,12 @@ describe('Main Dashboard View', function() {
 
       it('removes the task view #travis', function() {
         pending('Need to implement the dashboard task view');
+      });
+
+      it('removes the sidebar view #travis', function() {
+        spyOn(dashboard.sidebarView, 'remove');
+        dashboard.remove();
+        expect(dashboard.sidebarView.remove).toHaveBeenCalled();
       });
 
       it('removes itself through the Backbone.View prototype #travis', function() {

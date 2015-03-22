@@ -55,6 +55,7 @@ var DashboardView = Backbone.View.extend({
   },
 
   remove             : function() {
+    this.sidebarView.remove();
     Backbone.View.prototype.remove.call(this);
   },
 
