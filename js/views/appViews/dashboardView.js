@@ -30,7 +30,7 @@ var DashboardView = Backbone.View.extend({
   },
 
   showHomeView       : function() {
-    //
+    if(!this.$el.is(':visible')) { this.render(); }
   },
 
   // ------------------- //

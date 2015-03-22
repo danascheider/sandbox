@@ -165,10 +165,52 @@ describe('Main Dashboard View', function() {
           dashboard.showHomeView();
           expect(dashboard.render).not.toHaveBeenCalled();
         });
+
+        it('renders the home view #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
+
+        it('attaches the home view to the DOM #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
       });
 
-      context('when the main dash and task view are visible');
-      context('when the main dash isn\'t visible');
+      context('when the main dash and task view are visible', function() {
+        beforeEach(function() {
+          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
+          // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+        });
+
+        it('doesn\'t re-render the main dash #travis', function() {
+          spyOn(dashboard, 'render');
+          dashboard.showHomeView();
+          expect(dashboard.render).not.toHaveBeenCalled();
+        });
+
+        it('removes the task view #travis', function() {
+          pending('Need to implement the dashboard task view');
+        });
+
+        it('renders the home view #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
+
+        it('attaches the home view to the DOM #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
+      });
+
+      context('when the main dash isn\'t visible', function() {
+        beforeEach(function() {
+          spyOn(dashboard.$el, 'is').and.callFake(function() { return false; });
+        });
+
+        it('renders the main dash #travis', function() {
+          spyOn(dashboard, 'render');
+          dashboard.showHomeView();
+          expect(dashboard.render).toHaveBeenCalled();
+        });
+      });
     });
 
     describe('showTaskView', function() {
