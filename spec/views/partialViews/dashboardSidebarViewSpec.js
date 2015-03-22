@@ -74,7 +74,7 @@ describe('Dashboard Sidebar View', function() {
       });
 
       context('when the menu clicked is open', function() {
-        it('removes the `active` class from all the menus', function() {
+        it('removes the `active` class from all the menus #travis', function() {
           link.closest('li').addClass('active');
           sidebar.toggleSecondLevelNav(e);
           expect(sidebar.$('li.active').length).toEqual(0);
@@ -103,6 +103,26 @@ describe('Dashboard Sidebar View', function() {
 
       it('returns false with other argument #travis', function() {
         expect(sidebar.isA('Backbone.Router')).toBe(false);
+      });
+    });
+  });
+
+  describe('core view functions', function() {
+    describe('render', function() {
+      it('sets the HTML of its element #travis', function() {
+        spyOn(sidebar.$el, 'html');
+        sidebar.render();
+        expect(sidebar.$el.html).toHaveBeenCalledWith(sidebar.template());
+      });
+
+      it('calls delegateEvents on itself #travis', function() {
+        spyOn(sidebar, 'delegateEvents');
+        sidebar.render();
+        expect(sidebar.delegateEvents).toHaveBeenCalled();
+      });
+
+      it('returns itself #travis', function() {
+        expect(sidebar.render()).toBe(sidebar);
       });
     });
   });
