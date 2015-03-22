@@ -152,6 +152,18 @@ describe('Main Dashboard View', function() {
         });
       });
     });
+
+    describe('showHomeView', function() {
+      context('when the main dash and home view are visible');
+      context('when the main dash and task view are visible');
+      context('when the main dash isn\'t visible');
+    });
+
+    describe('showTaskView', function() {
+      context('when the main dash and home view are visible');
+      context('when the main dash and task view are visible');
+      context('when the main dash isn\'t visible');
+    });
   });
 
   describe('special functions', function() {
@@ -184,6 +196,26 @@ describe('Main Dashboard View', function() {
         spyOn(dashboard, 'delegateEvents');
         dashboard.render();
         expect(dashboard.delegateEvents).toHaveBeenCalled();
+      });
+
+      it('returns itself #travis', function() {
+        expect(dashboard.render()).toEqual(dashboard);
+      });
+    });
+
+    describe('remove', function() {
+      it('removes the home view #travis', function() {
+        pending('Need to implement the dashboard home view');
+      });
+
+      it('removes the task view #travis', function() {
+        pending('Need to implement the dashboard task view');
+      });
+
+      it('removes itself through the Backbone.View prototype #travis', function() {
+        spyOn(Backbone.View.prototype.remove, 'call');
+        dashboard.remove();
+        expect(Backbone.View.prototype.remove.call.calls.argsFor(0)[0]).toBe(dashboard);
       });
     });
   });

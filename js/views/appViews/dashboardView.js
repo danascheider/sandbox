@@ -38,9 +38,14 @@ var DashboardView = Backbone.View.extend({
     this.setUser(opts.user);
   },
 
+  remove             : function() {
+    Backbone.View.prototype.remove.call(this);
+  },
+
   render             : function() {
     this.$el.html(this.template({user: this.user}));
     this.delegateEvents();
+    return this;
   }
 });
 
