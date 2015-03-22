@@ -12,6 +12,10 @@ require('./collections/taskCollection.js');
 // Require views
 require('./views/modelViews/taskViews/taskListItemView.js');
 require('./views/modelViews/taskViews/taskModelView.js');
+require('./views/modelViews/taskViews/quickAddFormView.js');
+
+// Require top-level views
+require('./views/appViews/dashboardView.js');
 
 // Require presenters
 require('./presenters/appPresenter.js');
