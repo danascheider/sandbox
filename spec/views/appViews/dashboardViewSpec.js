@@ -100,6 +100,15 @@ describe('Main Dashboard View', function() {
           expect(dashboard.$('li.dropdown.open').length).toEqual(0);
         });
       });
+
+      context('when a menu is open', function() {
+        it('removes the .open class #travis', function() {
+          dashboard.$('li.dropdown').first().addClass('open');
+          e = $.Event('click', {target: dashboard.$el});
+          dashboard.hideDropdownMenus(e);
+          expect(dashboard.$('li.dropdown').first()).not.toHaveClass('open');
+        });
+      });
     });
 
     describe('toggleDropdownMenu', function() {
