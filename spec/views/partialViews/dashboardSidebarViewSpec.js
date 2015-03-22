@@ -24,6 +24,22 @@ describe('Dashboard Sidebar View', function() {
     });
   });
 
+  describe('event callbacks', function() {
+    describe('goToDashboard', function() {
+      beforeEach(function() {
+        sidebar.render();
+      });
+
+      it('triggers the redirect:dashboard event on the view #travis', function() {
+        var spy = jasmine.createSpy();
+        sidebar.on('redirect:dashboard', spy);
+        sidebar.goToDashboard();
+        expect(spy).toHaveBeenCalled();
+        sidebar.off('redirect:dashboard');
+      });
+    });
+  });
+
   describe('special functions', function() {
     describe('isA', function() {
       it('returns true with argument DashboardSidebarView #travis', function() {
