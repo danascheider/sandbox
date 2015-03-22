@@ -48,6 +48,20 @@ describe('Dashboard Sidebar View', function() {
         expect(SUT.prototype.toggleSecondLevelNav).toHaveBeenCalled();
       });
     });
+
+    describe('click li > .dashboard-link', function() {
+      it('calls goToDashboard #travis', function() {
+        newSidebar.$('li > .dashboard-link').first().click();
+        expect(SUT.prototype.goToDashboard).toHaveBeenCalled();
+      });
+    });
+
+    describe('click li > .task-page-link', function() {
+      it('calls goToTaskPage #travis', function() {
+        newSidebar.$('li > .task-page-link').first().click();
+        expect(SUT.prototype.goToTaskPage).toHaveBeenCalled();
+      });
+    })
   });
 
   describe('event callbacks', function() {
