@@ -88,12 +88,21 @@ describe('Main Dashboard View', function() {
   });
 
   describe('event callbacks', function() {
-    describe('hideDropdownMenus')
-    describe('toggleDropdownMenu', function() {
-      beforeEach(function() {
-        dashboard.render();
-      });
+    beforeEach(function() { dashboard.render(); });
+    afterEach(function() { dashboard.remove(); });
 
+    describe('hideDropdownMenus', function() {
+      context('when none of the menus is open', function() {
+        it('doesn\'t open the menus #travis', function() {
+          dashboard.$('li.dropdown').removeClass('open');
+          e = $.Event('click', {target: dashboard.$el});
+          dashboard.hideDropdownMenus(e);
+          expect(dashboard.$('li.dropdown.open').length).toEqual(0);
+        });
+      });
+    });
+
+    describe('toggleDropdownMenu', function() {
       context('when none of the menus is open', function() {
         beforeEach(function() {
           e = $.Event('click', {target: dashboard.$('a.dropdown-toggle').first()});

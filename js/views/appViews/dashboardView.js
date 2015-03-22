@@ -10,6 +10,10 @@ var DashboardView = Backbone.View.extend({
   // Event Callbacks //
   // --------------- //
 
+  hideDropdownMenus  : function(e) {
+    this.$('li.dropdown').removeClass('open');
+  },
+
   toggleDropdownMenu : function(e) {
     var li = $(e.target).closest('li.dropdown');
     li.siblings().removeClass('open');
