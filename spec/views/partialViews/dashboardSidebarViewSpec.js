@@ -32,10 +32,10 @@ describe('Dashboard Sidebar View', function() {
 
       it('triggers the redirect:dashboard event on the view #travis', function() {
         var spy = jasmine.createSpy();
-        sidebar.on('redirect:dashboard', spy);
+        sidebar.on('redirect', spy);
         sidebar.goToDashboard();
-        expect(spy).toHaveBeenCalled();
-        sidebar.off('redirect:dashboard');
+        expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+        sidebar.off('redirect');
       });
     });
   });

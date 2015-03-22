@@ -8,7 +8,7 @@ var DashboardSidebarView = Backbone.View.extend({
   // --------------- //
 
   goToDashboard   : function() {
-    this.trigger('redirect:dashboard');
+    this.trigger('redirect', {destination: 'dashboard'});
   },
 
   // ----------------- //
