@@ -210,6 +210,14 @@ describe('Main Dashboard View', function() {
           dashboard.showHomeView();
           expect(dashboard.render).toHaveBeenCalled();
         });
+
+        it('renders the home view #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
+
+        it('attaches the home view to the DOM #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
       });
     });
 
