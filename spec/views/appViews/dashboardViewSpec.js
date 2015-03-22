@@ -79,5 +79,27 @@ describe('Main Dashboard View', function() {
     it('has ID #dashboard-wrapper #travis', function() {
       expect(dashboard.$el).toHaveId('dashboard-wrapper');
     });
+
+    describe('sidebar', function() {
+      it('is attached to div.sidebar-collapse element', function() {
+        pending('Need to implement the dashboard sidebar view');
+      });
+    });
+  });
+
+  describe('core functions', function() {
+    describe('render', function() {
+      it('sets the HTML of its el #travis', function() {
+        spyOn(dashboard.$el, 'html');
+        dashboard.render();
+        expect(dashboard.$el.html).toHaveBeenCalled();
+      });
+
+      it('calls delegateEvents on itself #travis', function() {
+        spyOn(dashboard, 'delegateEvents');
+        dashboard.render();
+        expect(dashboard.delegateEvents).toHaveBeenCalled();
+      });
+    });
   });
 });

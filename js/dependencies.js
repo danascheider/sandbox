@@ -17,7 +17,8 @@ global.JST      = {
   'tasks/model'    : _.template(require('../templates/modelTemplates/taskTemplates/modelTemplate.js')),
   'tasks/listItem' : _.template(require('../templates/modelTemplates/taskTemplates/listItemTemplate.js')),
   'tasks/quickAdd' : _.template(require('../templates/modelTemplates/taskTemplates/quickAddFormTemplate.js')),
-  'spec/listItem'  : _.template(require('../templates/specTemplates/taskListItemSpecTemplate.js'))
+  'spec/listItem'  : _.template(require('../templates/specTemplates/taskListItemSpecTemplate.js')),
+  'spec/dashboard' : _.template(require('../templates/specTemplates/dashboardSpecTemplate.js'))
 };
 
 require('jquery.cookie');
