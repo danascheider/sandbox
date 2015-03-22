@@ -62,6 +62,14 @@ describe('Dashboard Sidebar View', function() {
           sidebar.toggleSecondLevelNav(e);
           expect(link.closest('li')).toHaveClass('active');
         });
+
+        it('removes the `active` class from any other li\'s #travis', function() {
+          var link = sidebar.$('a[href=#]').first();
+          sidebar.$('a[href=#]').last().closest('li').addClass('active');
+          e = $.Event('click', {target: link});
+          sidebar.toggleSecondLevelNav(e);
+          expect(sidebar.$('a[href=#]').last().closest('li')).not.toHaveClass('active');
+        });
       });
     });
   });
