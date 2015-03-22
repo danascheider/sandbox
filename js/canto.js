@@ -14,6 +14,9 @@ require('./views/modelViews/taskViews/taskListItemView.js');
 require('./views/modelViews/taskViews/taskModelView.js');
 require('./views/modelViews/taskViews/quickAddFormView.js');
 
+// Require partial views
+require('./views/partialViews/dashboardSidebarView.js');
+
 // Require top-level views
 require('./views/appViews/dashboardView.js');
 
