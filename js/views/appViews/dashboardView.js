@@ -33,6 +33,10 @@ var DashboardView = Backbone.View.extend({
     if(!this.$el.is(':visible')) { this.render(); }
   },
 
+  showTaskView       : function() {
+    //
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //

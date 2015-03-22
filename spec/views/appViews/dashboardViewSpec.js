@@ -222,7 +222,20 @@ describe('Main Dashboard View', function() {
     });
 
     describe('showTaskView', function() {
-      context('when the main dash and home view are visible');
+      context('when the main dash and home view are visible', function() {
+        beforeEach(function() {
+          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
+          // spyOn(dashboard.homeView.$el, 'is').and.callFake(function() { return true; });
+          // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return false; });
+        });
+
+        it('doesn\'t re-render the main dash #travis', function() {
+          spyOn(dashboard, 'render');
+          dashboard.showTaskView();
+          expect(dashboard.render).not.toHaveBeenCalled();
+        });
+      });
+
       context('when the main dash and task view are visible');
       context('when the main dash isn\'t visible');
     });
