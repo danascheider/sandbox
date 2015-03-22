@@ -10,16 +10,8 @@ global.$ = global.jQuery = require('jquery');
 
 global._        = require('underscore');
 global.Backbone = require('backbone');
+global.JST      = require('../templates/jst.js');
 Backbone.$      = $;
-
-global.JST      = {
-  'dashboard'      : _.template(require('../templates/app/dashboardTemplate.js')),
-  'tasks/model'    : _.template(require('../templates/modelTemplates/taskTemplates/modelTemplate.js')),
-  'tasks/listItem' : _.template(require('../templates/modelTemplates/taskTemplates/listItemTemplate.js')),
-  'tasks/quickAdd' : _.template(require('../templates/modelTemplates/taskTemplates/quickAddFormTemplate.js')),
-  'spec/listItem'  : _.template(require('../templates/specTemplates/taskListItemSpecTemplate.js')),
-  'spec/dashboard' : _.template(require('../templates/specTemplates/dashboardSpecTemplate.js'))
-};
 
 require('jquery.cookie');
 require('../vendor/jquery-ui-1.11.4.custom/jquery-ui.min.js');
