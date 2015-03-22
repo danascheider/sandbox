@@ -69,6 +69,7 @@ describe('Main Dashboard View', function() {
   describe('elements', function() {
     beforeEach(function() {
       dashboard.render();
+      $('body').html(dashboard.el);
     });
 
     it('is a div #travis', function() {
@@ -81,7 +82,7 @@ describe('Main Dashboard View', function() {
 
     describe('sidebar', function() {
       it('is attached to div.sidebar-collapse element', function() {
-        pending('Need to implement the dashboard sidebar view');
+        expect(dashboard.$('div.sidebar-collapse')).toHaveDescendant('#side-menu');
       });
     });
   });
