@@ -87,6 +87,31 @@ describe('Main Dashboard View', function() {
     });
   });
 
+  describe('events', function() {
+    var newDashboard;
+
+    beforeEach(function() {
+      spyOn(SUT.prototype, 'hideDropdownMenus');
+      spyOn(SUT.prototype, 'toggleDropdownMenu');
+      newDashboard = new SUT({user: user});
+      newDashboard.render();
+    });
+
+    describe('click $el', function() {
+      it('calls hideDropdownMenus #travis', function() {
+        newDashboard.$el.click();
+        expect(SUT.prototype.hideDropdownMenus).toHaveBeenCalled();
+      });
+    });
+
+    describe('click li.dropdown', function() {
+      it('calls toggleDropdownMenu #travis', function() {
+        newDashboard.$('li.dropdown').first().click();
+        expect(SUT.prototype.toggleDropdownMenu).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('event callbacks', function() {
     beforeEach(function() { dashboard.render(); });
     afterEach(function() { dashboard.remove(); });
@@ -234,10 +259,60 @@ describe('Main Dashboard View', function() {
           dashboard.showTaskView();
           expect(dashboard.render).not.toHaveBeenCalled();
         });
+
+        it('removes the home view #travis', function() {
+          pending('Need to implement the dashboard home view');
+        });
+
+        it('renders the task view #travis', function() {
+          pending('Need to implement the dashboard task view');
+        });
+
+        it('attaches the task view to the DOM #travisl', function() {
+          pending('Need to implement the dashboard task view');
+        });
       });
 
-      context('when the main dash and task view are visible');
-      context('when the main dash isn\'t visible');
+      context('when the main dash and task view are visible', function() {
+        beforeEach(function() {
+          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
+          // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+        });
+
+        it('doesn\'t re-render the main dash #travis', function() {
+          spyOn(dashboard, 'render');
+          dashboard.showTaskView();
+          expect(dashboard.render).not.toHaveBeenCalled();
+        });
+
+        it('renders the task view #travis', function() {
+          pending('Need to implement the dashboard task view');
+        });
+
+        it('attaches the task view to the DOM #travis', function() {
+          pending('Need to implement the dashboard task view');
+        });
+      });
+
+      context('when the main dash isn\'t visible', function() {
+        beforeEach(function() {
+          spyOn(dashboard.$el, 'is').and.callFake(function() { return false; });
+        });
+
+        it('renders the main dash #travis', function() {
+          spyOn(dashboard, 'render');
+          dashboard.showTaskView();
+          expect(dashboard.render).toHaveBeenCalled();
+        });
+
+        it('renders the task view #travis', function() {
+          pending('Need to implement the dashboard task view');
+        });
+
+        it('attaches the task view to the DOM #travis', function() {
+          pending('Need to implement the dashboard task view');
+        });
+      });
     });
   });
 

@@ -6,6 +6,11 @@ var DashboardView = Backbone.View.extend({
   id                 : 'dashboard-wrapper',
   template           : JST['dashboard'],
 
+  events             : {
+    'click'             : 'hideDropdownMenus',
+    'click li.dropdown' : 'toggleDropdownMenu'
+  },
+
   // --------------- //
   // Event Callbacks //
   // --------------- //
@@ -34,7 +39,7 @@ var DashboardView = Backbone.View.extend({
   },
 
   showTaskView       : function() {
-    //
+    if(!this.$el.is(':visible')) { this.render(); }
   },
 
   // ------------------- //
