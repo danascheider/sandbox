@@ -13,6 +13,7 @@ global.Backbone = require('backbone');
 Backbone.$      = $;
 
 global.JST      = {
+  'dashboard'      : _.template(require('../templates/app/dashboardTemplate.js')),
   'tasks/model'    : _.template(require('../templates/modelTemplates/taskTemplates/modelTemplate.js')),
   'tasks/listItem' : _.template(require('../templates/modelTemplates/taskTemplates/listItemTemplate.js')),
   'tasks/quickAdd' : _.template(require('../templates/modelTemplates/taskTemplates/quickAddFormTemplate.js')),
