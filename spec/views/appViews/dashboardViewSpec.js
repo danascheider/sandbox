@@ -88,6 +88,7 @@ describe('Main Dashboard View', function() {
   });
 
   describe('event callbacks', function() {
+    describe('hideDropdownMenus')
     describe('toggleDropdownMenu', function() {
       beforeEach(function() {
         dashboard.render();
@@ -110,8 +111,7 @@ describe('Main Dashboard View', function() {
 
       context('when another menu is open', function() {
         beforeEach(function() {
-          e = $.Event('click', {target: dashboard.$('a.dropdown-toggle').last() });
-          dashboard.toggleDropdownMenu(e); // show the last one
+          dashboard.$('li.dropdown').last().addClass('open');
           e.target = dashboard.$('a.dropdown-toggle').first();
           dashboard.toggleDropdownMenu(e);
         });
