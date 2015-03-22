@@ -154,6 +154,24 @@ describe('Main Dashboard View', function() {
     });
   });
 
+  describe('special functions', function() {
+    describe('setUser', function() {
+      it('sets this.user #travis', function() {
+        var newView = new SUT(); // we already know this won't set the user
+        newView.setUser(user);
+        expect(newView.user).toBe(user);
+      });
+
+      it('calls setUser on the home view #travis', function() {
+        pending('Need to implement the dashboard home view');
+      });
+
+      it('calls setUser on the task view #travis', function() {
+        pending('Need to implement the dashboard task view');
+      });
+    });
+  });
+
   describe('core functions', function() {
     describe('render', function() {
       it('sets the HTML of its el #travis', function() {
