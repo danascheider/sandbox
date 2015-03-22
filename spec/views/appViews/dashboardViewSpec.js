@@ -87,6 +87,29 @@ describe('Main Dashboard View', function() {
     });
   });
 
+  describe('event callbacks', function() {
+    describe('toggleDropdownMenu', function() {
+      beforeEach(function() {
+        dashboard.render();
+      });
+
+      context('when none of the menus is open', function() {
+        beforeEach(function() {
+          e = $.Event('click', {target: dashboard.$('a.dropdown-toggle').first()});
+          dashboard.toggleDropdownMenu(e);
+        });
+
+        it('adds the .open class to the target menu #travis #current', function() {
+          expect(dashboard.$('li.dropdown').first()).toHaveClass('open');
+        });
+
+        it('doesn\'t add the .open class to the other menus #travis', function() {
+          expect(dashboard.$('li.dropdown').last()).not.toHaveClass('open');
+        });
+      });
+    });
+  });
+
   describe('core functions', function() {
     describe('render', function() {
       it('sets the HTML of its el #travis', function() {

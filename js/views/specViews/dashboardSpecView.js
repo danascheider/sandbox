@@ -33,6 +33,7 @@ var SpecWrapper = Backbone.View.extend({
 
   callToggleDropdownMenu : function(e) {
     e.preventDefault();
+    var that = this;
 
     var ev = $.Event('click', {target: that.view.$('a.dropdown-toggle')});
     this.view.toggleDropdownMenu(ev);

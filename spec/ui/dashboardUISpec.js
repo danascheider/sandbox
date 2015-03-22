@@ -26,21 +26,18 @@ describe('Dashboard View', function() {
         done();
       });
     });
+
+    it('displays dropdown menus whose parents have class .open #ui', function(done) {
+      client.waitForVisible('a[data-method=toggleDropdownMenu]')
+            .click('a[data-method=toggleDropdownMenu]')
+            .waitForVisible('#dashboard-wrapper li.dropdown.open', function(err, isVisible) {
+
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
   });
 
   describe('event callbacks', function() {
-    describe('hideDropdownMenus', function() {
-      context('when no dropdown menus are visible', function() {
-        it('doesn\'t display the menus #current', function(done) {
-          client.waitForVisible('a[data-method=hideDropdownMenus]')
-                .click('a[data-method=hideDropdownMenus]')
-                .waitForVisible('#dashboard-wrapper ul.dropdown-menu', function(err, isVisible) {
-
-            expect(isVisible).toBe(false);
-            done();
-          });
-        });
-      });
-    });
   });
 });
