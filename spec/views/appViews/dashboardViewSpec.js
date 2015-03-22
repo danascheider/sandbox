@@ -66,4 +66,14 @@ describe('Main Dashboard View', function() {
       expect(newView.user).not.toExist();
     });
   });
+
+  describe('elements', function() {
+    beforeEach(function() {
+      dashboard.render();
+    });
+
+    it('is a div #travis', function() {
+      expect(dashboard.$el[0].tagName).toEqual('DIV');
+    });
+  });
 });
