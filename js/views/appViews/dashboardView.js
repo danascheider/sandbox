@@ -29,6 +29,10 @@ var DashboardView = Backbone.View.extend({
     this.user = user;
   },
 
+  showHomeView       : function() {
+    //
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //
