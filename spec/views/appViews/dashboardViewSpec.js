@@ -36,7 +36,6 @@ describe('Main Dashboard View', function() {
 
   describe('constructor', function() {
     it('calls setUser #travis', function() {
-      pending('Need to implement the setUser method');
       spyOn(SUT.prototype, 'setUser');
       var newView = new SUT({user: user});
       expect(SUT.prototype.setUser).toHaveBeenCalled();
@@ -44,7 +43,7 @@ describe('Main Dashboard View', function() {
     });
 
     it('instantiates a sidebar #travis', function() {
-      pending('Need to implement the sidebar view');
+      expect(dashboard.sidebarView.isA('DashboardSidebarView')).toBe(true);;
     });
 
     it('instantiates a home view #travis', function() {
@@ -73,7 +72,7 @@ describe('Main Dashboard View', function() {
     });
 
     it('is a div #travis', function() {
-      expect(dashboard.$el[0].tagName).toEqual('DIV');
+      expect(dashboard.$el).toHaveTag('div');
     });
 
     it('has ID #dashboard-wrapper #travis', function() {
@@ -122,7 +121,7 @@ describe('Main Dashboard View', function() {
           dashboard.$('li.dropdown').removeClass('open');
           e = $.Event('click', {target: dashboard.$el});
           dashboard.hideDropdownMenus(e);
-          expect(dashboard.$('li.dropdown.open').length).toEqual(0);
+          expect(dashboard.$('li.dropdown.open')).toHaveLength(0);
         });
       });
 
@@ -350,6 +349,18 @@ describe('Main Dashboard View', function() {
 
       it('returns itself #travis', function() {
         expect(dashboard.render()).toEqual(dashboard);
+      });
+
+      it('renders the sidebar view #travis', function() {
+        spyOn(dashboard.sidebarView, 'render');
+        dashboard.render();
+        expect(dashboard.sidebarView.render).toHaveBeenCalled();
+      });
+
+      it('inserts the sidebar view into its .sidebar-collapse div #travis', function() {
+        dashboard.render();
+        $('body').html(dashboard.$el);
+        expect(dashboard.sidebarView.el).toBeInDom();
       });
     });
 

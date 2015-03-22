@@ -1,6 +1,7 @@
 require('../../dependencies.js');
 
 var UserModel = require('../../models/userModel.js');
+var SidebarView = require('../partialViews/dashboardSidebarView.js');
 
 var DashboardView = Backbone.View.extend({
   id                 : 'dashboard-wrapper',
@@ -49,6 +50,8 @@ var DashboardView = Backbone.View.extend({
   initialize         : function(opts) {
     opts = opts || {};
     this.setUser(opts.user);
+
+    this.sidebarView = new SidebarView();
   },
 
   remove             : function() {
@@ -58,6 +61,10 @@ var DashboardView = Backbone.View.extend({
   render             : function() {
     this.$el.html(this.template({user: this.user}));
     this.delegateEvents();
+
+    this.sidebarView.render();
+    this.$('div.sidebar-collapse').html(this.sidebarView.el);
+
     return this;
   }
 });
