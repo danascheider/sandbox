@@ -11,6 +11,8 @@ var matchers       = require('jasmine-jquery-matchers'),
 Backbone.$         = $;
 
 describe('Dashboard Sidebar View', function() {
+  var sidebar, e;
+
   beforeEach(function() {
     jasmine.addMatchers(matchers);
     sidebar = new SUT();
@@ -49,6 +51,17 @@ describe('Dashboard Sidebar View', function() {
         sidebar.goToTaskPage();
         expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
         sidebar.off('redirect');
+      });
+    });
+
+    describe('toggleSecondLevelNav', function() {
+      context('when the menu clicked is closed', function() {
+        it('adds the `active` class to its parent #travis', function() {
+          var link = sidebar.$('a[href=#]').first();
+          e = $.Event('click', {target: link});
+          sidebar.toggleSecondLevelNav(e);
+          expect(link.closest('li')).toHaveClass('active');
+        });
       });
     });
   });

@@ -1,18 +1,23 @@
 require('../../dependencies.js');
 
 var DashboardSidebarView = Backbone.View.extend({
-  template        : JST['partials/sidebar'],
+  template             : JST['partials/sidebar'],
 
   // --------------- //
   // Event Callbacks //
   // --------------- //
 
-  goToDashboard   : function() {
+  goToDashboard        : function() {
     this.trigger('redirect', {destination: 'dashboard'});
   },
 
-  goToTaskPage    : function() {
+  goToTaskPage         : function() {
     this.trigger('redirect', {destination: 'tasks'});
+  },
+
+  toggleSecondLevelNav : function(e) {
+    var li = $(e.target).closest('li');
+    li.toggleClass('active');
   },
 
   // ----------------- //
@@ -23,11 +28,11 @@ var DashboardSidebarView = Backbone.View.extend({
   // directly, so this has to be called in the methods that 
   // require the information.
 
-  getLocationHash : function() {
+  getLocationHash      : function() {
     return location.hash;
   },
 
-  isA             : function(type) {
+  isA                  : function(type) {
     var types = [
       'Backbone.View',
       'DashboardSidebarView',
@@ -36,6 +41,16 @@ var DashboardSidebarView = Backbone.View.extend({
     ];
 
     return types.indexOf(type) > -1;
+  },
+
+  // ------------------- //
+  // Core View Functions //
+  // ------------------- //
+
+  render               : function() {
+    this.$el.html(this.template());
+    this.delegateEvents();
+    return this;
   }
 });
 
