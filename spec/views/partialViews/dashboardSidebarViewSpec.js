@@ -13,7 +13,7 @@ Backbone.$         = $;
 describe('Dashboard Sidebar View', function() {
   beforeEach(function() {
     jasmine.addMatchers(matchers);
-    var sidebar = new SUT();
+    sidebar = new SUT();
   });
 
   describe('constructor', function() {
@@ -21,6 +21,30 @@ describe('Dashboard Sidebar View', function() {
       spyOn(SUT.prototype, 'render');
       var newSidebar = new SUT();
       expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with argument DashboardSidebarView #travis', function() {
+        expect(sidebar.isA('DashboardSidebarView')).toBe(true);
+      });
+
+      it('returns true with argument Backbone.View #travis', function() {
+        expect(sidebar.isA('Backbone.View')).toBe(true);
+      });
+
+      it('returns true with argument DashboardView #travis', function() {
+        expect(sidebar.isA('DashboardView')).toBe(true);
+      });
+
+      it('returns true with argument PartialView #travis', function() {
+        expect(sidebar.isA('PartialView')).toBe(true);
+      });
+
+      it('returns false with other argument #travis', function() {
+        expect(sidebar.isA('Backbone.Router')).toBe(false);
+      });
     });
   });
 });
