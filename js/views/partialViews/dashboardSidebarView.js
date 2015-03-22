@@ -3,6 +3,10 @@ require('../../dependencies.js');
 var DashboardSidebarView = Backbone.View.extend({
   template             : JST['partials/sidebar'],
 
+  events               : {
+    'click a.sidebar-link' : 'toggleSecondLevelNav'
+  },
+
   // --------------- //
   // Event Callbacks //
   // --------------- //

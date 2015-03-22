@@ -31,6 +31,25 @@ describe('Dashboard Sidebar View', function() {
     });
   });
 
+  describe('events', function() {
+    var newSidebar;
+
+    beforeEach(function() { 
+      spyOn(SUT.prototype, 'toggleSecondLevelNav');
+      spyOn(SUT.prototype, 'goToDashboard');
+      spyOn(SUT.prototype, 'goToTaskPage');
+      newSidebar = new SUT();
+      newSidebar.render();
+    });
+
+    describe('click sidebar link', function() {
+      it('calls toggleSecondLevelNav #travis', function() {
+        newSidebar.$('a.sidebar-link').last().click();
+        expect(SUT.prototype.toggleSecondLevelNav).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('event callbacks', function() {
     beforeEach(function() { sidebar.render(); });
 
