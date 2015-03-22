@@ -17,7 +17,6 @@ var DashboardSidebarView = Backbone.View.extend({
 
   toggleSecondLevelNav : function(e) {
     var li = $(e.target).closest('li');
-
     li.toggleClass('active').siblings('li').removeClass('active');
   },
 

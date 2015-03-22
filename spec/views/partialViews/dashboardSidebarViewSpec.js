@@ -11,7 +11,7 @@ var matchers       = require('jasmine-jquery-matchers'),
 Backbone.$         = $;
 
 describe('Dashboard Sidebar View', function() {
-  var sidebar, e;
+  var sidebar, e, link;
 
   beforeEach(function() {
     jasmine.addMatchers(matchers);
@@ -55,20 +55,29 @@ describe('Dashboard Sidebar View', function() {
     });
 
     describe('toggleSecondLevelNav', function() {
+      beforeEach(function() {
+        link = sidebar.$('a[href=#]').first();
+        e = $.Event('click', {target: link});
+      });
+
       context('when the menu clicked is closed', function() {
         it('adds the `active` class to its parent #travis', function() {
-          var link = sidebar.$('a[href=#]').first();
-          e = $.Event('click', {target: link});
           sidebar.toggleSecondLevelNav(e);
           expect(link.closest('li')).toHaveClass('active');
         });
 
         it('removes the `active` class from any other li\'s #travis', function() {
-          var link = sidebar.$('a[href=#]').first();
           sidebar.$('a[href=#]').last().closest('li').addClass('active');
-          e = $.Event('click', {target: link});
           sidebar.toggleSecondLevelNav(e);
           expect(sidebar.$('a[href=#]').last().closest('li')).not.toHaveClass('active');
+        });
+      });
+
+      context('when the menu clicked is open', function() {
+        it('removes the `active` class from all the menus', function() {
+          link.closest('li').addClass('active');
+          sidebar.toggleSecondLevelNav(e);
+          expect(sidebar.$('li.active').length).toEqual(0);
         });
       });
     });
