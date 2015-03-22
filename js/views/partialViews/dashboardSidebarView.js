@@ -1,6 +1,7 @@
 require('../../dependencies.js');
 
 var DashboardSidebarView = Backbone.View.extend({
+  tagName              : 'ul',
   template             : JST['partials/sidebar'],
 
   events               : {

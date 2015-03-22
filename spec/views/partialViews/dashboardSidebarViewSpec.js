@@ -31,6 +31,16 @@ describe('Dashboard Sidebar View', function() {
     });
   });
 
+  describe('elements', function() {
+    beforeEach(function() {
+      sidebar.render();
+    });
+
+    it('is a ul #travis', function() {
+      expect(sidebar.$el[0].tagName).toEqual('UL');
+    });
+  })
+
   describe('events', function() {
     var newSidebar;
 
