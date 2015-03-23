@@ -36,11 +36,60 @@ describe('Dashboard Sidebar View', function() {
       it('expands the second-level nav #ui', function(done) {
         client.waitForVisible('a[data-method=toggleSecondLevelNav]')
               .click('a[data-method=toggleSecondLevelNav]')
-              .waitForVisible('#side-menu li.active ul.nav-second-level', function(err, isVisible) {
+              .waitForVisible('#side-menu li.active')
+              .execute(function() {
 
-          expect(isVisible).toBe(true);
+          return $('#side-menu a[href=#]').first().closest('li').find('ul.nav-second-level').is(':visible');
+        }, function(err, isVisible) {
+          expect(isVisible.value).toBe(true);
           done();
         });
+      });
+    });
+
+    context('when another menu is visible', function() {
+      it('expands the second-level nav #ui', function(done) {
+        client.waitForVisible('a[data-method=showLastNav]')
+              .click('a[data-method=showLastNav]')
+              .waitForVisible('#side-menu li.active')
+              .click('a[data-method=toggleSecondLevelNav]')
+              .execute(function() {
+
+          return $('#side-menu > li').has('a[href=#]').first().find('ul.nav-second-level').is(':visible');
+        }, function(err, isVisible) {
+          expect(isVisible.value).toBe(true);
+          done();
+        });
+      });
+
+      it('hides the other open second-level menu #ui #current', function(done) {
+        client.waitForVisible('a[data-method=showLastNav]')
+              .click('a[data-method=showLastNav]')
+              .waitForVisible('#side-menu > li.active')
+              .click('a[data-method=toggleSecondLevelNav]')
+              .waitForVisible('//ul[@id="side-menu"]/li[last()]/ul[@class="nav-second-level"]', function(err, isVisible) {
+                
+          expect(isVisible).toBe(false);
+          done();
+        });
+      });
+    });  
+  });
+
+  describe('showLastNav', function() {
+
+    // Verify that the test apparatus is working as intended
+
+    it('shows the last second-level nav #ui', function(done) {
+      client.waitForVisible('a[data-method=showLastNav]')
+            .click('a[data-method=showLastNav]')
+            .waitForVisible('#side-menu li.active')
+            .execute(function() {
+
+        return $('#side-menu > li').last().find('ul.nav-second-level').is(':visible');
+      }, function(err, isVisible) {
+        expect(isVisible.value).toBe(true);
+        done();
       });
     });
   });

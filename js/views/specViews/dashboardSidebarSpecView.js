@@ -8,7 +8,7 @@ var SpecWrapper = Backbone.View.extend({
 
   events    : {
     'click a[data-method=toggleSecondLevelNav]' : 'callToggleSecondLevelNav',
-    'click a[data-method=expandLastNav]'        : 'expandLastNav'
+    'click a[data-method=showLastNav]'          : 'showLastNav'
   },
 
   // --------------- //
@@ -23,12 +23,14 @@ var SpecWrapper = Backbone.View.extend({
     this.view.toggleSecondLevelNav(ev);
   },
 
-  expandLastNav            : function(e) {
+  showLastNav              : function(e) {
     e.preventDefault();
     var that = this;
 
     var ev = $.Event('click', {target: that.view.$('a[href=#]').last() });
-    if(!this.view.$('a[href=#]').last().is(':visible')) { this.view.toggleSecondLevelNav(ev); }
+    if(!this.view.$('a[href="blank.html"]').is(':visible')) {
+      this.view.toggleSecondLevelNav(ev);
+    }
   },
 
   // ------------------- //

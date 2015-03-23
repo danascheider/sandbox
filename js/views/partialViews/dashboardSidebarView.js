@@ -29,11 +29,13 @@ var DashboardSidebarView = Backbone.View.extend({
 
     if(!li.hasClass('active')) {
       li.siblings('li').removeClass('active');
-      li.siblings('li').find('ul.nav-second-level:visible').slideUp();
+      this.$('.nav-second-level:visible').slideUp();
+      li.addClass('active').find('.nav-second-level').slideDown();
+    } else {
+      li.removeClass('active').find('.nav-second-level').slideUp();
     }
 
-    li.toggleClass('active');
-    li.find('ul.nav-second-level').slideToggle();
+    if(li.className === '') { li.removeAttr('class'); }
   },
 
   // ----------------- //
