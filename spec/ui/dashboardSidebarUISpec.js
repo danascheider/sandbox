@@ -93,7 +93,7 @@ describe('Dashboard Sidebar View', function() {
       });
     });  
 
-    fcontext('when the target\'s menu is visible', function() {
+    context('when the target\'s menu is visible', function() {
       beforeEach(function(done) {
         client.waitForVisible('a[data-method=showTargetNav]')
               .click('a[data-method=showTargetNav]')
@@ -104,6 +104,13 @@ describe('Dashboard Sidebar View', function() {
       it('hides the target\'s menu #dashboardSidebar #ui', function(done) {
         client.waitForVisible('#side-menu li:nth-child(7) .nav-second-level', true, function(err, isVisible) {
           expect(isVisible).toBe(false);
+          done();
+        });
+      });
+
+      it('removes the \'active\' class from the li', function(done) {
+        client.element('#side-menu li:nth-child(7)', function(err, res) {
+          expect(res.value).not.toHaveClass('active');
           done();
         });
       });
