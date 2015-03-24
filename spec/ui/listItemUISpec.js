@@ -21,42 +21,42 @@ describe('Task List Item View', function() {
   });
 
   describe('view elements', function() {
-    it('displays the mark-complete checkbox #ui', function(done) {
+    it('displays the mark-complete checkbox #ui #listItem', function(done) {
       client.waitForVisible('li#task-1 i[title="Mark complete"]', function(err, isVisible) {
         expect(isVisible).toBe(true);
         done();
       });
     });
 
-    it('displays the task model #ui', function(done) {
+    it('displays the task model #ui #listItem', function(done) {
       client.waitForVisible('li#task-1 div.task-model', function(err, isVisible) {
         expect(isVisible).toBe(true);
         done();
       });
     });
 
-    it('doesn\'t display the task details by default #ui', function(done) {
+    it('doesn\'t display the task details by default #ui #listItem', function(done) {
       client.waitForVisible('li#task-1 .task-details', function(err, isVisible) {
         expect(isVisible).toBe(false);
         done();
       });
     });
 
-    it('doesn\'t display the edit icon by default #ui', function(done) {
+    it('doesn\'t display the edit icon by default #ui #listItem', function(done) {
       client.waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
         expect(isVisible).toBe(false);
         done();
       });
     });
 
-    it('doesn\'t display the delete icon by default #ui', function(done) {
+    it('doesn\'t display the delete icon by default #ui #listItem', function(done) {
       client.waitForVisible('li#task-1 i[title=Delete]', function(err, isVisible) {
         expect(isVisible).toBe(false);
         done();
       });
     });
 
-    it('doesn\'t display the backlog icon by default #ui', function(done) {
+    it('doesn\'t display the backlog icon by default #ui #listItem', function(done) {
       client.waitForVisible('li#task-1 i[title=Backlog]', function(err, isVisible) {
         expect(isVisible).toBe(false);
         done();
@@ -67,13 +67,13 @@ describe('Task List Item View', function() {
   describe('callbacks', function() {
     describe('hideEditForm', function() {
       context('when the edit form is not visible', function() {
-        it('doesn\'t toggle the form #ui', function() {
+        it('doesn\'t toggle the form #ui #listItem', function() {
           pending('Define the edit form view');
         });
       });
 
       context('when the edit form is visible', function() {
-        it('hides the form #ui', function() {
+        it('hides the form #ui #listItem', function() {
           pending('Define the edit form view');
         });
       });
@@ -86,7 +86,7 @@ describe('Task List Item View', function() {
               .waitForVisible('span.edit-task');
       });
 
-      it('hides the edit icon #ui', function(done) {
+      it('hides the edit icon #ui #listItem', function(done) {
         client.click('#triggers a[data-method=hideEditIcons]')
               .waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
           
@@ -102,14 +102,14 @@ describe('Task List Item View', function() {
               .click('#triggers a[data-method=markComplete]')
       });
 
-      it('checks the checkbox #ui', function(done) {
+      it('checks the checkbox #ui #listItem', function(done) {
         client.waitForVisible('i.fa-check-square-o', function(err, isVisible) {
           expect(isVisible).toBe(true);
           done();
         });
       });
 
-      it('doesn\'t show the unchecked checkbox icon #ui', function(done) {
+      it('doesn\'t show the unchecked checkbox icon #ui #listItem', function(done) {
         client.waitFor('i.fa-check-square-o')
               .getAttribute('i.fa-check-square-o', 'class', function(err, res) {
 
@@ -120,7 +120,7 @@ describe('Task List Item View', function() {
     });
 
     describe('showEditIcons', function() {
-      it('shows the edit icon #ui', function(done) {
+      it('shows the edit icon #ui #listItem', function(done) {
         client.waitForVisible('#triggers a')
               .click('#triggers a[data-method=showEditIcons]')
               .waitForVisible('li#task-1 i[title=Edit]', function(err, isVisible) {
@@ -130,7 +130,7 @@ describe('Task List Item View', function() {
         });
       });
 
-      it('shows the backlog icon #ui', function(done) {
+      it('shows the backlog icon #ui #listItem', function(done) {
         client.waitForVisible('#triggers a')
               .click('#triggers a[data-method=showEditIcons]')
               .waitForVisible('li#task-1 i[title=Backlog]', function(err, isVisible) {
@@ -140,7 +140,7 @@ describe('Task List Item View', function() {
         });
       });
 
-      it('shows the delete icon #ui', function(done) {
+      it('shows the delete icon #ui #listItem', function(done) {
         client.waitForVisible('#triggers')
               .click('#triggers a[data-method=showEditIcons]')
               .waitForVisible('li#task-1 i[title=Delete]', function(err, isVisible) {
@@ -153,7 +153,7 @@ describe('Task List Item View', function() {
 
     describe('toggleTaskDetails', function() {
       context('when the details are hidden', function() {
-        it('shows the details #ui', function(done) {
+        it('shows the details #ui #listItem', function(done) {
           client.waitForVisible('#triggers a')
                 .click('#triggers a[data-method=toggleTaskDetails]')
                 .waitForVisible('.task-details', function(err, isVisible) {
@@ -165,7 +165,7 @@ describe('Task List Item View', function() {
       });
 
       context('when the details are visible', function() {
-        it('hides the details #ui', function(done) {
+        it('hides the details #ui #listItem', function(done) {
           client.waitForVisible('#triggers a')
                 .click('#triggers a[data-method=toggleTaskDetails]')
                 .waitFor('.task-details')
