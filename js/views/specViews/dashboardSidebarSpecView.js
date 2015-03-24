@@ -7,6 +7,7 @@ var SpecWrapper = Backbone.View.extend({
   template  : JST['spec/sidebar'],
 
   events    : {
+    'click a[data-method=showTargetNav]'        : 'showTargetNav',
     'click a[data-method=toggleSecondLevelNav]' : 'callToggleSecondLevelNav',
     'click a[data-method=showLastNav]'          : 'showLastNav'
   },
@@ -31,6 +32,16 @@ var SpecWrapper = Backbone.View.extend({
     if(!this.view.$('a[href="blank.html"]').is(':visible')) {
       this.view.toggleSecondLevelNav(ev);
     }
+  },
+
+  showTargetNav            : function(e) {
+    e.preventDefault();
+    var that = this,
+        ev = $.Event('click', {target: that.view.$('a[href=#]:contains("UI Elements")').first() });
+
+    if(!this.view.$('a[href="panels-wells.html"]').is(':visible')) {
+      this.view.toggleSecondLevelNav(ev);
+    }    
   },
 
   // ------------------- //
