@@ -45,13 +45,6 @@ describe('Dashboard Sidebar View', function() {
           done();
         });
       });
-
-      it('adds the \'active\' class to the clicked-on li #dashboardSidebar #ui', function(done) {
-        client.getAttribute('#side-menu > li:nth-child(7)', 'class', function(err, klass) {
-          expect(klass).toEqual('active');
-          done();
-        });
-      });
     });
 
     // When the toggleSecondLevelNav method is called with a particular target li,
@@ -104,13 +97,6 @@ describe('Dashboard Sidebar View', function() {
       it('hides the target\'s menu #dashboardSidebar #ui', function(done) {
         client.waitForVisible('#side-menu li:nth-child(7) .nav-second-level', true, function(err, isVisible) {
           expect(isVisible).toBe(false);
-          done();
-        });
-      });
-
-      it('removes the \'active\' class from the li', function(done) {
-        client.element('#side-menu li:nth-child(7)', function(err, res) {
-          expect(res.value).not.toHaveClass('active');
           done();
         });
       });
