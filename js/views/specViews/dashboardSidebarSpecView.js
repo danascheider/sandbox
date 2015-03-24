@@ -19,7 +19,7 @@ var SpecWrapper = Backbone.View.extend({
     e.preventDefault();
     var that = this;
 
-    var ev = $.Event('click', {target: that.view.$('a[href=#]').first() });
+    var ev = $.Event('click', {target: that.view.$('a[href=#]:contains("UI Elements")').first() });
     this.view.toggleSecondLevelNav(ev);
   },
 
