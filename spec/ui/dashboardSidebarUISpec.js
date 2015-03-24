@@ -2,7 +2,8 @@ require(process.cwd() + '/spec/support/webdriver.js');
 require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var context = describe;
+var context  = describe,
+    fcontext = fdescribe;
 
 describe('Dashboard Sidebar View', function() {
   beforeAll(function(done) {
@@ -91,6 +92,10 @@ describe('Dashboard Sidebar View', function() {
         });
       });
     });  
+
+    fcontext('when the target\'s menu is visible', function() {
+      //
+    });
   });
 
   describe('showLastNav', function() {

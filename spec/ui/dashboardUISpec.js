@@ -2,7 +2,8 @@ require(process.cwd() + '/spec/support/webdriver.js');
 require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var context = describe;
+var context  = describe,
+    fcontext = fdescribe;
 
 describe('Dashboard View', function() {
   beforeAll(function(done) {

@@ -14,11 +14,13 @@ require(process.cwd() + '/spec/support/env.js');
 
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js');
 
-var matchers  = require('jasmine-jquery-matchers');
-var TaskModel = require(process.cwd() + '/js/models/taskModel.js');
-var ModelView = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
 Backbone.$    = $;
-var context   = describe; // RSpecify
+
+var matchers  = require('jasmine-jquery-matchers'),
+    TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
+    ModelView = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js'),
+    context   = describe,
+    fcontext  = fdescribe;
 
 // FIX: Need to give serious consideration to testing styles. If styles are not
 //      the responsibility of the view, they should not be tested by the view

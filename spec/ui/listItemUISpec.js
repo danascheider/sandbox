@@ -3,7 +3,8 @@ require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/env.js');
 
 var matchers = require('jasmine-jquery-matchers'),
-    context  = describe;
+    context  = describe,
+    fcontext = fdescribe;
 
 describe('Task List Item View', function() {
   beforeAll(function(done) {

@@ -5,10 +5,11 @@ var Env = require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/collections/taskCollection.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-var TaskModel      = require(process.cwd() + '/js/models/taskModel.js');
-var Collection     = require(process.cwd() + '/js/collections/protectedCollection.js');
 Backbone.$         = $;
-var context        = describe; // RSpecify
+var TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
+    Collection     = require(process.cwd() + '/js/collections/protectedCollection.js'),
+    context        = describe,
+    fcontext       = fdescribe;
 
 describe('Task Collection', function() {
   var collection;

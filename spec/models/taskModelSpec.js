@@ -6,7 +6,9 @@ var SUT = require(process.cwd() + '/js/models/taskModel.js');
 
 var ProtectedResource = require(process.cwd() + '/js/models/protectedResourceModel.js');
 Backbone.$            = $;
-var context           = describe; // RSpecify
+
+var context           = describe,
+    fcontext          = fdescribe;
 
 describe('Task Model', function() {
   var task;

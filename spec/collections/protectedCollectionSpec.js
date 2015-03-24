@@ -6,8 +6,9 @@ var SUT = require(process.cwd() + '/js/collections/protectedCollection.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
-var Model          = Backbone.Model.extend({});
-var context        = describe; // RSpecify
+var Model          = Backbone.Model.extend({}),
+    context        = describe,
+    fcontext       = fdescribe;
 
 describe('Protected Collection', function() {
   var collection, model1, model2, model3, xhr, ajaxSettings, spy;

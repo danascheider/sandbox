@@ -9,7 +9,8 @@ var matchers       = require('jasmine-jquery-matchers'),
     UserModel      = require(process.cwd() + '/js/models/userModel.js'),
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
     TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
-    context        = describe; // RSpecify
+    context        = describe,
+    fcontext       = fdescribe;
 
 Backbone.$         = $;
 

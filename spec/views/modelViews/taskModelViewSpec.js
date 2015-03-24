@@ -4,10 +4,12 @@ require(process.cwd() + '/spec/support/env.js');
 
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js');
 
-var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
-    matchers  = require('jasmine-jquery-matchers');
 Backbone.$    = $;
-var context   = describe; // RSpecify
+
+var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
+    matchers  = require('jasmine-jquery-matchers'),
+    context   = describe,
+    fcontext  = fdescribe;
 
 describe('Task Model View', function() {
   var view;

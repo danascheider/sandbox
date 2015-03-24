@@ -6,7 +6,8 @@ var SUT = require(process.cwd() + '/js/presenters/appPresenter.js');
 
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
-var context        = describe; // RSpecify
+var context        = describe,
+    fcontext       = fdescribe;
 
 describe('App Presenter', function() {
   var presenter;

@@ -4,9 +4,12 @@ require(process.cwd() + '/spec/support/env.js');
 
 var SUT = require(process.cwd() + '/js/models/userModel.js');
 
-var Collection     = require(process.cwd() + '/js/collections/taskCollection.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
+
+var Collection     = require(process.cwd() + '/js/collections/taskCollection.js'),
+    context        = describe,
+    fcontext       = fdescribe;
 
 describe('User Model', function() {
   var user, xhr;

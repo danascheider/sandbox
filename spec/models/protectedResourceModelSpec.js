@@ -7,6 +7,9 @@ var SUT = require(process.cwd() + '/js/models/protectedResourceModel.js');
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 Backbone.$         = $;
 
+var context        = describe,
+    fcontext       = fdescribe;
+
 describe('Protected Resource Model', function() {
   var resource, xhr;
 

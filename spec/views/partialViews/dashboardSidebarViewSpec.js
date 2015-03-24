@@ -6,7 +6,8 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardSidebarView.j
 
 var matchers       = require('jasmine-jquery-matchers'),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
-    context        = describe; // RSpecify
+    context        = describe,
+    fcontext       = fdescribe;
 
 Backbone.$         = $;
 
