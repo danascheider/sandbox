@@ -54,6 +54,7 @@ var QuickAddFormView = Backbone.View.extend({
     var types = [
       'Backbone.View',
       'QuickAddFormView',
+      'QuickAddForm',
       'TaskCollectionView',
       'TaskCreateFormView',
       'TaskFormView'
