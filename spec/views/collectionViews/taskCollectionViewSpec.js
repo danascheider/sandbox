@@ -57,5 +57,9 @@ fdescribe('Task Collection View #travis', function() {
     it('is a ul', function() {
       expect(view.$el[0]).toHaveTag('UL');
     });
+
+    it('has class .task-list', function() {
+      expect(view.$el[0]).toHaveClass('task-list');
+    });
   });
 });
