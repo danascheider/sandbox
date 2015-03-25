@@ -5,6 +5,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/collectionViews/taskCollectionView.js');
 
 var matchers       = require('jasmine-jquery-matchers'),
+    toBeA          = require(process.cwd() + '/spec/support/matchers/toBeA.js');
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
     TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
@@ -23,6 +24,8 @@ fdescribe('Task Collection View #travis', function() {
   var view;
   
   beforeEach(function() {
+    jasmine.addMatchers(matchers);
+    jasmine.addMatchers(toBeA);
     view = new SUT({collection: collection});
   });
 
@@ -40,6 +43,19 @@ fdescribe('Task Collection View #travis', function() {
 
     it('creates an empty childViews array #travis', function() {
       expect(view.childViews).toEqual([]);
+    });
+
+    it('creates a quick-add form #travis', function() {
+      console.log(toBeA.toString());
+      expect(view.quickAddForm).toBeA('QuickAddForm');
+    });
+  });
+
+  fdescribe('elements #travis', function() {
+    beforeEach(function() { view.render(); });
+
+    it('is a ul', function() {
+      expect(view.$el[0]).toHaveTag('UL');
     });
   });
 });

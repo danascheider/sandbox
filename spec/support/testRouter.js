@@ -1,13 +1,17 @@
 require('../../js/dependencies.js');
-var ListItemView = require('../../js/views/specViews/taskListItemSpecView.js');
-var DashboardView = require('../../js/views/specViews/dashboardSpecView.js');
-var DashboardSidebarView = require('../../js/views/specViews/dashboardSidebarSpecView.js');
+var ListItemView         = require('../../js/views/specViews/taskListItemSpecView.js'),
+    DashboardView        = require('../../js/views/specViews/dashboardSpecView.js'),
+    DashboardSidebarView = require('../../js/views/specViews/dashboardSidebarSpecView.js'),
+    TaskCollectionView   = require('../../js/views/specViews/taskCollectionSpecView.js'),
+    TaskPanelView        = require('../../js/views/specViews/taskPanelSpecView.js');
 
 var TestRouter = Backbone.Router.extend({
   routes : {
     'listItemViewSpec(/)'         : 'displayListItemView',
     'dashboardViewSpec(/)'        : 'displayDashboardView',
-    'dashboardSidebarViewSpec(/)' : 'displayDashboardSidebarView'
+    'dashboardSidebarViewSpec(/)' : 'displayDashboardSidebarView',
+    'taskCollectionViewSpec(/)'   : 'displayTaskCollectionView',
+    'taskPanelViewSpec(/)'        : 'displayTaskPanelView',
   },
 
   displayListItemView         : function() {
@@ -22,6 +26,15 @@ var TestRouter = Backbone.Router.extend({
 
   displayDashboardSidebarView : function() {
     view = new DashboardSidebarView();
+    view.render();
+  },
+
+  displayTaskCollectionView   : function() {
+    view = new TaskCollectionView();
+  },
+
+  displayTaskPanelView        : function() {
+    view = new TaskPanelView();
     view.render();
   }
 });
