@@ -5,6 +5,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/quickAddFormView.js');
 
 var matchers       = require('jasmine-jquery-matchers'),
+    toBeA          = require(process.cwd() + '/spec/support/matchers/toBeA.js')
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
     TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
@@ -24,6 +25,7 @@ describe('Quick-Add Task Form', function() {
 
   beforeEach(function() {
     jasmine.addMatchers(matchers);
+    jasmine.addMatchers(toBeA);
     view = new SUT({collection: collection, grouping: {status: 'Blocking'}});
   });
 
@@ -45,6 +47,24 @@ describe('Quick-Add Task Form', function() {
 
     it('sets the `grouping` property #travis', function() {
       expect(view.grouping).toEqual({status: 'Blocking'});
+    });
+  });
+
+  describe('properties', function() {
+    it('is a Canto.View', function() {
+      expect(view).toBeA('Canto.View');
+    });
+
+    it('has klass QuickAddTaskFormView', function() {
+      expect(view.klass).toBe('QuickAddTaskFormView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(view.family).toBe('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toBe('Backbone.View');
     });
   });
 
@@ -196,10 +216,6 @@ describe('Quick-Add Task Form', function() {
 
       it('returns true with arg \'TaskForm\' #travis', function() {
         expect(view.isA('TaskFormView')).toBe(true);
-      });
-
-      it('returns true with arg \'Backbone.View\' #travis', function() {
-        expect(view.isA('Backbone.View')).toBe(true);
       });
 
       it('returns false with other arg #travis', function() {
