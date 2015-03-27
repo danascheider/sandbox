@@ -8,8 +8,9 @@ var matchers = require('jasmine-jquery-matchers'),
     context  = describe,
     fcontext = fdescribe;
 
-describe('Task Collection View Elements', function() {
+fdescribe('Task Collection View Elements', function() {
   beforeAll(function() {
+    jasmine.addMatchers(matchers);
     client.init().url('http://localhost/#taskCollectionViewSpec');
   });
 
@@ -25,6 +26,20 @@ describe('Task Collection View Elements', function() {
     client.waitForVisible('#view .quick-add-form', function(err, isVisible) {
       expect(isVisible).toBe(true);
       done();
+    });
+  });
+
+  describe('crossOff', function(done) {
+    context('when the task is complete', function() {
+      it('adds a strikethrough to the title', function(done) {
+        client.waitForVisible('#triggers a[data-method=crossOffComplete]')
+              .click('#triggers a[data-method=crossOffComplete]')
+              .getCssProperty('li#task-3 a.task-title', 'text-decoration', function(err, res) {
+
+          expect(res.value).toEqual('line-through');
+          done();
+        });
+      });
     });
   });
 });

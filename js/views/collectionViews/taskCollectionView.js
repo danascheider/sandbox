@@ -25,8 +25,11 @@ var TaskCollectionView = Canto.View.extend({
   // Event Callbacks //
   // --------------- //
 
-  crossOff             : function() {
-    //
+  crossOff             : function(task) {
+    if(!task.get('status') === 'Complete') { return; }
+
+    var view = this.retrieveViewForModel(task);
+    view.$('a.task-title').css('text-decoration', 'line-through');
   },
 
   fetchCollection      : function() {
