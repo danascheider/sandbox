@@ -90,6 +90,12 @@ describe('Main Dashboard View', function() {
     });
   });
 
+  describe('properties', function() {
+    it('is a Canto.View', function() {
+      expect(dashboard).toBeA('Canto.View');
+    });
+  });
+
   describe('events', function() {
     var newDashboard;
 
@@ -335,14 +341,6 @@ describe('Main Dashboard View', function() {
 
   describe('special functions', function() {
     describe('isA', function() {
-      it('returns true with the argument Backbone.View', function() {
-        expect(dashboard.isA('Backbone.View')).toBe(true);
-      });
-
-      it('returns true with the argument Canto.View', function() {
-        expect(dashboard.isA('Canto.View')).toBe(true);
-      });
-
       it('returns true with the argument DashboardView', function() {
         expect(dashboard.isA('DashboardView')).toBe(true);
       });
