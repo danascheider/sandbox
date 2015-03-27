@@ -320,6 +320,12 @@ describe('Main Dashboard View', function() {
   });
 
   describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with the argument Backbone.View', function() {
+        expect(dashboard.isA('Backbone.View')).toBe(true);
+      });
+    });
+
     describe('setUser', function() {
       it('sets this.user #travis', function() {
         var newView = new SUT(); // we already know this won't set the user
