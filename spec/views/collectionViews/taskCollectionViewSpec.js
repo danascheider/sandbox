@@ -126,6 +126,22 @@ describe('Task Collection View #travis', function() {
         expect(view.childViews[1].unbind).toHaveBeenCalled();
       });
     });
+
+    describe('removeComplete', function() {
+      beforeEach(function() {
+        task1.set('status', 'Complete');
+        view.removeComplete();
+      });
+
+      afterEach(function() {
+        task1.set('status', 'Blocking');
+        view.collection.reset([task1, task2, task3]);
+      });
+
+      it('removes the completed task', function() {
+        expect(view.models).not.toContain(task1);
+      });
+    });
   });
 
   describe('special functions', function() {
