@@ -8,7 +8,7 @@ var matchers = require('jasmine-jquery-matchers'),
     context  = describe,
     fcontext = fdescribe;
 
-fdescribe('Task Collection View Elements', function() {
+describe('Task Collection View Elements', function() {
   beforeAll(function() {
     jasmine.addMatchers(matchers);
     client.init().url('http://localhost/#taskCollectionViewSpec');
@@ -47,6 +47,13 @@ fdescribe('Task Collection View Elements', function() {
         client.isVisible('li#task-3', function(err, isVisible) {
           expect(isVisible).toBe(true);
           done();
+        });
+      });
+
+      it('does eventually remove the item from the list', function(done) {
+        client.waitForVisible('li#task-3', 750, true, function(err, isVisible) {
+          expect(isVisible).toBe(false);
+          done()
         });
       });
     });
