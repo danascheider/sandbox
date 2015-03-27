@@ -3,11 +3,11 @@ module.exports = {
     return {
       compare : function(actual, expected) {
         var result = {
-          pass : util.equals(actual.isA, expected, customEqualityTesters)
+          pass : actual.isA(expected)
         };
 
         if(!result.pass) {
-          result.message = 'Expected ' + actual + ' to be a ' + expected;
+          result.message = 'Expected ' + actual + ' to be a ' + expected + ', but it is a ' + actual.klass;
         }
 
         return result;

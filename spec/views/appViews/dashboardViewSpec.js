@@ -5,6 +5,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
 
 var matchers       = require('jasmine-jquery-matchers'),
+    toBeA          = require(process.cwd() + '/spec/support/matchers/toBeA.js'),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     UserModel      = require(process.cwd() + '/js/models/userModel.js'),
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
@@ -22,11 +23,12 @@ var task1 = new TaskModel({id: 1, owner_id: 342, title: 'Test Task 1', status: '
 
 user.tasks = new TaskCollection([task1, task2, task3]);
 
-describe('Main Dashboard View', function() {
+fdescribe('Main Dashboard View', function() {
   var dashboard, e, spy;
 
   beforeEach(function() {
     jasmine.addMatchers(matchers);
+    jasmine.addMatchers(toBeA);
     dashboard = new SUT({user: user});
   });
 
@@ -44,7 +46,7 @@ describe('Main Dashboard View', function() {
     });
 
     it('instantiates a sidebar #travis', function() {
-      expect(dashboard.sidebarView.isA('DashboardSidebarView')).toBe(true);;
+      expect(dashboard.sidebarView).toBeA('DashboardSidebarView');
     });
 
     it('instantiates a home view #travis', function() {
