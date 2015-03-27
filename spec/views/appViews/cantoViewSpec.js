@@ -65,7 +65,7 @@ describe('Canto.View', function() {
     beforeEach(function() { ChildClass = Canto.View.extend({}); });
     afterAll(function() { ChildClass = null; });
 
-    fit('inherits its types', function() {
+    it('inherits its types', function() {
       var newView = new ChildClass();
       expect(newView.isA('Canto.View')).toBe(true);
     });
