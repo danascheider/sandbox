@@ -115,6 +115,20 @@ describe('Main Dashboard View', function() {
     });
   });
 
+  describe('properties', function() {
+    it('has klass DashboardView', function() {
+      expect(dashboard.klass).toEqual('DashboardView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(dashboard.family).toEqual('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(dashboard.superFamily).toEqual('Backbone.View');
+    });
+  });
+
   describe('event callbacks', function() {
     beforeEach(function() { dashboard.render(); });
     afterEach(function() { dashboard.remove(); });
