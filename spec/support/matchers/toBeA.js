@@ -3,7 +3,9 @@ module.exports = {
     return {
       compare : function(actual, expected) {
         var result = {
-          pass : actual.isA(expected)
+          pass : function() {
+            return active.isA(expected);
+          }
         };
 
         if(!result.pass) {
