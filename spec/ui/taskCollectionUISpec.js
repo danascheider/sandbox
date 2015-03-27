@@ -30,12 +30,12 @@ describe('Task Collection View Elements', function() {
   });
 
   describe('crossOff', function() {
-    beforeEach(function(done) {
-      client.waitForVisible('#triggers a[data-method=crossOffComplete]')
-            .click('#triggers a[data-method=crossOffComplete]', done);
-    });
-
     context('when the task is complete', function() {
+      beforeEach(function(done) {
+        client.waitForVisible('#triggers a[data-method=crossOffComplete]')
+              .click('#triggers a[data-method=crossOffComplete]', done);
+      });
+
       it('adds a strikethrough to the title', function(done) {
         client.getCssProperty('li#task-3 a.task-title', 'text-decoration', function(err, res) {
           expect(res.value).toEqual('line-through');
@@ -51,8 +51,29 @@ describe('Task Collection View Elements', function() {
       });
 
       it('does eventually remove the item from the list', function(done) {
-        client.waitForVisible('li#task-3', 750, true, function(err, isVisible) {
+        client.waitForVisible('li#task-3', 800, true, function(err, isVisible) {
           expect(isVisible).toBe(false);
+          done()
+        });
+      });
+    });
+
+    fcontext('when the task is incomplete', function() {
+      beforeEach(function(done) {
+        client.waitForVisible('a[data-method=crossOffIncomplete]')
+              .click('a[data-method=crossOffIncomplete', done);
+      });
+
+      it('does not cross out the title', function(done) {
+        client.getCssProperty('li#task-1 a.task-title', 'text-decoration', function(err, res) {
+          expect(res.value).not.toEqual('line-through');
+          done();
+        });
+      });
+
+      it('does not eventually remove the item from the list', function(done) {
+        client.waitForVisible('li#task-3', 800, function(err, isVisible) {
+          expect(isVisible).toBe(true);
           done()
         });
       });
