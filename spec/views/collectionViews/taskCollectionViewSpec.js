@@ -85,6 +85,47 @@ describe('Task Collection View #travis', function() {
     it('has class .task-list #travis', function() {
       expect(view.$el[0]).toHaveClass('task-list');
     });
+
+    it('has a list item for each task', function() {
+      expect(view.$('.task-list-item')).toHaveLength(3);
+    });
+  });
+
+  describe('event callbacks', function() {
+    describe('removeBacklog', function() {
+      beforeEach(function() { 
+        task2.set('backlog', true); 
+        view.removeBacklog();
+      });
+
+      afterEach(function() {
+        task2.unset('backlog');
+        view.collection.reset([task1, task2, task3]);
+      });
+
+      it('removes the backlogged task', function() {
+        expect(view.models).not.toContain(task2);
+      });
+    });
+
+    describe('removeChildViews', function() {
+      beforeEach(function() { 
+        view.childViews = childViews; 
+        view.render();
+      });
+
+      it('calls remove on the child views', function() {
+        spyOn(view.childViews[2], 'remove');
+        view.removeChildViews(); 
+        expect(view.childViews[2].remove).toHaveBeenCalled();
+      });
+
+      it('calls unbind on the child views', function() {
+        spyOn(view.childViews[1], 'unbind');
+        view.removeChildViews();
+        expect(view.childViews[1].unbind).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('special functions', function() {

@@ -21,9 +21,25 @@ var TaskCollectionView = Canto.View.extend({
     return Canto.View.prototype.types().concat(['TaskCollectionView', 'TaskView']);
   },
 
+  // --------------- //
+  // Event Callbacks //
+  // --------------- //
+
+  removeBacklog        : function() {
+    var backlog = this.collection.where({backlog: 'true'});
+    this.collection.remove(backlog);
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //
+
+  removeChildViews     : function() {
+    _.each(this.childViews, function(view) {
+      view.remove();
+      view.unbind();
+    });
+  },
 
   renderCollection     : function() {
     var that = this;
