@@ -57,6 +57,24 @@ describe('Task Collection View #travis', function() {
     });
   });
 
+  describe('properties', function() {
+    it('is a Canto.View', function() {
+      expect(view).toBeA('Canto.View');
+    });
+
+    it('has klass TaskCollectionView', function() {
+      expect(view.klass).toEqual('TaskCollectionView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(view.family).toEqual('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toEqual('Backbone.View');
+    });
+  });
+
   describe('elements', function() {
     beforeEach(function() { view.render(); });
 
