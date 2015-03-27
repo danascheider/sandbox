@@ -1,9 +1,9 @@
 Canto      = Canto || require('../../../dependencies.js');
-CantoView  = Canto.View || require('../../appViews/cantoView.js');
+Canto.View  = Canto.View || require('../../appViews/cantoView.js');
 
 var TaskModel  = require('../../../models/taskModel.js');
 
-var TaskModelView = CantoView.extend({
+var TaskModelView = Canto.View.extend({
   tagName      : 'div',
   className    : 'task-model',
   template     : JST['tasks/model'],

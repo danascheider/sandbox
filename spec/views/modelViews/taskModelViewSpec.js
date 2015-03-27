@@ -8,6 +8,7 @@ Backbone.$    = $;
 
 var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
     matchers  = require('jasmine-jquery-matchers'),
+    toBeA     = require(process.cwd() + '/spec/support/matchers/toBeA.js'),
     context   = describe,
     fcontext  = fdescribe;
 
@@ -27,6 +28,7 @@ describe('Task Model View', function() {
 
   beforeEach(function() {
     jasmine.addMatchers(matchers);
+    jasmine.addMatchers(toBeA);
 
     spyOn($, 'cookie').and.callFake(function(name) {
       return name === 'userID' ? 342 : btoa('testuser:testuser');
@@ -49,6 +51,24 @@ describe('Task Model View', function() {
       spyOn(SUT.prototype, 'render');
       var newView = new SUT({model: task});
       expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('properties', function() {
+    it('is a Canto.View', function() {
+      expect(view).toBeA('Canto.View');
+    });
+
+    it('has klass TaskModelView', function() {
+      expect(view.klass).toBe('TaskModelView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(view.family).toBe('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toBe('Backbone.View');
     });
   });
 
@@ -110,10 +130,6 @@ describe('Task Model View', function() {
     describe('isA', function() {
       it('returns true with arg \'TaskModelView\' #travis', function() {
         expect(view.isA('TaskModelView')).toBe(true);
-      });
-
-      it('returns true with arg \'Backbone.View\' #travis', function() {
-        expect(view.isA('Backbone.View')).toBe(true);
       });
 
       it('returns false with another string #travis', function() {
