@@ -1,4 +1,5 @@
-require('../../js/dependencies.js');
+Canto = Canto || require('../../js/dependencies.js');
+
 var ListItemView         = require('../../js/views/specViews/taskListItemSpecView.js'),
     DashboardView        = require('../../js/views/specViews/dashboardSpecView.js'),
     DashboardSidebarView = require('../../js/views/specViews/dashboardSidebarSpecView.js'),
@@ -31,6 +32,7 @@ var TestRouter = Backbone.Router.extend({
 
   displayTaskCollectionView   : function() {
     view = new TaskCollectionView();
+    view.render();
   },
 
   displayTaskPanelView        : function() {

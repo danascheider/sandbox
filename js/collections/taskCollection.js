@@ -1,4 +1,4 @@
-require('../dependencies.js');
+Canto = Canto || require('../dependencies.js');
 
 var Task                = require('../models/taskModel.js');
 var ProtectedCollection = require('./protectedCollection.js');

@@ -1,4 +1,4 @@
-require('../../dependencies.js');
+Canto = Canto || require('../../dependencies.js');
 
 var View = require('../modelViews/taskViews/taskListItemView.js');
 var Task = require('../../models/taskModel.js');

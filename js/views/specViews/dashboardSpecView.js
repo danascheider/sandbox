@@ -1,4 +1,4 @@
-require('../../dependencies.js');
+Canto = Canto || require('../../dependencies.js');
 
 var Dashboard = require('../appViews/dashboardView.js'),
     User      = require('../../models/userModel.js');

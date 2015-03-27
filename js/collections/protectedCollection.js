@@ -1,4 +1,4 @@
-require('../dependencies.js');
+Canto = Canto || require('../dependencies.js');
 
 var ProtectedCollection = Backbone.Collection.extend({
   token     : function() {

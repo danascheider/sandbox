@@ -1,7 +1,7 @@
 global.document  = window.document;
 global.navigator = window.navigator;
 
-global.Canto   = {
+global.Canto     = {
   API      : require('./api.js'),
   Utils    : require('./utils.js')
 };

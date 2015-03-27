@@ -1,4 +1,4 @@
-require('../dependencies.js');
+Canto = Canto || require('../dependencies.js');
 
 var Collection = require('../collections/taskCollection.js');
 

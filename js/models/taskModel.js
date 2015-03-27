@@ -1,4 +1,5 @@
-require('../dependencies.js');
+Canto = Canto || require('../dependencies.js');
+
 var ProtectedResource = require('./protectedResourceModel');
 
 var TaskModel = ProtectedResource.extend({
