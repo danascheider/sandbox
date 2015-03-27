@@ -62,6 +62,24 @@ describe('List Item Task View', function() {
     });
   });
 
+  describe('properties', function() {
+    it('is a Canto.View', function() {
+      expect(view).toBeA('Canto.View');
+    });
+
+    it('has klass TaskListItemView', function() {
+      expect(view.klass).toBe('TaskListItemView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(view.family).toBe('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toBe('Backbone.View');
+    });
+  });
+
   describe('el', function() {
     beforeEach(function() { view.render(); });
 
@@ -289,10 +307,6 @@ describe('List Item Task View', function() {
 
       it('returns true with arg \'ListItemView\' #travis', function() {
         expect(view.isA('ListItemView')).toBe(true);
-      });
-
-      it('returns true with arg \'Backbone.View\' #travis', function() {
-        expect(view.isA('Backbone.View')).toBe(true);
       });
 
       it('returns false with other arg #travis', function() {
