@@ -5,6 +5,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/partialViews/dashboardSidebarView.js');
 
 var matchers       = require('jasmine-jquery-matchers'),
+    toBeA          = require(process.cwd() + '/spec/support/matchers/toBeA'),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     context        = describe,
     fcontext       = fdescribe;
@@ -16,6 +17,7 @@ describe('Dashboard Sidebar View', function() {
 
   beforeEach(function() {
     jasmine.addMatchers(matchers);
+    jasmine.addMatchers(toBeA);
     sidebar = new SUT();
   });
 
@@ -29,6 +31,24 @@ describe('Dashboard Sidebar View', function() {
       spyOn(SUT.prototype, 'render');
       var newSidebar = new SUT();
       expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('properties', function() {
+    it('is a Canto.View', function() {
+      expect(sidebar).toBeA('Canto.View');
+    });
+
+    it('has klass DashboardSidebarView', function() {
+      expect(sidebar.klass).toBe('DashboardSidebarView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(sidebar.family).toBe('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(sidebar.superFamily).toBe('Backbone.View');
     });
   });
 
@@ -151,10 +171,6 @@ describe('Dashboard Sidebar View', function() {
     describe('isA', function() {
       it('returns true with argument DashboardSidebarView #travis', function() {
         expect(sidebar.isA('DashboardSidebarView')).toBe(true);
-      });
-
-      it('returns true with argument Backbone.View #travis', function() {
-        expect(sidebar.isA('Backbone.View')).toBe(true);
       });
 
       it('returns true with argument DashboardView #travis', function() {

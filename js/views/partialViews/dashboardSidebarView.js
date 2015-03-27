@@ -1,6 +1,7 @@
-Canto = Canto || require('../../dependencies.js');
+Canto      = Canto || require('../../dependencies.js');
+Canto.View = Canto.View || require('../appViews/cantoView.js');
 
-var DashboardSidebarView = Backbone.View.extend({
+var DashboardSidebarView = Canto.View.extend({
   tagName              : 'ul',
   className            : 'nav',
   id                   : 'side-menu',
@@ -10,6 +11,18 @@ var DashboardSidebarView = Backbone.View.extend({
     'click a.sidebar-link'       : 'toggleSecondLevelNav',
     'click li > .dashboard-link' : 'goToDashboard',
     'click li > .task-page-link' : 'goToTaskPage'
+  },
+
+  // --------------------- //
+  // Canto View Properties //
+  // --------------------- //
+
+  klass                : 'DashboardSidebarView',
+  family               : 'Canto.View',
+  superFamily          : 'Backbone.View',
+
+  types                : function() {
+    return Canto.View.prototype.types().concat(['DashboardView', 'DashboardSidebarView', 'PartialView']);
   },
 
   // --------------- //
@@ -48,17 +61,6 @@ var DashboardSidebarView = Backbone.View.extend({
 
   getLocationHash      : function() {
     return location.hash;
-  },
-
-  isA                  : function(type) {
-    var types = [
-      'Backbone.View',
-      'DashboardSidebarView',
-      'DashboardView',
-      'PartialView'
-    ];
-
-    return types.indexOf(type) > -1;
   },
 
   // ------------------- //
