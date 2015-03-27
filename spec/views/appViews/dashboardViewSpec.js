@@ -320,9 +320,25 @@ describe('Main Dashboard View', function() {
   });
 
   describe('special functions', function() {
-    describe('isA', function() {
+    fdescribe('isA', function() {
       it('returns true with the argument Backbone.View', function() {
         expect(dashboard.isA('Backbone.View')).toBe(true);
+      });
+
+      it('returns true with the argument Canto.View', function() {
+        expect(dashboard.isA('Canto.View')).toBe(true);
+      });
+
+      it('returns true with the argument DashboardView', function() {
+        expect(dashboard.isA('DashboardView')).toBe(true);
+      });
+
+      it('returns true with the argument TopLevelView', function() {
+        expect(dashboard.isA('TopLevelView')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(dashboard.isA('duck')).toBe(false);
       });
     });
 

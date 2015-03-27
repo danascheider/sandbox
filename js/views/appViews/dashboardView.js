@@ -19,7 +19,11 @@ var DashboardView = Canto.View.extend({
 
   klass              : 'DashboardView',
   family             : 'Canto.View',
-  superFamily        : 'Dashboard.View',
+  superFamily        : 'Backbone.View',
+
+  types              : function() {
+    return Canto.View.prototype.types().concat(['DashboardView', 'TopLevelView']);
+  },
 
   // --------------- //
   // Event Callbacks //
