@@ -1,9 +1,10 @@
-require('../../dependencies.js');
+Canto      = Canto || require('../../dependencies.js');
+Canto.View = Canto.View || require('./cantoView.js');
 
 var UserModel = require('../../models/userModel.js');
 var SidebarView = require('../partialViews/dashboardSidebarView.js');
 
-var DashboardView = Backbone.View.extend({
+var DashboardView = Canto.View.extend({
   id                 : 'dashboard-wrapper',
   template           : JST['dashboard'],
 
@@ -11,6 +12,14 @@ var DashboardView = Backbone.View.extend({
     'click'             : 'hideDropdownMenus',
     'click li.dropdown' : 'toggleDropdownMenu'
   },
+
+  // --------------------- //
+  // Canto View Properties //
+  // --------------------- //
+
+  klass              : 'DashboardView',
+  family             : 'Canto.View',
+  superFamily        : 'Dashboard.View',
 
   // --------------- //
   // Event Callbacks //

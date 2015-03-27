@@ -17,6 +17,7 @@ var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemVi
 Backbone.$    = $;
 
 var matchers  = require('jasmine-jquery-matchers'),
+    custom    = require(process.cwd() + '/spec/support/matchers/toBeA.js');
     TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
     ModelView = require(process.cwd() + '/js/views/modelViews/taskViews/taskModelView.js'),
     context   = describe,
@@ -34,6 +35,7 @@ describe('List Item Task View', function() {
 
   beforeEach(function() { 
     jasmine.addMatchers(matchers);
+    jasmine.addMatchers(custom);
     view = new SUT({model: task}); 
   });
 
@@ -52,7 +54,7 @@ describe('List Item Task View', function() {
     });
 
     it('creates a model view #travis', function() {
-      expect(view.modelView.isA('TaskModelView')).toBe(true);
+      expect((view.modelView).klass).toEqual('TaskModelView');
     });
 
     it('creates an edit form #travis', function() {

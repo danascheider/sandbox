@@ -1,9 +1,10 @@
-require('../../../dependencies.js');
+Canto      = Canto || require('../../../dependencies.js');
+Canto.View = Canto.View || ('../../appViews/cantoView.js');
 
-var TaskModel = require('../../../models/taskModel.js');
-var ModelView = require('./taskModelView.js');
+var TaskModel = require('../../../models/taskModel.js'),
+    ModelView = require('./taskModelView.js');
 
-var ListItemView = Backbone.View.extend({
+var ListItemView = Canto.View.extend({
   tagName    : 'li',
   className  : 'task-list-item ui-widget-content ui-draggable',
   id         : function() { return 'task-' + this.model.get('id'); },
@@ -17,6 +18,18 @@ var ListItemView = Backbone.View.extend({
     'click .task-title'      : 'toggleTaskDetails',
     'mouseenter'             : 'showEditIcons',
     'mouseleave'             : 'hideEditIcons'
+  },
+
+  // --------------------- //
+  // Canto View Properties //
+  // --------------------- //
+
+  klass      : 'TaskListItemView',
+  family     : 'Canto.View',
+  superFamily: 'Backbone.View',
+
+  types      : function() {
+    return Canto.View.prototype.types().concat(['TaskListItemView', 'ListItemView']);
   },
 
   // --------------- //
@@ -125,11 +138,6 @@ var ListItemView = Backbone.View.extend({
         });
       }
     });
-  },
-
-  isA                : function(type) {
-    var trueValues = ['TaskListItemView', 'ListItemView', 'Backbone.View'];
-    return trueValues.indexOf(type) > -1 ? true : false;
   },
 
   // ------------------- //

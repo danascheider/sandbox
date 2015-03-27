@@ -1,4 +1,5 @@
 require('./dependencies.js');
+require('./utils.js');
 
 // Require models
 require('./models/protectedResourceModel.js');
@@ -9,16 +10,18 @@ require('./models/userModel.js');
 require('./collections/protectedCollection.js');
 require('./collections/taskCollection.js');
 
-// Require views
+// Require top-level views
+require('./views/appViews/cantoView.js');
+require('./views/appViews/dashboardView.js');
+
+// Require model and collection views
 require('./views/modelViews/taskViews/taskListItemView.js');
 require('./views/modelViews/taskViews/taskModelView.js');
 require('./views/modelViews/taskViews/quickAddFormView.js');
+require('./views/collectionViews/taskCollectionView.js');
 
 // Require partial views
 require('./views/partialViews/dashboardSidebarView.js');
-
-// Require top-level views
-require('./views/appViews/dashboardView.js');
 
 // Require presenters
 require('./presenters/appPresenter.js');

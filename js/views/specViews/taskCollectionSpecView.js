@@ -1,4 +1,4 @@
-require('dependencies');
+Canto = Canto || require('../../dependencies');
 
 var TaskModel      = require('../../models/taskModel.js'),
     Collection     = require('../../collections/taskCollection.js'),
@@ -15,15 +15,31 @@ var task1      = new TaskModel({id: 1, title: 'Task 1', status: 'New', priority:
 var SpecWrapper = Backbone.View.extend({
   el              : 'body',
   template        : JST['spec/collection'],
+
+  events          : {
+    'click a[data-method=crossOff]' : 'callCrossOff',
+    'click a[data-method=reset]'    : 'resetCollection'
+  },
+
+  callCrossOff    : function(task) {
+    this.view.crossOff(task);
+  },
+
+  resetCollection : function() {
+    task1.set({title: 'Task 1', status: 'New', priority: 'Normal', position: 1});
+    task2.set({id: 2, title: 'Task 2', status: 'New', priority: 'Normal', position: 2});
+    task3.set({id: 3, title: 'Task 3', status: 'Complete', priority: 'Normal', position: 3});
+    this.collection.reset([task1, task2, task3]);
+  },
+
   initialize      : function() {
     this.view = new CollectionView({collection: collection});
     this.render();
   },
 
   render          : function() {
-    this.$el.html(this.template())
+    this.$el.html(this.template());
     this.delegateEvents();
-
     this.view.render();
     this.$('#view').html(this.view.$el);
     this.view.delegateEvents();

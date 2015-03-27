@@ -1,12 +1,25 @@
-require('../../../dependencies.js');
+Canto      = Canto || require('../../../dependencies.js');
+Canto.View = Canto.View || require('../../appViews/cantoView.js');
 
-var QuickAddFormView = Backbone.View.extend({
+var QuickAddFormView = Canto.View.extend({
   tagName    : 'form',
   className  : 'task-form create-form quick-add-form',
   template   : JST['tasks/quickAdd'],
 
   events     : {
     'submit' : 'createTask'
+  },
+
+  // --------------------- //
+  // Canto View Properties //
+  // --------------------- //
+
+  klass      : 'QuickAddTaskFormView',
+  family     : 'Canto.View',
+  superFamily: 'Backbone.View',
+
+  types      : function() {
+    return Canto.View.prototype.types().concat(['QuickAddForm', 'QuickAddFormView', 'TaskCollectionView', 'TaskFormView', 'TaskCreateFormView']);
   },
 
   // --------------- //
@@ -44,23 +57,6 @@ var QuickAddFormView = Backbone.View.extend({
         }
       });
     }
-  },
-
-  // --------------- //
-  // Special Methods //
-  // --------------- //
-
-  isA        : function(type) {
-    var types = [
-      'Backbone.View',
-      'QuickAddFormView',
-      'QuickAddForm',
-      'TaskCollectionView',
-      'TaskCreateFormView',
-      'TaskFormView'
-    ];
-
-    return types.indexOf(type) > -1;
   },
 
   // ------------------- //

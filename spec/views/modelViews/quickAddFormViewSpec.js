@@ -182,7 +182,7 @@ describe('Quick-Add Task Form', function() {
         expect(view.isA('QuickAddFormView')).toBe(true);
       });
 
-      fit('returns true with arg \'QuickAddForm\' #travis', function() {
+      it('returns true with arg \'QuickAddForm\' #travis', function() {
         expect(view.isA('QuickAddForm')).toBe(true);
       });
 
