@@ -29,14 +29,23 @@ fdescribe('Task Collection View Elements', function() {
     });
   });
 
-  describe('crossOff', function(done) {
+  describe('crossOff', function() {
+    beforeEach(function(done) {
+      client.waitForVisible('#triggers a[data-method=crossOffComplete]')
+            .click('#triggers a[data-method=crossOffComplete]', done);
+    });
+
     context('when the task is complete', function() {
       it('adds a strikethrough to the title', function(done) {
-        client.waitForVisible('#triggers a[data-method=crossOffComplete]')
-              .click('#triggers a[data-method=crossOffComplete]')
-              .getCssProperty('li#task-3 a.task-title', 'text-decoration', function(err, res) {
-
+        client.getCssProperty('li#task-3 a.task-title', 'text-decoration', function(err, res) {
           expect(res.value).toEqual('line-through');
+          done();
+        });
+      });
+
+      it('doesn\'t immediately remove the item from the list', function(done) {
+        client.isVisible('li#task-3', function(err, isVisible) {
+          expect(isVisible).toBe(true);
           done();
         });
       });
