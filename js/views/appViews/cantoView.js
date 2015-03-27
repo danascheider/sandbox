@@ -6,11 +6,11 @@ Backbone.View.prototype.types = function() {
 };
 
 Backbone.View.prototype.isA   = function(type) {
-  return this.types.indexOf(type) > -1 ? true : false;
+  return this.types().indexOf(type) > -1 ? true : false;
 };
 
 Canto.View = Backbone.View.extend({
-  klass       : 'CantoView',
+  klass       : 'Canto.View',
   family      : 'Backbone.View',
   superFamily : '',
 
