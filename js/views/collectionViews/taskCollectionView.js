@@ -25,6 +25,14 @@ var TaskCollectionView = Canto.View.extend({
   // Event Callbacks //
   // --------------- //
 
+  crossOff             : function() {
+    //
+  },
+
+  fetchCollection      : function() {
+    this.collection.fetch();
+  },
+
   removeBacklog        : function() {
     var backlog = this.collection.where({backlog: 'true'});
     this.collection.remove(backlog);
@@ -81,6 +89,17 @@ var TaskCollectionView = Canto.View.extend({
     this.grouping     = opts.grouping;
     this.childViews   = [];
     this.quickAddForm = new QuickAddForm({collection: this.collection, grouping: this.grouping});
+
+    this.listenTo(this.collection, 'add remove fetch', this.render);
+    this.listenTo(this.collection, 'change:status', this.crossOff);
+
+    // FIX: Determine whether this is really necessary
+    // this.listenTo(this.quickAddForm, 'newTask', this.collection.fetch);
+  },
+
+  remove              : function() {
+    this.removeChildViews();
+    Backbone.View.prototype.remove.call(this);
   },
 
   render              : function() {

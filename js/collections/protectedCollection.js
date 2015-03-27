@@ -44,11 +44,18 @@ var ProtectedCollection = Backbone.Collection.extend({
 
     var that = this;
 
+    var callback = opts.success;
+
     opts.beforeSend = (opts.beforeSend) || function(xhr) {
       xhr.setRequestHeader('Authorization', that.token());
     };
 
-    return Backbone.Collection.prototype.fetch.call(this, opts);
+    opts.success = function(model, response, xhr) {
+      this.trigger('fetch');
+      callback.call(model, response, xhr);
+    },
+
+    Backbone.sync('read', this, opts);
   }
 });
 

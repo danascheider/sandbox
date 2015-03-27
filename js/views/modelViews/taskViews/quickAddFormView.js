@@ -53,7 +53,9 @@ var QuickAddFormView = Canto.View.extend({
         success    : function(model) {
           that.$el[0].reset();
           that.collection.unshift(model);
-          that.trigger('newTask');
+
+          // FIX: Determine if the app works without this
+          // that.trigger('newTask');
         }
       });
     }

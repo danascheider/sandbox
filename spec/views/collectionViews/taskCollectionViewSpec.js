@@ -28,7 +28,7 @@ collection.each(function(task) {
 });
 
 describe('Task Collection View #travis', function() {
-  var view;
+  var view, newView;
   
   beforeEach(function() {
     jasmine.addMatchers(matchers);
@@ -91,6 +91,57 @@ describe('Task Collection View #travis', function() {
     });
   });
 
+  describe('events', function() {
+    beforeEach(function() {
+      spyOn(SUT.prototype, 'render');
+      // spyOn(TaskCollection.prototype, 'fetch');
+      spyOn(SUT.prototype, 'crossOff');
+      // newColl = new TaskCollection([task1, task2, task3]);
+      newView = new SUT({collection: collection});
+    });
+
+    afterEach(function() {
+      newView.remove();
+      newView.unbind();
+    });
+
+    describe('add to collection', function() {
+      it('calls render', function() {
+        newView.collection.trigger('add');
+        expect(SUT.prototype.render).toHaveBeenCalled();
+      });
+    });
+
+    describe('remove from collection', function() {
+      it('calls render', function() {
+        newView.collection.trigger('remove');
+        expect(SUT.prototype.render).toHaveBeenCalled();
+      });
+    });
+
+    describe('fetch collection', function() {
+      it('calls render', function() {
+        newView.collection.trigger('fetch');
+        expect(SUT.prototype.render).toHaveBeenCalled();
+      });
+    });
+
+    // FIX: Determine whether this is really necessary
+    // describe('newTask through quick-add form', function() {
+    //   it('calls fetch on the collection', function() {
+    //     newView.quickAddForm.trigger('newView');
+    //     expect(Backbone.Collection..fetch).toHaveBeenCalled();
+    //   });
+    // });
+
+    describe('change:status', function() {
+      it('calls crossOff', function() {
+        task1.trigger('change:status');
+        expect(SUT.prototype.crossOff).toHaveBeenCalled();
+      });
+    });
+  });
+
   describe('event callbacks', function() {
     describe('removeBacklog', function() {
       beforeEach(function() { 
@@ -142,9 +193,30 @@ describe('Task Collection View #travis', function() {
         expect(view.models).not.toContain(task1);
       });
     });
+
+    describe('renderCollection', function() {
+      it('renders the collection', function() {
+        view.renderCollection();
+        expect(view.$('li.task-list-item')).toHaveLength(3);
+      });
+    });
   });
 
   describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with the argument TaskCollectionView', function() {
+        expect(view.isA('TaskCollectionView')).toBe(true);
+      });
+
+      it('returns true with the argument TaskView', function() {
+        expect(view.isA('TaskView')).toBe(true);
+      });
+
+      it('returns false with other arguments', function() {
+        expect(view.isA('deposed Nigerian warlord')).toBe(false);
+      });
+    });
+
     describe('retrieveViewForModel', function() {
       context('when there is no view for the model', function() {
         beforeEach(function() { view.childViews = []; });
@@ -185,13 +257,21 @@ describe('Task Collection View #travis', function() {
       });
 
       it('renders the list items #travis', function() {
+        spyOn(view, 'renderCollection');
         view.render();
-        expect(view.$('li.task-list-item').length).toEqual(3);
+        expect(view.renderCollection).toHaveBeenCalled();
       });
 
-      it('returns itself', function() {
+      it('returns itself #travis', function() {
         expect(view.render()).toBe(view);
       });
+
+      // FIX: I don't know if this test was vestigial or what, but I'm going
+      //      to hang onto its shell while I investigate.
+
+      // it('configures sortable', function() {
+      //  
+      // });
 
       describe('idempotency', function() {
         beforeEach(function() { 
@@ -208,6 +288,22 @@ describe('Task Collection View #travis', function() {
           view.render();
           expect(view.childViews.length).toEqual(3);
         });
+      });
+    });
+
+    describe('remove', function() {
+      beforeEach(function() { view.render(); });
+
+      it('calls removeChildViews', function() {
+        spyOn(view, 'removeChildViews');
+        view.remove();
+        expect(view.removeChildViews).toHaveBeenCalled();
+      });
+
+      it('removes itself', function() {
+        spyOn(Backbone.View.prototype.remove, 'call');
+        view.remove();
+        expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
       });
     });
   });
