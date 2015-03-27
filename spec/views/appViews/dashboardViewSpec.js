@@ -320,7 +320,7 @@ describe('Main Dashboard View', function() {
   });
 
   describe('special functions', function() {
-    fdescribe('isA', function() {
+    describe('isA', function() {
       it('returns true with the argument Backbone.View', function() {
         expect(dashboard.isA('Backbone.View')).toBe(true);
       });
