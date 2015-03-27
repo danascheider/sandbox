@@ -23,7 +23,7 @@ var task1 = new TaskModel({id: 1, owner_id: 342, title: 'Test Task 1', status: '
 
 user.tasks = new TaskCollection([task1, task2, task3]);
 
-fdescribe('Main Dashboard View', function() {
+describe('Main Dashboard View', function() {
   var dashboard, e, spy;
 
   beforeEach(function() {
