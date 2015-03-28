@@ -5,7 +5,7 @@ var CollectionView = require('../collectionViews/taskCollectionView.js');
 
 var TaskPanelView = Canto.View.extend({
   id         : 'task-panel',
-  className  : 'panel',
+  className  : 'panel panel-primary',
 
   // --------------------- //
   // Canto View Properties // 
