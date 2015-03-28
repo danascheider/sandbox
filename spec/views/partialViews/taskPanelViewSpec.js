@@ -132,14 +132,22 @@ fdescribe('Task Panel View #travis', function() {
 
     describe('filterCollection', function() {
       beforeEach(function() {
-        for(var i = 4; i < 15; i++) {
-          var t = new TaskModel({title: 'My Task ' + i});
-          collection.add([t]);
+        spyOn($, 'ajax');
+
+        for(var i = 4; i < 13; i++) {
+          taskPanel.collection.create({title: 'My Task ' + i, position: i}, {sync: false});
         }
       });
 
       it('returns 10 tasks', function() {
         expect(taskPanel.filterCollection(collection)).toHaveLength(10);
+      });
+
+      it('doesn\'t include blocking tasks', function() {
+        task3.set({status: 'Blocking'});
+
+        // Yes, it needed to be phrased this way in order for it to work.
+        expect(taskPanel.filterCollection(collection).indexOf(task3)).toBe(-1);
       });
     });
   });
