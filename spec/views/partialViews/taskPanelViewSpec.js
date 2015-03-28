@@ -68,8 +68,19 @@ fdescribe('Task Panel View', function() {
       // For some reason, when I worded this with the toBeA('TaskCollectionView')
       // matcher, it passed even when the thing did not exist. That's why I'm 
       // using the stupid matcher.
-      
+
       expect(taskPanel.collectionView).toExist();
     });
+  });
+
+  describe('properties', function() {
+    it('has klass \'TaskPanelView\' #travis', function() {
+      expect(taskPanel.klass).toBe('TaskPanelView');
+    });
+  });
+
+  describe('events', function() {
+    // Make sure to test for the callback on the collection's events -
+    // change:status and change:backlog
   });
 });

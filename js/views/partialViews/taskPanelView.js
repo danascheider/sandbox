@@ -4,6 +4,16 @@ Canto.View = Canto.View || require('../appViews/cantoView.js');
 var CollectionView = require('../collectionViews/taskCollectionView.js');
 
 var TaskPanelView = Canto.View.extend({
+
+  // --------------------- //
+  // Canto View Properties // 
+  // --------------------- //
+
+  klass      : 'TaskPanelView',
+
+  // ------------------- //
+  // Core View Functions //
+  // ------------------- //
   initialize : function(opts) {
     opts = opts || {};
 
