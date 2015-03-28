@@ -172,6 +172,15 @@ describe('Task Panel View #travis', function() {
         expect(taskPanel.$('span.pull-right i').first()).toHaveClass('fa-plus');
       })
     });
+
+    fdescribe('removeBacklogged', function() {
+      it('removes the specified task from the collection', function() {
+        spyOn(taskPanel.collection, 'remove');
+        task1.set({backlog: true});
+        taskPanel.removeBacklogged();
+        expect(taskPanel.collection.remove).toHaveBeenCalledWith(task1);
+      });
+    });
   });
 
   describe('core view functions', function() {

@@ -45,6 +45,12 @@ var TaskPanelView = Canto.View.extend({
     this.$('i.fa-minus').removeClass('fa-minus').addClass('fa-plus');
   },
 
+  removeBacklogged : function() {
+    var that = this;
+    var backlogged = this.collection.where({backlog: true});
+   _.each(backlogged, function(task) { that.collection.remove(task); });
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //
