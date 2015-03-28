@@ -37,10 +37,10 @@ describe('Protected Collection', function() {
         expect(xhr.getRequestHeader('Authorization')).toEqual(collection.token());
       });
 
-      it('calls fetch on the Backbone collection prototype #travis', function() {
-        spyOn(Backbone.Collection.prototype, 'fetch');
+      it('calls Backbone.Sync #travis', function() {
+        spyOn(Backbone, 'sync');
         collection.fetch();
-        expect(Backbone.Collection.prototype.fetch).toHaveBeenCalled();
+        expect(Backbone.sync.calls.argsFor(0)[1]).toBe(collection);
       });
     });
   });
