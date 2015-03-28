@@ -149,6 +149,11 @@ fdescribe('Task Panel View #travis', function() {
         // Yes, it needed to be phrased this way in order for it to work.
         expect(taskPanel.filterCollection(collection).indexOf(task3)).toBe(-1);
       });
+
+      it('doesn\'t include backlogged tasks', function() {
+        task2.set({backlog: true});
+        expect(taskPanel.filterCollection(collection).indexOf(task2)).toBe(-1);
+      })
     });
   });
 

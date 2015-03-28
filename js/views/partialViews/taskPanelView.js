@@ -33,7 +33,7 @@ var TaskPanelView = Canto.View.extend({
 
   filterCollection : function(collection) {
     var tasks = collection.models.filter(function(task) {
-      return task.get('status') !== 'Blocking';
+      return task.get('status') !== 'Blocking' && !task.get('backlog');
     });
 
     var slice = tasks.slice(0, 10);
