@@ -4,7 +4,7 @@ require(process.cwd() + '/spec/support/env.js');
 
 Canto.View         = require(process.cwd() + '/js/views/appViews/cantoView.js');
 
-var custom         = require(process.cwd() + '/spec/support/matchers/toBeA.js');
+var custom         = require(process.cwd() + '/spec/support/matchers/toBeA.js'),
     context        = describe,
     fcontext       = fdescribe;
 

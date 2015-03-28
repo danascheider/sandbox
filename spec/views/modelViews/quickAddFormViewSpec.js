@@ -166,6 +166,7 @@ describe('Quick-Add Task Form', function() {
         });
 
         it('triggers the newTask event #travis', function() {
+          pending('Figure out if the app actually needs to do this');
           var spy = jasmine.createSpy('spy');
           view.on('newTask', spy);
           view.createTask(e);

@@ -58,7 +58,7 @@ describe('Task Collection View Elements', function() {
       });
     });
 
-    fcontext('when the task is incomplete', function() {
+    context('when the task is incomplete', function() {
       beforeEach(function(done) {
         client.waitForVisible('a[data-method=crossOffIncomplete]')
               .click('a[data-method=crossOffIncomplete', done);

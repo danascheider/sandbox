@@ -28,7 +28,9 @@ var TaskCollectionView = Canto.View.extend({
   crossOff             : function(task) {
     if(!task.get('status') === 'Complete') { return; }
 
-    var that = this, view = this.retrieveViewForModel(task);
+    var that = this, 
+        view = this.retrieveViewForModel(task);
+
     view.$('a.task-title').css('text-decoration', 'line-through');
 
     setTimeout(function() {
@@ -99,7 +101,8 @@ var TaskCollectionView = Canto.View.extend({
     this.childViews   = [];
     this.quickAddForm = new QuickAddForm({collection: this.collection, grouping: this.grouping});
 
-    this.listenTo(this.collection, 'add remove fetch', this.render);
+    this.listenTo(this.collection, 'add fetch', this.render);
+    this.listenTo(this.collection, 'remove', this.removeChildAndRender);
     this.listenTo(this.collection, 'change:status', this.crossOff);
 
     // FIX: Determine whether this is really necessary
@@ -109,6 +112,13 @@ var TaskCollectionView = Canto.View.extend({
   remove              : function() {
     this.removeChildViews();
     Backbone.View.prototype.remove.call(this);
+  },
+
+  removeChildAndRender: function(task) {
+    var view  = this.retrieveViewForModel(task),
+        index = this.childViews.indexOf(view);
+    this.childViews.splice(index, 1);
+    this.render();
   },
 
   render              : function() {

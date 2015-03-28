@@ -15,17 +15,7 @@ var matchers       = require('jasmine-jquery-matchers'),
 
 Backbone.$         = $;
 
-var task1 = new TaskModel({id: 1, title: 'Test Task 1', status: 'Blocking'}),
-    task2 = new TaskModel({id: 2, title: 'Test Task 2', status: 'Blocking'}),
-    task3 = new TaskModel({id: 3, title: 'Test Task 3', status: 'Blocking'});
-
-var collection = new TaskCollection([task1, task2, task3]);
-
-var childViews = [];
-
-collection.each(function(task) {
-  childViews.push(new ListItemView({model: task}));
-});
+var task1, task2, task3, collection, childViews;
 
 describe('Task Collection View #travis', function() {
   var view, newView;
@@ -33,6 +23,15 @@ describe('Task Collection View #travis', function() {
   beforeEach(function() {
     jasmine.addMatchers(matchers);
     jasmine.addMatchers(custom);
+
+    task1 = new TaskModel({id: 1, title: 'Test Task 1', status: 'Blocking'}),
+    task2 = new TaskModel({id: 2, title: 'Test Task 2', status: 'Blocking'}),
+    task3 = new TaskModel({id: 3, title: 'Test Task 3', status: 'Blocking'});
+
+    collection = new TaskCollection([task1, task2, task3]);
+
+    childViews = collection.models.map(function(task) { return new ListItemView({model: task}); });
+
     view = new SUT({collection: collection});
   });
 
@@ -58,19 +57,19 @@ describe('Task Collection View #travis', function() {
   });
 
   describe('properties', function() {
-    it('is a Canto.View', function() {
+    it('is a Canto.View #travis', function() {
       expect(view).toBeA('Canto.View');
     });
 
-    it('has klass TaskCollectionView', function() {
+    it('has klass TaskCollectionView #travis', function() {
       expect(view.klass).toEqual('TaskCollectionView');
     });
 
-    it('has family Canto.View', function() {
+    it('has family Canto.View #travis', function() {
       expect(view.family).toEqual('Canto.View');
     });
 
-    it('has superFamily Backbone.View', function() {
+    it('has superFamily Backbone.View #travis', function() {
       expect(view.superFamily).toEqual('Backbone.View');
     });
   });
@@ -86,7 +85,7 @@ describe('Task Collection View #travis', function() {
       expect(view.$el[0]).toHaveClass('task-list');
     });
 
-    it('has a list item for each task', function() {
+    it('has a list item for each task #travis', function() {
       expect(view.$('.task-list-item')).toHaveLength(3);
     });
   });
@@ -96,8 +95,15 @@ describe('Task Collection View #travis', function() {
       spyOn(SUT.prototype, 'render');
       // spyOn(TaskCollection.prototype, 'fetch');
       spyOn(SUT.prototype, 'crossOff');
+      spyOn(SUT.prototype, 'removeChildAndRender');
       // newColl = new TaskCollection([task1, task2, task3]);
+
+      spyOn(SUT.prototype, 'retrieveViewForModel').and.callFake(function() {
+        return childViews[0];
+      });
+
       newView = new SUT({collection: collection});
+      newView.childViews = childViews;
     });
 
     afterEach(function() {
@@ -106,27 +112,28 @@ describe('Task Collection View #travis', function() {
     });
 
     describe('add to collection', function() {
-      it('calls render', function() {
+      it('calls render #travis', function() {
         newView.collection.trigger('add');
         expect(SUT.prototype.render).toHaveBeenCalled();
       });
     });
 
     describe('remove from collection', function() {
-      it('calls render', function() {
+      it('calls removeChildAndRender #travis', function() {
         newView.collection.trigger('remove');
         expect(SUT.prototype.render).toHaveBeenCalled();
       });
     });
 
     describe('fetch collection', function() {
-      it('calls render', function() {
+      it('calls render #travis', function() {
         newView.collection.trigger('fetch');
         expect(SUT.prototype.render).toHaveBeenCalled();
       });
     });
 
     // FIX: Determine whether this is really necessary
+    // 
     // describe('newTask through quick-add form', function() {
     //   it('calls fetch on the collection', function() {
     //     newView.quickAddForm.trigger('newView');
@@ -135,8 +142,8 @@ describe('Task Collection View #travis', function() {
     // });
 
     describe('change:status', function() {
-      it('calls crossOff', function() {
-        task1.trigger('change:status');
+      it('calls crossOff #travis', function() {
+        task1.set('status', 'Complete');
         expect(SUT.prototype.crossOff).toHaveBeenCalled();
       });
     });
@@ -149,13 +156,22 @@ describe('Task Collection View #travis', function() {
         view.removeBacklog();
       });
 
-      afterEach(function() {
-        task2.unset('backlog');
-        view.collection.reset([task1, task2, task3]);
+      it('removes the backlogged task #travis', function() {
+        expect(view.models).not.toContain(task2);
+      });
+    });
+
+    describe('removeChildAndRender', function() {
+      it('removes the child view from the array', function() {
+        var child = childViews[1];
+        view.removeChildAndRender(task2);
+        expect(view.childViews).not.toContain(child);
       });
 
-      it('removes the backlogged task', function() {
-        expect(view.models).not.toContain(task2);
+      it('calls render', function() {
+        spyOn(view, 'render');
+        view.removeChildAndRender(task2);
+        expect(view.render).toHaveBeenCalled();
       });
     });
 
@@ -165,13 +181,13 @@ describe('Task Collection View #travis', function() {
         view.render();
       });
 
-      it('calls remove on the child views', function() {
+      it('calls remove on the child views #travis', function() {
         spyOn(view.childViews[2], 'remove');
         view.removeChildViews(); 
         expect(view.childViews[2].remove).toHaveBeenCalled();
       });
 
-      it('calls unbind on the child views', function() {
+      it('calls unbind on the child views #travis', function() {
         spyOn(view.childViews[1], 'unbind');
         view.removeChildViews();
         expect(view.childViews[1].unbind).toHaveBeenCalled();
@@ -180,22 +196,18 @@ describe('Task Collection View #travis', function() {
 
     describe('removeComplete', function() {
       beforeEach(function() {
+        view.childViews = childViews;
         task1.set('status', 'Complete');
         view.removeComplete();
       });
 
-      afterEach(function() {
-        task1.set('status', 'Blocking');
-        view.collection.reset([task1, task2, task3]);
-      });
-
-      it('removes the completed task', function() {
+      it('removes the completed task #travis', function() {
         expect(view.models).not.toContain(task1);
       });
     });
 
     describe('renderCollection', function() {
-      it('renders the collection', function() {
+      it('renders the collection #travis', function() {
         view.renderCollection();
         expect(view.$('li.task-list-item')).toHaveLength(3);
       });
@@ -204,15 +216,15 @@ describe('Task Collection View #travis', function() {
 
   describe('special functions', function() {
     describe('isA', function() {
-      it('returns true with the argument TaskCollectionView', function() {
+      it('returns true with the argument TaskCollectionView #travis', function() {
         expect(view.isA('TaskCollectionView')).toBe(true);
       });
 
-      it('returns true with the argument TaskView', function() {
+      it('returns true with the argument TaskView #travis', function() {
         expect(view.isA('TaskView')).toBe(true);
       });
 
-      it('returns false with other arguments', function() {
+      it('returns false with other arguments #travis', function() {
         expect(view.isA('deposed Nigerian warlord')).toBe(false);
       });
     });
@@ -229,7 +241,7 @@ describe('Task Collection View #travis', function() {
       context('when there is a view for the model', function() {
         beforeEach(function() { view.childViews = childViews; });
 
-        it('returns the appropriate view', function() {
+        it('returns the appropriate view #travis', function() {
           expect((view.retrieveViewForModel(task1)).klass).toEqual('TaskListItemView');
         });
       });
@@ -294,13 +306,13 @@ describe('Task Collection View #travis', function() {
     describe('remove', function() {
       beforeEach(function() { view.render(); });
 
-      it('calls removeChildViews', function() {
+      it('calls removeChildViews #travis', function() {
         spyOn(view, 'removeChildViews');
         view.remove();
         expect(view.removeChildViews).toHaveBeenCalled();
       });
 
-      it('removes itself', function() {
+      it('removes itself #travis', function() {
         spyOn(Backbone.View.prototype.remove, 'call');
         view.remove();
         expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
