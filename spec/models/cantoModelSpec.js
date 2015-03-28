@@ -48,4 +48,47 @@ describe('Canto.Model', function() {
       expect(model.isA('ProtectedResourceModel')).toBe(false);
     });
   });
+
+  describe('inheritance', function() {
+    var NewModel, newModel;
+
+    beforeEach(function() {
+      NewModel = Canto.Model.extend({klass: 'NewModel'});
+      newModel = new NewModel();
+    });
+
+    describe('types', function() {
+      it('inherits types from Canto.Model', function() {
+        expect(newModel.types()).toEqual(['Backbone.Model', 'Canto.Model']);
+      });
+    });
+
+    describe('isA', function() {
+      it('returns true with argument Backbone.Model', function() {
+        expect(newModel.isA('Backbone.Model')).toBe(true);
+      });
+
+      it('returns true with argument Canto.Model', function() {
+        expect(newModel.isA('Canto.Model')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(newModel.isA('walrus')).toBe(false);
+      });
+    });
+
+    describe('properties', function() {
+      it('has klass NewModel', function() {
+        expect(newModel.klass).toBe('NewModel');
+      });
+
+      it('has family Canto.Model', function() {
+        expect(newModel.family).toBe('Canto.Model');
+      });
+
+      it('has superFamily Backbone.Model', function() {
+        expect(newModel.superFamily).toBe('Backbone.Model');
+      });
+    });
+  });
 });
