@@ -88,12 +88,16 @@ fdescribe('Task Panel View #travis', function() {
       expect(taskPanel.$el).toHaveId('task-panel');
     });
 
-    it('has class \'panel dash-widget\'', function() {
+    it('has class \'panel\'', function() {
       expect(taskPanel.$el).toHaveClass('panel');
     });
 
     it('has class \'panel-primary\'', function() {
       expect(taskPanel.$el).toHaveClass('panel-primary');
+    });
+
+    it('has class \'dash-widget\'', function() {
+      expect(taskPanel.$el).toHaveClass('dash-widget');
     });
   });
 
