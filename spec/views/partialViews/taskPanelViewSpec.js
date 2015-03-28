@@ -93,6 +93,18 @@ fdescribe('Task Panel View', function() {
       it('returns true with argument \'TaskPanel\' #travis', function() {
         expect(taskPanel.isA('TaskPanel')).toBe(true);
       });
+
+      it('returns true with argument \'TaskView\' #travis', function() {
+        expect(taskPanel.isA('TaskView')).toBe(true);
+      });
+
+      it('returns true with argument \'PartialView\' #travis', function() {
+        expect(taskPanel.isA('PartialView')).toBe(true);
+      });
+
+      it('returns false with other arguments', function() {
+        expect(taskPanel.isA('TaskCollectionView')).toBe(false);
+      });
     });
   });
 });
