@@ -14,7 +14,7 @@ var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js
     context        = describe,
     fcontext       = fdescribe;
 
-fdescribe('Task Panel View', function() {
+fdescribe('Task Panel View #travis', function() {
 
   // Declare variables to be used in the tests
   var taskPanel, opts, e;
@@ -53,17 +53,17 @@ fdescribe('Task Panel View', function() {
   });
 
   describe('constructor', function() {
-    it('doesn\'t call render #travis', function() {
+    it('doesn\'t call render', function() {
       spyOn(SUT.prototype, 'render');
       var newPanel = new SUT(opts);
       expect(SUT.prototype.render).not.toHaveBeenCalled();
     });
 
-    it('sets a collection #travis', function() {
+    it('sets a collection', function() {
       expect(taskPanel.collection).toBe(collection);
     });
 
-    it('instantiates a collection view #travis', function() {
+    it('instantiates a collection view', function() {
 
       // For some reason, when I worded this with the toBeA('TaskCollectionView')
       // matcher, it passed even when the thing did not exist. That's why I'm 
@@ -74,8 +74,18 @@ fdescribe('Task Panel View', function() {
   });
 
   describe('properties', function() {
-    it('has klass \'TaskPanelView\' #travis', function() {
+    it('has klass \'TaskPanelView\'', function() {
       expect(taskPanel.klass).toBe('TaskPanelView');
+    });
+  });
+
+  describe('elements', function() {
+    beforeEach(function() {
+      taskPanel.render();
+    });
+
+    it('has ID #task-panel', function() {
+      expect(taskPanel.$el[0]).toHaveId('task-panel');
     });
   });
 
@@ -86,19 +96,19 @@ fdescribe('Task Panel View', function() {
 
   describe('special functions', function() {
     describe('isA', function() {
-      it('returns true with argument \'TaskPanelView\' #travis', function() {
+      it('returns true with argument \'TaskPanelView\'', function() {
         expect(taskPanel.isA('TaskPanelView')).toBe(true);
       });
 
-      it('returns true with argument \'TaskPanel\' #travis', function() {
+      it('returns true with argument \'TaskPanel\'', function() {
         expect(taskPanel.isA('TaskPanel')).toBe(true);
       });
 
-      it('returns true with argument \'TaskView\' #travis', function() {
+      it('returns true with argument \'TaskView\'', function() {
         expect(taskPanel.isA('TaskView')).toBe(true);
       });
 
-      it('returns true with argument \'PartialView\' #travis', function() {
+      it('returns true with argument \'PartialView\'', function() {
         expect(taskPanel.isA('PartialView')).toBe(true);
       });
 
