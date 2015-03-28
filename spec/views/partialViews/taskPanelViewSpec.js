@@ -9,6 +9,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/partialViews/taskPanelView.js');
 
 var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
+    TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
     ListItemView   = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js'),
     matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA')),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
@@ -126,6 +127,19 @@ fdescribe('Task Panel View #travis', function() {
         spyOn(taskPanel.collectionView, 'crossOff');
         taskPanel.crossOffComplete();
         expect(taskPanel.collectionView.crossOff).toHaveBeenCalledWith(task1);
+      });
+    });
+
+    describe('filterCollection', function() {
+      beforeEach(function() {
+        for(var i = 4; i < 15; i++) {
+          var t = new TaskModel({title: 'My Task ' + i});
+          collection.add([t]);
+        }
+      });
+
+      it('returns 10 tasks', function() {
+        expect(taskPanel.filterCollection(collection)).toHaveLength(10);
       });
     });
   });

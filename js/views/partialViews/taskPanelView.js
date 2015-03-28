@@ -31,6 +31,10 @@ var TaskPanelView = Canto.View.extend({
     });
   },
 
+  filterCollection : function(collection) {
+    return collection.models.slice(0, 10);
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //
