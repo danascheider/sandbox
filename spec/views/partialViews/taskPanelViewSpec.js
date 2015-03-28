@@ -85,7 +85,11 @@ fdescribe('Task Panel View #travis', function() {
     });
 
     it('has ID #task-panel', function() {
-      expect(taskPanel.$el[0]).toHaveId('task-panel');
+      expect(taskPanel.$el).toHaveId('task-panel');
+    });
+
+    it('has classname \'panel panel-primary dash-widget\'', function() {
+      expect(taskPanel.$el).toHaveClass('panel');
     });
   });
 
