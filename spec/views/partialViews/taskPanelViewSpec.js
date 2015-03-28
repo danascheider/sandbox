@@ -14,7 +14,7 @@ var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js
     context        = describe,
     fcontext       = fdescribe;
 
-describe('Task Panel View', function() {
+fdescribe('Task Panel View', function() {
 
   // Declare variables to be used in the tests
   var taskPanel, opts, e;
@@ -57,6 +57,19 @@ describe('Task Panel View', function() {
       spyOn(SUT.prototype, 'render');
       var newPanel = new SUT(opts);
       expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
+
+    it('sets a collection #travis', function() {
+      expect(taskPanel.collection).toBe(collection);
+    });
+
+    it('instantiates a collection view #travis', function() {
+
+      // For some reason, when I worded this with the toBeA('TaskCollectionView')
+      // matcher, it passed even when the thing did not exist. That's why I'm 
+      // using the stupid matcher.
+      
+      expect(taskPanel.collectionView).toExist();
     });
   });
 });
