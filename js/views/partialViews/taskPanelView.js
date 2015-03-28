@@ -4,17 +4,21 @@ Canto.View = Canto.View || require('../appViews/cantoView.js');
 var CollectionView = require('../collectionViews/taskCollectionView.js');
 
 var TaskPanelView = Canto.View.extend({
-  id               : 'task-panel',
-  className        : 'panel panel-primary dash-widget',
-  template         : JST['partials/taskPanel'],
+  id                   : 'task-panel',
+  className            : 'panel panel-primary dash-widget',
+  template             : JST['partials/taskPanel'],
+
+  events               : {
+    'mouseenter' : 'showToggleWidgetIcon'
+  },
 
   // --------------------- //
   // Canto View Properties // 
   // --------------------- //
 
-  klass            : 'TaskPanelView',
+  klass                : 'TaskPanelView',
 
-  types            : function() {
+  types                : function() {
     return Canto.View.prototype.types().concat(['TaskPanelView', 'TaskPanel', 'TaskView', 'PartialView']);
   },
 
@@ -22,7 +26,7 @@ var TaskPanelView = Canto.View.extend({
   // Event Callbacks //
   // --------------- //
 
-  crossOffComplete : function() {
+  crossOffComplete     : function() {
     var that = this;
 
     var complete = this.collection.where({status: 'Complete'});
@@ -31,7 +35,7 @@ var TaskPanelView = Canto.View.extend({
     });
   },
 
-  filterCollection : function(collection) {
+  filterCollection     : function(collection) {
     var tasks = collection.models.filter(function(task) {
       return task.get('status') !== 'Blocking' && !task.get('backlog');
     });
@@ -40,18 +44,22 @@ var TaskPanelView = Canto.View.extend({
     return slice;
   },
 
-  hideWidget       : function() {
+  hideWidget           : function() {
     this.$('span.pull-right').removeClass('hide-widget').addClass('show-widget');
     this.$('i.fa-minus').removeClass('fa-minus').addClass('fa-plus');
   },
 
-  removeBacklogged : function() {
+  removeBacklogged     : function() {
     var that = this;
     var backlogged = this.collection.where({backlog: true});
    _.each(backlogged, function(task) { that.collection.remove(task); });
   },
 
-  showWidget       : function() {
+  showToggleWidgetIcon : function() {
+    //
+  },
+
+  showWidget           : function() {
     this.$('span.pull-right').first().removeClass('show-widget').addClass('hide-widget');
     this.$('i.fa-plus').removeClass('fa-plus').addClass('fa-minus');
   },
@@ -60,7 +68,7 @@ var TaskPanelView = Canto.View.extend({
   // Core View Functions //
   // ------------------- //
 
-  initialize       : function(opts) {
+  initialize           : function(opts) {
     opts = opts || {};
 
     _.extend(this, opts);
@@ -68,13 +76,13 @@ var TaskPanelView = Canto.View.extend({
     this.collectionView = new CollectionView({collection: opts.collection});
   },
 
-  remove           : function() {
+  remove               : function() {
     this.collectionView.remove();
     Backbone.View.prototype.remove.call(this);
     this.undelegateEvents();
   },
 
-  render           : function() {
+  render               : function() {
     this.$el.html(this.template());
     this.delegateEvents();
 

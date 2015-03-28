@@ -107,7 +107,15 @@ describe('Task Panel View #travis', function() {
     });
   });
 
-  describe('events', function() {
+  fdescribe('events', function() {
+    describe('mouseenter', function() {
+      it('calls showToggleWidgetIcon', function() {
+        spyOn(SUT.prototype, 'showToggleWidgetIcon');
+        var newView = new SUT({collection: collection});
+        newView.$el.mouseenter();
+        expect(SUT.prototype.showToggleWidgetIcon).toHaveBeenCalled();
+      });
+    });
     // Make sure to test for the callback on the collection's events -
     // change:status and change:backlog
   });
