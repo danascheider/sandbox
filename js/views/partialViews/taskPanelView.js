@@ -68,6 +68,11 @@ var TaskPanelView = Canto.View.extend({
     this.collectionView = new CollectionView({collection: opts.collection});
   },
 
+  remove           : function() {
+    this.collectionView.remove();
+    Backbone.View.prototype.remove.call(this);
+  },
+
   render           : function() {
     this.$el.html(this.template());
     this.delegateEvents();

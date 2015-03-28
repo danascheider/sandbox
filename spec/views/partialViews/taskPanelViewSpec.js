@@ -201,6 +201,14 @@ describe('Task Panel View #travis', function() {
   });
 
   describe('core view functions', function() {
+    describe('remove()', function() {
+      it('removes the collection view from the DOM', function() {
+        spyOn(taskPanel.collectionView, 'remove');
+        taskPanel.remove();
+        expect(taskPanel.collectionView.remove).toHaveBeenCalled();
+      });
+    });
+
     describe('render()', function() {
       it('sets its HTML', function() {
         spyOn(taskPanel.$el, 'html');
