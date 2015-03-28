@@ -226,6 +226,18 @@ describe('Task Panel View #travis', function() {
         expect($.prototype.html.calls.argsFor(1)).toContain(taskPanel.collectionView.template());
       })
 
+      it('configures sortable', function() {
+        spyOn($.prototype, 'sortable');
+        taskPanel.render();
+        expect($.prototype.sortable).toHaveBeenCalled();
+      });
+
+      it('doesn\'t let not-sortable things be sorted', function() {
+        spyOn($.prototype, 'sortable');
+        taskPanel.render();
+        expect($.prototype.sortable.calls.argsFor(0)[0].items).toEqual('>*:not(.not-sortable)')
+      })
+
       it('returns itself', function() {
         expect(taskPanel.render()).toEqual(taskPanel);
       });

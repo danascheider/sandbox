@@ -75,6 +75,10 @@ var TaskPanelView = Canto.View.extend({
     this.collectionView.render();
     this.$('.panel-body').html(this.collectionView.$el);
 
+    this.$el.sortable({
+      items : '>*:not(.not-sortable)'
+    })
+
     return this;
   }
 });
