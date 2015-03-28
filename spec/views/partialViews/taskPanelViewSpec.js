@@ -83,4 +83,16 @@ fdescribe('Task Panel View', function() {
     // Make sure to test for the callback on the collection's events -
     // change:status and change:backlog
   });
+
+  describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with argument \'TaskPanelView\' #travis', function() {
+        expect(taskPanel.isA('TaskPanelView')).toBe(true);
+      });
+
+      it('returns true with argument \'TaskPanel\' #travis', function() {
+        expect(taskPanel.isA('TaskPanel')).toBe(true);
+      });
+    });
+  });
 });

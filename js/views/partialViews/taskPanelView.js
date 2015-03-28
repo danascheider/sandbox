@@ -11,6 +11,10 @@ var TaskPanelView = Canto.View.extend({
 
   klass      : 'TaskPanelView',
 
+  types      : function() {
+    return Canto.View.prototype.types().concat(['TaskPanelView', 'TaskPanel']);
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //
