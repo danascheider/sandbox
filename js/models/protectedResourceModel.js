@@ -1,9 +1,12 @@
-Canto = Canto || require('../dependencies.js');
+Canto       = Canto || require('../dependencies.js');
+Canto.Model = Canto.Model || require('./cantoModel');
 
-var ProtectedResource = Backbone.Model.extend({
+var ProtectedResource = Canto.Model.extend({
   token   : function() {
     return 'Basic ' + $.cookie('auth');
   },
+
+  klass   : 'ProtectedResourceModel',
 
   destroy : function(opts) {
     opts = opts || {};
@@ -40,6 +43,10 @@ var ProtectedResource = Backbone.Model.extend({
     };
 
     return Backbone.Model.prototype.save.call(this, attrs, opts);
+  },
+
+  types   : function() {
+    return Canto.Model.prototype.types().concat(['ProtectedResourceModel', 'ProtectedResource']);
   }
 });
 

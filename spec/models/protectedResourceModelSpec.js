@@ -29,6 +29,12 @@ describe('Protected Resource Model', function() {
     expect(resource.token()).toEqual(string);
   });
 
+  describe('properties', function() {
+    it('has klass ProtectedResourceModel', function() {
+      expect(resource.klass).toBe('ProtectedResourceModel');
+    });
+  });
+
   describe('destroy() method', function() {
     beforeEach(function() { spyOn(resource, 'token').and.returnValue('Basic ' + btoa('testuser:testuser')); });
 
@@ -75,6 +81,20 @@ describe('Protected Resource Model', function() {
       spyOn(Backbone.Model.prototype, 'fetch');
       resource.fetch();
       expect(Backbone.Model.prototype.fetch).toHaveBeenCalled;
+    });
+  });
+
+  describe('isA() method', function() {
+    it('returns true with argument ProtectedResourceModel', function() {
+      expect(resource.isA('ProtectedResourceModel')).toBe(true);
+    });
+
+    it('returns true with argument ProtectedResource', function() {
+      expect(resource.isA('ProtectedResource')).toBe(true);
+    });
+
+    it('returns false with another argument', function() {
+      expect(resource.isA('Canto.View')).toBe(false);
     });
   });
 
