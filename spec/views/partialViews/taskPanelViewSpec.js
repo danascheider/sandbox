@@ -9,6 +9,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/partialViews/taskPanelView.js');
 
 var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
+    ListItemView   = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js'),
     matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA')),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     context        = describe,
@@ -17,7 +18,7 @@ var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js
 fdescribe('Task Panel View #travis', function() {
 
   // Declare variables to be used in the tests
-  var taskPanel, opts, e;
+  var taskPanel, opts, childViews, e;
 
   beforeAll(function() {
     _.extend(global, Fixtures);
@@ -108,6 +109,25 @@ fdescribe('Task Panel View #travis', function() {
   describe('events', function() {
     // Make sure to test for the callback on the collection's events -
     // change:status and change:backlog
+  });
+
+  describe('event callbacks', function() {
+    describe('crossOffComplete', function() {
+      beforeEach(function() {
+        task1.set({status: 'Complete'}, {silent: true});
+        taskPanel.render();
+      });
+
+      afterEach(function() {
+        task1.set({status: 'New'}, {silent: true});
+      })
+
+      it('calls crossOff on the collection view', function() {
+        spyOn(taskPanel.collectionView, 'crossOff');
+        taskPanel.crossOffComplete();
+        expect(taskPanel.collectionView.crossOff).toHaveBeenCalledWith(task1);
+      });
+    });
   });
 
   describe('core view functions', function() {
