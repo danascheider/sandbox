@@ -207,6 +207,18 @@ describe('Task Panel View #travis', function() {
         taskPanel.remove();
         expect(taskPanel.collectionView.remove).toHaveBeenCalled();
       });
+
+      it('removes itself from the DOM', function() {
+        spyOn(Backbone.View.prototype.remove, 'call');
+        taskPanel.remove();
+        expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(taskPanel);
+      });
+
+      it('calls undelegateEvents', function() {
+        spyOn(taskPanel, 'undelegateEvents');
+        taskPanel.remove();
+        expect(taskPanel.undelegateEvents).toHaveBeenCalled();
+      });
     });
 
     describe('render()', function() {
