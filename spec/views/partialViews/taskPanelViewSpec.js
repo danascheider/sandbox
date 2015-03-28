@@ -173,12 +173,29 @@ describe('Task Panel View #travis', function() {
       })
     });
 
-    fdescribe('removeBacklogged', function() {
+    describe('removeBacklogged', function() {
       it('removes the specified task from the collection', function() {
         spyOn(taskPanel.collection, 'remove');
         task1.set({backlog: true});
         taskPanel.removeBacklogged();
         expect(taskPanel.collection.remove).toHaveBeenCalledWith(task1);
+      });
+    });
+
+    describe('showWidget', function() {
+      beforeEach(function() {
+        taskPanel.render();
+        taskPanel.hideWidget(); // hide it first
+        taskPanel.showWidget();
+      });
+
+      it('changes the icon class to .hide-widget', function() {
+        expect(taskPanel.$('span.pull-right').first()).toHaveClass('hide-widget');
+        expect(taskPanel.$('span.pull-right').first()).not.toHaveClass('show-widget');
+      });
+
+      it('changes the icon to fa-minus', function() {
+        expect(taskPanel.$('span.pull-right i').first()).toHaveClass('fa-minus');
       });
     });
   });
