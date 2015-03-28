@@ -2,6 +2,7 @@ require('./dependencies.js');
 require('./utils.js');
 
 // Require models
+require('./models/cantoModel.js');
 require('./models/protectedResourceModel.js');
 require('./models/taskModel.js');
 require('./models/userModel.js');
