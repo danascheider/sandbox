@@ -9,7 +9,10 @@ var TaskPanelView = Canto.View.extend({
   template             : JST['partials/taskPanel'],
 
   events               : {
-    'mouseenter' : 'showToggleWidgetIcon'
+    'mouseenter'         : 'showToggleWidgetIcon',
+    'mouseleave'         : 'hideToggleWidgetIcon',
+    'click .hide-widget' : 'hideWidget',
+    'click .show-widget' : 'showWidget'
   },
 
   // --------------------- //
@@ -44,6 +47,10 @@ var TaskPanelView = Canto.View.extend({
     return slice;
   },
 
+  hideToggleWidgetIcon : function() {
+    //
+  },
+
   hideWidget           : function() {
     this.$('span.pull-right').removeClass('hide-widget').addClass('show-widget');
     this.$('i.fa-minus').removeClass('fa-minus').addClass('fa-plus');
@@ -74,6 +81,9 @@ var TaskPanelView = Canto.View.extend({
     _.extend(this, opts);
 
     this.collectionView = new CollectionView({collection: opts.collection});
+
+    this.listenTo(this.collection, 'change:status', this.crossOffComplete);
+    this.listenTo(this.collection, 'change:backlog', this.removeBacklogged);
   },
 
   remove               : function() {

@@ -10,6 +10,8 @@ var SUT = require(process.cwd() + '/js/views/partialViews/taskPanelView.js');
 
 var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
+    TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
+    TaskCollectionView = require(process.cwd() + '/js/views/collectionViews/taskCollectionView.js'),
     ListItemView   = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js'),
     matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA')),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
@@ -19,7 +21,7 @@ var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js
 describe('Task Panel View #travis', function() {
 
   // Declare variables to be used in the tests
-  var taskPanel, opts, childViews, e;
+  var taskPanel, opts, e;
 
   beforeAll(function() {
     _.extend(global, Fixtures);
@@ -107,17 +109,64 @@ describe('Task Panel View #travis', function() {
     });
   });
 
-  fdescribe('events', function() {
+  describe('events', function() {
     describe('mouseenter', function() {
       it('calls showToggleWidgetIcon', function() {
         spyOn(SUT.prototype, 'showToggleWidgetIcon');
         var newView = new SUT({collection: collection});
-        newView.$el.mouseenter();
+        newView.render().$el.mouseenter();
         expect(SUT.prototype.showToggleWidgetIcon).toHaveBeenCalled();
       });
     });
-    // Make sure to test for the callback on the collection's events -
-    // change:status and change:backlog
+
+    describe('mouseleave', function() {
+      it('calls hideToggleWidgetIcon', function() {
+        spyOn(SUT.prototype, 'hideToggleWidgetIcon');
+        var newView = new SUT({collection: collection});
+        newView.render().$el.mouseleave();
+        expect(SUT.prototype.hideToggleWidgetIcon).toHaveBeenCalled();
+      });
+    });
+
+    describe('click .hide-widget', function() {
+      it('calls hideWidget', function() {
+        spyOn(SUT.prototype, 'hideWidget');
+        var newView = new SUT({collection: collection});
+        newView.render().$('.hide-widget').trigger('click');
+        expect(SUT.prototype.hideWidget).toHaveBeenCalled();
+      });
+    });
+
+    describe('click .show-widget', function() {
+      it('calls showWidget', function() {
+        spyOn(SUT.prototype, 'showWidget');
+        var newView = new SUT({collection: collection});
+        newView.render().hideWidget();
+        newView.$('.show-widget').click();
+        expect(SUT.prototype.showWidget).toHaveBeenCalled();
+      });
+    });
+
+    describe('change task status', function() {
+      it('calls crossOffComplete', function() {
+        spyOn(SUT.prototype, 'crossOffComplete');
+        spyOn(TaskCollectionView.prototype, 'crossOff');
+
+        var newCollection = new TaskCollection([task1, task2, task3]);
+        var newView = new SUT({collection: newCollection});
+        newView.collection.trigger('change:status');
+        expect(SUT.prototype.crossOffComplete).toHaveBeenCalled();
+      });
+    });
+
+    describe('change task backlog', function() {
+      it('calls removeBacklogged', function() {
+        spyOn(SUT.prototype, 'removeBacklogged');
+        var newView = new SUT({collection: collection});
+        newView.collection.trigger('change:backlog');
+        expect(SUT.prototype.removeBacklogged).toHaveBeenCalled();
+      });
+    });
   });
 
   describe('event callbacks', function() {
