@@ -11,6 +11,16 @@ var TaskModel = ProtectedResource.extend({
     return Canto.API.tasks.single(this.get('id'));
   },
 
+  // ---------------------- //
+  // Canto Model Properties //
+  // ---------------------- //
+
+  klass   : 'TaskModel',
+  parent  : 'ProtectedResourceModel',
+  types   : function() {
+    return ProtectedResource.prototype.types().concat(['TaskModel', 'Task']);
+  },
+
   // ----------------- //
   // Special Functions //
   // ----------------- //

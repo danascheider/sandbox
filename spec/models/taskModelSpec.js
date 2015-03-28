@@ -33,6 +33,14 @@ describe('Task Model', function() {
     it('has an individual `url` not scoped to the logged in user #travis', function() {
       expect(task.url()).toEqual(Canto.API.base + '/tasks/1');
     });
+
+    it('has klass `TaskModel`', function() {
+      expect(task.klass).toBe('TaskModel');
+    });
+
+    it('has parent `ProtectedResourceModel`', function() {
+      expect(task.parent).toBe('ProtectedResourceModel');
+    });
   });
 
   describe('constructor', function() {
@@ -156,6 +164,20 @@ describe('Task Model', function() {
           task.set('status', 'In Progress');
           expect(task.incomplete()).toBe(true);
         });
+      });
+    });
+
+    describe('isA', function() {
+      it('returns true with argument TaskModel', function() {
+        expect(task.isA('TaskModel')).toBe(true);
+      });
+
+      it('returns true with argument Task', function() {
+        expect(task.isA('Task')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(task.isA('feather pen')).toBe(false);
       });
     });
 
