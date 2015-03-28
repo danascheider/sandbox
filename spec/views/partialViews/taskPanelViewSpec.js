@@ -16,7 +16,7 @@ var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js
     context        = describe,
     fcontext       = fdescribe;
 
-fdescribe('Task Panel View #travis', function() {
+describe('Task Panel View #travis', function() {
 
   // Declare variables to be used in the tests
   var taskPanel, opts, childViews, e;
@@ -153,6 +153,23 @@ fdescribe('Task Panel View #travis', function() {
       it('doesn\'t include backlogged tasks', function() {
         task2.set({backlog: true});
         expect(taskPanel.filterCollection(collection).indexOf(task2)).toBe(-1);
+      })
+    });
+
+    describe('hideWidget', function() {
+      beforeEach(function() {
+        taskPanel.render();
+        taskPanel.hideWidget();
+      });
+
+      it('changes the icon class to .show-widget', function() {
+        expect(taskPanel.$('span.pull-right').first()).not.toHaveClass('hide-widget');
+        expect(taskPanel.$('span.pull-right').first()).toHaveClass('show-widget');
+      });
+
+      it('changes the icon to fa-plus', function() {
+        expect(taskPanel.$('span.pull-right i').first()).not.toHaveClass('fa-minus');
+        expect(taskPanel.$('span.pull-right i').first()).toHaveClass('fa-plus');
       })
     });
   });

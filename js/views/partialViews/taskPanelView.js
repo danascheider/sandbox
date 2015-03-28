@@ -40,6 +40,11 @@ var TaskPanelView = Canto.View.extend({
     return slice;
   },
 
+  hideWidget       : function() {
+    this.$('span.pull-right').removeClass('hide-widget').addClass('show-widget');
+    this.$('i.fa-minus').removeClass('fa-minus').addClass('fa-plus');
+  },
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //
