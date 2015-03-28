@@ -1,22 +1,51 @@
 Canto = Canto || require('../../dependencies.js');
 
+var Fixtures = require('../../../spec/support/fixtures/fixtures.js');
+
 var TaskModel      = require('../../models/taskModel.js'),
     Collection     = require('../../collections/taskCollection.js');
     TaskPanel      = require('../partialViews/taskPanelView.js');
 
-// Instantiate tasks to be displayed in view
-
-var task1      = new TaskModel({id: 1, title: 'Task 1', status: 'New', priority: 'Normal', position: 1}),
-    task2      = new TaskModel({id: 2, title: 'Task 2', status: 'New', priority: 'Normal', position: 2}),
-    task3      = new TaskModel({id: 3, title: 'Task 3', status: 'Complete', priority: 'Normal', position: 3}),
-    collection = new Collection([task1, task2, task3]);
-
 var SpecWrapper = Backbone.View.extend({
-  el : 'body',
-  template : JST['spec/taskPanel'],
+  el         : 'body',
+  template   : JST['spec/taskPanel'],
+
+  events     : {
+    'click a' : 'callMethod'
+  },
+
+  callMethod : function(e) {
+    e.preventDefault();
+
+    try {
+      this.view[$(e.target).attr('data-method')]();
+    } catch(err) {
+      this[$(e.target).attr('data-method')]();
+    }
+
+    if($(e.target).attr('data-method') === 'render') {
+      this.$('#view').html(this.view.$el);
+    }
+  },
+
+  displayIcon: function() {
+    if(!this.$('.toggleWidget').is(':visible')) { this.$('.toggleWidget').show(); }
+  },
+
+  displayPanelBody: function() {
+    if(!this.$('.panel-body').is(':visible')) { this.$('.panel-body').slideDown(); }
+  },
+
+  hideIcon: function() {
+    if(this.$('.toggleWidget').is(':visible')) { this.$('.toggleWidget').hide(); }
+  },
+
+  hidePanelBody: function() {
+    if(this.$('.panel-body').is(':visible')) { this.$('.panel-body').slideUp(); }
+  },
 
   initialize : function() {
-    this.view = new TaskPanel({collection: collection});
+    this.view = new TaskPanel({collection: Fixtures.collection});
     this.render();
   },
 
