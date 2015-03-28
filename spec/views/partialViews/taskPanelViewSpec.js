@@ -99,11 +99,47 @@ fdescribe('Task Panel View #travis', function() {
     it('has class \'dash-widget\'', function() {
       expect(taskPanel.$el).toHaveClass('dash-widget');
     });
+
+    it('has a collection view', function() {
+      expect(taskPanel.$('ul.task-list')).toExist();
+    });
   });
 
   describe('events', function() {
     // Make sure to test for the callback on the collection's events -
     // change:status and change:backlog
+  });
+
+  describe('core view functions', function() {
+    describe('render()', function() {
+      it('sets its HTML', function() {
+        spyOn(taskPanel.$el, 'html');
+        taskPanel.render();
+        expect(taskPanel.$el.html).toHaveBeenCalledWith(taskPanel.template());
+      });
+
+      it('calls delegateEvents on itself', function() {
+        spyOn(taskPanel, 'delegateEvents');
+        taskPanel.render();
+        expect(taskPanel.delegateEvents).toHaveBeenCalled();
+      });
+
+      it('renders its collection view', function() {
+        spyOn(taskPanel.collectionView, 'render');
+        taskPanel.render();
+        expect(taskPanel.collectionView.render).toHaveBeenCalled();
+      });
+
+      it('attaches the collection view to the DOM', function() {
+        spyOn($.prototype, 'html');
+        taskPanel.render();
+        expect($.prototype.html.calls.argsFor(1)).toContain(taskPanel.collectionView.template());
+      })
+
+      it('returns itself', function() {
+        expect(taskPanel.render()).toEqual(taskPanel);
+      });
+    });
   });
 
   describe('special functions', function() {
