@@ -1,9 +1,14 @@
 Canto = Canto || require('../dependencies.js');
+Canto.Model = Canto.Model || require('./cantoModel.js');
 
 var Collection = require('../collections/taskCollection.js');
 
-var UserModel = Backbone.Model.extend({
+var UserModel = Canto.Model.extend({
   urlRoot: Canto.API.users.collection,
+  klass  : 'UserModel',
+  types  : function() {
+    return Canto.Model.prototype.types().concat(['UserModel', 'User']);
+  },
 
   // ----------------- //
   // Special Functions //

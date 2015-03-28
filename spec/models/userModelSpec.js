@@ -27,6 +27,10 @@ describe('User Model', function() {
     it('has `urlRoot` /users #travis', function() {
       expect(user.urlRoot).toEqual(Canto.API.base + '/users');
     });
+
+    it('has klass UserModel', function() {
+      expect(user.klass).toBe('UserModel');
+    });
   });
 
   describe('constructor', function() {
@@ -88,6 +92,20 @@ describe('User Model', function() {
     beforeEach(function() {
       spyOn($, 'cookie').and.returnValue('Basic ' + btoa('danascheider:danascheider'));
       spyOn($, 'ajax');
+    });
+
+    describe('isA', function() {
+      it('returns true with argument UserModel', function() {
+        expect(user.isA('UserModel')).toBe(true);
+      });
+
+      it('returns true with argument User', function() {
+        expect(user.isA('User')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(user.isA('ProtectedResource')).toBe(false);
+      });
     });
 
     describe('protectedFetch', function() {
