@@ -99,7 +99,7 @@ describe('Canto.View', function() {
         render     : function() {
           var that = this;
 
-          Canto.View.prototype.render.call(this, this.template({recipient: 'world'}), function(args) {
+          return Canto.View.prototype.render.call(this, this.template({recipient: 'world'}), function(args) {
             return that.setMessage(args)
           }, 'Hope you\'re doing well today!');
         }
@@ -131,7 +131,7 @@ describe('Canto.View', function() {
         expect(newView.setMessage).toHaveBeenCalledWith('Hope you\'re doing well today!');
       });
 
-      it('returns itself', function() {
+      fit('returns itself', function() {
         expect(newView.render()).toBe(newView);
       });
     });

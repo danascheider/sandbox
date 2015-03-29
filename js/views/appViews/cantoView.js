@@ -26,6 +26,7 @@ Canto.View = Backbone.View.extend({
     this.$el.html(html);
     if(!!action) { action(args); }
     this.delegateEvents();
+
     return this;
   }
 });
