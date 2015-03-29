@@ -22,8 +22,11 @@ Canto.View = Backbone.View.extend({
     return this.types().indexOf(type) > -1 ? true : false;
   },
 
-  render      : function(html) {
+  render      : function(html, action) {
     this.$el.html(html);
+    if(!!action) { action(); }
+    this.delegateEvents();
+    return this;
   }
 });
 

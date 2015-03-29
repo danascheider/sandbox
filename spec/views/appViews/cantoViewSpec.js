@@ -59,10 +59,30 @@ describe('Canto.View', function() {
     });
   });
 
-  fdescribe('render', function() {
+  describe('render', function() {
+    beforeEach(function() {
+      view.helloWorld = function() { console.log('Hello World!'); };
+      spyOn(view, 'helloWorld');
+    });
+
     it('sets the html of its el with code passed into it', function() {
-      view.render('<div id="inner-html"></div>');
+      view.render('<div id="inner-html"></div>', view.helloWorld);
       expect(view.$el.html()).toEqual('<div id="inner-html"></div>');
+    });
+
+    it('calls delegateEvents on itself', function() {
+      spyOn(view, 'delegateEvents');
+      view.render('<div></div>', view.helloWorld);
+      expect(view.delegateEvents).toHaveBeenCalled();
+    });
+
+    it('executes an arbitrary function', function() {
+      view.render('<div></div>', view.helloWorld);
+      expect(view.helloWorld).toHaveBeenCalled();
+    });
+
+    it('returns itself', function() {
+      expect(view.render('<div></div>', view.helloWorld)).toBe(view);
     });
   });
 
