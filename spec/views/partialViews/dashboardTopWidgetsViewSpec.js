@@ -10,7 +10,7 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     context        = describe,
     fcontext       = fdescribe;
 
-describe('Dashboard Top Widget View #travis', function() {
+fdescribe('Dashboard Top Widget View #travis', function() {
   var view, data;
 
   beforeAll(function() {
