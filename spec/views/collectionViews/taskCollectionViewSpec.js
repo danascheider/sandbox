@@ -248,32 +248,16 @@ describe('Task Collection View #travis', function() {
 
   describe('core view functions', function() {
     describe('render', function() {
-      it('sets the HTML of its el', function() {
-        spyOn(view.$el, 'html');
-        view.render();
-        expect(view.$el.html).toHaveBeenCalledWith(view.template());
-      });
-
       it('renders the quick-add form', function() {
         spyOn(view.quickAddForm, 'render');
         view.render();
         expect(view.quickAddForm.render).toHaveBeenCalled();
       });
 
-      it('calls delegateEvents on itself', function() {
-        spyOn(view, 'delegateEvents');
-        view.render();
-        expect(view.delegateEvents).toHaveBeenCalled();
-      });
-
       it('renders the list items', function() {
         spyOn(view, 'renderCollection');
         view.render();
         expect(view.renderCollection).toHaveBeenCalled();
-      });
-
-      it('returns itself', function() {
-        expect(view.render()).toBe(view);
       });
 
       // FIX: I don't know if this test was vestigial or what, but I'm going

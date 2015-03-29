@@ -37,8 +37,7 @@ var TaskModelView = Canto.View.extend({
   },
 
   render       : function() {
-    this.$el.html(this.template({model: this.model}));
-    return this;
+    return Canto.View.prototype.render.call(this, this.template({model: this.model}));
   }
 });
 
