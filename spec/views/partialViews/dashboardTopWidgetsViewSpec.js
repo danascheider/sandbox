@@ -11,7 +11,7 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     fcontext       = fdescribe;
 
 describe('Dashboard Top Widget View #travis', function() {
-  var view, data, e;
+  var view, data, e, newView;
 
   beforeAll(function() {
     jasmine.addMatchers(matchers);
@@ -49,6 +49,20 @@ describe('Dashboard Top Widget View #travis', function() {
     });
   });
 
+  describe('properties', function() {
+    it('has klass DashboardTopWidgetView', function() {
+      expect(view.klass).toBe('DashboardTopWidgetView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(view.family).toBe('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toBe('Backbone.View');
+    });
+  });
+
   describe('elements', function() {
     beforeEach(function() {
       view.render();
@@ -79,6 +93,48 @@ describe('Dashboard Top Widget View #travis', function() {
     });
   });
 
+  describe('events', function() {
+    beforeEach(function() { 
+      spyOn(SUT.prototype, 'changeLinkColor');
+      spyOn(SUT.prototype, 'changeLinkColorBack');
+      spyOn(SUT.prototype, 'followLink');
+      newView = new SUT(data);
+      newView.render(); 
+    });
+
+    describe('mouseenter .dash-widget', function() {
+      it('calls changeLinkColor', function() {
+        newView.$('.dash-widget').first().mouseenter();
+        expect(SUT.prototype.changeLinkColor).toHaveBeenCalled();
+      });
+    });
+
+    describe('mouseleave .dash-widget', function() {
+      it('calls changeLinkColorBack', function() {
+        newView.$('.dash-widget').first().mouseleave();
+        expect(SUT.prototype.changeLinkColorBack).toHaveBeenCalled();
+      });
+    });
+
+    describe('click .dash-widget', function() {
+      it('calls followLink', function() {
+        newView.$('.dash-widget').first().click();
+        expect(SUT.prototype.followLink).toHaveBeenCalled();
+      });
+    });
+
+    _.each(['add', 'remove'], function(event) {
+      describe(event + ' event on task collection', function() {
+        it('calls render', function() {
+          spyOn(SUT.prototype, 'render');
+          newView = new SUT(data);
+          newView.taskCollection.trigger(event);
+          expect(SUT.prototype.render).toHaveBeenCalled();
+        });
+      });
+    });
+  });
+
   describe('event callbacks', function() {
     beforeEach(function() { view.render(); });
 
@@ -90,6 +146,22 @@ describe('Dashboard Top Widget View #travis', function() {
         view.followLink(e);
         expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
         view.off('redirect');
+      });
+    });
+  });
+
+  describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with arg DashboardTopWidgetView', function() {
+        expect(view.isA('DashboardTopWidgetView')).toBe(true);
+      });
+
+      it('returns true with arg PartialView', function() {
+        expect(view.isA('PartialView')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(view.isA('dachshund')).toBe(false);
       });
     });
   });
