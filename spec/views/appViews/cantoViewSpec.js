@@ -89,12 +89,51 @@ describe('Canto.View', function() {
   describe('inheritance', function() {
     var ChildClass;
 
-    beforeEach(function() { ChildClass = Canto.View.extend({}); });
+    beforeEach(function() { 
+      ChildClass = Canto.View.extend({
+        tagName    : 'span',
+        template   : _.template('<p>Hello, <%= recipient %>!</p>'),
+        setMessage : function(message) {
+          this.$el.append('<p>' + message + '</p>');
+        },
+        render     : function() {
+          var that = this;
+
+          Canto.View.prototype.render.call(this, this.template({recipient: 'world'}), function(args) {
+            return that.setMessage(args)
+          }, 'Hope you\'re doing well today!');
+        }
+      }); 
+    });
     afterAll(function() { ChildClass = null; });
 
     it('inherits its types', function() {
       var newView = new ChildClass();
       expect(newView.isA('Canto.View')).toBe(true);
+    });
+
+    describe('render', function() {
+      var newView;
+
+      beforeEach(function() {
+        newView = new ChildClass();
+      });
+
+      it('sets its el\'s HTML', function() {
+        spyOn(newView.$el, 'html');
+        newView.render();
+        expect(newView.$el.html).toHaveBeenCalledWith('<p>Hello, world!</p>');
+      });
+
+      it('calls setMessage with the message', function() {
+        spyOn(newView, 'setMessage');
+        newView.render();
+        expect(newView.setMessage).toHaveBeenCalledWith('Hope you\'re doing well today!');
+      });
+
+      it('returns itself', function() {
+        expect(newView.render()).toBe(newView);
+      });
     });
   });
 });
