@@ -49,7 +49,7 @@ describe('Dashboard Top Widget View #travis', function() {
     });
   });
 
-  fdescribe('elements', function() {
+  describe('elements', function() {
     beforeEach(function() {
       view.render();
     });
@@ -74,7 +74,7 @@ describe('Dashboard Top Widget View #travis', function() {
 
     describe('recommendation widget', function() {
       it('includes the recommendations count', function() {
-        expect(view.$('div-dash-widget[data-name=recommendations] div.huge')).toHaveText(data.recommendationCount);
+        expect(view.$('div.dash-widget[data-name=recommendations] div.huge')).toHaveText(data.recommendationCount);
       });
     });
   });
