@@ -59,6 +59,13 @@ describe('Canto.View', function() {
     });
   });
 
+  fdescribe('render', function() {
+    it('sets the html of its el with code passed into it', function() {
+      view.render('<div id="inner-html"></div>');
+      expect(view.$el.html()).toEqual('<div id="inner-html"></div>');
+    });
+  });
+
   describe('inheritance', function() {
     var ChildClass;
 

@@ -20,6 +20,10 @@ Canto.View = Backbone.View.extend({
 
   isA         : function(type) {
     return this.types().indexOf(type) > -1 ? true : false;
+  },
+
+  render      : function(html) {
+    this.$el.html(html);
   }
 });
 
