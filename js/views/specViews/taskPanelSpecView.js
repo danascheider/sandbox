@@ -29,19 +29,19 @@ var SpecWrapper = Backbone.View.extend({
   },
 
   displayIcon: function() {
-    if(!this.$('.toggleWidget').is(':visible')) { this.$('.toggleWidget').show(); }
+    if(!this.$('#task-panel .show-widget,#task-panel .hide-widget').is(':visible')) { this.$('#task-panel .show-widget, #task-panel .hide-widget').fadeIn(100); }
   },
 
   displayPanelBody: function() {
-    if(!this.$('.panel-body').is(':visible')) { this.$('.panel-body').slideDown(); }
+    if(!this.$('#task-panel .panel-body').is(':visible')) { this.$('.panel-body').slideDown(); }
   },
 
   hideIcon: function() {
-    if(this.$('.toggleWidget').is(':visible')) { this.$('.toggleWidget').hide(); }
+    if(this.$('#task-panel .show-widget,#task-panel .hide-widget').is(':visible')) { this.$('#task-panel .show-widget, #task-panel .hide-widget').fadeOut(100); }
   },
 
   hidePanelBody: function() {
-    if(this.$('.panel-body').is(':visible')) { this.$('.panel-body').slideUp(); }
+    if(this.$('#task-panel .panel-body').is(':visible')) { this.$('.panel-body').slideUp(); }
   },
 
   initialize : function() {
