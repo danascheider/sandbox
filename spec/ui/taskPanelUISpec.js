@@ -58,7 +58,7 @@ describe('Task Panel View Elements', function() {
     it('shows the toggle-widget icon');
   });
 
-  fdescribe('showWidget', function() {
+  describe('showWidget', function() {
     beforeEach(function(done) {
       client.waitForVisible('a[data-method=hidePanelBody]')
             .click('a[data-method=hidePanelBody]')
