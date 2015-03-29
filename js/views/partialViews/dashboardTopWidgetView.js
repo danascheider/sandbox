@@ -4,6 +4,16 @@ Canto.View = Canto.View || require('../appViews/cantoView.js');
 var DashboardTopWidgetView = Canto.View.extend({
   template   : JST['partials/topWidgets'],
 
+  // --------------- //
+  // Event Callbacks //
+  // --------------- //
+
+  followLink : function(e) {
+    var widget = $(e.target).hasClass('dash-widget') ? $(e.target) : $(e.target).closest('.dash-widget');
+    this.trigger('redirect', {destination: widget.attr('data-target')});
+  },
+
+
   // ------------------- //
   // Core View Functions //
   // ------------------- //

@@ -11,7 +11,7 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     fcontext       = fdescribe;
 
 describe('Dashboard Top Widget View #travis', function() {
-  var view, data;
+  var view, data, e;
 
   beforeAll(function() {
     jasmine.addMatchers(matchers);
@@ -75,6 +75,21 @@ describe('Dashboard Top Widget View #travis', function() {
     describe('recommendation widget', function() {
       it('includes the recommendations count', function() {
         expect(view.$('div.dash-widget[data-name=recommendations] div.huge')).toHaveText(data.recommendationCount);
+      });
+    });
+  });
+
+  describe('event callbacks', function() {
+    beforeEach(function() { view.render(); });
+
+    describe('followLink()', function() {
+      it('triggers a redirect event on the view', function() {
+        e = $.Event('click', {target: view.$('.dash-widget[data-name=tasks]').first()});
+        var spy = jasmine.createSpy();
+        view.on('redirect', spy);
+        view.followLink(e);
+        expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
+        view.off('redirect');
       });
     });
   });
