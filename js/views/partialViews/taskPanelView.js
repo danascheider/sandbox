@@ -66,7 +66,9 @@ var TaskPanelView = Canto.View.extend({
   },
 
   showToggleWidgetIcon : function() {
-    //
+    if(!this.$('span.show-widget,span.hide-widget').is(':visible')) {
+      this.$('span.show-widget, span.hide-widget').fadeIn(100);
+    }
   },
 
   showWidget           : function() {

@@ -6,7 +6,7 @@ var matchers = require('jasmine-jquery-matchers'),
     context  = describe,
     fcontext = fdescribe;
 
-describe('Task Panel View Elements', function() {
+describe('Task Panel View Elements #ui', function() {
   beforeAll(function(done) {
     jasmine.addMatchers(matchers);
     client.init().url('http://localhost/#taskPanelViewSpec', done);
@@ -55,7 +55,15 @@ describe('Task Panel View Elements', function() {
   });
 
   describe('showToggleWidgetIcon', function() {
-    it('shows the toggle-widget icon');
+    it('shows the toggle-widget icon', function(done) {
+      client.waitForVisible('a[data-method=showToggleWidgetIcon]')
+            .click('a[data-method=showToggleWidgetIcon]')
+            .waitForVisible('#task-panel .hide-widget', 5000)
+            .selectorExecute('#task-panel .hide-widget', function(icon) {
+
+        expect(icon).toBeVisible();
+      }, done);
+    });
   });
 
   describe('showWidget', function() {
