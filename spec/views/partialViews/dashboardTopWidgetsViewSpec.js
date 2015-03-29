@@ -10,7 +10,7 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     context        = describe,
     fcontext       = fdescribe;
 
-fdescribe('Dashboard Top Widget View #travis', function() {
+describe('Dashboard Top Widget View #travis', function() {
   var view, data;
 
   beforeAll(function() {
@@ -35,7 +35,7 @@ fdescribe('Dashboard Top Widget View #travis', function() {
     global = _.omit(global, Fixtures);
   });
 
-  describe('constructor', function() {
+  fdescribe('constructor', function() {
     it('doesn\'t call render', function() {
       spyOn(SUT.prototype, 'render');
       var newView = new SUT(data);
