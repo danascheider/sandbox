@@ -124,15 +124,11 @@ var TaskCollectionView = Canto.View.extend({
   render              : function() {
     var view, that = this;
 
-    this.$el.html(this.template());
-    this.quickAddForm.render();
-    this.$('li.quick-add-form').html(this.quickAddForm.$el);
-
-    this.renderCollection();
-
-    this.delegateEvents();
-
-    return this;
+    return Canto.View.prototype.render.call(this, this.template(), function() {
+      that.quickAddForm.render();
+      that.$('li.quick-add-form').html(that.quickAddForm.$el);
+      that.renderCollection();
+    });
   }
 });
 

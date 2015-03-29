@@ -93,10 +93,8 @@ describe('Task Collection View #travis', function() {
   describe('events', function() {
     beforeEach(function() {
       spyOn(SUT.prototype, 'render');
-      // spyOn(TaskCollection.prototype, 'fetch');
       spyOn(SUT.prototype, 'crossOff');
       spyOn(SUT.prototype, 'removeChildAndRender');
-      // newColl = new TaskCollection([task1, task2, task3]);
 
       spyOn(SUT.prototype, 'retrieveViewForModel').and.callFake(function() {
         return childViews[0];
@@ -249,7 +247,7 @@ describe('Task Collection View #travis', function() {
   });
 
   describe('core view functions', function() {
-    describe('render', function() {
+    fdescribe('render', function() {
       it('sets the HTML of its el', function() {
         spyOn(view.$el, 'html');
         view.render();
