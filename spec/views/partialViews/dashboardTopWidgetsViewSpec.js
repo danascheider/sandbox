@@ -10,7 +10,7 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     context        = describe,
     fcontext       = fdescribe;
 
-fdescribe('Dashboard Top Widget View #travis', function() {
+describe('Dashboard Top Widget View #travis', function() {
   var view, data;
 
   beforeAll(function() {
@@ -45,6 +45,42 @@ fdescribe('Dashboard Top Widget View #travis', function() {
     _.each(['taskCollection', 'deadlineCount', 'appointmentCount', 'recommendationCount'], function(datum) {
       it('sets the ' + datum, function() {
         expect(view[datum]).toEqual(data[datum]);
+      });
+    });
+  });
+
+  describe('elements', function() {
+    beforeEach(function() {
+      view.render();
+    });
+
+    describe('task widget', function() {
+      it('includes the task count', function() {
+        expect(view.$('div.dash-widget[data-name=tasks] div.huge')).toHaveText(data.taskCollection.length);
+      });
+    });
+
+    describe('deadline widget', function() {
+      it('includes the deadline count', function() {
+        expect(view.$('div.dash-widget[data-name=deadlines]')).toHaveText(data.deadlineCount);
+      });
+    });
+
+    describe('appointment widget', function() {
+      expect(view.$('div.dash-widget[data-name=appointments]')).toHaveText(data.appointmentCount);
+    });
+
+    describe('recommendation widget', function() {
+      expect(view.$('div-dash-widget[data-name=recommendations]')).toHaveText(data.recommendationCount);
+    });
+  });
+
+  describe('core view functions', function() {
+    describe('render()', function() {
+      it('sets the HTML of its el', function() {
+        spyOn(view.$el, 'html');
+        view.render();
+        expect(view.$el.html).toHaveBeenCalledWith(view.template(data));
       });
     });
   });
