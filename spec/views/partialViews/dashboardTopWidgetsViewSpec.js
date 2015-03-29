@@ -41,5 +41,11 @@ fdescribe('Dashboard Top Widget View #travis', function() {
       var newView = new SUT(data);
       expect(SUT.prototype.render).not.toHaveBeenCalled();
     });
+
+    _.each(['taskCollection', 'deadlineCount', 'appointmentCount', 'recommendationCount'], function(datum) {
+      it('sets the ' + datum, function() {
+        expect(view[datum]).toEqual(data[datum]);
+      });
+    });
   });
 });
