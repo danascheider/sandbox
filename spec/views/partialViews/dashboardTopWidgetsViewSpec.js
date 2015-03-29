@@ -74,14 +74,4 @@ describe('Dashboard Top Widget View #travis', function() {
       expect(view.$('div-dash-widget[data-name=recommendations]')).toHaveText(data.recommendationCount);
     });
   });
-
-  describe('core view functions', function() {
-    describe('render()', function() {
-      it('sets the HTML of its el', function() {
-        spyOn(view.$el, 'html');
-        view.render();
-        expect(view.$el.html).toHaveBeenCalledWith(view.template(data));
-      });
-    });
-  });
 });

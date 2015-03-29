@@ -17,7 +17,7 @@ var DashboardTopWidgetView = Canto.View.extend({
   },
 
   render     : function() {
-    this.$el.html(this.template(this.data));
+    Canto.View.prototype.render.call(this, this.template(this.data));
   }
 });
 
