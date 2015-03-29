@@ -154,14 +154,12 @@ var ListItemView = Canto.View.extend({
   },
 
   render             : function() {
-    this.$el.html(this.template());
-    this.delegateEvents();
+    var that = this;
 
-    this.modelView.render();
-    this.$('td.task-listing').html(this.modelView.el);
-    this.modelView.delegateEvents();
-
-    return this;
+    return Canto.View.prototype.render.call(this, this.template(), function() {
+      that.modelView.render();
+      that.$('td.task-listing').html(that.modelView.$el);
+    });
   }
 });
 

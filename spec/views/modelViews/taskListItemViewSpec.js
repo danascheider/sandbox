@@ -330,40 +330,18 @@ describe('List Item Task View', function() {
       });
     });
 
-    describe('render', function() {
-      it('sets the HTML of its element #travis', function() {
-        spyOn(view.$el, 'html');
-        view.render();
-        expect(view.$el.html).toHaveBeenCalled();
-      });
-
-      it('returns itself #travis', function() {
-        expect(view.render()).toBe(view);
-      });
-
-      it('configures the draggable property #travis', function() {
+    describe('render()', function() {
+      it('configures the draggable property', function() {
         spyOn(view, 'configureDraggable', function() {
           view.render();
           expect(view.configureDraggable).toHaveBeenCalled();
         });
       });
 
-      it('delegates events #travis', function() {
-        spyOn(view, 'delegateEvents');
-        view.render();
-        expect(view.delegateEvents).toHaveBeenCalled();
-      });
-
-      it('renders the model view #travis', function() {
+      it('renders the model view', function() {
         spyOn(view.modelView, 'render');
         view.render();
         expect(view.modelView.render).toHaveBeenCalled();
-      });
-
-      it('calls delegateEvents on the model view #travis', function() {
-        spyOn(view.modelView, 'delegateEvents');
-        view.render();
-        expect(view.modelView.delegateEvents).toHaveBeenCalled();
       });
     });
   });
