@@ -247,7 +247,7 @@ describe('Task Collection View #travis', function() {
   });
 
   describe('core view functions', function() {
-    fdescribe('render', function() {
+    describe('render', function() {
       it('sets the HTML of its el', function() {
         spyOn(view.$el, 'html');
         view.render();
