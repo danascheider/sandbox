@@ -99,17 +99,15 @@ var TaskPanelView = Canto.View.extend({
   },
 
   render               : function() {
-    this.$el.html(this.template());
-    this.delegateEvents();
+    var that = this;
 
-    this.collectionView.render();
-    this.$('.panel-body').html(this.collectionView.$el);
-
-    this.$el.sortable({
-      items : '>*:not(.not-sortable)'
-    })
-
-    return this;
+    return Canto.View.prototype.render.call(this, this.template(), function() {
+      that.collectionView.render();
+      that.$('.panel-body').html(that.collectionView.$el);
+      that.$el.sortable({
+        items : '>*:not(.not-sortable)'
+      });
+    });
   }
 });
 

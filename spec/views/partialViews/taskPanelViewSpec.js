@@ -278,19 +278,7 @@ describe('Task Panel View #travis', function() {
       });
     });
 
-    describe('render()', function() {
-      it('sets its HTML', function() {
-        spyOn(taskPanel.$el, 'html');
-        taskPanel.render();
-        expect(taskPanel.$el.html).toHaveBeenCalledWith(taskPanel.template());
-      });
-
-      it('calls delegateEvents on itself', function() {
-        spyOn(taskPanel, 'delegateEvents');
-        taskPanel.render();
-        expect(taskPanel.delegateEvents).toHaveBeenCalled();
-      });
-
+    fdescribe('render()', function() {
       it('renders its collection view', function() {
         spyOn(taskPanel.collectionView, 'render');
         taskPanel.render();
@@ -313,10 +301,6 @@ describe('Task Panel View #travis', function() {
         spyOn($.prototype, 'sortable');
         taskPanel.render();
         expect($.prototype.sortable.calls.argsFor(0)[0].items).toEqual('>*:not(.not-sortable)')
-      })
-
-      it('returns itself', function() {
-        expect(taskPanel.render()).toEqual(taskPanel);
       });
     });
   });
