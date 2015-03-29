@@ -1,7 +1,8 @@
-require('../../dependencies.js');
+Canto      = Canto || require('../../dependencies.js');
+Canto.View = Canto.View || require('../appViews/cantoView.js');
 
 var Fixtures      = require('../../../spec/support/fixtures/fixtures.js');
-var TopWidgetView = require('../partialViews/dashboardTopWidgetSpecView.js');
+var TopWidgetView = require('../partialViews/dashboardTopWidgetView.js');
 
 var SpecWrapper = Backbone.View.extend({
   el         : 'body',
@@ -74,9 +75,12 @@ var SpecWrapper = Backbone.View.extend({
 
   render   : function() {
     this.$el.html(this.template());
+    this.$el.addClass('test');
     this.view.render();
     this.$('#view').html(this.view.$el);
     this.delegateEvents();
     return this;
   }
 });
+
+module.exports = SpecWrapper;

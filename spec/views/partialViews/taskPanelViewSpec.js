@@ -278,7 +278,7 @@ describe('Task Panel View #travis', function() {
       });
     });
 
-    fdescribe('render()', function() {
+    describe('render()', function() {
       it('renders its collection view', function() {
         spyOn(taskPanel.collectionView, 'render');
         taskPanel.render();

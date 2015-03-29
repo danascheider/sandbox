@@ -49,7 +49,7 @@ describe('Dashboard Top Widget View #travis', function() {
     });
   });
 
-  describe('elements', function() {
+  fdescribe('elements', function() {
     beforeEach(function() {
       view.render();
     });
@@ -62,16 +62,20 @@ describe('Dashboard Top Widget View #travis', function() {
 
     describe('deadline widget', function() {
       it('includes the deadline count', function() {
-        expect(view.$('div.dash-widget[data-name=deadlines]')).toHaveText(data.deadlineCount);
+        expect(view.$('div.dash-widget[data-name=deadlines] div.huge')).toHaveText(data.deadlineCount);
       });
     });
 
     describe('appointment widget', function() {
-      expect(view.$('div.dash-widget[data-name=appointments]')).toHaveText(data.appointmentCount);
+      it('includes the appointment count', function() {
+        expect(view.$('div.dash-widget[data-name=appointments] div.huge')).toHaveText(data.appointmentCount);
+      });
     });
 
     describe('recommendation widget', function() {
-      expect(view.$('div-dash-widget[data-name=recommendations]')).toHaveText(data.recommendationCount);
+      it('includes the recommendations count', function() {
+        expect(view.$('div-dash-widget[data-name=recommendations] div.huge')).toHaveText(data.recommendationCount);
+      });
     });
   });
 });
