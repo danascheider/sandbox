@@ -48,12 +48,15 @@ var TaskPanelView = Canto.View.extend({
   },
 
   hideToggleWidgetIcon : function() {
-    //
+    if(this.$('span.show-widget i,span.hide-widget i').is(':visible')) { 
+      this.$('span.show-widget i, span.hide-widget i').fadeOut(100);
+    }
   },
 
   hideWidget           : function() {
     this.$('span.pull-right').removeClass('hide-widget').addClass('show-widget');
     this.$('i.fa-minus').removeClass('fa-minus').addClass('fa-plus');
+    this.$('.panel-body').slideUp();
   },
 
   removeBacklogged     : function() {
@@ -69,6 +72,7 @@ var TaskPanelView = Canto.View.extend({
   showWidget           : function() {
     this.$('span.pull-right').first().removeClass('show-widget').addClass('hide-widget');
     this.$('i.fa-plus').removeClass('fa-plus').addClass('fa-minus');
+    this.$('.panel-body').slideDown();
   },
 
   // ------------------- //
