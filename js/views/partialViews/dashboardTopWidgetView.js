@@ -13,6 +13,17 @@ var DashboardTopWidgetView = Canto.View.extend({
     this.trigger('redirect', {destination: widget.attr('data-target')});
   },
 
+  // ----------------- //
+  // Special Functions //
+  // ----------------- //
+
+  klass      : 'DashboardTopWidgetView',
+  family     : 'Canto.View',
+  superFamily: 'Backbone.View',
+
+  types      : function() {
+    return Canto.View.prototype.types().concat(['DashboardTopWidgetView', 'PartialView']);
+  },
 
   // ------------------- //
   // Core View Functions //
