@@ -84,6 +84,14 @@ describe('Task Panel View Elements #ui', function() {
   });
 
   describe('remove', function() {
-    it('hides itself');
+    it('hides itself', function(done) {
+      client.waitForVisible('a[data-method=remove]')
+            .click('a[data-method=remove]')
+            .waitForVisible('#task-panel', true, function(err, isVisible) {
+
+        expect(isVisible).toBe(false);
+        done();
+      });
+    });
   });
 });
