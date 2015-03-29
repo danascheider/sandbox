@@ -13,7 +13,7 @@ var DashboardTopWidgetView = Canto.View.extend({
 
     // For convenience, make the data available as own properties
     // of the view.
-    _.extend(this.data); 
+    _.extend(this, this.data); 
   },
 
   render     : function() {

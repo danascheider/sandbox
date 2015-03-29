@@ -35,7 +35,7 @@ describe('Dashboard Top Widget View #travis', function() {
     global = _.omit(global, Fixtures);
   });
 
-  fdescribe('constructor', function() {
+  describe('constructor', function() {
     it('doesn\'t call render', function() {
       spyOn(SUT.prototype, 'render');
       var newView = new SUT(data);
