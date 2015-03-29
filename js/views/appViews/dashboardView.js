@@ -73,13 +73,11 @@ var DashboardView = Canto.View.extend({
   },
 
   render             : function() {
-    this.$el.html(this.template({user: this.user}));
-    this.delegateEvents();
-
-    this.sidebarView.render();
-    this.$('div.sidebar-collapse').html(this.sidebarView.el);
-
-    return this;
+    var that = this;
+    return Canto.View.prototype.render.call(this, this.template({user: this.user}), function() {
+      that.sidebarView.render();
+      that.$('div.sidebar-collapse').html(that.sidebarView.$el);
+    });
   }
 });
 

@@ -131,7 +131,7 @@ describe('Canto.View', function() {
         expect(newView.setMessage).toHaveBeenCalledWith('Hope you\'re doing well today!');
       });
 
-      fit('returns itself', function() {
+      it('returns itself', function() {
         expect(newView.render()).toBe(newView);
       });
     });
