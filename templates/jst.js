@@ -13,7 +13,8 @@ var JST = {
   'spec/listItem'      : _.template(require('./specTemplates/taskListItemSpecTemplate.js')),
   'spec/sidebar'       : _.template(require('./specTemplates/dashboardSidebarSpecTemplate.js')),
   'spec/collection'    : _.template(require('./specTemplates/taskCollectionSpecTemplate.js')),
-  'spec/taskPanel'     : _.template(require('./specTemplates/taskPanelSpecTemplate.js'))
+  'spec/taskPanel'     : _.template(require('./specTemplates/taskPanelSpecTemplate.js')),
+  'spec/topWidgets'    : _.template(require('./specTemplates/dashboardTopWidgetSpecTemplate.js'))
 };
 
 module.exports = JST;
