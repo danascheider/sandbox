@@ -373,22 +373,6 @@ describe('Main Dashboard View', function() {
 
   describe('core functions', function() {
     describe('render', function() {
-      it('sets the HTML of its el #travis', function() {
-        spyOn(dashboard.$el, 'html');
-        dashboard.render();
-        expect(dashboard.$el.html).toHaveBeenCalled();
-      });
-
-      it('calls delegateEvents on itself #travis', function() {
-        spyOn(dashboard, 'delegateEvents');
-        dashboard.render();
-        expect(dashboard.delegateEvents).toHaveBeenCalled();
-      });
-
-      it('returns itself #travis', function() {
-        expect(dashboard.render()).toEqual(dashboard);
-      });
-
       it('renders the sidebar view #travis', function() {
         spyOn(dashboard.sidebarView, 'render');
         dashboard.render();
