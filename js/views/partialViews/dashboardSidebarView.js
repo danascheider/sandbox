@@ -68,9 +68,7 @@ var DashboardSidebarView = Canto.View.extend({
   // ------------------- //
 
   render               : function() {
-    this.$el.html(this.template());
-    this.delegateEvents();
-    return this;
+    return Canto.View.prototype.render.call(this, this.template());
   }
 });
 

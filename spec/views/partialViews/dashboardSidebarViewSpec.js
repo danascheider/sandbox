@@ -12,7 +12,7 @@ var matchers       = require('jasmine-jquery-matchers'),
 
 Backbone.$         = $;
 
-describe('Dashboard Sidebar View', function() {
+describe('Dashboard Sidebar View #travis', function() {
   var sidebar, e, link;
 
   beforeEach(function() {
@@ -27,7 +27,7 @@ describe('Dashboard Sidebar View', function() {
   });
 
   describe('constructor', function() {
-    it('doesn\'t call render #travis', function() {
+    it('doesn\'t call render', function() {
       spyOn(SUT.prototype, 'render');
       var newSidebar = new SUT();
       expect(SUT.prototype.render).not.toHaveBeenCalled();
@@ -57,19 +57,19 @@ describe('Dashboard Sidebar View', function() {
       sidebar.render();
     });
 
-    it('is a ul #travis', function() {
+    it('is a ul', function() {
       expect(sidebar.$el[0].tagName).toEqual('UL');
     });
 
-    it('has class .nav #travis', function() {
+    it('has class .nav', function() {
       expect(sidebar.$el).toHaveClass('nav');
     });
 
-    it('has ID #side-menu #travis', function() {
+    it('has ID #side-menu', function() {
       expect(sidebar.$el).toHaveId('side-menu');
     });
 
-    it('has a search field #travis', function() {
+    it('has a search field', function() {
       expect(sidebar.$('.custom-search-form')).toExist();
     });
 
@@ -94,21 +94,21 @@ describe('Dashboard Sidebar View', function() {
     });
 
     describe('click sidebar link', function() {
-      it('calls toggleSecondLevelNav #travis', function() {
+      it('calls toggleSecondLevelNav', function() {
         newSidebar.$('a.sidebar-link').last().click();
         expect(SUT.prototype.toggleSecondLevelNav).toHaveBeenCalled();
       });
     });
 
     describe('click li > .dashboard-link', function() {
-      it('calls goToDashboard #travis', function() {
+      it('calls goToDashboard', function() {
         newSidebar.$('li > .dashboard-link').first().click();
         expect(SUT.prototype.goToDashboard).toHaveBeenCalled();
       });
     });
 
     describe('click li > .task-page-link', function() {
-      it('calls goToTaskPage #travis', function() {
+      it('calls goToTaskPage', function() {
         newSidebar.$('li > .task-page-link').first().click();
         expect(SUT.prototype.goToTaskPage).toHaveBeenCalled();
       });
@@ -119,7 +119,7 @@ describe('Dashboard Sidebar View', function() {
     beforeEach(function() { sidebar.render(); });
 
     describe('goToDashboard', function() {
-      it('triggers the redirect:dashboard event on the view #travis', function() {
+      it('triggers the redirect:dashboard event on the view', function() {
         var spy = jasmine.createSpy();
         sidebar.on('redirect', spy);
         sidebar.goToDashboard();
@@ -129,7 +129,7 @@ describe('Dashboard Sidebar View', function() {
     });
 
     describe('goToTaskPage', function() {
-      it('triggers the redirect:tasks event on the view #travis', function() {
+      it('triggers the redirect:tasks event on the view', function() {
         var spy = jasmine.createSpy();
         sidebar.on('redirect', spy);
         sidebar.goToTaskPage();
@@ -145,12 +145,12 @@ describe('Dashboard Sidebar View', function() {
       });
 
       context('when the menu clicked is closed', function() {
-        it('adds the `active` class to its parent #travis', function() {
+        it('adds the `active` class to its parent', function() {
           sidebar.toggleSecondLevelNav(e);
           expect(link.closest('li')).toHaveClass('active');
         });
 
-        it('removes the `active` class from any other li\'s #travis', function() {
+        it('removes the `active` class from any other li\'s', function() {
           sidebar.$('a[href=#]').last().closest('li').addClass('active');
           sidebar.toggleSecondLevelNav(e);
           expect(sidebar.$('a[href=#]').last().closest('li')).not.toHaveClass('active');
@@ -158,7 +158,7 @@ describe('Dashboard Sidebar View', function() {
       });
 
       context('when the menu clicked is open', function() {
-        it('removes the `active` class from all the menus #travis', function() {
+        it('removes the `active` class from all the menus', function() {
           link.closest('li').addClass('active');
           sidebar.toggleSecondLevelNav(e);
           expect(sidebar.$('li.active').length).toEqual(0);
@@ -169,40 +169,20 @@ describe('Dashboard Sidebar View', function() {
 
   describe('special functions', function() {
     describe('isA', function() {
-      it('returns true with argument DashboardSidebarView #travis', function() {
+      it('returns true with argument DashboardSidebarView', function() {
         expect(sidebar.isA('DashboardSidebarView')).toBe(true);
       });
 
-      it('returns true with argument DashboardView #travis', function() {
+      it('returns true with argument DashboardView', function() {
         expect(sidebar.isA('DashboardView')).toBe(true);
       });
 
-      it('returns true with argument PartialView #travis', function() {
+      it('returns true with argument PartialView', function() {
         expect(sidebar.isA('PartialView')).toBe(true);
       });
 
-      it('returns false with other argument #travis', function() {
+      it('returns false with other argument', function() {
         expect(sidebar.isA('Backbone.Router')).toBe(false);
-      });
-    });
-  });
-
-  describe('core view functions', function() {
-    describe('render', function() {
-      it('sets the HTML of its element #travis', function() {
-        spyOn(sidebar.$el, 'html');
-        sidebar.render();
-        expect(sidebar.$el.html).toHaveBeenCalledWith(sidebar.template());
-      });
-
-      it('calls delegateEvents on itself #travis', function() {
-        spyOn(sidebar, 'delegateEvents');
-        sidebar.render();
-        expect(sidebar.delegateEvents).toHaveBeenCalled();
-      });
-
-      it('returns itself #travis', function() {
-        expect(sidebar.render()).toBe(sidebar);
       });
     });
   });
