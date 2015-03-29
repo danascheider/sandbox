@@ -71,9 +71,7 @@ var QuickAddFormView = Canto.View.extend({
   },
 
   render     : function(opts) {
-    this.$el.html(this.template());
-    this.delegateEvents();
-    return this;
+    return Canto.View.prototype.render.call(this, this.template());
   }
 });
 

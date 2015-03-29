@@ -224,24 +224,4 @@ describe('Quick-Add Task Form', function() {
       });
     });
   });
-
-  describe('core functions', function() {
-    describe('render', function() {
-      it('sets the HTML #travis', function() {
-        spyOn(view.$el, 'html');
-        view.render();
-        expect(view.$el.html).toHaveBeenCalled();
-      });
-
-      it('calls delegateEvents #travis', function() {
-        spyOn(view, 'delegateEvents');
-        view.render();
-        expect(view.delegateEvents).toHaveBeenCalled();
-      });
-
-      it('returns itself #travis', function() {
-        expect(view.render()).toEqual(view);
-      });
-    });
-  });
 });
