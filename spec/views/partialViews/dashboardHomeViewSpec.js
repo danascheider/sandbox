@@ -126,6 +126,12 @@ describe('Dashboard Home View #travis', function() {
       view.render();
       expect(view.taskPanelView.render).toHaveBeenCalled();
     });
+
+    it('renders its top widgets', function() {
+      spyOn(view.topWidgetView, 'render');
+      view.render();
+      expect(view.topWidgetView.render).toHaveBeenCalled();
+    });
   });
 
   /* Special Functions

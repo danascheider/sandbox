@@ -68,7 +68,14 @@ var DashboardHomeView = Canto.View.extend({
   /**************************************************************************/
 
   createTopWidgets : function() {
-    //
+    var that = this;
+
+    this.topWidgetView = new TopWidgetView({
+      taskCollection: that.user.tasks,
+      deadlineCount: 2,
+      appointmentCount: 4,
+      recommendationCount: 11
+    });
   },
 
   setUser          : function(user) {
@@ -96,6 +103,7 @@ var DashboardHomeView = Canto.View.extend({
 
     return Canto.View.prototype.render.call(this, this.template(), function() {
       that.taskPanelView.render();
+      that.topWidgetView.render();
     });
   }
 
