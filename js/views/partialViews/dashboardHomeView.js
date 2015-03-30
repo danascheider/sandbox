@@ -46,6 +46,8 @@ var DashboardHomeView = Canto.View.extend({
   /* Backbone View Properties
   /**************************************************************************/
 
+  template         : JST['partials/dashHome'],
+
   /* Canto View Properties
   /**************************************************************************/
 
@@ -87,6 +89,14 @@ var DashboardHomeView = Canto.View.extend({
     if(opts.user) {
       this.setUser(opts.user);
     }
+  },
+
+  render           : function() {
+    var that = this;
+
+    return Canto.View.prototype.render.call(this, this.template(), function() {
+      that.taskPanelView.render();
+    });
   }
 
 });

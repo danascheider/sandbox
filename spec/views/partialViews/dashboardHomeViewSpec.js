@@ -117,6 +117,16 @@ describe('Dashboard Home View #travis', function() {
   /* Event Callbacks
   /**************************************************************************/
 
+  /* Core View Functions
+  /**************************************************************************/
+
+  describe('render', function() {
+    it('renders its task panel', function() {
+      spyOn(view.taskPanelView, 'render');
+      view.render();
+      expect(view.taskPanelView.render).toHaveBeenCalled();
+    });
+  });
 
   /* Special Functions
   /**************************************************************************/
