@@ -53,6 +53,7 @@ describe(/* ACTUAL VALUE */, function() {
   });
 
   afterAll(function() {
+    view.remove();
     view = null;
     global = global.omit(fixtures);
   });
@@ -61,16 +62,16 @@ describe(/* ACTUAL VALUE */, function() {
   /**************************************************************************/
 
   describe('properties', function() {
-    it('has klass Canto.View', function() {
+    it('has klass /* EXPECTED VALUE */', function() {
       expect(view.klass).toEqual(/* Expected Value */);
     });
 
-    it('has family Backbone.View', function() {
-      expect(view.family).toEqual('Backbone.View');
+    it('has family Canto.View', function() {
+      expect(view.family).toEqual('Canto.View');
     });
 
-    it('has blank superFamily', function() {
-      expect(view.superFamily).toEqual('');
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toEqual('Backbone.View');
     });
   });
 

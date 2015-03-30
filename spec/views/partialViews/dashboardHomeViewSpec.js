@@ -87,8 +87,14 @@ fdescribe('Dashboard Home View #travis', function() {
   describe('constructor', function() {
     it('does not call render', function() {
       spyOn(SUT.prototype, 'render');
-      var newView = new SUT();
+      var newView = new SUT({user: user});
       expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
+
+    it('calls setUser', function() {
+      spyOn(SUT.prototype, 'setUser');
+      var newView = new SUT({user: user});
+      expect(SUT.prototype.setUser).toHaveBeenCalled();
     });
   });
 
