@@ -70,24 +70,5 @@ describe('Dashboard Top Widgets View #ui', function() {
         });
       });
     });
-
-    describe('changeLinkColor', function() {
-      it('changes the link color to the color of the panel heading', function(done) {
-        client.waitForVisible('#dashboard-top-widgets')
-              .moveToObject('div[data-name=tasks]')
-              .waitFor('#dashboard-top-widgets .panel-primary span')
-              .getCssProperty('#dashboard-top-widgets .panel-primary span', 'color', function(err, res) {
-
-          var values = res.map(function(val) { return val.parsed.hex; });
-
-          expect(values).toEqual(['#428bca', '#428bca']);
-          done();
-        });
-      });
-    });
   });
 });
-
-// Items to be tested:
-//   - changeLinkColor changes the link color to the heading background color
-//   - changeLinkColorBack changes the link color back to gray

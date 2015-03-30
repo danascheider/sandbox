@@ -6,18 +6,12 @@ var DashboardTopWidgetView = Canto.View.extend({
   template            : JST['partials/topWidgets'],
 
   events              : {
-    'mouseenter .dash-widget' : 'changeLinkColor',
     'click .dash-widget'      : 'followLink'
   },
 
   // --------------- //
   // Event Callbacks //
   // --------------- //
-
-  changeLinkColor     : function(e) {
-    var widget = $(e.target).hasClass('dash-widget') ? $(e.target) : this.$('.dash-widget').has(e.target);
-    widget.find('span').css('color', widget.attr('data-color'));
-  },
 
   followLink          : function(e) {
     var widget = $(e.target).hasClass('dash-widget') ? $(e.target) : $(e.target).closest('.dash-widget');
