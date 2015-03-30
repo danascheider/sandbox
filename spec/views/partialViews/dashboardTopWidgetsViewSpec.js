@@ -68,7 +68,7 @@ describe('Dashboard Top Widget View #travis', function() {
       view.render();
     });
 
-    fit('has ID #dashboard-top-widgets', function() {
+    it('has ID #dashboard-top-widgets', function() {
       expect(view.$el).toHaveId('dashboard-top-widgets');
     });
 
