@@ -37,8 +37,50 @@ describe('Dashboard Top Widgets View #ui', function() {
   describe('view elements', function() {
     describe('task widget', function() {
       it('is visible by default', function(done) {
-        client.waitForVisible('#view div[data-name=tasks]', function(err, isVisible) {
+        client.waitForVisible('#dashboard-top-widgets div[data-name=tasks]', function(err, isVisible) {
           expect(isVisible).toBe(true);
+          done();
+        });
+      });
+    });
+
+    describe('deadline widget', function() {
+      it('is visible by default', function(done) {
+        client.waitForVisible('#dashboard-top-widgets div[data-name=deadlines]', function(err, isVisible) {
+          expect(isVisible).toBe(true);
+          done();
+        });
+      });
+    });
+
+    describe('appointment widget', function() {
+      it('is visible by default', function(done) {
+        client.waitForVisible('#dashboard-top-widgets div[data-name=appointments]', function(err, isVisible) {
+          expect(isVisible).toBe(true);
+          done();
+        });
+      });
+    });
+
+    describe('recommendation widget', function() {
+      it('is visible by default', function(done) {
+        client.waitForVisible('#dashboard-top-widgets div[data-name=recommendations]', function(err, isVisible) {
+          expect(isVisible).toBe(true);
+          done();
+        });
+      });
+    });
+
+    describe('changeLinkColor', function() {
+      it('changes the link color to the color of the panel heading', function(done) {
+        client.waitForVisible('#dashboard-top-widgets')
+              .moveToObject('div[data-name=tasks]')
+              .waitFor('#dashboard-top-widgets .panel-primary span')
+              .getCssProperty('#dashboard-top-widgets .panel-primary span', 'color', function(err, res) {
+
+          var values = res.map(function(val) { return val.parsed.hex; });
+
+          expect(values).toEqual(['#428bca', '#428bca']);
           done();
         });
       });
@@ -47,9 +89,5 @@ describe('Dashboard Top Widgets View #ui', function() {
 });
 
 // Items to be tested:
-//   - task widget is visible by default
-//   - deadline widget is visible by default
-//   - appointment widget is visible by default
-//   - recommendation widget is visible by default
 //   - changeLinkColor changes the link color to the heading background color
 //   - changeLinkColorBack changes the link color back to gray
