@@ -2,25 +2,16 @@ Canto      = Canto || require('../../dependencies.js');
 Canto.View = Canto.View || require('../appViews/cantoView.js');
 
 var DashboardTopWidgetView = Canto.View.extend({
+  id                  : 'dashboard-top-widgets',
   template            : JST['partials/topWidgets'],
 
   events              : {
-    'mouseenter .dash-widget' : 'changeLinkColor',
-    'mouseleave .dash-widget' : 'changeLinkColorBack',
     'click .dash-widget'      : 'followLink'
   },
 
   // --------------- //
   // Event Callbacks //
   // --------------- //
-
-  changeLinkColor     : function(e) {
-    //
-  },
-
-  changeLinkColorBack : function(e) {
-    //
-  },
 
   followLink          : function(e) {
     var widget = $(e.target).hasClass('dash-widget') ? $(e.target) : $(e.target).closest('.dash-widget');

@@ -68,6 +68,10 @@ describe('Dashboard Top Widget View #travis', function() {
       view.render();
     });
 
+    fit('has ID #dashboard-top-widgets', function() {
+      expect(view.$el).toHaveId('dashboard-top-widgets');
+    });
+
     describe('task widget', function() {
       it('includes the task count', function() {
         expect(view.$('div.dash-widget[data-name=tasks] div.huge')).toHaveText(data.taskCollection.length);
@@ -100,20 +104,6 @@ describe('Dashboard Top Widget View #travis', function() {
       spyOn(SUT.prototype, 'followLink');
       newView = new SUT(data);
       newView.render(); 
-    });
-
-    describe('mouseenter .dash-widget', function() {
-      it('calls changeLinkColor', function() {
-        newView.$('.dash-widget').first().mouseenter();
-        expect(SUT.prototype.changeLinkColor).toHaveBeenCalled();
-      });
-    });
-
-    describe('mouseleave .dash-widget', function() {
-      it('calls changeLinkColorBack', function() {
-        newView.$('.dash-widget').first().mouseleave();
-        expect(SUT.prototype.changeLinkColorBack).toHaveBeenCalled();
-      });
     });
 
     describe('click .dash-widget', function() {
