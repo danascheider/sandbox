@@ -1,4 +1,4 @@
-/****************************************************************************
+/***************************************************************************
  *                                                                         *
  * DASHBOARD HOME VIEW                                                     *
  *                                                                         *
@@ -107,7 +107,7 @@ describe('Dashboard Home View #travis', function() {
 
   describe('DOM elements', function() {
     it('has a task panel', function() {
-      expect(view.taskPanel.klass).toBe('TaskPanelView');
+      expect(view.taskPanelView.klass).toBe('TaskPanelView');
     });
   });
 
@@ -146,6 +146,14 @@ describe('Dashboard Home View #travis', function() {
 
       it('sets the user', function() {
         expect(newView.user).toBe(user);
+      });
+
+      it('sets the collection', function() {
+        expect(newView.collection).toBe(user.tasks);
+      });
+
+      it('creates the task panel', function() {
+        expect(newView.taskPanelView.klass).toBe('TaskPanelView');
       });
     });
   });
