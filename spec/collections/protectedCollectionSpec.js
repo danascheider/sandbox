@@ -22,7 +22,7 @@
 /****************************************************************************/
 
 /* Core Requires
-/*************************************************************************/
+/****************************************************************************/
 
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/js/dependencies.js');
@@ -35,17 +35,17 @@ var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
 
 var SUT = require(process.cwd() + '/js/collections/protectedCollection.js');
 
-/****************************************************************************
- *                                                                          *
- * BEGIN SUITE                                                              *
- *                                                                          *  
-/****************************************************************************/
+/******************************************************************************
+ *                                                                            *
+ * BEGIN SUITE                                                                *
+ *                                                                            *  
+/******************************************************************************/
 
 describe('Protected Collection #travis', function() {
   var collection, model1, model2, model3, xhr, ajaxSettings, spy;
 
   /* Filters
-  /***********************************************************************/
+  /***************************************************************************/
 
   beforeEach(function() {
     collection = new SUT({model: Model});
@@ -55,7 +55,7 @@ describe('Protected Collection #travis', function() {
   });
 
   /* Authorization and Authentication
-  /***********************************************************************/
+  /***************************************************************************/
 
   describe('token', function() {
     it('returns the value of the auth header for the logged-in user', function() {
@@ -64,7 +64,7 @@ describe('Protected Collection #travis', function() {
   });
 
   /* Core Functions
-  /***********************************************************************/
+  /***************************************************************************/
 
   describe('core functions', function() {
     describe('fetch', function() {
@@ -86,7 +86,7 @@ describe('Protected Collection #travis', function() {
   });
 
   /* Special Functions
-  /***********************************************************************/
+  /***************************************************************************/
 
   describe('special functions', function() {
     describe('updateAll', function() {
