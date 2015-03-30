@@ -4,7 +4,7 @@ module.exports = {
       compare : function(actual, expected) {
         var result = {
           pass : function() {
-            return active.isA(expected);
+            return actual.isA(expected);
           }
         };
 

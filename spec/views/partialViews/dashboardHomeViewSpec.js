@@ -10,13 +10,11 @@
  * Requires ......................................................... 26   *
  * Suite ............................................................ 44   *
  *   Filters ........................................................ 50   *
- *   Authorization and Authentication ............................... 60   *
- *     token()                                                             *
  *   Core Functions ................................................. 69   *
  *     fetch()                                                             *
  *   Special Functions .............................................. 91   *
- *     updateAll() .................................................. 92   *
- *     isA() ....................................................... 140   *
+ *     isA() ........................................................ 92   *
+ *     setUser() ................................................... 140   *
  *                                                                         *
 /****************************************************************************/
 
@@ -40,7 +38,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  *                                                                            *  
 /******************************************************************************/
 
-fdescribe('Dashboard Home View #travis', function() {
+describe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
@@ -104,6 +102,15 @@ fdescribe('Dashboard Home View #travis', function() {
     });
   });
 
+  /* Elements
+  /**************************************************************************/
+
+  describe('DOM elements', function() {
+    it('has a task panel', function() {
+      expect(view.taskPanel.klass).toBe('TaskPanelView');
+    });
+  });
+
   /* Event Wiring
   /**************************************************************************/
 
@@ -126,6 +133,19 @@ fdescribe('Dashboard Home View #travis', function() {
 
       it('returns false with another argument', function() {
         expect(view.isA('Corvette')).toBe(false);
+      });
+    });
+
+    describe('setUser()', function() {
+      var newView;
+
+      beforeEach(function() {
+        newView = new SUT();
+        newView.setUser(user);
+      });
+
+      it('sets the user', function() {
+        expect(newView.user).toBe(user);
       });
     });
   });
