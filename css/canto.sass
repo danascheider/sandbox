@@ -7,24 +7,63 @@ li.task-list-item
 span.edit-task
   display: none
 
+#dash-top-widgets
+  .dash-widget
+    cursor: pointer
+
+.dash-widget
+  span.pull-left,
+  span.pull-right
+    color: #ccc
+
+.panel-primary,
 .panel-blue,
 .panel-yellow,
 .panel-red,
+.panel-green
+  border: none,
+  margin: none
+
 .panel-green,
-.panel-primary
-  border: none
+.panel-red,
+.panel-primary,
+.panel-blue,
+.panel-yellow,
+  .panel-heading
+    color: #fff 
+    margin: 0
+  .panel-body span.pull-left,
+  .panel-body span.pull-right
+    color: #ccc
 
 .panel-blue
   .panel-heading
     background-color: #516695
-    color: #fff 
-    margin: 0
+    .panel-body span.pull-left:hover,
+    .panel-body span.pull-right:hover
+      color: #516695
 
 .panel-green
   .panel-heading
     background-color: #5cb85c
-    color: #fff 
-    margin: 0
+  .panel-body span.pull-left:hover,
+  .panel-body span.pull-right:hover
+    color: #5cb85c
+
+.panel-yellow
+  .panel-heading
+    background-color: #f0ad4e
+  .panel-body span.pull-left:hover,
+  .panel-body span.pull-right:hover
+    color: #f0ad4e
+
+.panel-red
+  .panel-heading
+    background-color: #d9534f
+    
+    .panel-body span.pull-left:hover,
+    .panel-body span.pull-right:hover
+      color: #d9534f
 
 #task-panel 
   span.show-widget,
