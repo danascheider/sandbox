@@ -47,6 +47,7 @@ fdescribe('Dashboard Home View #travis', function() {
   /****************************************************************************/
 
   beforeAll(function() {
+    jasmine.addMatchers(matchers);
     _.extend(global, fixtures);
   });
 
@@ -95,6 +96,11 @@ fdescribe('Dashboard Home View #travis', function() {
       spyOn(SUT.prototype, 'setUser');
       var newView = new SUT({user: user});
       expect(SUT.prototype.setUser).toHaveBeenCalled();
+    });
+
+    it('can be instantiated without a user', function() {
+      var newView = new SUT();
+      expect(newView.user).not.toExist();
     });
   });
 
