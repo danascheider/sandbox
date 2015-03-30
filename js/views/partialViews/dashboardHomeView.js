@@ -49,10 +49,10 @@ var DashboardHomeView = Canto.View.extend({
   /* Canto View Properties
   /**************************************************************************/
 
-  klass       : 'DashboardHomeView',
-  family      : 'Canto.View',
-  superFamily : 'Backbone.View',
-  types       : function() {
+  klass            : 'DashboardHomeView',
+  family           : 'Canto.View',
+  superFamily      : 'Backbone.View',
+  types            : function() {
     return Canto.View.prototype.types().concat(['DashboardHomeView', 'PartialView']);
   },
 
@@ -65,18 +65,23 @@ var DashboardHomeView = Canto.View.extend({
   /* Special Functions
   /**************************************************************************/
 
-  setUser     : function(user) {
+  createTopWidgets : function() {
+    //
+  },
+
+  setUser          : function(user) {
     this.user       = user;
     this.collection = this.user.tasks;
 
     // Create view elements
     this.taskPanelView = new TaskPanelView({collection: this.collection});
+    this.createTopWidgets();
   },
 
   /* Core View Functions
   /**************************************************************************/
 
-  initialize  : function(opts) {
+  initialize       : function(opts) {
     opts = opts || {};
 
     if(opts.user) {

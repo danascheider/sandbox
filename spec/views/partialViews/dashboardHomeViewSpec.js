@@ -141,6 +141,7 @@ describe('Dashboard Home View #travis', function() {
 
       beforeEach(function() {
         newView = new SUT();
+        spyOn(newView, 'createTopWidgets');
         newView.setUser(user);
       });
 
@@ -154,6 +155,10 @@ describe('Dashboard Home View #travis', function() {
 
       it('creates the task panel', function() {
         expect(newView.taskPanelView.klass).toBe('TaskPanelView');
+      });
+
+      it('calls createTopWidgets', function() {
+        expect(newView.createTopWidgets).toHaveBeenCalled();
       });
     });
   });
