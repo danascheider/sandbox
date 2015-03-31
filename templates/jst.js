@@ -11,6 +11,7 @@ var JST = {
   'tasks/listItem'     : _.template(require('./modelTemplates/taskTemplates/listItemTemplate.js')),
   'tasks/quickAdd'     : _.template(require('./modelTemplates/taskTemplates/quickAddFormTemplate.js')),
   'spec/dashboard'     : _.template(require('./specTemplates/dashboardSpecTemplate.js')),
+  'spec/dashHome'      : _.template(require('./specTemplates/dashboardHomeSpecTemplate.js')),
   'spec/listItem'      : _.template(require('./specTemplates/taskListItemSpecTemplate.js')),
   'spec/sidebar'       : _.template(require('./specTemplates/dashboardSidebarSpecTemplate.js')),
   'spec/collection'    : _.template(require('./specTemplates/taskCollectionSpecTemplate.js')),
