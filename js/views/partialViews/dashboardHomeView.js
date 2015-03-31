@@ -113,8 +113,7 @@ var DashboardHomeView = Canto.View.extend({
     var that = this;
 
     return Canto.View.prototype.render.call(this, this.template(), function() {
-      that.taskPanelView.render();
-      that.$('div.col-lg-6').first().html(that.taskPanelView.$el);
+      that.renderTaskPanelView();
       that.topWidgetView.render();
 
       // Remove the top widget view if it is already in the DOM in order to 

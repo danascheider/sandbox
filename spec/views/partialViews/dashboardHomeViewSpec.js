@@ -42,7 +42,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  *                                                                            *  
 /******************************************************************************/
 
-fdescribe('Dashboard Home View #travis', function() {
+describe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
@@ -133,10 +133,10 @@ fdescribe('Dashboard Home View #travis', function() {
   /**************************************************************************/
 
   describe('render()', function() {
-    it('renders its task panel', function() {
-      spyOn(view.taskPanelView, 'render');
+    it('calls renderTaskPanelView', function() {
+      spyOn(view, 'renderTaskPanelView');
       view.render();
-      expect(view.taskPanelView.render).toHaveBeenCalled();
+      expect(view.renderTaskPanelView).toHaveBeenCalled();
     });
 
     it('renders its top widgets', function() {
