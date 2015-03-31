@@ -17,8 +17,10 @@ var SpecWrapper = Canto.View.extend({
     var that = this;
 
     return Canto.View.prototype.render.call(this, this.template(), function() {
+      that.$el.addClass('test');
       that.view.render();
       that.$('#view').html(that.view.$el);
+      console.log(that.$('#view').html());
     });
   }
 });
