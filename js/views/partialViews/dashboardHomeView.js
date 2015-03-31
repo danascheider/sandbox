@@ -7,20 +7,23 @@
  * activities and obligations.                                             *
  *                                                                         *
  * CONTENTS                                                          LINE  *
- * Core Requires .................................................... 30   *
- * Module-Specific Requires ......................................... 36   *
- * Module ........................................................... 44   *
- *   Backbone View Properties ....................................... 50   *
- *   Canto View Properties .......... ............................... 60   *
+ * Core Requires .................................................... 33   *
+ * Module-Specific Requires ......................................... 39   *
+ * Module ........................................................... 47   *
+ *   Backbone View Properties ....................................... 52   *
+ *   Canto View Properties .......... ............................... 59   *
  *     klass                                                               *
  *     family                                                              *
  *     superFamily                                                         *
  *     types                                                               *
- *   Core Functions ................................................. 69   *
- *     fetch()                                                             *
- *   Special Functions .............................................. 91   *
- *     setUser() .................................................... 92   *
- *     isA() ....................................................... 140   *
+ *   Special Functions .............................................. 69   *
+ *     renderTaskPanelView() ........................................ 69   *
+ *     renderTopWidgetView() ........................................ 74   *
+ *     setUser() .................................................... 85   *
+ *   Core Functions ................................................. 97   *
+ *     initialize() ................................................. 97   *
+ *     remove() .................................................... 105   * 
+ *     render() .................................................... 111   *
  *                                                                         *
 /****************************************************************************/
 
@@ -60,25 +63,8 @@ var DashboardHomeView = Canto.View.extend({
     return Canto.View.prototype.types().concat(['DashboardHomeView', 'PartialView']);
   },
 
-  /* View Events
-  /**************************************************************************/
-
-  /* Event Callbacks
-  /**************************************************************************/
-
   /* Special Functions
   /**************************************************************************/
-
-  createTopWidgets : function() {
-    var that = this;
-
-    this.topWidgetView = new TopWidgetView({
-      taskCollection: that.user.tasks,
-      deadlineCount: 2,
-      appointmentCount: 4,
-      recommendationCount: 11
-    });
-  },
 
   renderTaskPanelView : function() {
     this.taskPanelView.render();
