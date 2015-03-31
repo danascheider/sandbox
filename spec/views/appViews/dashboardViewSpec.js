@@ -341,11 +341,17 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('renders the home view', function() {
-          pending('Need to implement the dashboard home view');
+          spyOn(dashboard.homeView, 'render');
+          dashboard.showHomeView();
+          expect(dashboard.homeView.render).toHaveBeenCalled();
         });
 
         it('attaches the home view to the DOM', function() {
-          pending('Need to implement the dashboard home view');
+          dashboard.render();
+          $('body').html(dashboard.$el);
+          dashboard.homeView.remove();
+          dashboard.showHomeView();
+          expect(dashboard.homeView.$el).toBeInDom();
         });
       });
 
@@ -361,11 +367,15 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('renders the home view', function() {
-          pending('Need to implement the dashboard home view');
+          spyOn(dashboard.homeView, 'render');
+          dashboard.showHomeView();
+          expect(dashboard.homeView.render).toHaveBeenCalled();
         });
 
         it('attaches the home view to the DOM', function() {
-          pending('Need to implement the dashboard home view');
+          dashboard.showHomeView();
+          $('body').html(dashboard.$el);
+          expect(dashboard.homeView.$el).toBeInDom();
         });
       });
     });
@@ -385,7 +395,9 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('removes the home view', function() {
-          pending('Need to implement the dashboard home view');
+          spyOn(dashboard.homeView, 'remove');
+          dashboard.showTaskView();
+          expect(dashboard.homeView.remove).toHaveBeenCalled();
         });
 
         it('renders the task view', function() {
@@ -492,7 +504,9 @@ describe('Main Dashboard View #travis', function() {
 
     describe('remove', function() {
       it('removes the home view', function() {
-        pending('Need to implement the dashboard home view');
+        spyOn(dashboard.homeView, 'remove');
+        dashboard.remove();
+        expect(dashboard.homeView.remove).toHaveBeenCalled();
       });
 
       it('removes the task view', function() {

@@ -105,6 +105,7 @@ var DashboardView = Canto.View.extend({
 
   showTaskView       : function() {
     if(!this.$el.is(':visible')) { this.render(); }
+    if(this.homeView.$el.is(':visible')) { this.homeView.remove(); }
   },
 
   /* Core View Functions
@@ -122,6 +123,7 @@ var DashboardView = Canto.View.extend({
   remove             : function() {
     this.sidebarView.remove();
     Backbone.View.prototype.remove.call(this);
+    this.homeView.remove();
   },
 
   render             : function() {
