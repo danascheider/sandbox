@@ -99,8 +99,6 @@ describe('Dashboard Top Widget View #travis', function() {
 
   describe('events', function() {
     beforeEach(function() { 
-      spyOn(SUT.prototype, 'changeLinkColor');
-      spyOn(SUT.prototype, 'changeLinkColorBack');
       spyOn(SUT.prototype, 'followLink');
       newView = new SUT(data);
       newView.render(); 
