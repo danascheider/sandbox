@@ -33,7 +33,7 @@ require(process.cwd() + '/spec/support/env.js');
  * BEGIN SUITE                                                                *
 /******************************************************************************/
 
-describe('Dashboard Home View - Visual Elements #ui', function() {
+fdescribe('Dashboard Home View - Visual Elements #ui', function() {
 
   /* Filters
   /****************************************************************************/
@@ -55,6 +55,13 @@ describe('Dashboard Home View - Visual Elements #ui', function() {
   describe('view elements', function() {
     it('displays its task panel view', function(done) {
       client.waitForVisible('#task-panel', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
+
+    it('displays its top widget view', function(done) {
+      client.waitForVisible('#dashboard-top-widgets', function(err, isVisible) {
         expect(isVisible).toBe(true);
         done();
       });
