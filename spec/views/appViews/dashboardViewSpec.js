@@ -302,7 +302,8 @@ describe('Main Dashboard View #travis', function() {
       context('when the main dash and home view are visible', function() {
         beforeEach(function() {
           spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          // spyOn(dashboard.homeView.$el, 'is').and.callFake(function() { return true; });
+          dashboard.render();
+          $('body').html(dashboard.$el);
         });
 
         it('doesn\'t re-render the main dash', function() {
@@ -318,7 +319,8 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('attaches the home view to the DOM', function() {
-          pending('Need to implement the dashboard home view');
+          dashboard.showHomeView();
+          expect(dashboard.homeView.$el).toBeInDom();
         });
       });
 

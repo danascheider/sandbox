@@ -100,6 +100,7 @@ var DashboardView = Canto.View.extend({
   showHomeView       : function() {
     if(!this.$el.is(':visible')) { this.render(); }
     this.homeView.render();
+    this.$('nav').after(this.homeView.$el);
   },
 
   showTaskView       : function() {
