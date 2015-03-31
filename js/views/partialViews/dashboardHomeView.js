@@ -3,7 +3,7 @@
  * DASHBOARD HOME VIEW                                                     *
  *                                                                         *
  * The DashboardHomeView is the view the user sees when they first log     *
- * into their dashboard. It contains summary information about all their   *  
+ * into their dashboard. It contains summary information about all their   *
  * activities and obligations.                                             *
  *                                                                         *
  * CONTENTS                                                          LINE  *
@@ -25,7 +25,7 @@
  *     remove() .................................................... 105   * 
  *     render() .................................................... 111   *
  *                                                                         *
-/****************************************************************************/
+/***************************************************************************/
 
 /* Core Requires
 /****************************************************************************/

@@ -1,21 +1,62 @@
+/***************************************************************************
+ *                                                                         *
+ * TOP-LEVEL DASHBOARD VIEW                                                *
+ *                                                                         *
+ * The dashboard is the user's main view from which they manage            *
+ * everything. The dashboard displays summary information about their      *
+ * affairs and links to all their other pages.                             *
+ *                                                                         *
+ * CONTENTS                                                          LINE  *
+ * Core Requires .................................................... 33   *
+ * Module-Specific Requires ......................................... 39   *
+ * Module ........................................................... 47   *
+ *   Backbone View Properties ....................................... 52   *
+ *   Canto View Properties .......... ............................... 59   *
+ *     klass                                                               *
+ *     family                                                              *
+ *     superFamily                                                         *
+ *     types                                                               *
+ *   View Events .................................................... --   *
+ *   Event Callbacks ................................................ --   *
+ *     hideDropdownMenus() .......................................... --   *
+ *     toggleDropdownMenu() ......................................... --   *
+ *   Special Functions .............................................. 69   *
+ *     setUser() .................................................... 69   *
+ *     showHomeView() ............................................... 74   *
+ *     showTaskView() ............................................... 85   *
+ *   Core Functions ................................................. 97   *
+ *     initialize() ................................................. 97   *
+ *     remove() .................................................... 105   *
+ *     render() .................................................... 111   *
+ *                                                                         *
+/***************************************************************************/
+
+/* Core Requires
+/****************************************************************************/
+
 Canto      = Canto || require('../../dependencies.js');
 Canto.View = Canto.View || require('./cantoView.js');
+
+/* Module-Specific Requires
+/****************************************************************************/
 
 var UserModel = require('../../models/userModel.js');
 var SidebarView = require('../partialViews/dashboardSidebarView.js');
 
+/****************************************************************************
+ * BEGIN MODULE                                                             *
+/****************************************************************************/
+
 var DashboardView = Canto.View.extend({
+
+  /* Backbone View Properties
+  /**************************************************************************/
+
   id                 : 'dashboard-wrapper',
   template           : JST['dashboard'],
 
-  events             : {
-    'click'             : 'hideDropdownMenus',
-    'click li.dropdown' : 'toggleDropdownMenu'
-  },
-
-  // --------------------- //
-  // Canto View Properties //
-  // --------------------- //
+  /* Canto View Properties   
+  /**************************************************************************/
 
   klass              : 'DashboardView',
   family             : 'Canto.View',
@@ -25,9 +66,16 @@ var DashboardView = Canto.View.extend({
     return Canto.View.prototype.types().concat(['DashboardView', 'TopLevelView']);
   },
 
-  // --------------- //
-  // Event Callbacks //
-  // --------------- //
+  /* View Events                  
+  /**************************************************************************/
+
+  events             : {
+    'click'             : 'hideDropdownMenus',
+    'click li.dropdown' : 'toggleDropdownMenu'
+  },
+
+  /* Event Callbacks
+  /**************************************************************************/
 
   hideDropdownMenus  : function(e) {
     var li = this.$('li.dropdown');
