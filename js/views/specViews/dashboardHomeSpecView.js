@@ -20,7 +20,6 @@ var SpecWrapper = Canto.View.extend({
       that.$el.addClass('test');
       that.view.render();
       that.$('#view').html(that.view.$el);
-      console.log(that.$('#view').html());
     });
   }
 });
