@@ -40,8 +40,9 @@ Canto.View = Canto.View || require('./cantoView.js');
 /* Module-Specific Requires
 /****************************************************************************/
 
-var UserModel = require('../../models/userModel.js');
-var SidebarView = require('../partialViews/dashboardSidebarView.js');
+var userModel   = require('../../models/userModel.js'),
+    SidebarView = require('../partialViews/dashboardSidebarView.js'),
+    HomeView    = require('../partialViews/dashboardHomeView.js');
 
 /****************************************************************************
  * BEGIN MODULE                                                             *
@@ -88,9 +89,8 @@ var DashboardView = Canto.View.extend({
     li.toggleClass('open');
   },
 
-  // ----------------- //
-  // Special Functions //
-  // ----------------- //
+  /* Special Functions
+  /**************************************************************************/
 
   setUser            : function(user) {
     this.user = user;
@@ -104,15 +104,15 @@ var DashboardView = Canto.View.extend({
     if(!this.$el.is(':visible')) { this.render(); }
   },
 
-  // ------------------- //
-  // Core View Functions //
-  // ------------------- //
+  /* Core View Functions
+  /**************************************************************************/
 
   initialize         : function(opts) {
     opts = opts || {};
     this.setUser(opts.user);
 
     this.sidebarView = new SidebarView();
+    this.homeView    = new HomeView();
   },
 
   remove             : function() {

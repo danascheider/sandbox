@@ -111,7 +111,7 @@ describe('Main Dashboard View #travis', function() {
   /* Constructor             
   /**************************************************************************/
 
-  fdescribe('constructor', function() {
+  describe('constructor', function() {
     it('calls setUser', function() {
       spyOn(SUT.prototype, 'setUser');
       var newView = new SUT({user: user});
@@ -124,7 +124,7 @@ describe('Main Dashboard View #travis', function() {
     });
 
     it('instantiates a home view', function() {
-      pending('Need to implement the dashboard home view');
+      expect(dashboard.homeView.klass).toEqual('DashboardHomeView');
     });
 
     it('instantiates a task view', function() {
