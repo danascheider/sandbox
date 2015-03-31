@@ -124,6 +124,10 @@ describe('Dashboard Home View #travis', function() {
     it('has ID #page-wrapper', function() {
       expect(view.$el).toHaveId('page-wrapper');
     });
+
+    it('has class .dashboard-home', function() {
+      expect(view.$el).toHaveClass('dashboard-home');
+    });
   });
 
   /* Core View Functions
