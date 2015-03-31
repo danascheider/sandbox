@@ -47,6 +47,7 @@ var DashboardHomeView = Canto.View.extend({
   /**************************************************************************/
 
   template         : JST['partials/dashHome'],
+  id               : 'page-wrapper',
 
   /* Canto View Properties
   /**************************************************************************/

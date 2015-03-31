@@ -8,13 +8,13 @@
  *                                                                         *
  * CONTENTS                                                          LINE  *
  * Requires ......................................................... 28   *
- * Suite ............................................................ 44   *
- *   Filters ........................................................ 50   *
- *   Static Properties .............................................. --   *
- *   Constructor .................................................... --   *
- *   Event Callbacks ................................................ --   *
- *   Core Functions ................................................. 69   *
- *     render() ..................................................... --   *
+ * Suite ............................................................ 45   *
+ *   Filters ........................................................ 51   *
+ *   Static Properties .............................................. 73   *
+ *   Constructor .................................................... 89   *
+ *   Elements ...................................................... 112   *
+ *   Core Functions ................................................ 127   *
+ *     render() .................................................... 130   *
  *     remove() ..................................................... --   *
  *   Special Functions .............................................. 91   *
  *     isA() ........................................................ 92   *
@@ -37,9 +37,7 @@ var fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js
 var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js');
 
 /******************************************************************************
- *                                                                            *
  * BEGIN SUITE                                                                *
- *                                                                            *  
 /******************************************************************************/
 
 describe('Dashboard Home View #travis', function() {
@@ -122,46 +120,45 @@ describe('Dashboard Home View #travis', function() {
     it('has a top widget section', function() {
       expect(view.$('#dashboard-top-widgets')).toBeInDom();
     });
+
+    it('has ID #page-wrapper', function() {
+      expect(view.$el).toHaveId('page-wrapper');
+    });
   });
-
-  /* Event Wiring
-  /**************************************************************************/
-
-  /* Event Callbacks
-  /**************************************************************************/
 
   /* Core View Functions
   /**************************************************************************/
 
-  describe('render()', function() {
-    it('calls renderTaskPanelView', function() {
-      spyOn(view, 'renderTaskPanelView');
-      view.render();
-      expect(view.renderTaskPanelView).toHaveBeenCalled();
-    });
+  describe('core view functions', function() {
+    describe('render()', function() {
+      it('calls renderTaskPanelView', function() {
+        spyOn(view, 'renderTaskPanelView');
+        view.render();
+        expect(view.renderTaskPanelView).toHaveBeenCalled();
+      });
 
-    it('calls renderTopWidgetView', function() {
-      spyOn(view, 'renderTopWidgetView');
-      view.render();
-      expect(view.renderTopWidgetView).toHaveBeenCalled();
-    });
-
-  });
-
-  describe('remove()', function() {
-    _.each(['taskPanelView', 'topWidgetView'], function(str) {
-      it('removes the ' + str, function() {
-        spyOn(view[str], 'remove');
-        view.remove();
-        expect(view[str].remove).toHaveBeenCalled();
+      it('calls renderTopWidgetView', function() {
+        spyOn(view, 'renderTopWidgetView');
+        view.render();
+        expect(view.renderTopWidgetView).toHaveBeenCalled();
       });
     });
 
-    it('calls Backbone.View.prototype.remove on itself', function() {
-      spyOn(Backbone.View.prototype.remove, 'call');
-      view.remove();
-      expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
-    });
+    describe('remove()', function() {
+      _.each(['taskPanelView', 'topWidgetView'], function(str) {
+        it('removes the ' + str, function() {
+          spyOn(view[str], 'remove');
+          view.remove();
+          expect(view[str].remove).toHaveBeenCalled();
+        });
+      });
+
+      it('calls Backbone.View.prototype.remove on itself', function() {
+        spyOn(Backbone.View.prototype.remove, 'call');
+        view.remove();
+        expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
+      });
+    }); 
   });
 
   /* Special Functions
