@@ -103,7 +103,14 @@ var DashboardHomeView = Canto.View.extend({
 
     return Canto.View.prototype.render.call(this, this.template(), function() {
       that.taskPanelView.render();
+      that.$('div.col-lg-6').first().html(that.taskPanelView.$el);
       that.topWidgetView.render();
+
+      // Remove the top widget view if it is already in the DOM in order to 
+      // maintain idempotency when using prepend() for DOM insertion
+      
+      if($.contains(that.$el, that.topWidgetView.$el)) { that.topWidgetView.remove(); }
+      that.$el.prepend(that.topWidgetView.$el);
     });
   }
 

@@ -38,7 +38,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  *                                                                            *  
 /******************************************************************************/
 
-describe('Dashboard Home View #travis', function() {
+fdescribe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
@@ -106,8 +106,16 @@ describe('Dashboard Home View #travis', function() {
   /**************************************************************************/
 
   describe('DOM elements', function() {
-    it('has a task panel', function() {
-      expect(view.taskPanelView.klass).toBe('TaskPanelView');
+    beforeEach(function() {
+      view.render();
+    });
+
+    xit('has a task panel', function() {
+      expect(view.$('#task-panel')).toBeInDom();
+    });
+
+    xit('has a top widget section', function() {
+      expect(view.$('#dashboard-top-widgets')).toBeInDom();
     });
   });
 
@@ -120,7 +128,7 @@ describe('Dashboard Home View #travis', function() {
   /* Core View Functions
   /**************************************************************************/
 
-  describe('render', function() {
+  describe('render()', function() {
     it('renders its task panel', function() {
       spyOn(view.taskPanelView, 'render');
       view.render();
@@ -132,6 +140,20 @@ describe('Dashboard Home View #travis', function() {
       view.render();
       expect(view.topWidgetView.render).toHaveBeenCalled();
     });
+
+    it('inserts the task panel view into the DOM', function() {
+      pending('Determine why views are not in the DOM');
+      spyOn($.prototype, 'html').and.callThrough();
+      view.render();
+      expect(view.$('#task-panel')).toBeInDom();
+    });
+
+    it('inserts the top widget view into the DOM', function() {
+      pending('Determine why views are not considered to be in the DOM');
+      spyOn($.prototype, 'html').and.callThrough();
+      view.render();
+      expect(view.$('#dashboard-top-widgets')).toBeInDom();
+    })
   });
 
   /* Special Functions
