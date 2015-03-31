@@ -112,13 +112,14 @@ describe('Dashboard Home View #travis', function() {
   describe('DOM elements', function() {
     beforeEach(function() {
       view.render();
+      $('body').html(view.$el);
     });
 
-    xit('has a task panel', function() {
+    it('has a task panel', function() {
       expect(view.$('#task-panel')).toBeInDom();
     });
 
-    xit('has a top widget section', function() {
+    it('has a top widget section', function() {
       expect(view.$('#dashboard-top-widgets')).toBeInDom();
     });
   });
