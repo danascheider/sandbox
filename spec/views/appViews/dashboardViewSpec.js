@@ -69,7 +69,7 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
 
 var matchers       = require('jasmine-jquery-matchers'),
-    toBeA          = require(process.cwd() + '/spec/support/matchers/toBeA.js'),
+    fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     UserModel      = require(process.cwd() + '/js/models/userModel.js'),
     TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
@@ -77,35 +77,28 @@ var matchers       = require('jasmine-jquery-matchers'),
     context        = describe,
     fcontext       = fdescribe;
 
-Backbone.$         = $;
-
-var user  = new UserModel({id: 342, username: 'testuser', password: 'testuser', email: 'testuser@example.com', first_name: 'Test', last_name: 'User'});
-
-var task1 = new TaskModel({id: 1, owner_id: 342, title: 'Test Task 1', status: 'New'}),
-    task2 = new TaskModel({id: 2, owner_id: 342, title: 'Test Task 2', status: 'New'}),
-    task3 = new TaskModel({id: 3, owner_id: 342, title: 'Test Task 3', status: 'Complete'});
-
-user.tasks = new TaskCollection([task1, task2, task3]);
-
 /****************************************************************************
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-fdescribe('Main Dashboard View #travis', function() {
+describe('Main Dashboard View #travis', function() {
   var dashboard, e, spy;
 
   /* Filters                 
   /**************************************************************************/
+  beforeAll(function() {
+    jasmine.addMatchers(matchers);
+    _.extend(global, fixtures);
+  });
 
   beforeEach(function() {
-    jasmine.addMatchers(matchers);
-    jasmine.addMatchers(toBeA);
     dashboard = new SUT({user: user});
   });
 
   afterAll(function() {
     dashboard.remove();
     dashboard = null;
+    global = _.omit(global, fixtures);
   });
 
   /* Constructor             
@@ -292,7 +285,7 @@ fdescribe('Main Dashboard View #travis', function() {
         });
 
         it('removes the .open class from the target menu', function() {
-          expect('li.dropdown').first().not.toHaveClass('open');
+          expect(dashboard.$('li.dropdown').first()).not.toHaveClass('open');
         });
 
         it('doesn\'t open any other menus', function() {
