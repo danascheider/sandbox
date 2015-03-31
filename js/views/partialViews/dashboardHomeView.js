@@ -98,6 +98,10 @@ var DashboardHomeView = Canto.View.extend({
     }
   },
 
+  remove           : function() {
+    this.taskPanelView.remove();
+  },
+
   render           : function() {
     var that = this;
 

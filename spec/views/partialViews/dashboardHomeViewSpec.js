@@ -7,11 +7,14 @@
  * activities and obligations.                                             *
  *                                                                         *
  * CONTENTS                                                          LINE  *
- * Requires ......................................................... 26   *
+ * Requires ......................................................... 27   *
  * Suite ............................................................ 44   *
  *   Filters ........................................................ 50   *
+ *   Static Properties .............................................. --   *
+ *   Constructor .................................................... --   *
+ *   Event Callbacks ................................................ --   *
  *   Core Functions ................................................. 69   *
- *     fetch()                                                             *
+ *     render()                                                            *
  *   Special Functions .............................................. 91   *
  *     isA() ........................................................ 92   *
  *     setUser() ................................................... 140   *
@@ -38,7 +41,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  *                                                                            *  
 /******************************************************************************/
 
-fdescribe('Dashboard Home View #travis', function() {
+describe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
@@ -154,6 +157,14 @@ fdescribe('Dashboard Home View #travis', function() {
       view.render();
       expect(view.$('#dashboard-top-widgets')).toBeInDom();
     })
+  });
+
+  describe('remove()', function() {
+    it('removes the task panel view', function() {
+      spyOn(view.taskPanelView, 'remove');
+      view.remove();
+      expect(view.taskPanelView.remove).toHaveBeenCalled();
+    });
   });
 
   /* Special Functions
