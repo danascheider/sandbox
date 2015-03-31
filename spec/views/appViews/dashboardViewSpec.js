@@ -95,6 +95,10 @@ describe('Main Dashboard View #travis', function() {
     dashboard = new SUT({user: user});
   });
 
+  afterEach(function() {
+    fixtures.restoreFixtures();
+  });
+
   afterAll(function() {
     dashboard.remove();
     dashboard = null;
