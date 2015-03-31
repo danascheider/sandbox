@@ -87,8 +87,15 @@ var DashboardHomeView = Canto.View.extend({
     this.collection = this.user.tasks;
 
     // Create view elements
+    var that = this;
+
     this.taskPanelView = new TaskPanelView({collection: this.collection});
-    this.createTopWidgets();
+    this.topWidgetView    = new TopWidgetView({
+      taskCollection: that.user.tasks,
+      deadlineCount: 7,
+      appointmentCount: 4,
+      recommendationCount: 14
+    });
   },
 
   /* Core View Functions
@@ -96,8 +103,7 @@ var DashboardHomeView = Canto.View.extend({
 
   initialize          : function(opts) {
     opts = opts || {};
-
-    if(opts.user) {
+    if(!!opts.user) {
       this.setUser(opts.user);
     }
   },

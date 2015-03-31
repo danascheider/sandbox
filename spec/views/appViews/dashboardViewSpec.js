@@ -312,7 +312,9 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('renders the home view', function() {
-          pending('Need to implement the dashboard home view');
+          spyOn(dashboard.homeView, 'render');
+          dashboard.showHomeView();
+          expect(dashboard.homeView.render).toHaveBeenCalled();
         });
 
         it('attaches the home view to the DOM', function() {
@@ -459,7 +461,10 @@ describe('Main Dashboard View #travis', function() {
       });
 
       it('calls setUser on the home view', function() {
-        pending('Need to implement the dashboard home view');
+        var newView = new SUT();
+        spyOn(newView.homeView, 'setUser');
+        newView.setUser(user);
+        expect(newView.homeView.setUser).toHaveBeenCalledWith(user);
       });
 
       it('calls setUser on the task view', function() {

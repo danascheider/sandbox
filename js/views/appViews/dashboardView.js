@@ -94,10 +94,12 @@ var DashboardView = Canto.View.extend({
 
   setUser            : function(user) {
     this.user = user;
+    this.homeView.setUser(user);
   },
 
   showHomeView       : function() {
     if(!this.$el.is(':visible')) { this.render(); }
+    this.homeView.render();
   },
 
   showTaskView       : function() {
@@ -109,10 +111,11 @@ var DashboardView = Canto.View.extend({
 
   initialize         : function(opts) {
     opts = opts || {};
-    this.setUser(opts.user);
 
     this.sidebarView = new SidebarView();
     this.homeView    = new HomeView();
+
+    if(opts.user) { this.setUser(opts.user); }
   },
 
   remove             : function() {
