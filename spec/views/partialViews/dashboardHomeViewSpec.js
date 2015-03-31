@@ -42,7 +42,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  *                                                                            *  
 /******************************************************************************/
 
-describe('Dashboard Home View #travis', function() {
+fdescribe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
@@ -199,6 +199,13 @@ describe('Dashboard Home View #travis', function() {
         spyOn(view.taskPanelView, 'render');
         view.renderTaskPanelView();
         expect(view.taskPanelView.render).toHaveBeenCalled();
+      });
+
+      it('attaches the task panel view to the DOM', function() {
+        view.$el.html(view.template());
+        view.renderTaskPanelView();
+        $('body').html(view.$el);
+        expect(view.taskPanelView.$el).toBeInDom();
       });
     });
 
