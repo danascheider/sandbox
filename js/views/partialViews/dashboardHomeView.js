@@ -78,7 +78,11 @@ var DashboardHomeView = Canto.View.extend({
     });
   },
 
-  setUser          : function(user) {
+  renderTaskPanelView : function() {
+    this.taskPanelView.render();
+  },
+
+  setUser             : function(user) {
     this.user       = user;
     this.collection = this.user.tasks;
 
@@ -90,7 +94,7 @@ var DashboardHomeView = Canto.View.extend({
   /* Core View Functions
   /**************************************************************************/
 
-  initialize       : function(opts) {
+  initialize          : function(opts) {
     opts = opts || {};
 
     if(opts.user) {
@@ -98,13 +102,13 @@ var DashboardHomeView = Canto.View.extend({
     }
   },
 
-  remove           : function() {
+  remove              : function() {
     this.taskPanelView.remove();
     this.topWidgetView.remove();
     Canto.View.prototype.remove.call(this);
   },
 
-  render           : function() {
+  render              : function() {
     var that = this;
 
     return Canto.View.prototype.render.call(this, this.template(), function() {

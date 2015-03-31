@@ -180,7 +180,7 @@ describe('Dashboard Home View #travis', function() {
   /**************************************************************************/
 
   describe('special functions', function() {
-    describe('isA', function() {
+    describe('isA()', function() {
       it('returns true with argument DashboardHomeView', function() {
         expect(view.isA('DashboardHomeView')).toBe(true);
       });
@@ -191,6 +191,14 @@ describe('Dashboard Home View #travis', function() {
 
       it('returns false with another argument', function() {
         expect(view.isA('Corvette')).toBe(false);
+      });
+    });
+
+    describe('renderTaskPanelView', function() {
+      it('calls render on the task panel view', function() {
+        spyOn(view.taskPanelView, 'render');
+        view.renderTaskPanelView();
+        expect(view.taskPanelView.render).toHaveBeenCalled();
       });
     });
 
