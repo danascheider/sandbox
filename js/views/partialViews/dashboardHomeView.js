@@ -85,6 +85,8 @@ var DashboardHomeView = Canto.View.extend({
 
   renderTopWidgetView : function() {
     this.topWidgetView.render();
+    if($.contains(this.$el, this.topWidgetView.$el)) { this.topWidgetView.remove(); }
+    this.$el.prepend(this.topWidgetView.$el);
   },
 
   setUser             : function(user) {

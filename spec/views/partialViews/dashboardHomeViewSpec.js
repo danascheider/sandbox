@@ -208,6 +208,13 @@ describe('Dashboard Home View #travis', function() {
         view.renderTopWidgetView();
         expect(view.topWidgetView.render).toHaveBeenCalled();
       });
+
+      it('attaches the top widget view to the DOM', function() {
+        view.$el.html(view.template());
+        view.renderTopWidgetView();
+        $('body').html(view.$el);
+        expect(view.topWidgetView.$el).toBeInDom();
+      });
     });
 
     describe('setUser()', function() {
