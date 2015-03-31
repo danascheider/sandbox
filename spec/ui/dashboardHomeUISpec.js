@@ -40,9 +40,24 @@ describe('Dashboard Home View - Visual Elements #ui', function() {
 
   beforeAll(function() {
     jasmine.addMatchers(require('jasmine-jquery-matchers'));
+    client.init().url('http://localhost/#dashboardHomeViewSpec');
+  });
+
+  beforeEach(function() {
+    client.refresh();
+  });
+
+  afterAll(function(done) {
+    client.end();
+    done();
   });
 
   describe('view elements', function() {
-    //
+    it('displays its task panel view', function(done) {
+      client.waitForVisible('#task-panel', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
   });
 });
