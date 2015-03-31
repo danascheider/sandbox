@@ -85,7 +85,12 @@ var DashboardHomeView = Canto.View.extend({
 
   renderTopWidgetView : function() {
     this.topWidgetView.render();
+
+    // Remove the top widget view if it is already in the DOM in order to 
+    // maintain idempotency when using prepend() for DOM insertion
+
     if($.contains(this.$el, this.topWidgetView.$el)) { this.topWidgetView.remove(); }
+
     this.$el.prepend(this.topWidgetView.$el);
   },
 
@@ -120,13 +125,7 @@ var DashboardHomeView = Canto.View.extend({
 
     return Canto.View.prototype.render.call(this, this.template(), function() {
       that.renderTaskPanelView();
-      that.topWidgetView.render();
-
-      // Remove the top widget view if it is already in the DOM in order to 
-      // maintain idempotency when using prepend() for DOM insertion
-      
-      if($.contains(that.$el, that.topWidgetView.$el)) { that.topWidgetView.remove(); }
-      that.$el.prepend(that.topWidgetView.$el);
+      that.renderTopWidgetView();
     });
   }
 

@@ -139,18 +139,12 @@ describe('Dashboard Home View #travis', function() {
       expect(view.renderTaskPanelView).toHaveBeenCalled();
     });
 
-    it('renders its top widgets', function() {
-      spyOn(view.topWidgetView, 'render');
+    it('calls renderTopWidgetView', function() {
+      spyOn(view, 'renderTopWidgetView');
       view.render();
-      expect(view.topWidgetView.render).toHaveBeenCalled();
+      expect(view.renderTopWidgetView).toHaveBeenCalled();
     });
 
-    it('inserts the top widget view into the DOM', function() {
-      pending('Determine why views are not considered to be in the DOM');
-      spyOn($.prototype, 'html').and.callThrough();
-      view.render();
-      expect(view.$('#dashboard-top-widgets')).toBeInDom();
-    })
   });
 
   describe('remove()', function() {
