@@ -145,13 +145,6 @@ describe('Dashboard Home View #travis', function() {
       expect(view.topWidgetView.render).toHaveBeenCalled();
     });
 
-    it('inserts the task panel view into the DOM', function() {
-      pending('Determine why views are not in the DOM');
-      spyOn($.prototype, 'html').and.callThrough();
-      view.render();
-      expect(view.$('#task-panel')).toBeInDom();
-    });
-
     it('inserts the top widget view into the DOM', function() {
       pending('Determine why views are not considered to be in the DOM');
       spyOn($.prototype, 'html').and.callThrough();
@@ -194,7 +187,7 @@ describe('Dashboard Home View #travis', function() {
       });
     });
 
-    describe('renderTaskPanelView', function() {
+    describe('renderTaskPanelView()', function() {
       it('calls render on the task panel view', function() {
         spyOn(view.taskPanelView, 'render');
         view.renderTaskPanelView();
@@ -206,6 +199,14 @@ describe('Dashboard Home View #travis', function() {
         view.renderTaskPanelView();
         $('body').html(view.$el);
         expect(view.taskPanelView.$el).toBeInDom();
+      });
+    });
+
+    describe('renderTopWidgetView()', function() {
+      it('calls render on the top-widget view', function() {
+        spyOn(view.topWidgetView, 'render');
+        view.renderTopWidgetView();
+        expect(view.topWidgetView.render).toHaveBeenCalled();
       });
     });
 

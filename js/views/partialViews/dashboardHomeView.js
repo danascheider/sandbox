@@ -83,6 +83,10 @@ var DashboardHomeView = Canto.View.extend({
     this.$('div.col-lg-6').first().html(this.taskPanelView.$el);
   },
 
+  renderTopWidgetView : function() {
+    this.topWidgetView.render();
+  },
+
   setUser             : function(user) {
     this.user       = user;
     this.collection = this.user.tasks;
