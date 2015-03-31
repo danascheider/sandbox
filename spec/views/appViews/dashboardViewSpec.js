@@ -91,7 +91,7 @@ user.tasks = new TaskCollection([task1, task2, task3]);
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-describe('Main Dashboard View #travis', function() {
+fdescribe('Main Dashboard View #travis', function() {
   var dashboard, e, spy;
 
   /* Filters                 

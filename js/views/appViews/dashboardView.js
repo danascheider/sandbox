@@ -64,7 +64,7 @@ var DashboardView = Canto.View.extend({
   superFamily        : 'Backbone.View',
 
   types              : function() {
-    return Canto.View.prototype.types().concat(['DashboardView', 'TopLevelView']);
+    return Canto.View.prototype.types().concat(['DashboardView', 'MainDashboardView', 'Dashboard', 'MainDashboard', 'TopLevelView']);
   },
 
   /* View Events                  
