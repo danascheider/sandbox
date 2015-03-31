@@ -7,14 +7,15 @@
  * activities and obligations.                                             *
  *                                                                         *
  * CONTENTS                                                          LINE  *
- * Requires ......................................................... 27   *
+ * Requires ......................................................... 28   *
  * Suite ............................................................ 44   *
  *   Filters ........................................................ 50   *
  *   Static Properties .............................................. --   *
  *   Constructor .................................................... --   *
  *   Event Callbacks ................................................ --   *
  *   Core Functions ................................................. 69   *
- *     render()                                                            *
+ *     render() ..................................................... --   *
+ *     remove() ..................................................... --   *
  *   Special Functions .............................................. 91   *
  *     isA() ........................................................ 92   *
  *     setUser() ................................................... 140   *
@@ -160,10 +161,18 @@ describe('Dashboard Home View #travis', function() {
   });
 
   describe('remove()', function() {
-    it('removes the task panel view', function() {
-      spyOn(view.taskPanelView, 'remove');
+    _.each(['taskPanelView', 'topWidgetView'], function(str) {
+      it('removes the ' + str, function() {
+        spyOn(view[str], 'remove');
+        view.remove();
+        expect(view[str].remove).toHaveBeenCalled();
+      });
+    });
+
+    it('calls Backbone.View.prototype.remove on itself', function() {
+      spyOn(Backbone.View.prototype.remove, 'call');
       view.remove();
-      expect(view.taskPanelView.remove).toHaveBeenCalled();
+      expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
     });
   });
 

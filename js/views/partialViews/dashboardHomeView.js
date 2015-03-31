@@ -100,6 +100,8 @@ var DashboardHomeView = Canto.View.extend({
 
   remove           : function() {
     this.taskPanelView.remove();
+    this.topWidgetView.remove();
+    Canto.View.prototype.remove.call(this);
   },
 
   render           : function() {
