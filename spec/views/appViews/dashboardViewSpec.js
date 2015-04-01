@@ -7,16 +7,16 @@
  * affairs and links to all their other pages.                             *
  *                                                                         *
  * CONTENTS                                                          LINE  *
- * Requires ......................................................... 33   *
- * Suite ............................................................ 47   *
- *   Filters ........................................................ 52   *
- *   Constructor .................................................... 59   *
- *     calls setUser()                                                     *
- *     instantiates a sidebar                                              *
- *     instantiates a home view                                            *
- *     instantiates a task view                                            *
- *     doesn't call render                                                 *
- *     can be instantiated without a user                                  *
+ * Requires ......................................................... 97   *
+ * Suite ........................................................... 116   *
+ *   Filters ....................................................... 122   *
+ *   Constructor ................................................... 144   *
+ *     calls setUser() ............................................. 145   *
+ *     instantiates a sidebar ...................................... 152   *
+ *     instantiates a home view .................................... 156   *
+ *     instantiates a task view .................................... 160   *
+ *     doesn't call render ......................................... 164   *
+ *     can be instantiated without a user .......................... 170   *
  *   Properties ..................................................... --   *
  *     klass ........................................................ --   *
  *     family ....................................................... --   *
@@ -49,13 +49,45 @@
  *         renders the home view ................................... ---   *
  *         attaches the home view to the DOM ....................... ---   *
  *       when the main dash and task view are visible .............. ---   *
+ *         doesn't re-render the main dash ......................... ---   *
+ *         removes the task view ................................... ---   *
+ *         renders the home view ................................... ---   *
+ *         attaches the home view to the DOM ....................... ---   *
  *       when the main dash isn't visible .......................... ---   *
+ *         renders the main dash view .............................. ---   *
+ *         renders the home view ................................... ---   *
+ *         attaches the home view to the DOM ....................... ---   *
+ *     showTaskView() .............................................. ---   *
+ *       when the main dash and home view are visible .............. ---   *
+ *         doesn't re-render the main dash ......................... ---   *
+ *         removes the home view ................................... ---   *
+ *         renders the task view ................................... ---   *
+ *         attaches the task view to the DOM ....................... ---   *
+ *       when the main dash and task view are visible .............. ---   *
+ *         doesn't re-render the main dash ......................... ---   *
+ *         renders the task view ................................... ---   *
+ *         attaches the task view to the DOM ....................... ---   *
+ *       when the main dash isn't visible .......................... ---   *
+ *         doesn't re-render the main dash ......................... ---   *
+ *         renders the task view ................................... ---   *
+ *         attaches the task view to the DOM ....................... ---   *
  *   Special Functions .............................................. 69   *
+ *     isA() ....................................................... ---   *
+ *       returns true with argument * .............................. ---   *
+ *       returns false with another argument ....................... ---   *
  *     setUser() .................................................... 69   *
+ *       sets this.user ............................................ ---   *
+ *       calls setUser on the home view ............................ ---   *
+ *       calls setUser on the task view ............................ ---   *
  *   Core Functions ................................................. 97   *
- *     initialize() ................................................. 97   *
+ *     render() ..................................................... 97   *
+ *       renders the sidebar view .................................. ---   *
+ *       attaches the sidebar view to its .sidebar-collapse div .... ---   *
  *     remove() .................................................... 105   *
- *     render() .................................................... 111   *
+ *       removes the sidebar ....................................... ---   *
+ *       removes the home view ..................................... ---   *
+ *       removes the task view ..................................... ---   *
+ *       removes itself using the Backbone.View.prototype .......... ---   *
  *                                                                         *
 /***************************************************************************/
 
@@ -81,11 +113,12 @@ var matchers       = require('jasmine-jquery-matchers'),
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-describe('Main Dashboard View #travis', function() {
+fdescribe('Main Dashboard View #travis', function() {
   var dashboard, e, spy;
 
   /* Filters                 
   /**************************************************************************/
+
   beforeAll(function() {
     jasmine.addMatchers(matchers);
     _.extend(global, fixtures);
@@ -298,7 +331,7 @@ describe('Main Dashboard View #travis', function() {
       });
     });
 
-    describe('showHomeView', function() {
+    describe('showHomeView()', function() {
       context('when the main dash and home view are visible', function() {
         beforeEach(function() {
           spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
@@ -384,7 +417,7 @@ describe('Main Dashboard View #travis', function() {
       context('when the main dash and home view are visible', function() {
         beforeEach(function() {
           spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          // spyOn(dashboard.homeView.$el, 'is').and.callFake(function() { return true; });
+          spyOn(dashboard.homeView.$el, 'is').and.callFake(function() { return true; });
           // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return false; });
         });
 
@@ -453,13 +486,11 @@ describe('Main Dashboard View #travis', function() {
   });
 
   describe('special functions', function() {
-    describe('isA', function() {
-      it('returns true with the argument DashboardView', function() {
-        expect(dashboard.isA('DashboardView')).toBe(true);
-      });
-
-      it('returns true with the argument TopLevelView', function() {
-        expect(dashboard.isA('TopLevelView')).toBe(true);
+    describe('isA()', function() {
+      _.each(['DashboardView', 'Dashboard', 'MainDashboardView', 'MainDashboard', 'TopLevelView'], function(type) {
+        it('returns true with argument ' + type, function() {
+          expect(dashboard.isA(type)).toBe(true);
+        });
       });
 
       it('returns false with another argument', function() {
@@ -467,7 +498,7 @@ describe('Main Dashboard View #travis', function() {
       });
     });
 
-    describe('setUser', function() {
+    describe('setUser()', function() {
       it('sets this.user', function() {
         var newView = new SUT(); // we already know this won't set the user
         newView.setUser(user);
@@ -488,7 +519,7 @@ describe('Main Dashboard View #travis', function() {
   });
 
   describe('core functions', function() {
-    describe('render', function() {
+    describe('render()', function() {
       it('renders the sidebar view', function() {
         spyOn(dashboard.sidebarView, 'render');
         dashboard.render();
