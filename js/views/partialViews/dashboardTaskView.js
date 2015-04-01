@@ -12,6 +12,9 @@ var DashboardTaskView = Canto.View.extend({
   klass       : 'DashboardTaskView',
   family      : 'Canto.View',
   superFamily : 'Backbone.View',
+  types       : function() {
+    return Canto.View.prototype.types().concat(['DashboardTaskView']);
+  },
 
   /* Special Functions
   /**************************************************************************/

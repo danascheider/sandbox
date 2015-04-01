@@ -67,15 +67,7 @@
  *         doesn't re-render the main dash ......................... ---   *
  *         renders the task view ................................... ---   *
  *         attaches the task view to the DOM ....................... ---   *
- *   Special Functions .............................................. 69   *
- *     isA() ....................................................... ---   *
- *       returns true with argument * .............................. ---   *
- *       returns false with another argument ....................... ---   *
- *     setUser() .................................................... 69   *
- *       sets this.user ............................................ ---   *
- *       calls setUser on the home view ............................ ---   *
- *       calls setUser on the task view ............................ ---   *
- *   Core Functions ................................................. 97   *
+ *   Core View Functions ............................................ 97   *
  *     render() ..................................................... 97   *
  *       renders the sidebar view .................................. ---   *
  *       attaches the sidebar view to its .sidebar-collapse div .... ---   *
@@ -84,6 +76,14 @@
  *       removes the home view ..................................... ---   *
  *       removes the task view ..................................... ---   *
  *       removes itself using the Backbone.View.prototype .......... ---   *
+ *   Special Functions .............................................. 69   *
+ *     isA() ....................................................... ---   *
+ *       returns true with argument DashboardTaskView .............. ---   *
+ *       returns false with another argument ....................... ---   *
+ *     setUser() .................................................... 69   *
+ *       sets this.user ............................................ ---   *
+ *       calls setUser on the home view ............................ ---   *
+ *       calls setUser on the task view ............................ ---   *
  *                                                                         *
 /***************************************************************************/
 
@@ -167,6 +167,33 @@ describe('Dashboard Task View #travis', function() {
     it('can be instantiated without a user', function() {
       var newView = new SUT();
       expect(newView.user).not.toExist();
+    });
+  });
+
+  /* View Elements
+  /**************************************************************************/
+
+  /* View Events
+  /**************************************************************************/
+
+  /* Event Callbacks
+  /**************************************************************************/
+
+  /* Core View Functions
+  /**************************************************************************/
+
+  /* Special Functions
+  /**************************************************************************/
+
+  describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with argument DashboardTaskView', function() {
+        expect(view.isA('DashboardTaskView')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(view.isA('Corvette')).toBe(false);
+      });
     });
   });
 });
