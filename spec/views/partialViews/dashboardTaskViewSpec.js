@@ -10,18 +10,14 @@
  * Requires ......................................................... 97   *
  * Suite ........................................................... 116   *
  *   Filters ....................................................... 122   *
- *   Constructor ................................................... 144   *
- *     calls setUser() ............................................. 145   *
- *     instantiates a sidebar ...................................... 152   *
- *     instantiates a home view .................................... 156   *
- *     instantiates a task view .................................... 160   *
- *     doesn't call render ......................................... 164   *
- *     can be instantiated without a user .......................... 170   *
  *   Properties ..................................................... --   *
  *     klass ........................................................ --   *
  *     family ....................................................... --   *
  *     superFamily .................................................. --   *
- *     types ........................................................ --   *
+ *   Constructor ................................................... 144   *
+ *     doesn't call render ......................................... 164   *
+ *     calls setUser() ............................................. 145   *
+ *     can be instantiated without a user .......................... 170   *
  *   View Elements................................................... --   *
  *     has ID #dashboard-wrapper .................................... --   *
  *     Sidebar ...................................................... --   *
@@ -109,7 +105,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardTaskView.js')
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-fdescribe('Dashboard Task View #travis', function() {
+describe('Dashboard Task View #travis', function() {
   var view, e, spy;
 
   /* Filters
@@ -132,6 +128,23 @@ fdescribe('Dashboard Task View #travis', function() {
     view.remove();
     dashboard = null;
     global = _.omit(global, fixtures);
+  });
+
+  /* Static Properties
+  /**************************************************************************/
+
+  describe('properties', function() {
+    it('has klass DashboardTaskView', function() {
+      expect(view.klass).toEqual('DashboardTaskView');
+    });
+
+    it('has family Canto.View', function() {
+      expect(view.family).toEqual('Canto.View');
+    });
+
+    it('has superFamily Backbone.View', function() {
+      expect(view.superFamily).toEqual('Backbone.View');
+    });
   });
 
   /* Constructor             

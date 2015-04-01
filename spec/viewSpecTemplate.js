@@ -35,9 +35,7 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
 var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
 
 /****************************************************************************
- *
- * BEGIN SUITE
- *
+ * BEGIN SUITE                                                              *
 /****************************************************************************/
 
 describe(/* ACTUAL VALUE */, function() {
