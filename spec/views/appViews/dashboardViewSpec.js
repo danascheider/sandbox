@@ -92,7 +92,7 @@
 /***************************************************************************/
 
 /* Requires
-/****************************************************************************/
+/***************************************************************************/
 
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/js/dependencies.js');
@@ -113,7 +113,7 @@ var matchers       = require('jasmine-jquery-matchers'),
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-fdescribe('Main Dashboard View #travis', function() {
+describe('Main Dashboard View #travis', function() {
   var dashboard, e, spy;
 
   /* Filters                 

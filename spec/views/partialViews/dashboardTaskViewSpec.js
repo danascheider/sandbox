@@ -103,5 +103,57 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     context        = describe,
     fcontext       = fdescribe;
 
-var SUT = require(process.cwd() + '/js/views/partialViews/dashboardTask.js');
+var SUT = require(process.cwd() + '/js/views/partialViews/dashboardTaskView.js');
 
+/****************************************************************************
+ * BEGIN SUITE                                                              *
+/****************************************************************************/
+
+fdescribe('Dashboard Task View #travis', function() {
+  var view, e, spy;
+
+  /* Filters
+  /**************************************************************************/
+
+  beforeAll(function() {
+    jasmine.addMatchers(matchers);
+    _.extend(global, fixtures);
+  });
+
+  beforeEach(function() {
+    view = new SUT({user: user});
+  });
+
+  afterEach(function() {
+    fixtures.restoreFixtures();
+  });
+
+  afterAll(function() {
+    view.remove();
+    dashboard = null;
+    global = _.omit(global, fixtures);
+  });
+
+  /* Constructor             
+  /**************************************************************************/
+
+  describe('constructor', function() {
+    it('calls setUser', function() {
+      spyOn(SUT.prototype, 'setUser');
+      var newView = new SUT({user: user});
+      expect(SUT.prototype.setUser).toHaveBeenCalled();
+      expect(SUT.prototype.setUser.calls.argsFor(0)[0]).toEqual(user);
+    });
+
+    it('doesn\'t call render', function() {
+      spyOn(SUT.prototype, 'render');
+      var newView = new SUT({user: user});
+      expect(SUT.prototype.render).not.toHaveBeenCalled();
+    });
+
+    it('can be instantiated without a user', function() {
+      var newView = new SUT();
+      expect(newView.user).not.toExist();
+    });
+  });
+});
