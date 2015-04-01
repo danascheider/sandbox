@@ -120,6 +120,10 @@ var DashboardTaskView = Canto.View.extend({
     this.setUser(opts.user);
   },
 
+  remove     : function() {
+    Canto.View.prototype.remove.call(this);
+  },
+
   render     : function() {
     var that = this;
 

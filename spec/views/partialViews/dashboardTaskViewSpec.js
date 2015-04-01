@@ -69,13 +69,11 @@
  *         attaches the task view to the DOM ....................... ---   *
  *   Core View Functions ............................................ 97   *
  *     remove() .................................................... 105   *
- *       removes the sidebar ....................................... ---   *
- *       removes the home view ..................................... ---   *
- *       removes the task view ..................................... ---   *
+ *       removes its child views ................................... ---   *
  *       removes itself using the Backbone.View.prototype .......... ---   *
  *     render() ..................................................... 97   *
  *       fetches the task collection ............................... ---   *
- *       attaches the sidebar view to its .sidebar-collapse div .... ---   *
+ *       creates child views ....................................... ---   *
  *   Special Functions .............................................. 69   *
  *     isA() ....................................................... ---   *
  *       returns true with argument DashboardTaskView .............. ---   *
@@ -182,11 +180,36 @@ describe('Dashboard Task View #travis', function() {
   /* Core View Functions
   /**************************************************************************/
 
+  describe('remove', function() {
+    _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
+      it('removes its ' + column, function() {
+        pending('Need to implement the Kanban column view');
+        spyOn(view[column], 'remove');
+        view.remove();
+        expect(view[column].remove).toHaveBeenCalled();
+      });
+    });
+
+    it('removes itself using the Backbone.View.prototype', function() {
+      spyOn(Backbone.View.prototype.remove, 'call');
+      view.remove();
+      expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
+    });
+  });
+
   describe('render', function() {
     it('fetches the task collection', function() {
       spyOn(user.tasks, 'fetch');
       view.render();
       expect(user.tasks.fetch).toHaveBeenCalled();
+    });
+
+    _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
+      it('creates the ' + column, function() {
+        pending('Need to implement the Kanban column view');
+        view.render();
+        expect(view[column]).toExist();
+      });
     });
   });
 
