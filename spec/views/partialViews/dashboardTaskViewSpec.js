@@ -15,58 +15,12 @@
  *     family ....................................................... --   *
  *     superFamily .................................................. --   *
  *   Constructor ................................................... 144   *
- *     doesn't call render ......................................... 164   *
+ *     doesn't call render() ......................................... 164   *
  *     calls setUser() ............................................. 145   *
  *     can be instantiated without a user .......................... 170   *
  *   View Elements................................................... --   *
  *     has ID #dashboard-wrapper .................................... --   *
  *     Sidebar ...................................................... --   *
- *   View Events .................................................... --   *
- *     click $el .................................................... --   *
- *     click li.dropdown ............................................ --   *
- *   Event Callbacks ................................................ --   *
- *     hideDropdownMenus() .......................................... --   *
- *       when no menus are open .................................... ---   *
- *       when a menu is visible .................................... ---   *
- *       when the clicked-on object is inside the menu ............. ---   *
- *     toggleDropdownMenu() ........................................ ---   *
- *       when none of the menus is open ............................ ---   *
- *         adds the .open class to the target menu ................. ---   *
- *         doesn't add the .open class to the other menus .......... ---   *
- *       when another menu is open ................................. ---   *
- *         removes the .open class from the open menu .............. ---   *
- *         adds the .open class to the target menu ................. ---   *
- *       when the target menu is open .............................. ---   *
- *         removes the .open class from the target menu ............ ---   *
- *         doesn't open any other menus ............................ ---   *
- *     showHomeView() .............................................. ---   *
- *       when the main dash and home view are visible .............. ---   *
- *         doesn't re-render the main dash ......................... ---   *
- *         renders the home view ................................... ---   *
- *         attaches the home view to the DOM ....................... ---   *
- *       when the main dash and task view are visible .............. ---   *
- *         doesn't re-render the main dash ......................... ---   *
- *         removes the task view ................................... ---   *
- *         renders the home view ................................... ---   *
- *         attaches the home view to the DOM ....................... ---   *
- *       when the main dash isn't visible .......................... ---   *
- *         renders the main dash view .............................. ---   *
- *         renders the home view ................................... ---   *
- *         attaches the home view to the DOM ....................... ---   *
- *     showTaskView() .............................................. ---   *
- *       when the main dash and home view are visible .............. ---   *
- *         doesn't re-render the main dash ......................... ---   *
- *         removes the home view ................................... ---   *
- *         renders the task view ................................... ---   *
- *         attaches the task view to the DOM ....................... ---   *
- *       when the main dash and task view are visible .............. ---   *
- *         doesn't re-render the main dash ......................... ---   *
- *         renders the task view ................................... ---   *
- *         attaches the task view to the DOM ....................... ---   *
- *       when the main dash isn't visible .......................... ---   *
- *         doesn't re-render the main dash ......................... ---   *
- *         renders the task view ................................... ---   *
- *         attaches the task view to the DOM ....................... ---   *
  *   Core View Functions ............................................ 97   *
  *     remove() .................................................... 105   *
  *       removes its child views ................................... ---   *
@@ -80,8 +34,6 @@
  *       returns false with another argument ....................... ---   *
  *     setUser() .................................................... 69   *
  *       sets this.user ............................................ ---   *
- *       calls setUser on the home view ............................ ---   *
- *       calls setUser on the task view ............................ ---   *
  *                                                                         *
 /***************************************************************************/
 
@@ -171,6 +123,21 @@ describe('Dashboard Task View #travis', function() {
   /* View Elements
   /**************************************************************************/
 
+  describe('elements', function() {
+    beforeEach(function() {
+      spyOn(user.tasks, 'fetch').and.callFake(function(args) { return user.tasks; });
+      view.render();
+    });
+
+    it('is a div', function() {
+      expect(view.$el[0].tagName).toEqual('DIV');
+    });
+
+    it('has ID #page-wrapper', function() {
+      expect(view.$el).toHaveId('page-wrapper');
+    });
+  });
+
   /* View Events
   /**************************************************************************/
 
@@ -217,13 +184,21 @@ describe('Dashboard Task View #travis', function() {
   /**************************************************************************/
 
   describe('special functions', function() {
-    describe('isA', function() {
+    describe('isA()', function() {
       it('returns true with argument DashboardTaskView', function() {
         expect(view.isA('DashboardTaskView')).toBe(true);
       });
 
       it('returns false with another argument', function() {
         expect(view.isA('Corvette')).toBe(false);
+      });
+    });
+
+    describe('setUser()', function() {
+      it('sets the user', function() {
+        var newView = new SUT();
+        newView.setUser(user);
+        expect(newView.user).toBe(user);
       });
     });
   });

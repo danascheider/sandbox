@@ -93,6 +93,7 @@ var DashboardTaskView = Canto.View.extend({
   /**************************************************************************/
 
   template    : JST['partials/dashTasks'],
+  id          : 'page-wrapper',
 
   /* Canto View Properties
   /**************************************************************************/
@@ -108,7 +109,7 @@ var DashboardTaskView = Canto.View.extend({
   /**************************************************************************/
 
   setUser : function(user) {
-    //
+    this.user = user;
   },
 
   /* Core View Functions
@@ -117,7 +118,7 @@ var DashboardTaskView = Canto.View.extend({
   initialize : function(opts) {
     opts = opts || {};
 
-    this.setUser(opts.user);
+    if(!!opts.user) { this.setUser(opts.user); }
   },
 
   remove     : function() {
