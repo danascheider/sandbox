@@ -22,11 +22,12 @@ require('./views/modelViews/taskViews/quickAddFormView.js');
 require('./views/collectionViews/taskCollectionView.js');
 
 // Require partial views
+require('./views/partialViews/dashboardHomeView.js');
 require('./views/partialViews/dashboardSidebarView.js');
 require('./views/partialViews/dashboardTopWidgetView.js');
+require('./views/partialViews/dashboardTaskView.js');
 require('./views/partialViews/taskPanelView.js');
 require('./views/partialViews/dashboardHomeView.js');
-
 // Require presenters
 require('./presenters/appPresenter.js');
 
