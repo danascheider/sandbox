@@ -1,10 +1,10 @@
 /***************************************************************************
  *                                                                         *
- * TOP-LEVEL DASHBOARD VIEW                                                *
+ * DASHBOARD TASK VIEW                                                     *
  *                                                                         *
- * The dashboard is the user's main view from which they manage            *
- * everything. The dashboard displays summary information about their      *
- * affairs and links to all their other pages.                             *
+ * The dashboard task view is the page that shows detailed information     *
+ * about the user's tasks. Currently, it takes the form of a Kanban        *
+ * board, but I'm considering other possibilities as well.                 *
  *                                                                         *
  * CONTENTS                                                          LINE  *
  * Requires ......................................................... 97   *
@@ -68,14 +68,14 @@
  *         renders the task view ................................... ---   *
  *         attaches the task view to the DOM ....................... ---   *
  *   Core View Functions ............................................ 97   *
- *     render() ..................................................... 97   *
- *       renders the sidebar view .................................. ---   *
- *       attaches the sidebar view to its .sidebar-collapse div .... ---   *
  *     remove() .................................................... 105   *
  *       removes the sidebar ....................................... ---   *
  *       removes the home view ..................................... ---   *
  *       removes the task view ..................................... ---   *
  *       removes itself using the Backbone.View.prototype .......... ---   *
+ *     render() ..................................................... 97   *
+ *       fetches the task collection ............................... ---   *
+ *       attaches the sidebar view to its .sidebar-collapse div .... ---   *
  *   Special Functions .............................................. 69   *
  *     isA() ....................................................... ---   *
  *       returns true with argument DashboardTaskView .............. ---   *
@@ -181,6 +181,14 @@ describe('Dashboard Task View #travis', function() {
 
   /* Core View Functions
   /**************************************************************************/
+
+  describe('render', function() {
+    it('fetches the task collection', function() {
+      spyOn(user.tasks, 'fetch');
+      view.render();
+      expect(user.tasks.fetch).toHaveBeenCalled();
+    });
+  });
 
   /* Special Functions
   /**************************************************************************/
