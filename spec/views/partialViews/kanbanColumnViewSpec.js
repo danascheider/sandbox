@@ -28,7 +28,7 @@ require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA.js')),
+var matchers       = _.extend(require('jasmine-jquery-matchers')),
     fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
     context        = describe,
     fcontext       = fdescribe;
@@ -40,14 +40,15 @@ var SUT = require(process.cwd() + '/js/views/partialViews/kanbanColumnView.js');
 /****************************************************************************/
 
 describe('Kanban Column View #travis', function() {
-  var view;
+  var view, data;
 
   beforeEach(function() {
     // Create an instance of the view under test
     // Insert args here
 
     _.extend(global, fixtures);
-    view = new SUT();
+    data = {collection: collection, color: 'blue', icon: 'fa-exclamation-circle', headline: 'New'};
+    view = new SUT(data);
   });
 
   afterAll(function() {
@@ -79,9 +80,25 @@ describe('Kanban Column View #travis', function() {
   describe('constructor', function() {
     it('does not call render', function() {
       spyOn(SUT.prototype, 'render');
-      var newView = new SUT();
-      expect(SUT.prototype.render).not.toHaveBeenCalled();
+      var newView = new SUT(data);
     });
+
+    it('sets the collection', function () {
+      expect(view.collection).toBe(collection);
+    });
+
+    it('sets the data property', function() {
+      var newView = new SUT(data);
+      _.each(['color', 'icon', 'headline'], function(prop) {
+        expect(newView[prop]).toEqual(data[prop]);
+      });
+    });
+
+    // FIX: Decide if the groupedBy property is really such a good idea
+
+    it('creates a collection view', function() {
+      expect(view.collectionView.isA('TaskCollectionView')).toBe(true);
+    })
   });
 
   /* Elements

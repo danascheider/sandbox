@@ -37,6 +37,8 @@ Canto.View = Canto.View || require('../appViews/cantoView.js');
 /* Module-Specific Requires
 /****************************************************************************/
 
+var CollectionView = require('../collectionViews/taskCollectionView.js');
+
 /****************************************************************************
  * BEGIN MODULE                                                             *
 /****************************************************************************/
@@ -55,6 +57,13 @@ var KanbanColumnView = Canto.View.extend({
 
   types       : function() {
     return Canto.View.prototype.types().concat(['KanbanColumnView', 'KanbanColumn', 'PartialView']);
+  },
+
+  /* Core View Functions
+  /**************************************************************************/
+  initialize  : function(data) {
+    _.extend(this, data);
+    this.collectionView = new CollectionView({collection: this.collection});
   }
 });
 
