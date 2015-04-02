@@ -42,7 +42,8 @@ Canto.View = Canto.View || require('./cantoView.js');
 
 var userModel   = require('../../models/userModel.js'),
     SidebarView = require('../partialViews/dashboardSidebarView.js'),
-    HomeView    = require('../partialViews/dashboardHomeView.js');
+    HomeView    = require('../partialViews/dashboardHomeView.js'),
+    TaskView    = require('../partialViews/dashboardTaskView.js');
 
 /****************************************************************************
  * BEGIN MODULE                                                             *
@@ -95,10 +96,12 @@ var DashboardView = Canto.View.extend({
   setUser            : function(user) {
     this.user = user;
     this.homeView.setUser(user);
+    this.taskView.setUser(user);
   },
 
   showHomeView       : function() {
     if(!this.$el.is(':visible')) { this.render(); }
+    if(this.taskView.$el.is(':visible')) { this.taskView.remove(); }
     this.homeView.render();
     this.$('nav').after(this.homeView.$el);
   },
@@ -106,6 +109,9 @@ var DashboardView = Canto.View.extend({
   showTaskView       : function() {
     if(!this.$el.is(':visible')) { this.render(); }
     if(this.homeView.$el.is(':visible')) { this.homeView.remove(); }
+
+    this.taskView.render();
+    this.$('nav').after(this.taskView.$el);
   },
 
   /* Core View Functions
@@ -116,6 +122,7 @@ var DashboardView = Canto.View.extend({
 
     this.sidebarView = new SidebarView();
     this.homeView    = new HomeView();
+    this.taskView    = new TaskView();
 
     if(opts.user) { this.setUser(opts.user); }
   },
@@ -124,6 +131,7 @@ var DashboardView = Canto.View.extend({
     this.sidebarView.remove();
     Backbone.View.prototype.remove.call(this);
     this.homeView.remove();
+    this.taskView.remove();
   },
 
   render             : function() {

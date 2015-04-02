@@ -17,32 +17,32 @@
  *     instantiates a task view .................................... 160   *
  *     doesn't call render ......................................... 164   *
  *     can be instantiated without a user .......................... 170   *
- *   Properties ..................................................... --   *
- *     klass ........................................................ --   *
- *     family ....................................................... --   *
- *     superFamily .................................................. --   *
- *     types ........................................................ --   *
+ *   Static Properties ............................................. 179   *
+ *     klass ....................................................... 180   *
+ *     family ...................................................... 184   *
+ *     superFamily ................................................. 188   *
+ *     types ....................................................... 192   *
  *   View Elements.................................................. 204   *
- *     has ID #dashboard-wrapper .................................... --   *
- *     Sidebar ...................................................... --   *
- *   View Events .................................................... --   *
- *     click $el .................................................... --   *
- *     click li.dropdown ............................................ --   *
- *   Event Callbacks ................................................ --   *
- *     hideDropdownMenus() .......................................... --   *
- *       when no menus are open .................................... ---   *
- *       when a menu is visible .................................... ---   *
- *       when the clicked-on object is inside the menu ............. ---   *
- *     toggleDropdownMenu() ........................................ ---   *
- *       when none of the menus is open ............................ ---   *
- *         adds the .open class to the target menu ................. ---   *
- *         doesn't add the .open class to the other menus .......... ---   *
- *       when another menu is open ................................. ---   *
- *         removes the .open class from the open menu .............. ---   *
- *         adds the .open class to the target menu ................. ---   *
- *       when the target menu is open .............................. ---   *
- *         removes the .open class from the target menu ............ ---   *
- *         doesn't open any other menus ............................ ---   *
+ *     has ID #dashboard-wrapper ................................... 210   *
+ *     sidebar ..................................................... 214   *
+ *   View Events ................................................... 224   *
+ *     click $el ................................................... 234   *
+ *     click li.dropdown ........................................... 241   *
+ *   Event Callbacks ............................................... 252   *
+ *     hideDropdownMenus() ......................................... 256   *
+ *       when no menus are open .................................... 257   *
+ *       when a menu is open ....................................... 266   *
+ *       when the clicked-on object is inside the menu ............. 275   *
+ *     toggleDropdownMenu() ........................................ 285   *
+ *       when none of the menus is open ............................ 286   *
+ *         adds the .open class to the target menu ................. 291   *
+ *         doesn't add the .open class to the other menus .......... 296   *
+ *       when another menu is open ................................. 301   *
+ *         removes the .open class from the open menu .............. 308   *
+ *         adds the .open class to the target menu ................. 312   *
+ *       when the target menu is open .............................. 317   *
+ *         removes the .open class from the target menu ............ 324   *
+ *         doesn't open any other menus ............................ 328   *
  *     showHomeView() .............................................. ---   *
  *       when the main dash and home view are visible .............. ---   *
  *         doesn't re-render the main dash ......................... ---   *
@@ -158,7 +158,7 @@ describe('Main Dashboard View #travis', function() {
     });
 
     it('instantiates a task view', function() {
-      pending('Need to implement the dashboard task view');
+      expect(dashboard.taskView.klass).toBe('DashboardTaskView');
     });
 
     it('doesn\'t call render', function() {
@@ -360,7 +360,7 @@ describe('Main Dashboard View #travis', function() {
       context('when the main dash and task view are visible', function() {
         beforeEach(function() {
           spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+          spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
         });
 
         it('doesn\'t re-render the main dash', function() {
@@ -370,7 +370,9 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('removes the task view', function() {
-          pending('Need to implement the dashboard task view');
+          spyOn(dashboard.taskView, 'remove');
+          dashboard.showHomeView();
+          expect(dashboard.taskView.remove).toHaveBeenCalled();
         });
 
         it('renders the home view', function() {
@@ -418,7 +420,9 @@ describe('Main Dashboard View #travis', function() {
         beforeEach(function() {
           spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
           spyOn(dashboard.homeView.$el, 'is').and.callFake(function() { return true; });
-          // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return false; });
+          spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return false; });
+          dashboard.render();
+          $('body').html(dashboard.$el);
         });
 
         it('doesn\'t re-render the main dash', function() {
@@ -434,18 +438,23 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('renders the task view', function() {
-          pending('Need to implement the dashboard task view');
+          spyOn(dashboard.taskView, 'render');
+          dashboard.showTaskView();
+          expect(dashboard.taskView.render).toHaveBeenCalled();
         });
 
         it('attaches the task view to the DOM', function() {
-          pending('Need to implement the dashboard task view');
+          dashboard.showTaskView();
+          expect(dashboard.taskView.$el).toBeInDom();
         });
       });
 
       context('when the main dash and task view are visible', function() {
         beforeEach(function() {
           spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          // spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+          spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+          dashboard.render();
+          $('body').html(dashboard.$el);
         });
 
         it('doesn\'t re-render the main dash', function() {
@@ -455,11 +464,14 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('renders the task view', function() {
-          pending('Need to implement the dashboard task view');
+          spyOn(dashboard.taskView, 'render');
+          dashboard.showTaskView();
+          expect(dashboard.taskView.render).toHaveBeenCalled();
         });
 
         it('attaches the task view to the DOM', function() {
-          pending('Need to implement the dashboard task view');
+          dashboard.showTaskView();
+          expect(dashboard.taskView.$el).toBeInDom();
         });
       });
 
@@ -475,11 +487,15 @@ describe('Main Dashboard View #travis', function() {
         });
 
         it('renders the task view', function() {
-          pending('Need to implement the dashboard task view');
+          spyOn(dashboard.taskView, 'render');
+          dashboard.showTaskView();
+          expect(dashboard.taskView.render).toHaveBeenCalled();
         });
 
         it('attaches the task view to the DOM', function() {
-          pending('Need to implement the dashboard task view');
+          dashboard.showTaskView();
+          $('body').html(dashboard.$el);
+          expect(dashboard.taskView.$el).toBeInDom();
         });
       });
     });
@@ -513,7 +529,10 @@ describe('Main Dashboard View #travis', function() {
       });
 
       it('calls setUser on the task view', function() {
-        pending('Need to implement the dashboard task view');
+        var newView = new SUT();
+        spyOn(newView.taskView, 'setUser');
+        newView.setUser(user);
+        expect(newView.taskView.setUser).toHaveBeenCalled();
       });
     });
   });
@@ -541,7 +560,9 @@ describe('Main Dashboard View #travis', function() {
       });
 
       it('removes the task view', function() {
-        pending('Need to implement the dashboard task view');
+        spyOn(dashboard.taskView, 'remove');
+        dashboard.remove();
+        expect(dashboard.taskView.remove).toHaveBeenCalled();
       });
 
       it('removes the sidebar view', function() {
