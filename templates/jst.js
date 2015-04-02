@@ -5,6 +5,7 @@ var JST = {
   'collections/task'   : _.template('<li class=\'quick-add-form not-sortable\'></li>'),
   'partials/dashHome'  : _.template(require('./partialTemplates/dashboardHomeTemplate.js')),
   'partials/dashTasks' : _.template(require('./partialTemplates/dashboardTaskTemplate.js')),
+  'partials/kanbanCol' : _.template(require('./partialTemplates/kanbanColumnTemplate.js')),
   'partials/sidebar'   : _.template(require('./partialTemplates/dashboardSidebarTemplate.js')),
   'partials/taskPanel' : _.template(require('./partialTemplates/taskPanelTemplate.js')),
   'partials/topWidgets': _.template(require('./partialTemplates/dashboardTopWidgetTemplate.js')),
