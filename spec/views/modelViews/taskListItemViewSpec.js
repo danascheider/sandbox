@@ -14,8 +14,6 @@ require(process.cwd() + '/spec/support/env.js');
 
 var SUT = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js');
 
-Backbone.$    = $;
-
 var matchers  = require('jasmine-jquery-matchers'),
     custom    = require(process.cwd() + '/spec/support/matchers/toBeA.js');
     TaskModel = require(process.cwd() + '/js/models/taskModel.js'),

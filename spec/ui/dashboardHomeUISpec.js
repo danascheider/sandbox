@@ -25,7 +25,7 @@ require(process.cwd() + '/spec/support/env.js');
  * BEGIN SUITE                                                                *
 /******************************************************************************/
 
-describe('Dashboard Home View - Visual Elements #ui', function() {
+fdescribe('Dashboard Home View - Visual Elements #ui', function() {
 
   /* Filters
   /****************************************************************************/

@@ -12,8 +12,6 @@ var matchers       = require('jasmine-jquery-matchers'),
     context        = describe,
     fcontext       = fdescribe;
 
-Backbone.$         = $;
-
 var task1 = new TaskModel({id: 1, title: 'Test Task 1', status: 'Blocking'}),
     task2 = new TaskModel({id: 2, title: 'Test Task 2', status: 'Blocking'}),
     task3 = new TaskModel({id: 3, title: 'Test Task 3', status: 'Blocking'});

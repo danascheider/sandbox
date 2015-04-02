@@ -19,10 +19,10 @@
  *     calls setUser()                                                     *
  *     can be instantiated without a user                                  *
  *   Elements ...................................................... 122   *
- *     has a task panel                                                    *
- *     has a top widget section                                            *
- *     has ID #page-wrapper                                                *
- *     has class .dashboard-home                                           *
+ *     has a task panel ............................................ 128   *
+ *     has a top widget section .................................... 132   *
+ *     has ID #page-wrapper ........................................ 136   *
+ *     has class .dashboard-home ................................... 140   *
  *   Core View Functions ........................................... 148   *
  *     render() .................................................... 149   *
  *     remove() .................................................... 163   *
@@ -52,7 +52,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  * BEGIN SUITE                                                                *
 /******************************************************************************/
 
-describe('Dashboard Home View #travis', function() {
+fdescribe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
