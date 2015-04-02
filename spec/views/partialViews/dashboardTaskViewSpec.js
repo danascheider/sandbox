@@ -7,33 +7,33 @@
  * board, but I'm considering other possibilities as well.                 *
  *                                                                         *
  * CONTENTS                                                          LINE  *
- * Requires ......................................................... 97   *
- * Suite ........................................................... 116   *
- *   Filters ....................................................... 122   *
- *   Properties ..................................................... --   *
- *     klass ........................................................ --   *
- *     family ....................................................... --   *
- *     superFamily .................................................. --   *
- *   Constructor ................................................... 144   *
- *     doesn't call render() ......................................... 164   *
- *     calls setUser() ............................................. 145   *
- *     can be instantiated without a user .......................... 170   *
- *   View Elements................................................... --   *
- *     has ID #dashboard-wrapper .................................... --   *
- *     Sidebar ...................................................... --   *
- *   Core View Functions ............................................ 97   *
- *     remove() .................................................... 105   *
- *       removes its child views ................................... ---   *
- *       removes itself using the Backbone.View.prototype .......... ---   *
- *     render() ..................................................... 97   *
- *       fetches the task collection ............................... ---   *
- *       creates child views ....................................... ---   *
- *   Special Functions .............................................. 69   *
- *     isA() ....................................................... ---   *
- *       returns true with argument DashboardTaskView .............. ---   *
- *       returns false with another argument ....................... ---   *
- *     setUser() .................................................... 69   *
- *       sets this.user ............................................ ---   *
+ * Requires ......................................................... 43   *
+ * Suite ............................................................ 58   *
+ *   Filters ........................................................ 22   *
+ *   Properties ..................................................... 86   *
+ *     klass ........................................................ 87   *
+ *     family ....................................................... 91   *
+ *     superFamily .................................................. 95   *
+ *   Constructor ................................................... 103   *
+ *     doesn't call render() ........................................104   *
+ *     calls setUser() ............................................. 111   *
+ *     can be instantiated without a user .......................... 117   *
+ *   View Elements.................................................. 126   *
+ *     is a div .................................................... 132   *
+ *     has ID #page-wrapper ........................................ 136   *
+ *   Core View Functions ........................................... 144   *
+ *     remove() .................................................... 145   *
+ *       removes its child views ................................... 146   *
+ *       removes itself using the Backbone.View.prototype .......... 155   *
+ *     render() .................................................... 162   *
+ *       fetches the task collection ............................... 163   *
+ *       creates child views ....................................... 169   *
+ *   Special Functions ............................................. 182   *
+ *     isA() ....................................................... 183   *
+ *       returns true with argument DashboardTaskView .............. 184   *
+ *       returns false with another argument ....................... 188   *
+ *     setUser() ................................................... 193   *
+ *       sets this.user ............................................ 194   *
  *                                                                         *
 /***************************************************************************/
 
@@ -138,44 +138,40 @@ describe('Dashboard Task View #travis', function() {
     });
   });
 
-  /* View Events
-  /**************************************************************************/
-
-  /* Event Callbacks
-  /**************************************************************************/
-
   /* Core View Functions
   /**************************************************************************/
 
-  describe('remove', function() {
-    _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
-      it('removes its ' + column, function() {
-        pending('Need to implement the Kanban column view');
-        spyOn(view[column], 'remove');
+  describe('core view functions', function() {
+    describe('remove', function() {
+      _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
+        it('removes its ' + column, function() {
+          pending('Need to implement the Kanban column view');
+          spyOn(view[column], 'remove');
+          view.remove();
+          expect(view[column].remove).toHaveBeenCalled();
+        });
+      });
+
+      it('removes itself using the Backbone.View.prototype', function() {
+        spyOn(Backbone.View.prototype.remove, 'call');
         view.remove();
-        expect(view[column].remove).toHaveBeenCalled();
+        expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
       });
     });
 
-    it('removes itself using the Backbone.View.prototype', function() {
-      spyOn(Backbone.View.prototype.remove, 'call');
-      view.remove();
-      expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
-    });
-  });
-
-  describe('render', function() {
-    it('fetches the task collection', function() {
-      spyOn(user.tasks, 'fetch');
-      view.render();
-      expect(user.tasks.fetch).toHaveBeenCalled();
-    });
-
-    _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
-      it('creates the ' + column, function() {
-        pending('Need to implement the Kanban column view');
+    describe('render', function() {
+      it('fetches the task collection', function() {
+        spyOn(user.tasks, 'fetch');
         view.render();
-        expect(view[column]).toExist();
+        expect(user.tasks.fetch).toHaveBeenCalled();
+      });
+
+      _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
+        it('creates the ' + column, function() {
+          pending('Need to implement the Kanban column view');
+          view.render();
+          expect(view[column]).toExist();
+        });
       });
     });
   });
