@@ -52,7 +52,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/dashboardHomeView.js')
  * BEGIN SUITE                                                                *
 /******************************************************************************/
 
-fdescribe('Dashboard Home View #travis', function() {
+describe('Dashboard Home View #travis', function() {
   var view;
 
   /* Filters
