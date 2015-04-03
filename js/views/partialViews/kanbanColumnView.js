@@ -103,13 +103,13 @@ var KanbanColumnView = Canto.View.extend({
 
   initialize    : function(data) {
     this.data = data || {};
+    
     this.data.color = this.data.color || 'primary';
+    this.$el.addClass('panel-' + this.data.color);
 
     this.groupedBy = this.data.headline === 'Backlog' ?  {backlog: true} : {status: this.data.headline};
 
-    this.$el.addClass('panel-' + this.data.color);
-
-    if(!!this.data.collection) { this.setCollection(collection); }
+    if(!!this.data.collection) { this.setCollection(this.data.collection); }
   },
 
   remove      : function() {

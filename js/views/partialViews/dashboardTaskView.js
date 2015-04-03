@@ -84,6 +84,12 @@
 Canto      = Canto      || require('../../dependencies.js');
 Canto.View = Canto.View || require('../appViews/cantoView.js');
 
+/* Module-Specific Requires
+/***************************************************************************/
+
+var KanbanColumnView = require('./kanbanColumnView.js'),
+    TaskCollection   = require('../../collections/taskCollection.js');
+
 /****************************************************************************
  * BEGIN MODULE                                                             *
 /****************************************************************************/
@@ -129,9 +135,51 @@ var DashboardTaskView = Canto.View.extend({
   render     : function() {
     var that = this;
 
-    return Canto.View.prototype.render.call(this, this.template(), function() {
-      this.user.tasks.fetch();
+    this.user.tasks.fetch({
+      success: function(collection) {
+        collection = new TaskCollection(collection);
+        
+        that.backlogColumnView = new KanbanColumnView({
+          el         : that.$('#backlog-tasks'),
+          collection : new TaskCollection(collection.where({backlog: true})),
+          color      : 'red',
+          icon       : 'fa-exclamation-circle',
+          headline   : 'Backlog'
+        });
+
+        collection.remove(that.backlogColumnView.collection.models);
+
+        that.newColumnView = new KanbanColumnView({
+          el         : that.$('#new-tasks'),
+          collection : new TaskCollection(collection.where({status: 'New'})),
+          color      : 'blue',
+          icon       : 'fa-certificate',
+          headline   : 'New'
+        });
+
+        that.inProgressColumnView = new KanbanColumnView({
+          el         : that.$('#in-progress-tasks'),
+          collection : new TaskCollection(collection.where({status: 'In Progress'})),
+          color      : 'green',
+          icon       : 'fa-road',
+          headline   : 'In Progress'
+        });
+
+        that.blockingColumnView = new KanbanColumnView({
+          el         : that.$('#blocking-tasks'),
+          collection : new TaskCollection(collection.where({status: 'Blocking'})),
+          color      : 'yellow',
+          icon       : 'fa-minus-circle',
+          headline   : 'Blocking'
+        });
+
+        _.each([that.backlogColumnView, that.newColumnView, that.inProgressColumnView, that.blockingColumnView], function(col) {
+          col.render();
+        });
+      }
     });
+
+    return Canto.View.prototype.render.call(this, this.template());
   }
 });
 

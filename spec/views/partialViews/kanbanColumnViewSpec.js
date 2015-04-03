@@ -44,7 +44,7 @@ var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-fdescribe('Kanban Column View #travis', function() {
+describe('Kanban Column View #travis', function() {
   var view, data;
 
   /* Filters

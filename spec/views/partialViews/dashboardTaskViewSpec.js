@@ -144,7 +144,9 @@ describe('Dashboard Task View #travis', function() {
   describe('core view functions', function() {
     describe('remove', function() {
       _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
-        it('removes its ' + column, function() {
+        it('removes its ' + column, function(done) {
+          view.render();
+          done();
           spyOn(view[column], 'remove');
           view.remove();
           expect(view[column].remove).toHaveBeenCalled();
@@ -165,9 +167,12 @@ describe('Dashboard Task View #travis', function() {
         expect(user.tasks.fetch).toHaveBeenCalled();
       });
 
-      _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
+      _.each(['newColumnView', 'inProgressColumnView', 'blockingColumnView', 'backlogColumnView'], function(column) {
         it('creates the ' + column, function() {
-          pending('Need to implement the Kanban column view');
+          spyOn($, 'ajax').and.callFake(function(args) {
+            args.success(user.tasks);
+          });
+
           view.render();
           expect(view[column]).toExist();
         });
