@@ -44,6 +44,9 @@ describe('Homepage View - Visual Elements #ui', function() {
     done();
   });
 
+  /* View Elements
+  /****************************************************************************/
+
   describe('view elements', function() {
     it('displays its top nav', function(done) {
       client.waitForVisible('#navbar-top', function(err, isVisible) {

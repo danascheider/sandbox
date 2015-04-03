@@ -51,6 +51,10 @@ var HomepageView = Canto.View.extend({
   /* Core View Functions
   /**************************************************************************/
 
+  remove      : function() {
+    Canto.View.prototype.remove.call(this);
+  },
+
   render      : function() {
     Canto.View.prototype.render.call(this, this.template());
   }

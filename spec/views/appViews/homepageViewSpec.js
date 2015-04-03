@@ -112,12 +112,27 @@ describe('Canto Homepage View #travis', function() {
   /* Event Callbacks
   /**************************************************************************/
 
+  describe('event callbacks', function() {
+    //
+  });
+
   /* Core View Functions
   /**************************************************************************/
 
   describe('core view functions', function() {
-    describe('render()', function() {
-      
+    describe('remove()', function() {
+      it('removes its login form', function() {
+        pending('Need to implement the login form');
+        spyOn(view.loginForm, 'remove');
+        view.remove();
+        expect(view.loginForm.remove).toHaveBeenCalled();
+      });
+
+      it('removes itself using the Backbone view prototype', function() {
+        spyOn(Backbone.View.prototype.remove, 'call');
+        view.remove();
+        expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
+      });
     });
   });
 
