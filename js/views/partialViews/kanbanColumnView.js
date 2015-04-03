@@ -49,6 +49,7 @@ var KanbanColumnView = Canto.View.extend({
   /**************************************************************************/
 
   template    : JST['partials/kanbanCol'],
+  className   : 'panel dash-widget kanban-column',
 
   /* Canto View Properties
   /**************************************************************************/
@@ -66,6 +67,8 @@ var KanbanColumnView = Canto.View.extend({
 
   initialize  : function(data) {
     this.data = data;
+    this.data.color = this.data.color || 'primary';
+    this.$el.addClass('panel-' + this.data.color);
     this.collectionView = new CollectionView({collection: this.collection});
   },
 

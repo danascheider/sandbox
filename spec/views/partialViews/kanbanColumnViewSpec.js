@@ -102,8 +102,30 @@ describe('Kanban Column View #travis', function() {
     });
   });
 
-  /* Elements
+  /* View Elements
   /**************************************************************************/
+
+  describe('view elements', function() {
+    it('is a div', function() {
+      expect(view.$el).toHaveTag('div');
+    });
+
+    it('has class .panel', function() {
+      expect(view.$el).toHaveClass('panel');
+    });
+
+    it('has class .dash-widget', function() {
+      expect(view.$el).toHaveClass('dash-widget');
+    });
+
+    it('has class .kanban-column', function() {
+      expect(view.$el).toHaveClass('kanban-column');
+    });
+
+    it('sets its panel color', function() {
+      expect(view.$el).toHaveClass('panel-blue');
+    });
+  });
 
   /* Event Wiring
   /**************************************************************************/
