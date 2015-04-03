@@ -27,8 +27,7 @@ require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
-    matchers       = _.extend(require('jasmine-jquery-matchers')),
+var matchers       = _.extend(require('jasmine-jquery-matchers')),
     context        = describe,
     fcontext       = fdescribe;
 
@@ -40,7 +39,7 @@ var User = require(process.cwd() + '/js/models/userModel.js'),
 /****************************************************************************/
 
 describe('Canto Homepage View #travis', function() {
-  var view, e, spy, xhr;
+  var view, e, spy;
 
   /* Filters
   /**************************************************************************/
@@ -192,6 +191,18 @@ describe('Canto Homepage View #travis', function() {
         it('does not redirect', function() {
           expect(spy).not.toHaveBeenCalled();
         });
+      });
+    });
+
+    describe('hideLoginForm()', function() {
+      it('hides the login form', function() {
+        pending('Need to implement the login form view');
+      });
+    });
+
+    describe('toggleLoginForm()', function() {
+      it('toggles the login form', function() {
+        pending('Need to implement the login form view');
       });
     });
   });
