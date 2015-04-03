@@ -102,6 +102,10 @@ describe('Login Form View', function() {
     it('is a form', function() {
       expect(view.$el).toHaveTag('form');
     });
+
+    it('has ID #login-form', function() {
+      expect(view.$el).toHaveId('login-form');
+    });
   });
 
   /* Event Wiring
