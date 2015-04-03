@@ -39,7 +39,7 @@ var User = require(process.cwd() + '/js/models/userModel.js'),
 /****************************************************************************/
 
 describe('Canto Homepage View #travis', function() {
-  var view, e, spy;
+  var view, e, spy, newView;
 
   /* Filters
   /**************************************************************************/
@@ -109,6 +109,39 @@ describe('Canto Homepage View #travis', function() {
 
   /* Event Wiring
   /**************************************************************************/
+
+  describe('events', function() {
+    beforeEach(function() {
+      spyOn(SUT.prototype, 'hideLoginForm');
+      spyOn(SUT.prototype, 'createUser');
+      spyOn(SUT.prototype, 'toggleLoginForm');
+      newView = new SUT();
+      newView.render();
+    });
+
+    afterEach(function() { newView.remove(); });
+
+    describe('submit registration form', function() {
+      it('calls createUser', function() {
+        newView.$('#registration-form').submit();
+        expect(SUT.prototype.createUser).toHaveBeenCalled();
+      });
+    });
+
+    describe('click .login-link', function() {
+      it('calls toggleLoginForm', function() {
+        newView.$('nav li .login-link').click();
+        expect(SUT.prototype.toggleLoginForm).toHaveBeenCalled();
+      });
+    });
+
+    describe('dblclick #shade', function() {
+      it('calls hideLoginForm', function() {
+        newView.$('#shade').dblclick();
+        expect(SUT.prototype.hideLoginForm).toHaveBeenCalled();
+      });
+    });
+  });
 
   /* Event Callbacks
   /**************************************************************************/

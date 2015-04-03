@@ -43,6 +43,12 @@ var HomepageView = Canto.View.extend({
   template    : JST['homepage'],
   id          : 'homepage-wrapper',
 
+  events      : {
+    'submit #registration-form' : 'createUser',
+    'click nav li .login-link'  : 'toggleLoginForm',
+    'dblclick #shade'           : 'hideLoginForm'
+  },
+
   /* Canto View Properties
   /**************************************************************************/
 
@@ -72,6 +78,14 @@ var HomepageView = Canto.View.extend({
         that.trigger('redirect', {destination: 'dashboard'});
       }
     });
+  },
+
+  hideLoginForm: function() {
+    //
+  },
+
+  toggleLoginForm: function() {
+    //
   },
 
   /* Core View Functions
