@@ -106,6 +106,10 @@ describe('Login Form View', function() {
     it('has ID #login-form', function() {
       expect(view.$el).toHaveId('login-form');
     });
+
+    it('has a username input', function() {
+      expect(view.$('input[name=username]')).toHaveLength(1);
+    });
   });
 
   /* Event Wiring
