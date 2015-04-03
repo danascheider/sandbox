@@ -41,6 +41,7 @@ var LoginFormView = Canto.View.extend({
   /**************************************************************************/
 
   template    : JST['partials/loginForm'],
+  tagName     : 'form',
 
   /* Canto View Properties
   /**************************************************************************/

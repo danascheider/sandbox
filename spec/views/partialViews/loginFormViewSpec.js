@@ -95,7 +95,13 @@ describe('Login Form View', function() {
   /**************************************************************************/
 
   describe('view elements', function() {
-    //
+    beforeEach(function() {
+      view.render();
+    });
+
+    it('is a form', function() {
+      expect(view.$el).toHaveTag('form');
+    });
   });
 
   /* Event Wiring
