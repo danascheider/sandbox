@@ -18,9 +18,7 @@
  *     superFamily                                                         *
  *     types                                                               *
  *   Special Functions .............................................. 69   *
- *     renderTaskPanelView() ........................................ 69   *
- *     renderTopWidgetView() ........................................ 74   *
- *     setUser() .................................................... 85   *
+ *     setCollection() .............................................. 85   *
  *   Core Functions ................................................. 97   *
  *     initialize() ................................................. 97   *
  *     remove() .................................................... 105   * 
@@ -92,17 +90,26 @@ var KanbanColumnView = Canto.View.extend({
   /* Core View Functions
   /**************************************************************************/
 
-  initialize  : function(data) {
-    this.data = data;
+  setCollection : function(collection) {
+    this.collection = collection;
+    this.collectionView = new CollectionView({collection: this.collection});
+
+    this.listenTo(this.collection, 'add', this.updateTask);
+    this.listenTo(this.collection, 'change:backlog', this.removeTask);
+  },
+
+  /* Core View Functions
+  /**************************************************************************/
+
+  initialize    : function(data) {
+    this.data = data || {};
     this.data.color = this.data.color || 'primary';
 
     this.groupedBy = this.data.headline === 'Backlog' ?  {backlog: true} : {status: this.data.headline};
 
     this.$el.addClass('panel-' + this.data.color);
-    this.collectionView = new CollectionView({collection: this.collection});
 
-    this.listenTo(this.collection, 'add', this.updateTask);
-    this.listenTo(this.collection, 'change:backlog', this.removeTask);
+    if(!!this.data.collection) { this.setCollection(collection); }
   },
 
   remove      : function() {

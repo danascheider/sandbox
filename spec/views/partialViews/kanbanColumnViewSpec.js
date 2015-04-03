@@ -44,8 +44,11 @@ var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-describe('Kanban Column View #travis', function() {
+fdescribe('Kanban Column View #travis', function() {
   var view, data;
+
+  /* Filters
+  /**************************************************************************/
 
   beforeAll(function() {
     jasmine.addMatchers(matchers);
@@ -93,7 +96,8 @@ describe('Kanban Column View #travis', function() {
       var newView = new SUT(data);
     });
 
-    it('sets the collection', function () {
+    it('calls setCollection', function () {
+      spyOn(view, 'setCollection');
       expect(view.collection).toBe(collection);
     });
 
@@ -102,6 +106,13 @@ describe('Kanban Column View #travis', function() {
       _.each(['color', 'icon', 'headline'], function(prop) {
         expect(newView.data[prop]).toEqual(data[prop]);
       });
+    });
+
+    it('can be instantiated without a collection', function() {
+      delete data.collection;
+      var newView = new SUT(data)
+      expect(newView.collection).not.toExist();
+      data.collection = user.tasks;
     });
 
     describe('groupedBy property', function() {
@@ -201,6 +212,34 @@ describe('Kanban Column View #travis', function() {
           view.updateTask(task1);
           expect(task1.save).not.toHaveBeenCalled();
         });
+      });
+    });
+  });
+
+  /* Special Functions
+  /**************************************************************************/
+
+  describe('special functions', function() {
+    describe('setCollection()', function() {
+      var newView;
+
+      beforeEach(function() { 
+        delete data.collection;
+        newView = new SUT();
+      });
+
+      afterAll(function() {
+        data.collection = collection;
+      });
+
+      it('sets the collection', function() {
+        newView.setCollection(collection);
+        expect(newView.collection).toBe(collection);
+      });
+
+      it('creates a collection view', function() {
+        newView.setCollection(collection);
+        expect(newView.collectionView.isA('TaskCollectionView')).toBe(true);
       });
     });
   });
