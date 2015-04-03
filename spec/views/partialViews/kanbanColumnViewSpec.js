@@ -42,12 +42,13 @@ var SUT = require(process.cwd() + '/js/views/partialViews/kanbanColumnView.js');
 describe('Kanban Column View #travis', function() {
   var view, data;
 
-  beforeEach(function() {
-    // Create an instance of the view under test
-    // Insert args here
-
+  beforeAll(function() {
+    jasmine.addMatchers(matchers);
     _.extend(global, fixtures);
     data = {collection: collection, color: 'blue', icon: 'fa-exclamation-circle', headline: 'New'};
+  });
+
+  beforeEach(function() {
     view = new SUT(data);
   });
 
@@ -90,7 +91,7 @@ describe('Kanban Column View #travis', function() {
     it('sets the data property', function() {
       var newView = new SUT(data);
       _.each(['color', 'icon', 'headline'], function(prop) {
-        expect(newView[prop]).toEqual(data[prop]);
+        expect(newView.data[prop]).toEqual(data[prop]);
       });
     });
 
@@ -98,7 +99,7 @@ describe('Kanban Column View #travis', function() {
 
     it('creates a collection view', function() {
       expect(view.collectionView.isA('TaskCollectionView')).toBe(true);
-    })
+    });
   });
 
   /* Elements
@@ -113,11 +114,29 @@ describe('Kanban Column View #travis', function() {
   /* Core View Functions
   /**************************************************************************/
 
+  describe('remove()', function() {
+    //
+  });
+
+  describe('render()', function() {
+    it('renders the collection view', function() {
+      spyOn(view.collectionView, 'render');
+      view.render();
+      expect(view.collectionView.render).toHaveBeenCalled();
+    });
+
+    it('attaches the collection view to the DOM', function() {
+      $('body').html(view.$el);
+      view.render();
+      expect(view.$('ul.task-list')).toBeInDom();
+    });
+  });
+
   /* Special Functions
   /**************************************************************************/
 
   describe('special functions', function() {
-    describe('isA', function() {
+    describe('isA()', function() {
       it('returns true with argument KanbanColumnView', function() {
         expect(view.isA('KanbanColumnView')).toBe(true);
       });

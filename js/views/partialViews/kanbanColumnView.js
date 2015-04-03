@@ -48,6 +48,8 @@ var KanbanColumnView = Canto.View.extend({
   /* Backbone View Properties
   /**************************************************************************/
 
+  template    : JST['partials/kanbanCol'],
+
   /* Canto View Properties
   /**************************************************************************/
 
@@ -61,9 +63,19 @@ var KanbanColumnView = Canto.View.extend({
 
   /* Core View Functions
   /**************************************************************************/
+
   initialize  : function(data) {
-    _.extend(this, data);
+    this.data = data;
     this.collectionView = new CollectionView({collection: this.collection});
+  },
+
+  render      : function() {
+    var that = this;
+
+    Canto.View.prototype.render.call(this, this.template({data: that.data}), function() {
+      that.collectionView.render();
+      that.$('.panel-body').html(that.collectionView.$el);
+    });
   }
 });
 
