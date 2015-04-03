@@ -14,6 +14,7 @@ require('./collections/taskCollection.js');
 // Require top-level views
 require('./views/appViews/cantoView.js');
 require('./views/appViews/dashboardView.js');
+require('./views/appViews/homepage.js');
 
 // Require model and collection views
 require('./views/modelViews/taskViews/taskListItemView.js');

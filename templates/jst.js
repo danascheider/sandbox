@@ -2,6 +2,7 @@ var _ = require('underscore');
 
 var JST = {
   'dashboard'          : _.template(require('./topLevelTemplates/dashboardTemplate.js')),
+  'homepage'           : _.template(require('./topLevelTemplates/homepageTemplate.js')),
   'collections/task'   : _.template('<li class=\'quick-add-form not-sortable\'></li>'),
   'partials/dashHome'  : _.template(require('./partialTemplates/dashboardHomeTemplate.js')),
   'partials/dashTasks' : _.template(require('./partialTemplates/dashboardTaskTemplate.js')),

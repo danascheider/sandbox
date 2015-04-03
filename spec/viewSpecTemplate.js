@@ -41,6 +41,9 @@ var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
 describe(/* ACTUAL VALUE */, function() {
   var view;
 
+  /* Filters
+  /**************************************************************************/
+
   beforeAll(function() {
     jasmine.addMatchers(matchers);
     _.extend(global, fixtures);
@@ -52,11 +55,10 @@ describe(/* ACTUAL VALUE */, function() {
     // Insert args here
 
     view = new SUT();
-    _.extend(global, fixtures);
   });
 
   afterEach(function() {
-    fixtures.restoreFixtures();
+    restoreFixtures();
   });
 
   afterAll(function() {
