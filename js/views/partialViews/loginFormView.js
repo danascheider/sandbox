@@ -57,6 +57,9 @@ var LoginFormView = Canto.View.extend({
   /* Core View Functions
   /**************************************************************************/
 
+  render      : function() {
+    return Canto.View.prototype.render.call(this, this.template());
+  }
 });
 
 module.exports = LoginFormView;
