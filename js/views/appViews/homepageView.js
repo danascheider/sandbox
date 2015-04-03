@@ -58,7 +58,8 @@ var HomepageView = Canto.View.extend({
 
   createUser  : function(e) {
     e.preventDefault();
-    var form  = $(e.target),
+    var that  = this,
+        form  = $(e.target),
         attrs = Canto.Utils.getAttributes(form),
         hash  = btoa(attrs.username + ':' + attrs.password),
         user  = new User();
@@ -68,6 +69,7 @@ var HomepageView = Canto.View.extend({
       success : function(model) {
         $.cookie('userID', model.id);
         $.cookie('auth', hash);
+        that.trigger('redirect', {destination: 'dashboard'});
       }
     });
   },

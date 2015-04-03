@@ -40,7 +40,7 @@ var User = require(process.cwd() + '/js/models/userModel.js'),
 /****************************************************************************/
 
 describe('Canto Homepage View #travis', function() {
-  var view, e, spy, ajaxSpy, xhr;
+  var view, e, spy, xhr;
 
   /* Filters
   /**************************************************************************/
@@ -117,8 +117,6 @@ describe('Canto Homepage View #travis', function() {
   describe('event callbacks', function() {
     describe('createUser()', function() {
       beforeEach(function() {
-        ajaxSpy = function() { return jasmine.createSpy($, 'ajax'); };
-
         spyOn(Canto.Utils, 'getAttributes').and.returnValue({
           username: 'testuser245', password: '245usertest', email: 'tu245@example.org',
           first_name: 'Test', last_name: 'User'
@@ -147,12 +145,6 @@ describe('Canto Homepage View #travis', function() {
           spy = jasmine.createSpy();
           view.on('redirect', spy);
 
-          xhr = new XMLHttpRequest();
-        });
-
-        afterEach(function() { view.off('redirect'); });
-
-        it('sets the auth cookie as a session cookie', function() {
           spyOn($, 'ajax').and.callFake(function(args) {
             args.success({
               id: 245, username: 'testuser245', password: '245usertest', 
@@ -160,8 +152,24 @@ describe('Canto Homepage View #travis', function() {
             });
           });
 
+          xhr = new XMLHttpRequest();
+        });
+
+        afterEach(function() { view.off('redirect'); });
+
+        it('sets the auth cookie as a session cookie', function() {
           view.createUser(e);
           expect($.cookie).toHaveBeenCalledWith('auth', btoa('testuser245:245usertest'));
+        });
+
+        it('sets the userID cookie as a session cookie', function() {
+          view.createUser(e);
+          expect($.cookie).toHaveBeenCalledWith('userID', 245);
+        });
+
+        it('triggers the redirect event', function() {
+          view.createUser(e);
+          expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
         });
       });
     });
