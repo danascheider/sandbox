@@ -1,10 +1,10 @@
 /****************************************************************************
  *                                                                         *
- * META-INFORMATION AND THE TABLE OF CONTENTS                              *
+ * LOGIN FORM VIEW                                                         *
  *                                                                         *
- * This is a place to share meta-information about the system under test.  *
- * It explains briefly what the purpose of that element of the app is      *  
- * and any other relevant information.                                     *
+ * The login form is displayed on the homepage when the user clicks the    *
+ * .login-link item on the homepage top nav. It provides fields for the    *  
+ * username and password, a "remember-me" checkbox, and a login help link. *
  *                                                                         *
  * CONTENTS                                                          LINE  *
  * Requires ......................................................... 26   *
@@ -32,13 +32,13 @@ var matchers       = _.extend(require('jasmine-jquery-matchers'), require(proces
     context        = describe,
     fcontext       = fdescribe;
 
-var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
+var SUT = require(process.cwd() + '/js/views/partialViews/loginFormView.js');
 
 /****************************************************************************
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-describe(/* ACTUAL VALUE */, function() {
+describe('Login Form View', function() {
   var view;
 
   /* Filters
@@ -50,10 +50,6 @@ describe(/* ACTUAL VALUE */, function() {
   })
 
   beforeEach(function() {
-
-    // Create an instance of the view under test
-    // Insert args here
-
     view = new SUT();
   });
 
@@ -71,8 +67,8 @@ describe(/* ACTUAL VALUE */, function() {
   /**************************************************************************/
 
   describe('properties', function() {
-    it('has klass /* EXPECTED VALUE */', function() {
-      expect(view.klass).toEqual(/* Expected Value */);
+    it('has klass LoginFormView', function() {
+      expect(view.klass).toEqual('LoginFormView');
     });
 
     it('has family Canto.View', function() {
@@ -130,12 +126,16 @@ describe(/* ACTUAL VALUE */, function() {
 
   describe('special functions', function() {
     describe('isA()', function() {
-      it('returns true with argument /* ACTUAL VALUE HERE */', function() {
-        expect(view.isA(/* ACTUAL VALUE */)).toBe(true);
+      it('returns true with argument LoginFormView', function() {
+        expect(view.isA('LoginFormView')).toBe(true);
       });
 
-      it('returns true with argument /* ACTUAL VALUE HERE */', function() {
-        expect(view.isA(/* ACTUAL VALUE */)).toBe(true);
+      it('returns true with argument LoginForm', function() {
+        expect(view.isA('LoginForm')).toBe(true);
+      });
+
+      it('returns true with argument PartialView', function() {
+        expect(view.isA('PartialView')).toBe(true);
       });
 
       it('returns false with another argument', function() {

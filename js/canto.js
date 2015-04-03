@@ -28,6 +28,7 @@ require('./views/partialViews/dashboardSidebarView.js');
 require('./views/partialViews/dashboardTopWidgetView.js');
 require('./views/partialViews/dashboardTaskView.js');
 require('./views/partialViews/kanbanColumnView.js');
+require('./views/partialViews/loginFormView.js');
 require('./views/partialViews/taskPanelView.js');
 
 // Require presenters
