@@ -45,15 +45,15 @@ describe('Homepage View - Visual Elements #ui', function() {
   });
 
   describe('view elements', function() {
-    it('displays its task panel view', function(done) {
-      client.waitForVisible('#task-panel', function(err, isVisible) {
+    it('displays its top nav', function(done) {
+      client.waitForVisible('#navbar-top', function(err, isVisible) {
         expect(isVisible).toBe(true);
         done();
       });
     });
 
-    it('displays its top widget view', function(done) {
-      client.waitForVisible('#dashboard-top-widgets', function(err, isVisible) {
+    it('displays a link to log in', function(done) {
+      client.waitForVisible('#navbar-top .login-link', function(err, isVisible) {
         expect(isVisible).toBe(true);
         done();
       });
