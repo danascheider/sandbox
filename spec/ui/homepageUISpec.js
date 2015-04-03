@@ -58,5 +58,12 @@ describe('Homepage View - Visual Elements #ui', function() {
         done();
       });
     });
+
+    it('displays a registration form', function(done) {
+      client.waitForVisible('form#registration-form', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
   });
 });
