@@ -125,7 +125,7 @@ describe('Dashboard Task View #travis', function() {
 
   describe('elements', function() {
     beforeEach(function() {
-      spyOn(user.tasks, 'fetch').and.callFake(function(args) { return user.tasks; });
+      spyOn(user.tasks, 'fetch').and.returnValue(user.tasks);
       view.render();
     });
 

@@ -96,9 +96,7 @@ describe('Task Collection View #travis', function() {
       spyOn(SUT.prototype, 'crossOff');
       spyOn(SUT.prototype, 'removeChildAndRender');
 
-      spyOn(SUT.prototype, 'retrieveViewForModel').and.callFake(function() {
-        return childViews[0];
-      });
+      spyOn(SUT.prototype, 'retrieveViewForModel').and.returnValue(childViews[0]);
 
       newView = new SUT({collection: collection});
       newView.childViews = childViews;

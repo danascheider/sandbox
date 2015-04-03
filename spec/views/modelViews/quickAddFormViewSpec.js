@@ -119,9 +119,7 @@ describe('Quick-Add Task Form', function() {
         beforeEach(function() {
           xhr = new XMLHttpRequest();
 
-          spyOn(Canto.Utils, 'getAttributes').and.callFake(function() {
-            return {title: 'Finish writing tests'};
-          });
+          spyOn(Canto.Utils, 'getAttributes').and.returnValue({title: 'Finish writing tests'});
 
           spyOn($, 'ajax').and.callFake(function(args) {
             args.success();
@@ -181,8 +179,7 @@ describe('Quick-Add Task Form', function() {
 
       context('when no title given', function() {
         it('doesn\'t create a task', function() {
-          spyOn(Canto.Utils, 'getAttributes').and.callFake(function() {
-            return {title: ''};
+          spyOn(Canto.Utils, 'getAttributes').and.returnValue({title: ''});
           });
 
           spyOn(collection, 'create');

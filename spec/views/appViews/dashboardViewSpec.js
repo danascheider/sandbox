@@ -334,7 +334,7 @@ describe('Main Dashboard View #travis', function() {
     describe('showHomeView()', function() {
       context('when the main dash and home view are visible', function() {
         beforeEach(function() {
-          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
+          spyOn(dashboard.$el, 'is').and.returnValue(true);
           dashboard.render();
           $('body').html(dashboard.$el);
         });
@@ -359,8 +359,8 @@ describe('Main Dashboard View #travis', function() {
 
       context('when the main dash and task view are visible', function() {
         beforeEach(function() {
-          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+          spyOn(dashboard.$el, 'is').and.returnValue(true);
+          spyOn(dashboard.taskView.$el, 'is').and.returnValue(true);
         });
 
         it('doesn\'t re-render the main dash', function() {
@@ -392,7 +392,7 @@ describe('Main Dashboard View #travis', function() {
 
       context('when the main dash isn\'t visible', function() {
         beforeEach(function() {
-          spyOn(dashboard.$el, 'is').and.callFake(function() { return false; });
+          spyOn(dashboard.$el, 'is').and.returnValue(false);
         });
 
         it('renders the main dash', function() {
@@ -418,9 +418,9 @@ describe('Main Dashboard View #travis', function() {
     describe('showTaskView', function() {
       context('when the main dash and home view are visible', function() {
         beforeEach(function() {
-          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          spyOn(dashboard.homeView.$el, 'is').and.callFake(function() { return true; });
-          spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return false; });
+          spyOn(dashboard.$el, 'is').and.returnValue(true);
+          spyOn(dashboard.homeView.$el, 'is').and.returnValue(true);
+          spyOn(dashboard.taskView.$el, 'is').and.returnValue(false);
           dashboard.render();
           $('body').html(dashboard.$el);
         });
@@ -451,8 +451,8 @@ describe('Main Dashboard View #travis', function() {
 
       context('when the main dash and task view are visible', function() {
         beforeEach(function() {
-          spyOn(dashboard.$el, 'is').and.callFake(function() { return true; });
-          spyOn(dashboard.taskView.$el, 'is').and.callFake(function() { return true; });
+          spyOn(dashboard.$el, 'is').and.returnValue(true);
+          spyOn(dashboard.taskView.$el, 'is').and.returnValue(true);
           dashboard.render();
           $('body').html(dashboard.$el);
         });
@@ -477,7 +477,7 @@ describe('Main Dashboard View #travis', function() {
 
       context('when the main dash isn\'t visible', function() {
         beforeEach(function() {
-          spyOn(dashboard.$el, 'is').and.callFake(function() { return false; });
+          spyOn(dashboard.$el, 'is').and.returnValue(false);
         });
 
         it('renders the main dash', function() {
