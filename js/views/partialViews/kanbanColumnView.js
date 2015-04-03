@@ -69,6 +69,11 @@ var KanbanColumnView = Canto.View.extend({
     this.collectionView = new CollectionView({collection: this.collection});
   },
 
+  remove      : function() {
+    this.collectionView.remove();
+    Canto.View.prototype.remove.call(this);
+  },
+
   render      : function() {
     var that = this;
 

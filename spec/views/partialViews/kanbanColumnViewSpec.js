@@ -115,7 +115,17 @@ describe('Kanban Column View #travis', function() {
   /**************************************************************************/
 
   describe('remove()', function() {
-    //
+    it('removes the collection view', function() {
+      spyOn(view.collectionView, 'remove');
+      view.remove();
+      expect(view.collectionView.remove).toHaveBeenCalled();
+    });
+
+    it('removes itself from the DOM using the Canto View prototype', function() {
+      spyOn(Canto.View.prototype.remove, 'call');
+      view.remove();
+      expect(Canto.View.prototype.remove.call).toHaveBeenCalledWith(view);
+    });
   });
 
   describe('render()', function() {
