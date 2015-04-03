@@ -180,8 +180,6 @@ describe('Quick-Add Task Form', function() {
       context('when no title given', function() {
         it('doesn\'t create a task', function() {
           spyOn(Canto.Utils, 'getAttributes').and.returnValue({title: ''});
-          });
-
           spyOn(collection, 'create');
           spyOn(TaskModel.prototype, 'initialize');
           view.createTask(e);
