@@ -62,14 +62,47 @@ var KanbanColumnView = Canto.View.extend({
     return Canto.View.prototype.types().concat(['KanbanColumnView', 'KanbanColumn', 'PartialView']);
   },
 
+  /* Event Callbacks
+  /**************************************************************************/
+
+  removeTask  : function(task) {
+    this.collection.remove(task);
+  },
+
+  updateTask  : function(task) {
+    var needsUpdate = false;
+
+    _.each(this.groupedBy, function(val, key) {
+      if(task.get(key) != val) { 
+
+        // Since this is not set to false at any point,
+        // it is not necessary to break out of the loop at this point,
+        // except if performance concerns come up later. We'll cross that
+        // bridge when we come to it since this is the simplest implementation.
+
+        needsUpdate = true;
+      }
+    });
+
+    if(needsUpdate) { 
+      task.save(this.groupedBy); 
+    }
+  },
+
   /* Core View Functions
   /**************************************************************************/
 
   initialize  : function(data) {
     this.data = data;
     this.data.color = this.data.color || 'primary';
+
+    this.groupedBy = this.data.headline === 'Backlog' ?  {backlog: true} : {status: this.data.headline};
+
     this.$el.addClass('panel-' + this.data.color);
     this.collectionView = new CollectionView({collection: this.collection});
+
+    this.listenTo(this.collection, 'add', this.updateTask);
+    this.listenTo(this.collection, 'change:backlog', this.removeTask);
   },
 
   remove      : function() {

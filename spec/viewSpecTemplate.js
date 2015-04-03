@@ -41,6 +41,11 @@ var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
 describe(/* ACTUAL VALUE */, function() {
   var view;
 
+  beforeAll(function() {
+    jasmine.addMatchers(matchers);
+    _.extend(global, fixtures);
+  })
+
   beforeEach(function() {
 
     // Create an instance of the view under test
@@ -48,6 +53,10 @@ describe(/* ACTUAL VALUE */, function() {
 
     view = new SUT();
     _.extend(global, fixtures);
+  });
+
+  afterEach(function() {
+    fixtures.restoreFixtures();
   });
 
   afterAll(function() {

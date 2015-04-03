@@ -9,6 +9,7 @@
  *                                                                         *
  * CONTENTS                                                          LINE  *
  * Core Requires .................................................... 26   *
+ * Module-Specific Requires ......................................... --   * 
  * Suite ............................................................ 44   *
  *   Filters ........................................................ 50   *
  *   Authorization and Authentication ............................... 60   *
@@ -33,7 +34,11 @@ var matchers       = _.extend(require('jasmine-jquery-matchers')),
     context        = describe,
     fcontext       = fdescribe;
 
-var SUT = require(process.cwd() + '/js/views/partialViews/kanbanColumnView.js');
+/* Module-Specific Requires
+/****************************************************************************/
+
+var TaskModel = require(process.cwd() + '/js/models/taskModel.js'),
+    SUT       = require(process.cwd() + '/js/views/partialViews/kanbanColumnView.js');
 
 /****************************************************************************
  * BEGIN SUITE                                                              *
@@ -51,6 +56,10 @@ describe('Kanban Column View #travis', function() {
   beforeEach(function() {
     view = new SUT(data);
   });
+
+  afterEach(function() {
+    fixtures.restoreFixtures();
+  })
 
   afterAll(function() {
     view.remove();
@@ -95,7 +104,23 @@ describe('Kanban Column View #travis', function() {
       });
     });
 
-    // FIX: Decide if the groupedBy property is really such a good idea
+    describe('groupedBy property', function() {
+      context('when grouped by backlog', function() {
+        it('sets groupedBy to Backlog', function() {
+          data.headline = 'Backlog';
+          var newView = new SUT(data);
+          expect(newView.groupedBy).toEqual({backlog: true});
+          data.headline = 'New';
+        });
+      });
+
+      context('when grouped by status', function() {
+        it('sets groupedBy to the appropriate status', function() {
+          var newView = new SUT(data);
+          expect(newView.groupedBy).toEqual({status: 'New'});
+        });
+      });
+    });
 
     it('creates a collection view', function() {
       expect(view.collectionView.isA('TaskCollectionView')).toBe(true);
@@ -130,8 +155,55 @@ describe('Kanban Column View #travis', function() {
   /* Event Wiring
   /**************************************************************************/
 
+  describe('view events', function() {
+    describe('add task to collection', function() {
+      it('calls updateTask', function() {
+        spyOn(SUT.prototype, 'updateTask');
+        var newView = new SUT(data);
+        var newTask = new TaskModel({id: 4, owner_id: 342, title: 'Hello World'});
+        newView.collection.trigger('add', newTask);
+        expect(SUT.prototype.updateTask).toHaveBeenCalled();
+      });
+    });
+
+    describe('change:backlog', function() {
+      it('calls removeTask', function() {
+        spyOn(SUT.prototype, 'removeTask');
+        var newView = new SUT(data);
+        newView.collection.trigger('change:backlog', task1);
+        expect(SUT.prototype.removeTask).toHaveBeenCalledWith(task1);
+      });
+    });
+  });
+
   /* Event Callbacks
   /**************************************************************************/
+
+  describe('event callbacks', function() {
+    describe('removeTask()', function() {
+      it('removes the task', function() {
+        spyOn(collection, 'remove');
+        view.removeTask(view.collection.models[0]);
+        expect(collection.remove.calls.argsFor(0)[0]).toEqual(view.collection.models[0]);
+      });
+    });
+
+    describe('updateTask()', function() {
+      it('modifies the task with the column\'s groupedBy property', function() {
+        spyOn(task3, 'save');
+        view.updateTask(task3);
+        expect(task3.save).toHaveBeenCalledWith({status: 'New'});
+      });
+
+      context('when the attributes already match', function() {
+        it('doesn\'t call save on the task', function() {
+          spyOn(task1, 'save');
+          view.updateTask(task1);
+          expect(task1.save).not.toHaveBeenCalled();
+        });
+      });
+    });
+  });
 
   /* Core View Functions
   /**************************************************************************/
