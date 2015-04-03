@@ -107,8 +107,12 @@ describe('Login Form View', function() {
       expect(view.$el).toHaveId('login-form');
     });
 
-    it('has a username input', function() {
+    it('has a username field', function() {
       expect(view.$('input[name=username]')).toHaveLength(1);
+    });
+
+    it('has a password field', function() {
+      expect(view.$('input[name=password]')).toHaveLength(1);
     });
   });
 
