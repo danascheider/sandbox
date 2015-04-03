@@ -26,6 +26,11 @@
 Canto      = Canto || require('../../dependencies.js');
 Canto.View = Canto.View || require('./cantoView.js');
 
+/* Module-Specific Requires
+/****************************************************************************/
+
+var User = require('../../models/userModel.js');
+
 /****************************************************************************
  * BEGIN MODULE                                                             *
 /****************************************************************************/
@@ -53,6 +58,18 @@ var HomepageView = Canto.View.extend({
 
   createUser  : function(e) {
     e.preventDefault();
+    var form  = $(e.target),
+        attrs = Canto.Utils.getAttributes(form),
+        hash  = btoa(attrs.username + ':' + attrs.password),
+        user  = new User();
+
+    user.save(attrs,  {
+      url     : Canto.API.users.root,
+      success : function(model) {
+        $.cookie('userID', model.id);
+        $.cookie('auth', hash);
+      }
+    });
   },
 
   /* Core View Functions

@@ -32,14 +32,15 @@ var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     context        = describe,
     fcontext       = fdescribe;
 
-var SUT = require(process.cwd() + '/js/views/appViews/homepageView.js');
+var User = require(process.cwd() + '/js/models/userModel.js'),
+    SUT  = require(process.cwd() + '/js/views/appViews/homepageView.js');
 
 /****************************************************************************
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
 describe('Canto Homepage View #travis', function() {
-  var view, e;
+  var view, e, spy, ajaxSpy, xhr;
 
   /* Filters
   /**************************************************************************/
@@ -116,6 +117,8 @@ describe('Canto Homepage View #travis', function() {
   describe('event callbacks', function() {
     describe('createUser()', function() {
       beforeEach(function() {
+        ajaxSpy = function() { return jasmine.createSpy($, 'ajax'); };
+
         spyOn(Canto.Utils, 'getAttributes').and.returnValue({
           username: 'testuser245', password: '245usertest', email: 'tu245@example.org',
           first_name: 'Test', last_name: 'User'
@@ -129,6 +132,37 @@ describe('Canto Homepage View #travis', function() {
         spyOn(e, 'preventDefault').and.callThrough();
         view.createUser(e);
         expect(e.preventDefault).toHaveBeenCalled();
+      });
+
+      it('instantiates a user model', function() {
+        spyOn($, 'ajax');
+        spyOn(User.prototype, 'initialize');
+        view.createUser(e);
+        expect(User.prototype.initialize).toHaveBeenCalled();
+      });
+
+      context('success', function() {
+        beforeEach(function() {
+          spyOn($, 'cookie');
+          spy = jasmine.createSpy();
+          view.on('redirect', spy);
+
+          xhr = new XMLHttpRequest();
+        });
+
+        afterEach(function() { view.off('redirect'); });
+
+        it('sets the auth cookie as a session cookie', function() {
+          spyOn($, 'ajax').and.callFake(function(args) {
+            args.success({
+              id: 245, username: 'testuser245', password: '245usertest', 
+              email: 'tu245@example.org', first_name: 'Test', last_name: 'User'
+            });
+          });
+
+          view.createUser(e);
+          expect($.cookie).toHaveBeenCalledWith('auth', btoa('testuser245:245usertest'));
+        });
       });
     });
   });
