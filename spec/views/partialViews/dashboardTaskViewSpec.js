@@ -141,15 +141,16 @@ describe('Dashboard Task View #travis', function() {
   /* Core View Functions
   /**************************************************************************/
 
-  fdescribe('core view functions', function() {
+  describe('core view functions', function() {
     describe('remove', function() {
-      _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
+      _.each(['newColumnView', 'inProgressColumnView', 'blockingColumnView', 'backlogColumnView'], function(column) {
         it('removes its ' + column, function(done) {
           view.render();
           done();
-          spyOn(view[column], 'remove');
-          view.remove();
-          expect(view[column].remove).toHaveBeenCalled();
+          setTimeout(function() {spyOn(view[column], 'remove');
+            view.remove();
+            expect(view[column].remove).toHaveBeenCalled();
+          }, 50);
         });
       });
 
