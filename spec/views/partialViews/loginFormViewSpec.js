@@ -115,6 +115,14 @@ describe('Login Form View', function() {
       expect(view.$('input[name=password]')).toHaveLength(1);
     });
 
+    it('has a submit button', function() {
+      expect(view.$('button[type=submit]')).toHaveLength(1);
+    });
+
+    it('has a link for login help', function() {
+      expect(view.$('a.login-help-link')).toHaveLength(1);
+    });
+
     describe('remember checkbox', function() {
       it('is a checkbox', function() {
         expect(view.$('input[name=remember]')[0].type).toEqual('checkbox');
