@@ -1,6 +1,7 @@
 Canto = Canto || require('../../js/dependencies.js');
 
-var ListItemView         = require('../../js/views/specViews/taskListItemSpecView.js'),
+var HomepageView         = require('../../js/views/specViews/homepageSpecView.js'),
+    ListItemView         = require('../../js/views/specViews/taskListItemSpecView.js'),
     DashboardHomeView    = require('../../js/views/specViews/dashboardHomeSpecView.js'),
     DashboardView        = require('../../js/views/specViews/dashboardSpecView.js'),
     DashboardSidebarView = require('../../js/views/specViews/dashboardSidebarSpecView.js'),
@@ -15,6 +16,7 @@ var TestRouter = Backbone.Router.extend({
     'dashboardSidebarViewSpec(/)'   : 'displayDashboardSidebarView',
     'dashboardTopWidgetViewSpec(/)' : 'displayDashboardTopWidgetView',
     'dashboardViewSpec(/)'          : 'displayDashboardView',
+    'homepageViewSpec(/)'           : 'displayHomepageView',
     'taskCollectionViewSpec(/)'     : 'displayTaskCollectionView',
     'taskPanelViewSpec(/)'          : 'displayTaskPanelView',
   },
@@ -39,6 +41,11 @@ var TestRouter = Backbone.Router.extend({
 
   displayDashboardView        : function() {
     view = new DashboardView();
+    view.render();
+  },
+
+  displayHomepageView         : function() {
+    view = new HomepageView();
     view.render();
   },
 
