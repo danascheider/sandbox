@@ -1,10 +1,10 @@
 /****************************************************************************
  *                                                                         *
- * META-INFORMATION AND THE TABLE OF CONTENTS                              *
+ * HOMEPAGE VIEW                                                           *
  *                                                                         *
- * This is a place to share meta-information about the system under test.  *
- * It explains briefly what the purpose of that element of the app is      *  
- * and any other relevant information.                                     *
+ * The homepage is the place where users who are not logged in land when   *
+ * they visit the site. It is the place where they can get information     *  
+ * about the product or log into their dashboard.                          *
  *                                                                         *
  * CONTENTS                                                          LINE  *
  * Requires ......................................................... 26   *
@@ -27,18 +27,17 @@ require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA.js')),
-    fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
+var matchers       = _.extend(require('jasmine-jquery-matchers')),
     context        = describe,
     fcontext       = fdescribe;
 
-var SUT = require(process.cwd() + '/js/views/appViews/dashboardView.js');
+var SUT = require(process.cwd() + '/js/views/appViews/homepageView.js');
 
 /****************************************************************************
  * BEGIN SUITE                                                              *
 /****************************************************************************/
 
-describe(/* ACTUAL VALUE */, function() {
+describe('Canto Homepage View #travis', function() {
   var view;
 
   /* Filters
@@ -46,33 +45,23 @@ describe(/* ACTUAL VALUE */, function() {
 
   beforeAll(function() {
     jasmine.addMatchers(matchers);
-    _.extend(global, fixtures);
   })
 
   beforeEach(function() {
-
-    // Create an instance of the view under test
-    // Insert args here
-
     view = new SUT();
-  });
-
-  afterEach(function() {
-    restoreFixtures();
   });
 
   afterAll(function() {
     view.remove();
     view = null;
-    global = global.omit(fixtures);
   });
 
   /* Static Properties
   /**************************************************************************/
 
   describe('properties', function() {
-    it('has klass /* EXPECTED VALUE */', function() {
-      expect(view.klass).toEqual(/* Expected Value */);
+    it('has klass \'HomepageView\'', function() {
+      expect(view.klass).toEqual('HomepageView');
     });
 
     it('has family Canto.View', function() {
@@ -93,35 +82,42 @@ describe(/* ACTUAL VALUE */, function() {
       var newView = new SUT();
       expect(SUT.prototype.render).not.toHaveBeenCalled();
     });
+
+    it('creates a login form', function() {
+      pending('Need to implement the login form');
+      expect(view.loginForm).toExist();
+    });
   });
 
   /* Elements
   /**************************************************************************/
 
   describe('view elements', function() {
-    //
+    beforeEach(function() {
+      view.render();
+    });
+
+    it('is a div', function() {
+      expect(view.$el).toHaveTag('div');
+    });
+
+    it('has ID #homepage-wrapper', function() {
+      expect(view.$el).toHaveId('homepage-wrapper');
+    });
   });
 
   /* Event Wiring
   /**************************************************************************/
 
-  describe('view events', function() {
-    //
-  });
-
   /* Event Callbacks
   /**************************************************************************/
-
-  describe('event callbacks', function() {
-    //
-  });
 
   /* Core View Functions
   /**************************************************************************/
 
   describe('core view functions', function() {
     describe('render()', function() {
-      //
+      
     });
   });
 
@@ -130,12 +126,12 @@ describe(/* ACTUAL VALUE */, function() {
 
   describe('special functions', function() {
     describe('isA()', function() {
-      it('returns true with argument /* ACTUAL VALUE HERE */', function() {
-        expect(view.isA(/* ACTUAL VALUE */)).toBe(true);
+      it('returns true with argument HomepageView', function() {
+        expect(view.isA('HomepageView')).toBe(true);
       });
 
-      it('returns true with argument /* ACTUAL VALUE HERE */', function() {
-        expect(view.isA(/* ACTUAL VALUE */)).toBe(true);
+      it('returns true with argument TopLevelView', function() {
+        expect(view.isA('TopLevelView')).toBe(true);
       });
 
       it('returns false with another argument', function() {
