@@ -141,7 +141,7 @@ describe('Dashboard Task View #travis', function() {
   /* Core View Functions
   /**************************************************************************/
 
-  describe('core view functions', function() {
+  fdescribe('core view functions', function() {
     describe('remove', function() {
       _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
         it('removes its ' + column, function(done) {

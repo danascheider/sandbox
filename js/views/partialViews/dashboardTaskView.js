@@ -129,6 +129,11 @@ var DashboardTaskView = Canto.View.extend({
   },
 
   remove     : function() {
+    if(!!this.backlogColumnView)    { this.backlogColumnView.remove();    }
+    if(!!this.newColumnView)        { this.newColumnView.remove();        }
+    if(!!this.inProgressColumnView) { this.inProgressColumnView.remove(); }
+    if(!!this.blockingColumnView)   { this.blockingColumnView.remove();   }
+    
     Canto.View.prototype.remove.call(this);
   },
 
@@ -138,7 +143,7 @@ var DashboardTaskView = Canto.View.extend({
     this.user.tasks.fetch({
       success: function(collection) {
         collection = new TaskCollection(collection);
-        
+
         that.backlogColumnView = new KanbanColumnView({
           el         : that.$('#backlog-tasks'),
           collection : new TaskCollection(collection.where({backlog: true})),
