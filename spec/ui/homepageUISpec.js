@@ -65,5 +65,29 @@ describe('Homepage View - Visual Elements #ui', function() {
         done();
       });
     });
+
+    it('displays a features section', function(done) {
+      client.waitForVisible('#view section#features', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
+
+    it('displays contact information', function(done) {
+      client.waitForVisible('#view #contact-us', function(err, isVisible) {
+        expect(isVisible).toBe(true);
+        done();
+      });
+    });
+
+    describe('login form', function() {
+      it('is hidden by default', function(done) {
+        pending('Need to implement the login form view');
+        client.waitForVisible('#login-form', true, function(err, isVisible) {
+          expect(isVisible).toBe(false);
+          done();
+        });
+      });
+    });
   });
 });
