@@ -145,7 +145,6 @@ describe('Dashboard Task View #travis', function() {
     describe('remove', function() {
       _.each(['newColumn', 'inProgressColumn', 'blockingColumn', 'backlogColumn'], function(column) {
         it('removes its ' + column, function() {
-          pending('Need to implement the Kanban column view');
           spyOn(view[column], 'remove');
           view.remove();
           expect(view[column].remove).toHaveBeenCalled();

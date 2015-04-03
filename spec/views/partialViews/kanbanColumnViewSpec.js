@@ -8,11 +8,11 @@
  * access their completed tasks as well.                                   *
  *                                                                         *
  * CONTENTS                                                          LINE  *
- * Core Requires .................................................... 26   *
- * Module-Specific Requires ......................................... --   * 
- * Suite ............................................................ 44   *
+ * Core Requires .................................................... 28   *
+ * Module-Specific Requires ......................................... 40   * 
+ * Suite ............................................................ 47   *
  *   Filters ........................................................ 50   *
- *   Authorization and Authentication ............................... 60   *
+ *   Authorization and Authentication ............................... 73   *
  *     token()                                                             *
  *   Core Functions ................................................. 69   *
  *     fetch()                                                             *
@@ -58,7 +58,7 @@ describe('Kanban Column View #travis', function() {
   });
 
   afterEach(function() {
-    fixtures.restoreFixtures();
+    restoreFixtures();
   })
 
   afterAll(function() {

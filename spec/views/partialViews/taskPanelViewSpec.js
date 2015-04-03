@@ -9,11 +9,10 @@ require(process.cwd() + '/spec/support/env.js');
 var SUT = require(process.cwd() + '/js/views/partialViews/taskPanelView.js');
 
 var Fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
-    TaskModel      = require(process.cwd() + '/js/models/taskModel.js'),
     TaskCollection = require(process.cwd() + '/js/collections/taskCollection.js'),
     TaskCollectionView = require(process.cwd() + '/js/views/collectionViews/taskCollectionView.js'),
     ListItemView   = require(process.cwd() + '/js/views/modelViews/taskViews/taskListItemView.js'),
-    matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA')),
+    matchers       = _.extend(require('jasmine-jquery-matchers')),
     XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
     context        = describe,
     fcontext       = fdescribe;
@@ -201,10 +200,10 @@ describe('Task Panel View #travis', function() {
       });
 
       it('doesn\'t include blocking tasks', function() {
-        task3.set({status: 'Blocking'});
-
-        // Yes, it needed to be phrased this way in order for it to work.
-        expect(taskPanel.filterCollection(collection).indexOf(task3)).toBe(-1);
+        var newView = new ListItemView({model: task2});
+        spyOn(TaskCollectionView.prototype, 'retrieveViewForModel').and.returnValue(newView);
+        task2.set({status: 'Blocking'});
+        expect(taskPanel.filterCollection(collection).indexOf(task2)).toBe(-1);
       });
 
       it('doesn\'t include backlogged tasks', function() {
