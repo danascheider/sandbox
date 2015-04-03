@@ -152,24 +152,45 @@ describe('Canto Homepage View #travis', function() {
             });
           });
 
-          xhr = new XMLHttpRequest();
+          view.createUser(e);
         });
 
         afterEach(function() { view.off('redirect'); });
 
         it('sets the auth cookie as a session cookie', function() {
-          view.createUser(e);
           expect($.cookie).toHaveBeenCalledWith('auth', btoa('testuser245:245usertest'));
         });
 
         it('sets the userID cookie as a session cookie', function() {
-          view.createUser(e);
           expect($.cookie).toHaveBeenCalledWith('userID', 245);
         });
 
         it('triggers the redirect event', function() {
-          view.createUser(e);
           expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+        });
+      });
+      
+      context('error', function() {
+        beforeEach(function() {
+          spyOn($, 'cookie');
+          spy = jasmine.createSpy();
+          view.on('redirect', spy);
+
+          spyOn($, 'ajax').and.callFake(function(args) {
+            args.error();
+          });
+
+          view.createUser(e);
+        });
+
+        afterEach(function() { view.off('redirect'); });
+
+        it('does not set cookies', function() {
+          expect($.cookie).not.toHaveBeenCalled();
+        });
+
+        it('does not redirect', function() {
+          expect(spy).not.toHaveBeenCalled();
         });
       });
     });
