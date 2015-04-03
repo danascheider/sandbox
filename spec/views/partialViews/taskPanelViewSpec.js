@@ -187,12 +187,12 @@ describe('Task Panel View #travis', function() {
       });
     });
 
-    describe('filterCollection', function() {
+    describe('filterCollection()', function() {
       beforeEach(function() {
         spyOn($, 'ajax');
 
         for(var i = 4; i < 13; i++) {
-          taskPanel.collection.create({title: 'My Task ' + i, position: i}, {sync: false});
+          taskPanel.collection.create({title: 'My Task ' + i, position: i}, {sync: false, silent: true});
         }
       });
 
