@@ -27,7 +27,8 @@ require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var matchers       = _.extend(require('jasmine-jquery-matchers')),
+var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
+    matchers       = _.extend(require('jasmine-jquery-matchers')),
     context        = describe,
     fcontext       = fdescribe;
 
@@ -38,7 +39,7 @@ var SUT = require(process.cwd() + '/js/views/appViews/homepageView.js');
 /****************************************************************************/
 
 describe('Canto Homepage View #travis', function() {
-  var view;
+  var view, e;
 
   /* Filters
   /**************************************************************************/
@@ -113,7 +114,23 @@ describe('Canto Homepage View #travis', function() {
   /**************************************************************************/
 
   describe('event callbacks', function() {
-    //
+    describe('createUser()', function() {
+      beforeEach(function() {
+        spyOn(Canto.Utils, 'getAttributes').and.returnValue({
+          username: 'testuser245', password: '245usertest', email: 'tu245@example.org',
+          first_name: 'Test', last_name: 'User'
+        });      
+
+        e = $.Event('submit', {target: view.$('#registration-form')});
+      });
+
+      it('doesn\'t refresh the page', function() {
+        spyOn($, 'ajax');
+        spyOn(e, 'preventDefault').and.callThrough();
+        view.createUser(e);
+        expect(e.preventDefault).toHaveBeenCalled();
+      });
+    });
   });
 
   /* Core View Functions

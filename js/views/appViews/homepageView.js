@@ -48,6 +48,13 @@ var HomepageView = Canto.View.extend({
     return Canto.View.prototype.types().concat(['HomepageView', 'TopLevelView']);
   },
 
+  /* Event Callbacks
+  /**************************************************************************/
+
+  createUser  : function(e) {
+    e.preventDefault();
+  },
+
   /* Core View Functions
   /**************************************************************************/
 
