@@ -114,6 +114,16 @@ describe('Login Form View', function() {
     it('has a password field', function() {
       expect(view.$('input[name=password]')).toHaveLength(1);
     });
+
+    describe('remember checkbox', function() {
+      it('is a checkbox', function() {
+        expect(view.$('input[name=remember]')[0].type).toEqual('checkbox');
+      });
+
+      it('is checked by default', function() {
+        expect(view.$('input[name=remember]')).toBeChecked();
+      });
+    });
   });
 
   /* Event Wiring
