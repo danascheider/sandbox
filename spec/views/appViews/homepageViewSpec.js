@@ -233,8 +233,27 @@ describe('Canto Homepage View #travis', function() {
     });
 
     describe('toggleLoginForm()', function() {
-      it('toggles the login form', function() {
-        pending('Need to implement the login form view');
+      context('when the user is logged in', function() {
+        beforeEach(function() {
+          spyOn($, 'cookie').and.returnValue(btoa('testuser:testuser'));
+        });
+
+        it('triggers redirect', function() {
+          spy = jasmine.createSpy();
+          view.on('redirect', spy);
+          view.toggleLoginForm($.Event('click', {target: view.$('.login-link')}));
+          expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+        });
+      });
+
+      context('when the user is not logged in', function() {
+        beforeEach(function() {
+          spyOn($, 'cookie').and.returnValue(null);
+        });
+
+        it('doesn\'t trigger redirect', function() {
+          view.toggleLoginForm($.Event('click', {target: view.$('.login-link')}));
+        });
       });
     });
   });

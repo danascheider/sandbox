@@ -21,6 +21,9 @@ Canto = Canto || require('../../js/dependencies.js');
 require(process.cwd() + '/spec/support/webdriver.js');
 require(process.cwd() + '/spec/support/env.js');
 
+var context  = describe,
+    fcontext = fdescribe;
+
 /******************************************************************************
  * BEGIN SUITE                                                                *
 /******************************************************************************/
@@ -35,8 +38,9 @@ describe('Homepage View - Visual Elements #ui', function() {
     client.init().url('http://localhost/#homepageViewSpec');
   });
 
-  beforeEach(function() {
+  beforeEach(function(done) {
     client.refresh();
+    client.deleteCookie(done)
   });
 
   afterAll(function(done) {
@@ -88,6 +92,82 @@ describe('Homepage View - Visual Elements #ui', function() {
         client.waitForVisible('#login-form', true, function(err, isVisible) {
           expect(isVisible).toBe(false);
           done();
+        });
+      });
+    });
+  });
+
+  /* View Events
+  /****************************************************************************/
+
+  describe('view event callbacks', function() {
+    describe('hideLoginForm()', function() {
+      beforeEach(function(done) {
+        client.waitForVisible('#triggers a[data-method=showLoginForm]')
+              .click('#triggers a[data-method=showLoginForm]')
+              .waitForVisible('#view #login-form', done);
+      });
+
+      it('hides the login form', function(done) {
+        client.click('#triggers a[data-method=hideLoginForm]')
+              .waitForVisible('#view #login-form', true, function(err, isVisible) {
+
+          expect(isVisible).toBe(false);
+          done();
+        });
+      });
+    });
+
+    describe('toggleLoginForm()', function() {   
+      context('when the login form is not visible', function() {
+        beforeEach(function(done) {
+          client.waitForVisible('#triggers a[data-method=hideLoginForm]')
+                .click('#triggers a[data-method=hideLoginForm]')
+                .waitForVisible('#view #login-form', true, done)
+        });
+
+        it('displays the login form', function(done) {
+          client.click('#triggers a[data-method=toggleLoginForm]')
+                .waitForVisible('#view #login-form', function(err, isVisible) {
+            expect(isVisible).toBe(true);
+            done();
+          });
+        });
+
+        it('hides the center text', function(done) {
+          client.click('#triggers a[data-method=toggleLoginForm]')
+                .waitForVisible('#view div.text-vertical-center > *', true, function(err, isVisible) {
+            expect(isVisible).toBe(false);
+            done();
+          });
+        })
+      });
+
+      context('when the login form is visible', function() {
+        beforeEach(function(done) {
+          client.waitForVisible('#triggers a[data-method=showLoginForm]')
+                .click('#triggers a[data-method=showLoginForm]')
+                .waitForVisible('#view #login-form', done);
+        });
+
+        it('hides the login form', function(done) {
+          client.waitForVisible('#triggers a[data-method=toggleLoginForm]')
+                .click('#triggers a[data-method=toggleLoginForm]')
+                .waitForVisible('#view #login-form', true, function(err, isVisible) {
+
+            expect(isVisible).toBe(false);
+            done();
+          });
+        });
+
+        it('shows the center text', function(done) {
+          client.waitForVisible('#triggers a[data-method=toggleLoginForm]')
+                .click('#triggers a[data-method=toggleLoginForm]')
+                .waitForVisible('#view div.text-vertical-center > *', function(err, isVisible) {
+
+            expect(isVisible).toBe(true);
+            done();
+          });
         });
       });
     });

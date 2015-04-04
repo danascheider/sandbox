@@ -18,18 +18,21 @@ var SpecWrapper = Canto.View.extend({
 
   callHideLoginForm   : function(e) {
     e.preventDefault();
-    this.view.hideLoginForm($.Event('dblclick', {target: view.$('#shade')}));
+    var click = $.Event('dblclick', {target: this.view.$('#shade')});
+    this.view.hideLoginForm(click);
   },
 
   callToggleLoginForm : function(e) {
     e.preventDefault();
-    this.view.toggleLoginForm($.Event('click', {target: view.$('.login-link')}));
+    var click = $.Event('click', {target: this.view.$('.login-link')});
+    this.view.toggleLoginForm(click);
   },
 
   showLoginForm       : function(e) {
     e.preventDefault();
     if(!this.view.$('#login-form').is(':visible')) {
-      this.view.toggleLoginForm($.Event('click', {target: view.$('.login-link')}));
+      var click = $.Event('click', {target: this.view.$('.login-link')});
+      this.view.toggleLoginForm(click);
     }
   },
 
