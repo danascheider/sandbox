@@ -85,7 +85,6 @@ describe('Homepage View - Visual Elements #ui', function() {
 
     describe('login form', function() {
       it('is hidden by default', function(done) {
-        pending('Need to implement the login form view');
         client.waitForVisible('#login-form', true, function(err, isVisible) {
           expect(isVisible).toBe(false);
           done();

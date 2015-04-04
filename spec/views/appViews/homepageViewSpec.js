@@ -85,7 +85,6 @@ describe('Canto Homepage View #travis', function() {
     });
 
     it('creates a login form', function() {
-      pending('Need to implement the login form');
       expect(view.loginForm).toExist();
     });
   });
@@ -246,7 +245,6 @@ describe('Canto Homepage View #travis', function() {
   describe('core view functions', function() {
     describe('remove()', function() {
       it('removes its login form', function() {
-        pending('Need to implement the login form');
         spyOn(view.loginForm, 'remove');
         view.remove();
         expect(view.loginForm.remove).toHaveBeenCalled();
@@ -256,6 +254,19 @@ describe('Canto Homepage View #travis', function() {
         spyOn(Backbone.View.prototype.remove, 'call');
         view.remove();
         expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
+      });
+    });
+
+    describe('render', function() {
+      it('renders its login form', function() {
+        spyOn(view.loginForm, 'render');
+        view.render();
+        expect(view.loginForm.render).toHaveBeenCalled();
+      });
+
+      it('inserts its login form into its #shade element', function() {
+        view.render();
+        expect(view.$('#shade')).toHaveDescendant(view.loginForm.$el);
       });
     });
   });

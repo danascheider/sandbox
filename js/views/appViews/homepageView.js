@@ -29,7 +29,8 @@ Canto.View = Canto.View || require('./cantoView.js');
 /* Module-Specific Requires
 /****************************************************************************/
 
-var User = require('../../models/userModel.js');
+var User = require('../../models/userModel.js'),
+    LoginFormView = require('../partialViews/loginFormView.js');
 
 /****************************************************************************
  * BEGIN MODULE                                                             *
@@ -91,12 +92,22 @@ var HomepageView = Canto.View.extend({
   /* Core View Functions
   /**************************************************************************/
 
+  initialize  : function() {
+    this.loginForm = new LoginFormView();
+  },
+
   remove      : function() {
+    this.loginForm.remove();
     Canto.View.prototype.remove.call(this);
   },
 
   render      : function() {
-    Canto.View.prototype.render.call(this, this.template());
+    var that = this;
+
+    return Canto.View.prototype.render.call(this, this.template(), function() {
+      that.loginForm.render();
+      that.$('#shade').html(that.loginForm.$el);
+    });
   }
 });
 

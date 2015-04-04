@@ -8,6 +8,35 @@ var SpecWrapper = Canto.View.extend({
   template: JST['spec/dashHome'],
   el      : 'body',
 
+  events  : {
+    'click a[data-method=showLoginForm]'   : 'showLoginForm',
+    'click a[data-method=hideLoginForm]'   : 'callHideLoginForm',
+    'click a[data-method=toggleLoginForm]' : 'callToggleLoginForm'
+  },
+
+  /* Event Callbacks
+  /***************************************************************************/
+
+  callHideLoginForm   : function(e) {
+    e.preventDefault();
+    this.view.hideLoginForm($.Event('dblclick', {target: view.$('#shade')}));
+  },
+
+  callToggleLoginForm : function(e) {
+    e.preventDefault();
+    this.view.toggleLoginForm($.Event('click', {target: view.$('.login-link')}));
+  },
+
+  showLoginForm       : function(e) {
+    e.preventDefault();
+    if(!this.view.$('#login-form').is(':visible')) {
+      this.view.toggleLoginForm($.Event('click', {target: view.$('.login-link')}));
+    }
+  },
+
+  /* Core View Functions
+  /***************************************************************************/
+
   initialize : function() {
     this.view = new DashboardHomeView({user: fixtures.user});
     this.render();
