@@ -81,12 +81,21 @@ var HomepageView = Canto.View.extend({
     });
   },
 
-  hideLoginForm: function() {
-    //
+  hideLoginForm: function(e) {
+    var t = $(e.target);
+    if (t.attr('id') !== 'login-form' && this.loginForm.$el.has(t).length === 0) {
+      this.$('#shade').hide();
+      this.$('div.text-vertical-center').children().show();
+    }
   },
 
   toggleLoginForm: function() {
-    //
+    if(!!$.cookie('auth')) {
+      this.trigger('redirect', {destination: 'dashboard'});
+    } else {
+      this.$('div.text-vertical-center').children().toggle();
+      this.$('#shade').toggle();
+    }
   },
 
   /* Core View Functions
