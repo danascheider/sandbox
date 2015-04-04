@@ -47,6 +47,23 @@ describe('Dashboard Presenter #travis', function() {
     presenter = null;
   });
 
+  /* Canto Model Properties
+  /***************************************************************************************/
+
+  describe('Canto model properties', function() {
+    it('has klass DashboardPresenter', function() {
+      expect(presenter.klass).toBe('DashboardPresenter');
+    });
+
+    it('has family Canto.Model', function() {
+      expect(presenter.family).toBe('Canto.Model');
+    });
+
+    it('has superFamily Backbone.Model', function() {
+      expect(presenter.superFamily).toBe('Backbone.Model');
+    });
+  });
+
   /* Presenter Constructor
   /***************************************************************************************/
 

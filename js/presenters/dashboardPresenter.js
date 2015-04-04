@@ -18,6 +18,7 @@ var DashboardPresenter = Canto.Model.extend({
   /* Canto Model Properties
   /***************************************************************************************/
 
+  klass      : 'DashboardPresenter',
   types      : function() {
     return Canto.Model.prototype.types().concat(['Presenter', 'DashboardPresenter']);
   },
