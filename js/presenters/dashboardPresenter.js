@@ -1,7 +1,8 @@
 /* Core Requires
 /*****************************************************************************************/
 
-Canto = Canto || require('../dependencies.js');
+Canto       = Canto || require('../dependencies.js');
+Canto.Model = Canto.Model || require('../models/cantoModel.js');
 
 /* Module-Specific Requires
 /*****************************************************************************************/
@@ -12,7 +13,14 @@ DashboardView = require('../views/appViews/dashboardView.js');
  * DASHBOARD PRESENTER                                                                   *
 \*****************************************************************************************/
 
-var DashboardPresenter = Backbone.Model.extend({
+var DashboardPresenter = Canto.Model.extend({
+
+  /* Canto Model Properties
+  /***************************************************************************************/
+
+  types      : function() {
+    return Canto.Model.prototype.types().concat(['Presenter', 'DashboardPresenter']);
+  },
 
   /* Event Callbacks
   /***************************************************************************************/

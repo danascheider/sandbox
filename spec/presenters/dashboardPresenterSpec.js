@@ -97,4 +97,23 @@ describe('Dashboard Presenter #travis', function() {
       });
     });
   });
+
+  /* Special Functions
+  /***************************************************************************************/
+
+  describe('special functions', function() {
+    describe('isA', function() {
+      it('returns true with argument `Presenter`', function() {
+        expect(presenter.isA('Presenter')).toBe(true);
+      });
+
+      it('returns true with argument \'DashboardPresenter\'', function() {
+        expect(presenter.isA('DashboardPresenter')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(presenter.isA('Backbone.Router')).toBe(false);
+      });
+    });
+  });
 });
