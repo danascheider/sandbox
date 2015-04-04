@@ -1,13 +1,18 @@
+/* Protected Collection 
+/****************************************************************************************/
+
 Canto = Canto || require('../dependencies.js');
+
+/* Protected Collection
+/****************************************************************************************/
 
 var ProtectedCollection = Backbone.Collection.extend({
   token     : function() {
     return 'Basic ' + $.cookie('auth');
   },
 
-  // ----------------- //
-  // Special Functions //
-  // ----------------- //
+  /* Special Functions
+  /**************************************************************************************/
 
   isA       : function(type) {
     return ['Backbone.Collection', 'ProtectedCollection'].indexOf(type) > -1 ? true : false;
@@ -35,9 +40,8 @@ var ProtectedCollection = Backbone.Collection.extend({
     Backbone.sync('update', toSync, opts);
   },
 
-  // ------------------------- //
-  // Core Collection Functions //
-  // ------------------------- //
+  /* Core Collection Functions
+  /**************************************************************************************/
 
   fetch     : function(opts) {
     opts = opts || {};
