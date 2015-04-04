@@ -8,7 +8,8 @@ require(process.cwd() + '/spec/support/env.js');
 /* Module-Specific Requires
 /*****************************************************************************************/
 
-var DashboardPresenter = require(process.cwd() + '/js/presenters/dashboardPresenter.js');
+var DashboardPresenter = require(process.cwd() + '/js/presenters/dashboardPresenter.js'),
+    TaskCollection     = require(process.cwd() + '/js/collections/taskCollection.js');
 
 /* Configuration
 /*****************************************************************************************/
@@ -19,7 +20,7 @@ var matchers = require('jasmine-jquery-matchers'),
     fcontext = fdescribe;
 
 /*****************************************************************************************
-/* BEGIN SUITE                                                                           *
+/* DASHBOARD PRESENTER SPEC                                                              *
 /*****************************************************************************************/
 
 describe('Dashboard Presenter #travis', function() {
@@ -130,6 +131,49 @@ describe('Dashboard Presenter #travis', function() {
 
       it('returns false with another argument', function() {
         expect(presenter.isA('Backbone.Router')).toBe(false);
+      });
+    });
+
+    describe('setUser', function() {
+      var newPresenter;
+      
+      beforeEach(function() {
+        spyOn($, 'ajax').and.callFake(function(args) {
+          args.success(user.toJSON());
+        });
+
+        newPresenter = new DashboardPresenter();
+        spyOn(newPresenter.dashboardView, 'setUser').and.callThrough();
+      });
+
+      afterEach(function() { newPresenter.destroy(); });
+
+      it('sets the user', function() {
+        newPresenter.setUser(user);
+        expect(newPresenter.user.isA('UserModel')).toBe(true);
+      });
+
+      it('calls setUser on the dashboard', function() {
+        newPresenter.setUser(user);
+        expect(newPresenter.dashboardView.setUser).toHaveBeenCalledWith(user);
+      });
+
+      it('fetches the user data', function() {
+        spyOn(user, 'protectedFetch');
+        newPresenter.setUser(user);
+        expect(user.protectedFetch).toHaveBeenCalled();
+      });
+
+      it('instantiates a task collection', function() {
+        spyOn(TaskCollection.prototype, 'initialize');
+        newPresenter.setUser(user);
+        expect(TaskCollection.prototype.initialize).toHaveBeenCalled();
+      });
+
+      it('fetches the task collection', function() {
+        spyOn(TaskCollection.prototype, 'fetch');
+        newPresenter.setUser(user);
+        expect(TaskCollection.prototype.fetch).toHaveBeenCalled();
       });
     });
   });

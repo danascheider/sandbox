@@ -56,7 +56,7 @@ var ProtectedCollection = Backbone.Collection.extend({
 
     opts.success = function(model, response, xhr) {
       that.trigger('fetch');
-      callback.call(model, response, xhr);
+      if(!!callback) { callback.call(model, response, xhr); }
     },
 
     Backbone.sync('read', this, opts);
