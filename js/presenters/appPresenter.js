@@ -28,6 +28,13 @@ var AppPresenter = Canto.Model.extend({
     return this.isA(type);
   },
 
+  /* Event Callbacks
+  /***************************************************************************************/
+
+  redirect   : function(opts) {
+    this.trigger('redirect', opts);
+  },
+
   /* Core Model Functions
   /***************************************************************************************/
 

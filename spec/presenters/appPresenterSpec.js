@@ -23,7 +23,7 @@ var matchers       = require('jasmine-jquery-matchers'),
 /*****************************************************************************************/
 
 describe('App Presenter', function() {
-  var presenter;
+  var presenter, spy;
 
   /* Filters
   /***************************************************************************************/
@@ -80,6 +80,25 @@ describe('App Presenter', function() {
     describe('redirect:dashboard', function() {
       it('calls emitRedirect #travis', function() {
         pending('fuller implementation of the app as a whole');
+      });
+    });
+  });
+
+  /* Event Callbacks
+  /***************************************************************************************/
+
+  describe('event callbacks', function() {
+    describe('redirect()', function() {
+      beforeEach(function() {
+        spy = jasmine.createSpy();
+        presenter.on('redirect', spy);
+      });
+
+      afterEach(function() { presenter.off('redirect'); });
+
+      it('triggers the redirect event on itself', function() {
+        presenter.redirect({destination: 'dashboard'});
+        expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
       });
     });
   });
