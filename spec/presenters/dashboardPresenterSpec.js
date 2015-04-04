@@ -96,6 +96,36 @@ describe('Dashboard Presenter #travis', function() {
   /***************************************************************************************/
 
   describe('event callbacks', function() {
+    describe('getHome()', function() {
+      beforeEach(function() { spyOn(presenter.dashboardView, 'showHomeView'); });
+
+      context('general', function() {
+        beforeEach(function() {
+          presenter.getHome();
+        });
+
+        it('calls the dashboard\'s showHomeView method', function() {
+          expect(presenter.dashboardView.showHomeView).toHaveBeenCalled();
+        });
+
+        it('sets the \'current\' property to \'home\'', function() {
+          expect(presenter.current).toBe('home');
+        });
+      });
+
+      context('when the dashboard view is not already visible', function() {
+        beforeEach(function() {
+          spyOn(presenter.dashboardView.$el, 'is').and.returnValue(false);
+          spyOn(presenter.dashboardView, 'render').and.callThrough();
+          presenter.getHome();
+        });
+
+        it('attaches the dashboard view to the DOM', function() {
+          expect(presenter.dashboardView.$el).toBeInDom();
+        });
+      });
+    });
+
     describe('redirect()', function() {
       beforeEach(function() {
         spy = jasmine.createSpy();
