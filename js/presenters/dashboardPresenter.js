@@ -50,6 +50,10 @@ var DashboardPresenter = Canto.Model.extend({
   /* Special Functions
   /***************************************************************************************/
 
+  removeAll  : function() {
+    this.dashboardView.remove();
+  },
+
   setUser    : function(user) {
     this.user = user;
     this.user.tasks = new TaskCollection();
@@ -63,8 +67,11 @@ var DashboardPresenter = Canto.Model.extend({
 
   initialize : function(opts) {
     opts = opts || {};
-
     this.dashboardView = new DashboardView();
+    
+    if(!!opts.user) { this.setUser(opts.user) }
+
+    this.listenTo(this.dashboardView, 'redirect', this.redirect);
   }
 });
 

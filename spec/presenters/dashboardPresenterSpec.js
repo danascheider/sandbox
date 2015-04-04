@@ -85,10 +85,35 @@ describe('Dashboard Presenter #travis', function() {
     });
 
     it('calls setUser', function() {
-      pending('Need to implement the setUser method');
       spyOn(DashboardPresenter.prototype, 'setUser');
       var newPresenter = new DashboardPresenter({user: user});
       expect(DashboardPresenter.prototype.setUser).toHaveBeenCalledWith(user);
+    });
+  });
+
+  /* Presenter Events
+  /***************************************************************************************/
+
+  describe('events', function() {
+    beforeEach(function() {
+      spy = jasmine.createSpy();
+      presenter.on('redirect', spy);
+    });
+
+    afterEach(function() { presenter.off('redirect'); });
+
+    describe('redirect:dashboard on the dashboard view', function() {
+      it('emits the redirect:dashboard event', function() {
+        presenter.dashboardView.trigger('redirect', {destination: 'dashboard'});
+        expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+      });
+    });
+
+    describe('redirect:tasks on the dashboard view', function() {
+      it('emits the redirect:tasks event', function() {
+        presenter.dashboardView.trigger('redirect', {destination: 'tasks'});
+        expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
+      });
     });
   });
 
@@ -172,6 +197,14 @@ describe('Dashboard Presenter #travis', function() {
       it('emits the redirect:tasks event', function() {
         presenter.redirect({destination: 'tasks'});
         expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
+      });
+    });
+
+    describe('removeAll()', function() {
+      it('removes the dashboard view', function() {
+        spyOn(presenter.dashboardView, 'remove');
+        presenter.removeAll();
+        expect(presenter.dashboardView.remove).toHaveBeenCalled();
       });
     });
   });
