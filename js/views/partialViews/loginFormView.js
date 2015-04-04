@@ -62,7 +62,7 @@ var LoginFormView = Canto.View.extend({
 
     var loginInfo = Canto.Utils.getAttributes(this.$el),
         hash      = btoa(loginInfo.username + ':' + loginInfo.password),
-        exp       = loginInfo.remember ? {expires: 365} : null;
+        that      = this;
 
     $.ajax({
       url        : Canto.API.login,
@@ -73,6 +73,7 @@ var LoginFormView = Canto.View.extend({
       success    : function(user) {
         loginInfo.remember ? $.cookie('auth', hash, {expires: 365}) : $.cookie('auth', hash);
         loginInfo.remember ? $.cookie('userID', user.get('id'), {expires: 365}) : $. cookie('userID', user.get('id'));
+        that.trigger('redirect', {destination: 'dashboard'});
       }
     });
   },

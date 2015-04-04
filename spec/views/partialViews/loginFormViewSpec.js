@@ -40,7 +40,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/loginFormView.js');
 /****************************************************************************/
 
 describe('Login Form View', function() {
-  var view, e, xhr;
+  var view, e, spy, xhr;
 
   /* Filters
   /**************************************************************************/
@@ -192,6 +192,12 @@ describe('Login Form View', function() {
       describe('setting cookies', function() {
         beforeEach(function() {
           spyOn($, 'cookie');
+          spy = jasmine.createSpy();
+          view.on('redirect', spy);
+        });
+
+        afterAll(function() {
+          view.off('redirect');
         });
 
         context('successful login', function() {
@@ -214,6 +220,11 @@ describe('Login Form View', function() {
             it('sets the userID cookie for 365 days', function() {
               expect($.cookie).toHaveBeenCalledWith('userID', 342, {expires: 365});
             });
+
+            it('triggers the `redirect` event', function(done) {
+              expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+              done();
+            });
           });
 
           context('with remember me false', function() {
@@ -229,6 +240,10 @@ describe('Login Form View', function() {
             it('sets the userID cookie as a session cookie', function() {
               expect($.cookie).toHaveBeenCalledWith('userID', 342);
             });
+
+            it('triggers the `redirect` event', function() {
+              expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+            });
           });
         });
 
@@ -239,6 +254,10 @@ describe('Login Form View', function() {
 
           it('doesn\'t set cookies', function() {
             expect($.cookie).not.toHaveBeenCalled();
+          });
+
+          it('doesn\'t redirect to the dashboard', function() {
+            expect(spy).not.toHaveBeenCalled();
           });
         });
       });
