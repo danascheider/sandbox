@@ -156,46 +156,54 @@ describe('Login Form View', function() {
       beforeEach(function() {
         view.render();
         e = $.Event('submit', {target: view.$el});
-        spyOn(Canto.Utils, 'getAttributes').and.returnValue({username: 'testuser', password: 'testuser', remember: 'Remember Me'});
         xhr = new XMLHttpRequest();
         xhr.open('POST', Canto.API.login)
       });
 
-      context('with Remember Me true', function() {
-        describe('ajax request', function() {
-          beforeEach(function() { spyOn($, 'ajax'); });
-
-          it('doesn\'t refresh the page', function() {
-            spyOn(e, 'preventDefault').and.callThrough();
-            view.loginUser(e);
-            expect(e.preventDefault).toHaveBeenCalled();
-          });
-
-          it('sends a POST request', function() {
-            view.loginUser(e);
-            expect($.ajax.calls.argsFor(0)[0].type).toEqual('POST');
-          });
-
-          it('makes a request to the /login endpoint', function() {
-            view.loginUser(e);
-            expect($.ajax.calls.argsFor(0)[0].url).toMatch(/\/login$/);
-          });
-
-          it('includes a basic auth header', function() {
-            view.loginUser(e);
-            $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
-            expect(xhr.getRequestHeader('Authorization')).toEqual(btoa('testuser:testuser'));
-          });
+      describe('ajax request', function() {
+        beforeEach(function() { 
+          spyOn($, 'ajax'); 
+          spyOn(Canto.Utils, 'getAttributes').and.returnValue({username: 'testuser', password: 'testuser', remember: 'Remember Me'});
         });
 
-        describe('setting cookies', function() {
-          context('successful login', function() {
-            beforeEach(function() {
-              spyOn($, 'cookie');
-              spyOn($, 'ajax').and.callFake(function(args) {
-                args.success(user);
-              });
+        it('doesn\'t refresh the page', function() {
+          spyOn(e, 'preventDefault').and.callThrough();
+          view.loginUser(e);
+          expect(e.preventDefault).toHaveBeenCalled();
+        });
 
+        it('sends a POST request', function() {
+          view.loginUser(e);
+          expect($.ajax.calls.argsFor(0)[0].type).toEqual('POST');
+        });
+
+        it('makes a request to the /login endpoint', function() {
+          view.loginUser(e);
+          expect($.ajax.calls.argsFor(0)[0].url).toMatch(/\/login$/);
+        });
+
+        it('includes a basic auth header', function() {
+          view.loginUser(e);
+          $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+          expect(xhr.getRequestHeader('Authorization')).toEqual(btoa('testuser:testuser'));
+        });
+      });
+
+      describe('setting cookies', function() {
+        beforeEach(function() {
+          spyOn($, 'cookie');
+        });
+
+        context('successful login', function() {
+          beforeEach(function() {
+            spyOn($, 'ajax').and.callFake(function(args) {
+              args.success(user);
+            });
+          });
+
+          context('with remember me true', function() {
+            beforeEach(function() {
+              spyOn(Canto.Utils, 'getAttributes').and.returnValue({username: 'testuser', password: 'testuser', remember: 'Remember Me'});
               view.loginUser(e);
             });
 
@@ -208,15 +216,29 @@ describe('Login Form View', function() {
             });
           });
 
-          context('unsuccessful login', function() {
+          context('with remember me false', function() {
             beforeEach(function() {
-              spyOn($, 'cookie');
-              spyOn($, 'ajax').and.callFake(function(args) { args.error(); });
+              spyOn(Canto.Utils, 'getAttributes').and.returnValue({username: 'testuser', password: 'testuser', remember: null});
+              view.loginUser(e);
             });
 
-            it('doesn\'t set cookies', function() {
-              expect($.cookie).not.toHaveBeenCalled();
+            it('sets the auth cookie as a session cookie', function() {
+              expect($.cookie).toHaveBeenCalledWith('auth', btoa('testuser:testuser'));
             });
+
+            it('sets the userID cookie as a session cookie', function() {
+              expect($.cookie).toHaveBeenCalledWith('userID', 342);
+            });
+          });
+        });
+
+        context('unsuccessful login', function() {
+          beforeEach(function() {
+            spyOn($, 'ajax').and.callFake(function(args) { args.error(); });
+          });
+
+          it('doesn\'t set cookies', function() {
+            expect($.cookie).not.toHaveBeenCalled();
           });
         });
       });

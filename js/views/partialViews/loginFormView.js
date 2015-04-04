@@ -71,8 +71,8 @@ var LoginFormView = Canto.View.extend({
         xhr.setRequestHeader('Authorization', hash);
       },
       success    : function(user) {
-        $.cookie('auth', hash, exp);
-        $.cookie('userID', user.get('id'), exp);
+        loginInfo.remember ? $.cookie('auth', hash, {expires: 365}) : $.cookie('auth', hash);
+        loginInfo.remember ? $.cookie('userID', user.get('id'), {expires: 365}) : $. cookie('userID', user.get('id'));
       }
     });
   },
