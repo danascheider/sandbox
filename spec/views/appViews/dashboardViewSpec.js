@@ -244,6 +244,15 @@ describe('Main Dashboard View #travis', function() {
         expect(SUT.prototype.toggleDropdownMenu).toHaveBeenCalled();
       });
     });
+
+    describe('sync user', function() {
+      it('calls render()', function() {
+        spyOn(SUT.prototype, 'render');
+        var newDashboard = new SUT({user: user});
+        user.trigger('sync');
+        expect(SUT.prototype.render).toHaveBeenCalled();
+      });
+    });
   });
 
   /* Event Callbacks

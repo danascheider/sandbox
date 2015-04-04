@@ -97,6 +97,8 @@ var DashboardView = Canto.View.extend({
     this.user = user;
     this.homeView.setUser(user);
     this.taskView.setUser(user);
+
+    this.listenTo(this.user, 'sync', this.render);
   },
 
   showHomeView       : function() {
