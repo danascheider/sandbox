@@ -126,6 +126,36 @@ describe('Dashboard Presenter #travis', function() {
       });
     });
 
+    describe('getTask()', function() {
+      beforeEach(function() { spyOn(presenter.dashboardView, 'showTaskView'); });
+
+      context('general', function() {
+        beforeEach(function() {
+          presenter.getTask();
+        });
+
+        it('calls the dashboard\'s showTaskView method', function() {
+          expect(presenter.dashboardView.showTaskView).toHaveBeenCalled();
+        });
+
+        it('sets the \'current\' property to \'task\'', function() {
+          expect(presenter.current).toBe('task');
+        });
+      });
+
+      context('when the dashboard view is not already visible', function() {
+        beforeEach(function() {
+          spyOn(presenter.dashboardView.$el, 'is').and.returnValue(false);
+          spyOn(presenter.dashboardView, 'render').and.callThrough();
+          presenter.getTask();
+        });
+
+        it('attaches the dashboard view to the DOM', function() {
+          expect(presenter.dashboardView.$el).toBeInDom();
+        });
+      });
+    });
+
     describe('redirect()', function() {
       beforeEach(function() {
         spy = jasmine.createSpy();

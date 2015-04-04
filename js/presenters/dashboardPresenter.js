@@ -35,6 +35,14 @@ var DashboardPresenter = Canto.Model.extend({
     }
   },
 
+  getTask    : function() {
+    this.dashboardView.showTaskView();
+    this.current = 'task';
+    if(!this.dashboardView.$el.is(':visible')) {
+      $('body').html(this.dashboardView.$el);
+    }
+  },
+
   redirect   : function(opts) {
     this.trigger('redirect', opts);
   },
