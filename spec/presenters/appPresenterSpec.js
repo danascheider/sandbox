@@ -1,30 +1,104 @@
-require(process.cwd() + '/spec/support/jsdom.js');
+/* Core Requires
+/*****************************************************************************************/
+
 require(process.cwd() + '/js/dependencies.js');
+require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var SUT = require(process.cwd() + '/js/presenters/appPresenter.js');
+/* Module-Specific Requires
+/*****************************************************************************************/
 
-var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
-Backbone.$         = $;
-var context        = describe,
+var AppPresenter = require(process.cwd() + '/js/presenters/appPresenter.js');
+
+/* Configuration
+/*****************************************************************************************/
+
+var matchers       = require('jasmine-jquery-matchers'),
+    fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
+    context        = describe,
     fcontext       = fdescribe;
+
+/*****************************************************************************************
+/* APP PRESENTER SPEC                                                                    *
+/*****************************************************************************************/
 
 describe('App Presenter', function() {
   var presenter;
 
-  beforeEach(function() { presenter = new SUT(); });
-  afterAll(function() { presenter = null; });
+  /* Filters
+  /***************************************************************************************/
+
+  beforeAll(function() {
+    jasmine.addMatchers(matchers);
+    _.extend(global, fixtures);
+  });
+
+  beforeEach(function() { 
+    presenter = new AppPresenter(); 
+  });
+
+  afterEach(function() {
+    restoreFixtures();
+  });
+
+  afterAll(function() { 
+    presenter.destroy();
+    _.omit(global, fixtures);
+    presenter = null; 
+  });
+
+  /* Canto Model Properties
+  /***************************************************************************************/
+
+  describe('Canto model properties', function() {
+    it('has klass AppPresenter', function() {
+      expect(presenter.klass).toBe('AppPresenter');
+    });
+
+    it('has family Canto.Model', function() {
+      expect(presenter.family).toBe('Canto.Model');
+    });
+
+    it('has superFamily Backbone.Model', function() {
+      expect(presenter.superFamily).toBe('Backbone.Model');
+    });
+  });
+
+  /* Presenter Constructor
+  /***************************************************************************************/
 
   describe('constructor', function() {
     it('initializes a homepage view #travis', function() {
-      pending('define the homepage view');
+      expect(presenter.homepageView.isA('HomepageView')).toBe(true);
     });
   });
+
+  /* Presenter Events
+  /***************************************************************************************/
 
   describe('events', function() {
     describe('redirect:dashboard', function() {
       it('calls emitRedirect #travis', function() {
         pending('fuller implementation of the app as a whole');
+      });
+    });
+  });
+
+  /* Special Functions
+  /***************************************************************************************/
+
+  describe('special functions', function() {
+    describe('isA()', function() {
+      it('returns true with argument AppPresenter', function() {
+        expect(presenter.isAn('AppPresenter')).toBe(true);
+      });
+
+      it('returns true with argument Presenter', function() {
+        expect(presenter.isA('Presenter')).toBe(true);
+      });
+
+      it('returns false with another argument', function() {
+        expect(presenter.isA('Backbone.View')).toBe(false);
       });
     });
   });
