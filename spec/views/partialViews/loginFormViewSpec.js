@@ -10,8 +10,10 @@
  * Requires ......................................................... 26   *
  * Suite ............................................................ 44   *
  *   Filters ........................................................ 50   *
- *   Authorization and Authentication ............................... 60   *
- *     token()                                                             *
+ *   Static Properties .............................................. 60   *
+ *     klass                                                               *
+ *     family                                                              *
+ *     superFamily                                                         *
  *   Core Functions ................................................. 69   *
  *     fetch()                                                             *
  *   Special Functions .............................................. 91   *
@@ -139,7 +141,29 @@ describe('Login Form View', function() {
   /**************************************************************************/
 
   describe('view events', function() {
-    //
+    var newView; 
+    beforeEach(function() {
+      spyOn(SUT.prototype, 'loginUser');
+      spyOn(SUT.prototype, 'loginHelp');
+      newView = new SUT();
+      newView.render();
+    });
+
+    afterEach(function() { newView.remove(); });
+
+    describe('submit form', function() {
+      it('calls loginUser', function() {
+        newView.$el.submit();
+        expect(SUT.prototype.loginUser).toHaveBeenCalled();
+      });
+    });
+
+    describe('click .login-help-link', function() {
+      it('calls loginHelp', function() {
+        newView.$('.login-help-link').click();
+        expect(SUT.prototype.loginHelp).toHaveBeenCalled();
+      });
+    });
   });
 
   /* Event Callbacks

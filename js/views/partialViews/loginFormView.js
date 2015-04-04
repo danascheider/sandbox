@@ -44,6 +44,11 @@ var LoginFormView = Canto.View.extend({
   tagName     : 'form',
   id          : 'login-form',
 
+  events      : {
+    'submit'                 : 'loginUser',
+    'click .login-help-link' : 'loginHelp'
+  },
+
   /* Canto View Properties
   /**************************************************************************/
 
@@ -56,6 +61,10 @@ var LoginFormView = Canto.View.extend({
 
   /* Event Callbacks
   /**************************************************************************/
+
+  loginHelp   : function(e) {
+    console.log('Haha, you\'re boned!');
+  },
 
   loginUser   : function(e) {
     e.preventDefault();
