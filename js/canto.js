@@ -33,6 +33,7 @@ require('./views/partialViews/taskPanelView.js');
 
 // Require presenters
 require('./presenters/appPresenter.js');
+require('./presenters/dashboardPresenter.js');
 
 // Require router
 var router = require('../spec/support/testRouter.js');
