@@ -13,6 +13,17 @@ DashboardView = require('../views/appViews/dashboardView.js');
 \*****************************************************************************************/
 
 var DashboardPresenter = Backbone.Model.extend({
+
+  /* Event Callbacks
+  /***************************************************************************************/
+
+  redirect   : function(opts) {
+    this.trigger('redirect', opts);
+  },
+
+  /* Core Model Functions
+  /***************************************************************************************/
+
   initialize : function(opts) {
     opts = opts || {};
 

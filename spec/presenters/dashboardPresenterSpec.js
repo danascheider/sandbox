@@ -23,7 +23,7 @@ var matchers = require('jasmine-jquery-matchers'),
 /*****************************************************************************************/
 
 describe('Dashboard Presenter #travis', function() {
-  var presenter;
+  var presenter, spy;
 
   /* Filters
   /***************************************************************************************/
@@ -34,7 +34,7 @@ describe('Dashboard Presenter #travis', function() {
   });
 
   beforeEach(function() {
-    presenter = new DashboardPresenter();
+    presenter = new DashboardPresenter({user: user});
   });
 
   afterEach(function() {
@@ -71,6 +71,30 @@ describe('Dashboard Presenter #travis', function() {
       spyOn(DashboardPresenter.prototype, 'setUser');
       var newPresenter = new DashboardPresenter({user: user});
       expect(DashboardPresenter.prototype.setUser).toHaveBeenCalledWith(user);
+    });
+  });
+
+  /* Event Callbacks
+  /***************************************************************************************/
+
+  describe('event callbacks', function() {
+    describe('redirect()', function() {
+      beforeEach(function() {
+        spy = jasmine.createSpy();
+        presenter.on('redirect', spy);
+      });
+
+      afterEach(function() { presenter.off('redirect'); });
+
+      it('emits the redirect:dashboard event', function() {
+        presenter.redirect({destination: 'dashboard'});
+        expect(spy).toHaveBeenCalledWith({destination: 'dashboard'});
+      });
+
+      it('emits the redirect:tasks event', function() {
+        presenter.redirect({destination: 'tasks'});
+        expect(spy).toHaveBeenCalledWith({destination: 'tasks'});
+      });
     });
   });
 });
