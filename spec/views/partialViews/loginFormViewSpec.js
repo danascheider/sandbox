@@ -27,7 +27,8 @@ require(process.cwd() + '/js/dependencies.js');
 require(process.cwd() + '/spec/support/jsdom.js');
 require(process.cwd() + '/spec/support/env.js');
 
-var matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA.js')),
+var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest,
+    matchers       = _.extend(require('jasmine-jquery-matchers'), require(process.cwd() + '/spec/support/matchers/toBeA.js')),
     fixtures       = require(process.cwd() + '/spec/support/fixtures/fixtures.js'),
     context        = describe,
     fcontext       = fdescribe;
@@ -39,7 +40,7 @@ var SUT = require(process.cwd() + '/js/views/partialViews/loginFormView.js');
 /****************************************************************************/
 
 describe('Login Form View', function() {
-  var view;
+  var view, e, xhr;
 
   /* Filters
   /**************************************************************************/
@@ -145,7 +146,81 @@ describe('Login Form View', function() {
   /**************************************************************************/
 
   describe('event callbacks', function() {
-    //
+    describe('loginHelp()', function() {
+      it('does not log "Haha, you\'re boned!" to the console', function() {
+        pending('Fuller implementation');
+      });
+    });
+
+    describe('loginUser()', function() {
+      beforeEach(function() {
+        view.render();
+        e = $.Event('submit', {target: view.$el});
+        spyOn(Canto.Utils, 'getAttributes').and.returnValue({username: 'testuser', password: 'testuser', remember: 'Remember Me'});
+        xhr = new XMLHttpRequest();
+        xhr.open('POST', Canto.API.login)
+      });
+
+      context('with Remember Me true', function() {
+        describe('ajax request', function() {
+          beforeEach(function() { spyOn($, 'ajax'); });
+
+          it('doesn\'t refresh the page', function() {
+            spyOn(e, 'preventDefault').and.callThrough();
+            view.loginUser(e);
+            expect(e.preventDefault).toHaveBeenCalled();
+          });
+
+          it('sends a POST request', function() {
+            view.loginUser(e);
+            expect($.ajax.calls.argsFor(0)[0].type).toEqual('POST');
+          });
+
+          it('makes a request to the /login endpoint', function() {
+            view.loginUser(e);
+            expect($.ajax.calls.argsFor(0)[0].url).toMatch(/\/login$/);
+          });
+
+          it('includes a basic auth header', function() {
+            view.loginUser(e);
+            $.ajax.calls.argsFor(0)[0].beforeSend(xhr);
+            expect(xhr.getRequestHeader('Authorization')).toEqual(btoa('testuser:testuser'));
+          });
+        });
+
+        describe('setting cookies', function() {
+          context('successful login', function() {
+            beforeEach(function() {
+              spyOn($, 'cookie');
+              spyOn($, 'ajax').and.callFake(function(args) {
+                args.success(user);
+              });
+
+              view.loginUser(e);
+            });
+
+            it('sets the auth cookie for 365 days', function() {
+              expect($.cookie).toHaveBeenCalledWith('auth', btoa('testuser:testuser'), {expires: 365});
+            });
+
+            it('sets the userID cookie for 365 days', function() {
+              expect($.cookie).toHaveBeenCalledWith('userID', 342, {expires: 365});
+            });
+          });
+
+          context('unsuccessful login', function() {
+            beforeEach(function() {
+              spyOn($, 'cookie');
+              spyOn($, 'ajax').and.callFake(function(args) { args.error(); });
+            });
+
+            it('doesn\'t set cookies', function() {
+              expect($.cookie).not.toHaveBeenCalled();
+            });
+          });
+        });
+      });
+    });
   });
 
   /* Core View Functions

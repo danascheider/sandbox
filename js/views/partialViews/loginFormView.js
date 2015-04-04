@@ -54,6 +54,29 @@ var LoginFormView = Canto.View.extend({
     return Canto.View.prototype.types().concat(['LoginFormView', 'LoginForm', 'PartialView']);
   },
 
+  /* Event Callbacks
+  /**************************************************************************/
+
+  loginUser   : function(e) {
+    e.preventDefault();
+
+    var loginInfo = Canto.Utils.getAttributes(this.$el),
+        hash      = btoa(loginInfo.username + ':' + loginInfo.password),
+        exp       = loginInfo.remember ? {expires: 365} : null;
+
+    $.ajax({
+      url        : Canto.API.login,
+      type       : 'POST',
+      beforeSend : function(xhr) {
+        xhr.setRequestHeader('Authorization', hash);
+      },
+      success    : function(user) {
+        $.cookie('auth', hash, exp);
+        $.cookie('userID', user.get('id'), exp);
+      }
+    });
+  },
+
   /* Core View Functions
   /**************************************************************************/
 
