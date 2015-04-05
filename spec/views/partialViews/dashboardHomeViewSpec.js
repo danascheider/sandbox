@@ -174,6 +174,13 @@ describe('Dashboard Home View #travis', function() {
         view.remove();
         expect(Backbone.View.prototype.remove.call).toHaveBeenCalledWith(view);
       });
+
+      context('when the child views don\'t exist', function() {
+        it('doesn\'t raise an error', function() {
+          var newView = new SUT();
+          expect(view.remove).not.toThrow();
+        });
+      });
     }); 
   });
 

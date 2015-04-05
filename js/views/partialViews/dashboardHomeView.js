@@ -109,8 +109,13 @@ var DashboardHomeView = Canto.View.extend({
   },
 
   remove              : function() {
-    this.taskPanelView.remove();
-    this.topWidgetView.remove();
+    try {
+      this.taskPanelView.remove();
+      this.topWidgetView.remove();
+    } catch(e) {
+      if(!(this.taskPanelView && this.topWidgetView)) { return; }
+    }
+
     Canto.View.prototype.remove.call(this);
   },
 
