@@ -35,6 +35,18 @@ var AppPresenter = Canto.Model.extend({
     this.trigger('redirect', opts);
   },
 
+  /* Special Functions
+  /***************************************************************************************/
+
+  getHomepage : function() {
+    this.homepageView.render();
+    if(!this.homepageView.$el.is(':visible')) { $('body').html(this.homepageView.$el); }
+  },
+
+  removeAll   : function() {
+    this.homepageView.remove();
+  },
+
   /* Core Model Functions
   /***************************************************************************************/
 

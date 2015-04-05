@@ -107,6 +107,14 @@ describe('App Presenter', function() {
   /***************************************************************************************/
 
   describe('special functions', function() {
+    describe('getHomepage()', function() {
+      it('renders the homepage view', function() {
+        spyOn(presenter.homepageView, 'render');
+        presenter.getHomepage();
+        expect(presenter.homepageView.render).toHaveBeenCalled();
+      });
+    });
+
     describe('isA()', function() {
       it('returns true with argument AppPresenter', function() {
         expect(presenter.isAn('AppPresenter')).toBe(true);
@@ -118,6 +126,14 @@ describe('App Presenter', function() {
 
       it('returns false with another argument', function() {
         expect(presenter.isA('Backbone.View')).toBe(false);
+      });
+    });
+
+    describe('removeAll()', function() {
+      it('removes the homepage view', function() {
+        spyOn(presenter.homepageView, 'remove');
+        presenter.removeAll();
+        expect(presenter.homepageView.remove).toHaveBeenCalled();
       });
     });
   });
