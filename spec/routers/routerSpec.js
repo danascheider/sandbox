@@ -71,6 +71,19 @@ describe('Canto Router', function() {
     });
   });
 
+  /* Constructor
+  /****************************************************************************/
+
+  describe('constructor', function() {
+    it('instantiates an app presenter', function() {
+      expect(router.AppPresenter.isAn('AppPresenter')).toBe(true);
+    });
+
+    it('instantiates a dashboard presenter', function() {
+      expect(router.DashboardPresenter.isA('DashboardPresenter')).toBe(true);
+    });
+  });
+
   /* Special Functions
   /****************************************************************************/
 

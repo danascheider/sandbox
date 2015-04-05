@@ -1,30 +1,57 @@
+/* Core Requires
+/******************************************************************************/
+
 Canto = Canto || require('./dependencies.js');
-require('./models/taskModel.js');
-require('./views/modelViews/taskViews/taskListItemView.js');
-require('./views/modelViews/taskViews/taskModelView.js');
+
+/* Module-Specific Requires
+/******************************************************************************/
 
 require('../vendor/backbone-route-filter.js');
 
-var Router = Backbone.Router.extend({
+var AppPresenter       = require('./presenters/appPresenter.js'),
+    DashboardPresenter = require('./presenters/dashboardPresenter.js');
+
+/******************************************************************************
+ * CANTO ROUTER SPEC                                                          *
+/******************************************************************************/
+
+Canto.Router = Backbone.Router.extend({
+
+  /* Static Properties
+  /****************************************************************************/
+
+  klass      : 'Canto.Router',
+  types      : function() {
+    return ['Canto.Router', 'Router', 'Backbone.Router'];
+  },
+
+  /* Special Functions
+  /****************************************************************************/
+
+  isA        : function(type) {
+    return this.types().indexOf(type) > -1 ? true : false;
+  },
+
+  /* Core Router Functions
+  /****************************************************************************/
+
   initialize : function() {
-    // this.AppPresenter       = new AppPresenter();
-    // this.DashboardPresenter = new DashboardPresenter();
+    this.AppPresenter = new AppPresenter();
+    this.DashboardPresenter = new DashboardPresenter();
     //
     // this.listenTo(this.appPresenter, 'redirect', this.navigateTo);
     // this.listenTo(this.dashboardPresenter, 'redirect', this.navigateTo);
   },
 
-  // --------------------------- //
-  // Event Callbacks (Non-Route) //
-  // --------------------------- //
+  /* Event Callbacks (non-route)
+  /****************************************************************************/
 
   navigateTo         : function(obj) {
     this.navigate(obj.destination, {trigger: true});
   },
 
-  // -------------------------- //
-  // Routes and Route Callbacks //
-  // -------------------------- //
+  /* Routes and Route Callbacks
+  /****************************************************************************/
 
   routes: {
     '(/)'            : 'displayHomepage',
@@ -88,4 +115,4 @@ var Router = Backbone.Router.extend({
   }
 });
 
-module.exports = Router;
+module.exports = Canto.Router;
