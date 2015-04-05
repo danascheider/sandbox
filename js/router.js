@@ -38,9 +38,9 @@ Canto.Router = Backbone.Router.extend({
   initialize : function() {
     this.AppPresenter = new AppPresenter();
     this.DashboardPresenter = new DashboardPresenter();
-    //
-    // this.listenTo(this.appPresenter, 'redirect', this.navigateTo);
-    // this.listenTo(this.dashboardPresenter, 'redirect', this.navigateTo);
+
+    this.listenTo(this.AppPresenter, 'redirect', this.navigateTo);
+    this.listenTo(this.DashboardPresenter, 'redirect', this.navigateTo);
   },
 
   /* Event Callbacks (non-route)
@@ -77,41 +77,41 @@ Canto.Router = Backbone.Router.extend({
   },
 
   displayDashboardHome: function() {
-    // if(!this.dashboardPresenter.user) { this.dashboardPresenter.setUser(new UserModel({id: $.cookie('userID')})); }
-    // this.dashboardPresenter.getHome();
+    if(!this.DashboardPresenter.user) { this.DashboardPresenter.setUser(new UserModel({id: $.cookie('userID')})); }
+    this.DashboardPresenter.getHome();
   },
 
   displayTaskView: function() {
-    // if(!this.dashboardPresenter.user) { this.dashboardPresenter.setUser(new UserModel({id: $.cookie('userID')})); }
-    // this.dashboardPresenter.getTask();
+    if(!this.DashboardPresenter.user) { this.DashboardPresenter.setUser(new UserModel({id: $.cookie('userID')})); }
+    this.DashboardPresenter.getTask();
   },
 
   displayHomepage: function() {
-    // this.dashboardPresenter.removeAll();
-    // this.appPresenter.getHomepage('body');
+    this.DashboardPresenter.removeAll();
+    this.AppPresenter.getHomepage();
   },
 
   logOut: function() {
-    // $.removeCookie('auth');
-    // $.removeCookie('userID');
-    // this.navigate('', {trigger: true});
+    $.removeCookie('auth');
+    $.removeCookie('userID');
+    this.navigate('', {trigger: true});
   },
 
   rerouteIfLoggedIn: function(fragment, args, next) {
-    // if (!$.cookie('auth')) {
-    //   next();
-    // } else {
-    //   this.appPresenter.removeAll();
-    //   this.navigate('dashboard', {trigger: true});
-    // }
+    if (!$.cookie('auth')) {
+      next();
+    } else {
+      this.AppPresenter.removeAll();
+      this.navigate('dashboard', {trigger: true});
+    }
   },
 
   verifyLoggedIn: function(fragment, args, next) {
-    // if ($.cookie('auth')) {
-    //   next();
-    // } else {
-    //   this.navigate('', {trigger: true});
-    // }
+    if ($.cookie('auth')) {
+      next();
+    } else {
+      this.navigate('', {trigger: true});
+    }
   }
 });
 

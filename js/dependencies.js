@@ -3,7 +3,7 @@ global.navigator = window.navigator;
 
 global.Canto     = {
   API      : require('./api.js'),
-  Utils    : require('./utils.js')
+  Utils    : require('./utils.js'),
 };
 
 global.$ = global.jQuery = require('jquery');
